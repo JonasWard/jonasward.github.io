@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import {Game} from "./play/tik-tak-toe";
 import About from "./components/About";
+import {resumeData} from "./resources/txt/resumeData.js";
 
 function App() {
     return (
@@ -26,7 +27,7 @@ function App() {
                 </ul>
                 <Routes>
                     <Route path="/" element={<Game/>}/>
-                    <Route path="about" element={<About/>}/>
+                    <Route path="about" element={<About { ...resumeData}/>}/>
                     <Route path="contact" element={<h1>Contact Us</h1>}/>
                 </Routes>
             </div>
