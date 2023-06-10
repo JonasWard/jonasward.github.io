@@ -5,8 +5,7 @@ name: GitHub Pages deploy
 
 on:
   push:
-    branches:
-      - next
+    branches: [main]
 
 jobs:
   build:
