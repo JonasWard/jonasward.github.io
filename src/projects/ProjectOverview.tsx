@@ -1,11 +1,12 @@
+import { Header } from '../Header';
+import { allProjects } from './projectsData/allProjects';
+
 export const ProjectOverview = () => {
   return (
-    <div>
-      <h2>About Page</h2>
-      <main>
-        <p>This section contains information about...</p>
-      </main>
-    </div>
+    <>
+      <Header />
+      <div>{allProjects.map((project) => project.projectCard)}</div>
+    </>
   );
 };
 

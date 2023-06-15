@@ -1,3 +1,5 @@
+import { Header } from '../Header';
+
 const divStyle = {
   background: 'black',
   color: 'white',
@@ -5,12 +7,15 @@ const divStyle = {
 
 export const About = () => {
   return (
-    <div style={divStyle}>
-      <h2>About Page</h2>
-      <main>
-        <p>This section contains information about...</p>
-      </main>
-    </div>
+    <>
+      <Header />
+      <div style={divStyle}>
+        <h2>About Page</h2>
+        <main>
+          <p>This section contains information about...</p>
+        </main>
+      </div>
+    </>
   );
 };
 
