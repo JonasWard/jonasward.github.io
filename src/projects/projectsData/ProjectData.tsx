@@ -7,10 +7,10 @@ export type ProjectMetaData = {
   projectType: ProjectType;
   description: string;
   keyImage?: string;
-  keywords: Keywords[];
+  keywords?: Keywords[];
   projectContext: ProjectContext;
   projectPartnerContext: ProjectPartnerContext;
-  projectParners: string[];
+  projectParners?: string[];
 };
 
 export type ProjectData = {
@@ -19,4 +19,11 @@ export type ProjectData = {
   projectCard: React.ReactNode;
   projectPage: React.ReactNode;
   projectPageImage: string;
+};
+
+export type ProjectImageData = {
+  id: string;
+  image: string;
+  description: string;
+  title?: string;
 };

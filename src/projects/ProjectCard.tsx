@@ -22,8 +22,8 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ id, metaData, keyImage
       <p>{metaData.projectType}</p>
       <p>{metaData.projectContext}</p>
       <p>{metaData.projectPartnerContext}</p>
-      <p>{metaData.projectParners.map((partner) => partner)}</p>
-      {metaData.keywords.map((keyword) => keyword)}
+      <p>{metaData.projectParners && metaData.projectParners.map((partner) => partner)}</p>
+      {metaData.keywords && metaData.keywords.map((keyword) => keyword)}
     </div>
   );
 };

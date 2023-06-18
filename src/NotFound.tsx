@@ -1,5 +1,5 @@
 import { Header } from './Header';
-import logo from './assets/jonasward_logo_ww.svg';
+import logo from './assets/icons/jonasward_logo_ww.svg';
 
 const Landing = () => {
   return (

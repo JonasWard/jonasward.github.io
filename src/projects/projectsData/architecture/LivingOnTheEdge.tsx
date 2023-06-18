@@ -13,10 +13,8 @@ const metaData: ProjectMetaData = {
   projectType: ProjectType.Architecture,
   description: 'lorum ipsum dolor',
   keyImage: undefined,
-  keywords: [],
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  projectParners: [],
 };
 
 export const LivingOnTheEdge: ProjectData = {

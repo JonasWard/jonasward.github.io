@@ -1,13 +1,14 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import Landing from './Landing';
 import About from './me/About';
 import ProjectOverview from './projects/ProjectOverview';
 import CV from './me/CV';
 import { allProjects } from './projects/projectsData/allProjects';
 import NotFound from './NotFound';
+import './index.css';
+import './assets/fonts/Montserrat-VariableFont_wght.ttf';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

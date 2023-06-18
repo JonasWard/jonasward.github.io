@@ -1,4 +1,5 @@
 import { Header } from '../Header';
+import ProjectHeader from './projectComponents/ProjectHeader';
 import { ProjectMetaData } from './projectsData/ProjectData';
 
 interface IProjectMain {
@@ -12,18 +13,7 @@ export const ProjectMain: React.FC<IProjectMain> = ({ id, metaData, keyImage, ot
   return (
     <>
       <Header />
-      <div style={{ width: '100hw' }}>
-        <img style={{ width: '100%', objectFit: 'contain' }} src={keyImage} alt='Red dot' />
-        <h2>{metaData.name}</h2>
-        <main>
-          <p>{metaData.description}</p>
-        </main>
-        <p>{metaData.projectType}</p>
-        <p>{metaData.projectContext}</p>
-        <p>{metaData.projectPartnerContext}</p>
-        <p>{metaData.projectParners.map((partner) => partner)}</p>
-        {metaData.keywords.map((keyword) => keyword)}
-      </div>
+      <ProjectHeader id={id} metaData={metaData} keyImage={keyImage} />
       {otherNodes}
     </>
   );
