@@ -59,6 +59,11 @@
   filter: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
 }
 
+/* Change the background color on mouse-over */
+.header button.button-active:hover {
+  transition: filter 0.3s;
+}
+
 /* Float the link section to the right */
 .header-right {
   flex-direction: row;
