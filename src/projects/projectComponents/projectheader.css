@@ -1,0 +1,9 @@
+.project-header {
+  width: 100hw;
+}
+
+.project-header img {
+  width: 100%;
+  object-fit: contain;
+  overflow: overlay;
+}

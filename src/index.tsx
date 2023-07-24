@@ -8,7 +8,6 @@ import CV from './me/CV';
 import { allProjects } from './projects/projectsData/allProjects';
 import NotFound from './NotFound';
 import './index.css';
-import './assets/fonts/Montserrat-VariableFont_wght.ttf';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

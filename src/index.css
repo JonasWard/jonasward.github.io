@@ -1,21 +1,17 @@
-@font-face {
-  font-family: 'Italic'; /*Can be any text*/
-  src: local('MontserratItalic'), url('./assets/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Regular'; /*Can be any text*/
-  src: local('MontserratRegular'), url('./assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
 body {
   margin: 0;
   font-weight: 900;
-  font-family: 'MontserratRegular';
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'MontserratRegular';
+  font-family: 'Montserrat', sans-serif;
 }

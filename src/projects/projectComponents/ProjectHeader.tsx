@@ -1,4 +1,5 @@
 import { ProjectMetaData } from '../projectsData/ProjectData';
+import './projectheader.css';
 
 interface IProjectHeader {
   id: string;
@@ -8,8 +9,8 @@ interface IProjectHeader {
 
 export const ProjectHeader: React.FC<IProjectHeader> = ({ id, metaData, keyImage }) => {
   return (
-    <div id={id} style={{ width: '100hw' }}>
-      <img style={{ width: '100%', objectFit: 'contain', overflow: 'overlay' }} src={keyImage} alt='Red dot' />
+    <div className={'project-header'}>
+      <img src={keyImage} alt='Red dot' />
       <h2>{metaData.name}</h2>
       <main>
         <p>{metaData.description}</p>
