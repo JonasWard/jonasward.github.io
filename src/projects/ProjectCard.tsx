@@ -1,5 +1,6 @@
 import { ProjectMetaData } from './projectsData/ProjectData';
 import { useNavigate } from 'react-router-dom';
+import './ProjectCard.css';
 
 interface IProjectNameCard {
   id: string;
@@ -13,7 +14,7 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ id, metaData, keyImage
   const navigateProject = () => navigate(`/project/${metaData.webstring}`);
 
   return (
-    <div style={{ width: '200px' }} onClick={navigateProject}>
+    <div className={'project-card'} style={{ width: '200px' }} onClick={navigateProject}>
       <img style={{ width: '100%', objectFit: 'contain' }} src={keyImage} alt='Red dot' />
       <h2>{metaData.name}</h2>
       <main>
