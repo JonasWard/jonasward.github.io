@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.073c9b0a.css",
-    "main.js": "/portfolio/static/js/main.4f77534e.js",
+    "main.css": "/portfolio/static/css/main.e3924795.css",
+    "main.js": "/portfolio/static/js/main.1104b77c.js",
     "static/media/SiteModel.jpg": "/portfolio/static/media/SiteModel.2fcdd850569ddeec436c.jpg",
-    "static/media/jonasward_logo_ww.svg": "/portfolio/static/media/jonasward_logo_ww.fb5bf3246d2bb2871a00b82629eabe97.svg",
+    "static/media/jonasward_logo_ww.svg": "/portfolio/static/media/jonasward_logo_ww.fca1949febf2443fca018dcb0e6e9880.svg",
     "static/media/logo.svg": "/portfolio/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/portfolio/index.html",
-    "main.073c9b0a.css.map": "/portfolio/static/css/main.073c9b0a.css.map",
-    "main.4f77534e.js.map": "/portfolio/static/js/main.4f77534e.js.map"
+    "main.e3924795.css.map": "/portfolio/static/css/main.e3924795.css.map",
+    "main.1104b77c.js.map": "/portfolio/static/js/main.1104b77c.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.4f77534e.js"
+    "static/css/main.e3924795.css",
+    "static/js/main.1104b77c.js"
   ]
 }
