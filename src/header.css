@@ -2,6 +2,7 @@
 
 .header {
   display: flex;
+  font-family: 'Montserrat', sans-serif;
   justify-content: space-between;
   position: fixed;
   width: calc(100% - 4px);
@@ -30,6 +31,8 @@
 
 /* Style the header links */
 .header button {
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
   float: left;
   color: black;
   text-align: center;
@@ -41,14 +44,13 @@
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header button.button {
   font-size: 1rem;
-  font-weight: bold;
   transition: filter 0.3s;
   /* filter: invert(80%) sepia(60%) saturate(7030%) hue-rotate(30deg) brightness(110%) contrast(118%); */
 }
 
 .header button.button-active {
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 900;
   transition: filter 0.3s;
   filter: invert(18%) sepia(52%) saturate(4747%) hue-rotate(241deg) brightness(63%) contrast(127%);
 }
