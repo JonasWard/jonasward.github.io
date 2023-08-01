@@ -51,6 +51,7 @@
 .header button.button-active {
   font-size: 1rem;
   font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
   transition: filter 0.3s;
   filter: invert(18%) sepia(52%) saturate(4747%) hue-rotate(241deg) brightness(63%) contrast(127%);
 }
@@ -66,19 +67,11 @@
   transition: filter 0.3s;
 }
 
-/* Float the link section to the right */
-.header-right {
-  flex-direction: row;
-  justify-content: space-between;
-  float: right;
-}
-
 /* Style the dropdown content (hidden by default) */
 .dropdown-content {
   transform: show 0.3s;
   display: flex;
   flex-direction: column;
-  top: 40px;
   position: absolute;
   background-color: rgba(255, 255, 255, 0.7);
   min-width: 100px;

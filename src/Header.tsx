@@ -54,7 +54,7 @@ export const Header = () => {
       <button className={acitveTab === activeTab.home ? 'button-active' : 'button'} onClick={navigateHome}>
         <img alt={''} src={logo} style={{ width: '200px' }} />
       </button>
-      <div className={'header-right'}>
+      <div style={{ width: mobileView ? '100px' : '200px' }} className={'header-right'}>
         {mobileView ? (
           <>
             <button className={showDropDown ? 'button-active' : 'button'} onClick={() => setShowDropDown(!showDropDown)}>
