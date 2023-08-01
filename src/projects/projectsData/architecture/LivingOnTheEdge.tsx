@@ -8,7 +8,7 @@ const id = '2017-01';
 
 const metaData: ProjectMetaData = {
   id,
-  webstring: 'livingOnTheEdge',
+  webstring: 'living-on-the-edge',
   name: 'Living on the Edge',
   projectType: ProjectType.Architecture,
   description: 'lorum ipsum dolor',
