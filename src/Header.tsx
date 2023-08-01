@@ -76,13 +76,13 @@ export const Header = () => {
           </>
         ) : (
           <>
-            <button className={acitveTab === activeTab.projects ? 'button-active' : 'button'} onClick={navigateProjects}>
+            <button style={{ width: '40%' }} className={acitveTab === activeTab.projects ? 'button-active' : 'button'} onClick={navigateProjects}>
               <p>Projects</p>
             </button>
-            <button className={acitveTab === activeTab.about ? 'button-active' : 'button'} type='button' onClick={navigateAbout}>
+            <button style={{ width: '40%' }} className={acitveTab === activeTab.about ? 'button-active' : 'button'} type='button' onClick={navigateAbout}>
               <p>About</p>
             </button>
-            <button className={acitveTab === activeTab.cv ? 'button-active' : 'button'} onClick={navigateCV}>
+            <button style={{ width: '20%' }} className={acitveTab === activeTab.cv ? 'button-active' : 'button'} onClick={navigateCV}>
               <p>Cv</p>
             </button>
           </>
