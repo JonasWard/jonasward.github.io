@@ -1,3 +1,6 @@
 import { LivingOnTheEdge } from './architecture/LivingOnTheEdge';
+import { TheCityIsArt } from './architecture/TheCityIsArt';
+import { PatternMachine } from './computationDesign/PatternMachine';
+import { SmartBrick } from './computationDesign/SmartBrick';
 
-export const allProjects = [LivingOnTheEdge];
+export const allProjects = [LivingOnTheEdge, PatternMachine, SmartBrick, TheCityIsArt];
