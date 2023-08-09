@@ -204,6 +204,7 @@ const EducationRenderer: React.FC<{ education: Education }> = ({ education }) =>
           <Text style={styles.secondaryItem}>{`- ${data.place}`}</Text>
         </View>
         <Text style={styles.regularItem}>{`${data.date} - ${data.description}`}</Text>
+        <DividingSpace />
       </View>
     ))}
   </View>
