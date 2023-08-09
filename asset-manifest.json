@@ -1,19 +1,18 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.e2e697bd.css",
-    "main.js": "/portfolio/static/js/main.f276133d.js",
+    "main.css": "/portfolio/static/css/main.835872e1.css",
+    "main.js": "/portfolio/static/js/main.f3c694b7.js",
     "static/media/topViewTiles.jpg": "/portfolio/static/media/topViewTiles.f6d8b7e1ea0e7c2ac8a9.jpg",
     "static/media/theCityIsArt.jpg": "/portfolio/static/media/theCityIsArt.a5c7ce8f90c35912048b.jpg",
     "static/media/SiteModel.jpg": "/portfolio/static/media/SiteModel.2fcdd850569ddeec436c.jpg",
     "static/media/patternTitle.jpg": "/portfolio/static/media/patternTitle.0de3054abc05826e592f.jpg",
     "static/media/jonasward_logo_ww.svg": "/portfolio/static/media/jonasward_logo_ww.fca1949febf2443fca018dcb0e6e9880.svg",
-    "static/media/logo.svg": "/portfolio/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/portfolio/index.html",
-    "main.e2e697bd.css.map": "/portfolio/static/css/main.e2e697bd.css.map",
-    "main.f276133d.js.map": "/portfolio/static/js/main.f276133d.js.map"
+    "main.835872e1.css.map": "/portfolio/static/css/main.835872e1.css.map",
+    "main.f3c694b7.js.map": "/portfolio/static/js/main.f3c694b7.js.map"
   },
   "entrypoints": [
-    "static/css/main.e2e697bd.css",
-    "static/js/main.f276133d.js"
+    "static/css/main.835872e1.css",
+    "static/js/main.f3c694b7.js"
   ]
 }
