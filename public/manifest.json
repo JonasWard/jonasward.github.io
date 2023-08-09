@@ -1,21 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "JonasWard",
+  "name": "Jonas Ward's Portfolio",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "64x64",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "jonasward_logo_rec.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "339x339"
     },
     {
-      "src": "logo512.png",
+      "src": "jonasward_logo_elong.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "1324×342"
     }
   ],
   "start_url": ".",
