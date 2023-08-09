@@ -229,25 +229,28 @@ const ExperienceRenderer: React.FC<{ experience: Experience }> = ({ experience }
 );
 
 // Create Document Component
-export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => (
-  <Document>
-    <Page size='A4' style={styles.page}>
-      <View id={'section 1'} style={styles.section}>
-        <View id={'left'} style={styles.left}>
-          <InfoRenderer info={data.info} />
+export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
+  const date = new Date();
+  return (
+    <Document title={`JonasWard_CV_${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.pdf`}>
+      <Page size='A4' style={styles.page}>
+        <View id={'section 1'} style={styles.section}>
+          <View id={'left'} style={styles.left}>
+            <InfoRenderer info={data.info} />
+          </View>
+          <View id={'right'} style={styles.right}>
+            <EducationRenderer education={data.education} />
+          </View>
         </View>
-        <View id={'right'} style={styles.right}>
-          <EducationRenderer education={data.education} />
+        <View id={'section 2'} style={styles.section}>
+          <View id={'left'} style={styles.left}>
+            <SkillsRenderer skills={data.skills} />
+          </View>
+          <View id={'right'} style={styles.right}>
+            <ExperienceRenderer experience={data.experience} />
+          </View>
         </View>
-      </View>
-      <View id={'section 2'} style={styles.section}>
-        <View id={'left'} style={styles.left}>
-          <SkillsRenderer skills={data.skills} />
-        </View>
-        <View id={'right'} style={styles.right}>
-          <ExperienceRenderer experience={data.experience} />
-        </View>
-      </View>
-    </Page>
-  </Document>
-);
+      </Page>
+    </Document>
+  );
+};
