@@ -1,0 +1,8 @@
+.document {
+  width: 100%;
+  max-width: 900px;
+  height: calc(100% - 80px);
+  display: block;
+  position: absolute;
+  top: 80px;
+}
