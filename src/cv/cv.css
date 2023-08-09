@@ -4,5 +4,6 @@
   height: calc(100% - 80px);
   display: block;
   position: absolute;
+  margin-left: calc((100% - min(900px, 100%)) * 0.5);
   top: 80px;
 }
