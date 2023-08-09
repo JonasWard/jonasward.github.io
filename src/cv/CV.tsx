@@ -5,8 +5,6 @@ import { CVDocument } from './CVDocument';
 import cv from './cv.json';
 import { CVData } from './cv.type';
 
-console.log(cv);
-
 export const CV = () => {
   return (
     <>
