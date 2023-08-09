@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.835872e1.css",
+    "main.css": "/portfolio/static/css/main.939d83c1.css",
     "main.js": "/portfolio/static/js/main.f3c694b7.js",
     "static/media/topViewTiles.jpg": "/portfolio/static/media/topViewTiles.f6d8b7e1ea0e7c2ac8a9.jpg",
     "static/media/theCityIsArt.jpg": "/portfolio/static/media/theCityIsArt.a5c7ce8f90c35912048b.jpg",
@@ -8,11 +8,11 @@
     "static/media/patternTitle.jpg": "/portfolio/static/media/patternTitle.0de3054abc05826e592f.jpg",
     "static/media/jonasward_logo_ww.svg": "/portfolio/static/media/jonasward_logo_ww.fca1949febf2443fca018dcb0e6e9880.svg",
     "index.html": "/portfolio/index.html",
-    "main.835872e1.css.map": "/portfolio/static/css/main.835872e1.css.map",
+    "main.939d83c1.css.map": "/portfolio/static/css/main.939d83c1.css.map",
     "main.f3c694b7.js.map": "/portfolio/static/js/main.f3c694b7.js.map"
   },
   "entrypoints": [
-    "static/css/main.835872e1.css",
+    "static/css/main.939d83c1.css",
     "static/js/main.f3c694b7.js"
   ]
 }
