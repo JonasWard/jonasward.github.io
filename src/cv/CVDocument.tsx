@@ -119,32 +119,30 @@ const InfoRenderer: React.FC<{ info: Info; isPdf: boolean }> = ({ info, isPdf })
 );
 
 const NamedListRenderer: React.FC<{ data: { [key: string]: string }; isPdf: boolean }> = ({ data, isPdf }) => (
-  <PDFDivText
-    isPdf={isPdf}
-    content={Object.entries(data).map(([title, data]) => (
+  <div id={'NamedListRenderer'}>
+    {Object.entries(data).map(([title, data]) => (
       <div id={title} style={styles.skillsInset}>
         <div style={styles.secondaryItem}>
-          <PDFDivText isPdf={isPdf} content={`${title}`} id={title} />
+          <PDFDivText isPdf={isPdf} content={`${title}`} id={'title'} />
         </div>
         <div style={styles.regularItem}>
           <PDFDivText isPdf={isPdf} content={`${data}`} id={'data'} />
         </div>
       </div>
     ))}
-    id={'NamedListRenderer'}
-  />
+  </div>
 );
 
 const UnNamedListRenderer: React.FC<{ data: { [key: string]: string }; isPdf: boolean }> = ({ data, isPdf }) => (
-  <PDFDivText
+  <div id={'UnNamedListRenderer'}>
     isPdf={isPdf}
-    content={Object.entries(data).map(([title, data], i) => (
+    content=
+    {Object.entries(data).map(([title, data], i) => (
       <div id={title} style={styles.regularItem}>
         <PDFDivText isPdf={isPdf} content={`${data}`} id={`${i}`} />
       </div>
     ))}
-    id={'UnNamedListRenderer'}
-  />
+  </div>
 );
 
 const ConcatenatedUnNamedListRenderer: React.FC<{ data: { [key: string]: string }; isPdf: boolean }> = ({ data, isPdf }) => (
