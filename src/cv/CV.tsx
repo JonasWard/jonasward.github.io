@@ -16,7 +16,7 @@ export const CV = () => {
         fileName={`JonasWard_CV_${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.pdf`}
         document={<CVDocument data={cv} isPdf={true} />}
       >
-        <div>donwload me!</div>
+        <div>download me!</div>
       </PDFDownloadLink>
       <CVHTML data={cv} isPdf={false} />
 
