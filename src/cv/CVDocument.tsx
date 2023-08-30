@@ -292,7 +292,7 @@ export const CVDocument: React.FC<{ data: CVData; isPdf: boolean }> = ({ data, i
 };
 
 export const CVHTML: React.FC<{ data: CVData; isPdf: boolean }> = ({ data, isPdf }) => (
-  <div style={{ width: '650px', left: 'max(calc((100vw - 650px) * .5), 0px)', position: 'relative', top: '500px', scale: '1.5' }}>
+  <div style={{ width: '650px', left: 'max(calc((100vw - 650px) * .5), 0px)', position: 'relative', top: '50px' }}>
     <div id={'header'} style={styles.section}>
       <div id={'left'} style={styles.left}>
         <img src='logo.svg' />
