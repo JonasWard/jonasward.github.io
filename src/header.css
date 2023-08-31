@@ -21,7 +21,7 @@
   height: 100%;
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
   opacity: 0;
-  transition: opacity 0.4s;
+  transition: 0.5s;
   z-index: -1;
 }
 
@@ -44,32 +44,33 @@
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header button.button {
   font-size: 1rem;
-  transition: filter 0.3s;
-  /* filter: invert(80%) sepia(60%) saturate(7030%) hue-rotate(30deg) brightness(110%) contrast(118%); */
+  transition: 0.5s;
+  filter: invert(0);
 }
 
 .header button.button-active {
   font-size: 1rem;
   font-weight: 900;
   font-family: 'Montserrat', sans-serif;
-  transition: filter 0.3s;
+  transition: 0.5s;
   filter: invert(18%) sepia(52%) saturate(4747%) hue-rotate(241deg) brightness(63%) contrast(127%);
 }
 
 /* Change the background color on mouse-over */
 .header button.button:hover {
-  transition: filter 0.3s;
+  transition: 0.5s;
   filter: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
 }
 
 /* Change the background color on mouse-over */
 .header button.button-active:hover {
-  transition: filter 0.3s;
+  opacity: 80%;
+  transition: 0.5s;
 }
 
 /* Style the dropdown content (hidden by default) */
 .dropdown-content {
-  transform: show 0.3s;
+  transform: show 0.5s;
   display: flex;
   flex-direction: column;
   position: absolute;
