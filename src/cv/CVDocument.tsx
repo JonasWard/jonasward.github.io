@@ -49,6 +49,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
   },
+  blockRight: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    textAlign: 'right',
+  },
   section: {
     display: 'flex',
     flexDirection: 'row',
@@ -56,13 +62,19 @@ const styles = StyleSheet.create({
   primaryItem: {
     padding: 0,
     fontSize: 14,
-    fontWeight: 'light',
+    fontWeight: 200,
+  },
+  primaryItemRight: {
+    padding: 0,
+    fontSize: 14,
+    fontWeight: 200,
+    textAlign: 'right',
   },
   secondaryItem: {
     marginTop: '3.5px',
     padding: 0,
     fontSize: 10.5,
-    fontWeight: 'light',
+    fontWeight: 200,
   },
   regularItem: {
     margin: 0,
@@ -74,24 +86,38 @@ const styles = StyleSheet.create({
     margin: '2px 0px',
     padding: 0,
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: 800,
     textAlign: 'left',
   },
   mainItemTitleRight: {
     margin: '2px 0px',
     padding: 0,
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: 800,
+    textAlign: 'right',
+  },
+  skillSubTitle: {
+    fontSize: 10.5,
+    fontWeight: 400,
+    fontStyle: 'normal',
     textAlign: 'right',
   },
   skillsInset: {
-    margin: '3.5px 0 3.5px 12px',
+    margin: '3.5px 12px 3.5px 0px',
     fontSize: 9,
-    fontWeight: 'bold',
-    textAlign: 'justify',
+    fontWeight: 400,
+    fontStyle: 'italic',
+    textAlign: 'left',
+  },
+  skillsInsetRight: {
+    margin: '3.5px 12px 3.5px 0px',
+    fontSize: 9,
+    fontWeight: 400,
+    fontStyle: 'italic',
+    textAlign: 'right',
   },
   namedTitle: {
-    fontWeight: 'light',
+    fontWeight: 200,
     fontSize: 12,
   },
 });
@@ -120,25 +146,23 @@ const InfoRenderer: React.FC<{ info: Info; isPdf: boolean }> = ({ info, isPdf })
 
 const NamedListRenderer: React.FC<{ data: { [key: string]: string }; isPdf: boolean }> = ({ data, isPdf }) => (
   <div id={'NamedListRenderer'}>
-    {Object.entries(data).map(([title, data]) => (
-      <div id={title} style={styles.skillsInset}>
-        <div style={styles.secondaryItem}>
+    {Object.entries(data).map(([title, content]) => (
+      <div id={title}>
+        <div id={'title'} style={styles.secondaryItem}>
           <PDFDivText isPdf={isPdf} content={`${title}`} id={'title'} />
         </div>
-        <div style={styles.regularItem}>
-          <PDFDivText isPdf={isPdf} content={`${data}`} id={'data'} />
+        <div id={'content'} style={styles.regularItem}>
+          <PDFDivText isPdf={isPdf} content={`${content}`} id={'data'} />
         </div>
       </div>
     ))}
   </div>
 );
 
-const UnNamedListRenderer: React.FC<{ data: { [key: string]: string }; isPdf: boolean }> = ({ data, isPdf }) => (
+const UnNamedListRenderer: React.FC<{ data: { [key: string]: string }; isPdf: boolean; style: React.CSSProperties }> = ({ data, isPdf, style }) => (
   <div id={'UnNamedListRenderer'}>
-    isPdf={isPdf}
-    content=
     {Object.entries(data).map(([title, data], i) => (
-      <div id={title} style={styles.regularItem}>
+      <div id={title} style={style}>
         <PDFDivText isPdf={isPdf} content={`${data}`} id={`${i}`} />
       </div>
     ))}
@@ -178,28 +202,26 @@ const SimpleDividingLine = () => (
 const DividingSpace: React.FC<{ id?: string }> = ({ id }) => <div id={id ?? 'divider'} style={{ height: '3px' }} />;
 
 const SkillsRenderer: React.FC<{ skills: Skills; isPdf: boolean }> = ({ skills, isPdf }) => (
-  <div id={'skills'} style={styles.block}>
+  <div id={'skills'} style={styles.blockRight}>
     <TitleRenderer title={'Skills'} leftAlign={false} isPdf={isPdf} />
     {Object.entries(skills).map(([parentSkill, subSkills]) => (
       <div id={parentSkill}>
         <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
         {Object.entries(subSkills).map(([parentSkill, subSkills]) => (
-          <div id={parentSkill} style={styles.skillsInset}>
+          <div id={parentSkill} style={{ ...styles.skillsInsetRight, ...styles.skillSubTitle }}>
             <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
             {isNestedList(subSkills) ? (
               Object.entries(subSkills as NestedList).map(([parentSkill, subSkills]) => (
-                <div id={parentSkill} style={styles.skillsInset}>
-                  <div id={'skills'} style={styles.regularItem}>
-                    <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
-                  </div>
-                  <div id={'subSkills'} style={styles.skillsInset}>
+                <div id={'skills'} style={styles.skillsInsetRight}>
+                  <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
+                  <div id={'subSkills'} style={styles.skillsInsetRight}>
                     <ConcatenatedUnNamedListRenderer data={subSkills} isPdf={isPdf} />
                   </div>
                 </div>
               ))
             ) : (
-              <div id={parentSkill} style={styles.skillsInset}>
-                <UnNamedListRenderer data={subSkills as List} isPdf={isPdf} />
+              <div id={parentSkill} style={styles.skillsInsetRight}>
+                <UnNamedListRenderer data={subSkills as List} isPdf={isPdf} style={styles.skillsInsetRight} />
               </div>
             )}
           </div>
@@ -211,7 +233,7 @@ const SkillsRenderer: React.FC<{ skills: Skills; isPdf: boolean }> = ({ skills, 
 );
 
 const EducationRenderer: React.FC<{ education: Education; isPdf: boolean }> = ({ education, isPdf }) => (
-  <div id={'education'} style={styles.block}>
+  <div id={'education'} style={styles.blockRight}>
     <TitleRenderer title={'Education'} isPdf={isPdf} />
     {Object.entries(education).map(([title, data]) => (
       <div id={title}>
