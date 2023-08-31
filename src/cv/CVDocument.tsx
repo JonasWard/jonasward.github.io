@@ -26,9 +26,6 @@ Font.register({
   ],
 });
 
-const PDFDivText: React.FC<{ content: React.ReactNode; isPdf: boolean; id: string }> = ({ content, isPdf, id }) =>
-  isPdf ? <Text id={id.replaceAll(' ', '_')}>{content}</Text> : <div id={id.replaceAll(' ', '_')}>{content}</div>;
-
 Font.registerHyphenationCallback((word) => [word]);
 
 // Create styles
@@ -98,6 +95,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
+const PDFDivText: React.FC<{ content: React.ReactNode; isPdf: boolean; id: string }> = ({ content, isPdf, id }) =>
+  isPdf ? <Text id={id.replaceAll(' ', '_')}>{content}</Text> : <div id={id.replaceAll(' ', '_')}>{content}</div>;
 
 const InfoRenderer: React.FC<{ info: Info; isPdf: boolean }> = ({ info, isPdf }) => (
   <div id={'info'} style={styles.block}>
