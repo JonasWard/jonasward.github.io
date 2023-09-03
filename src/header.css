@@ -4,22 +4,22 @@
   display: flex;
   font-family: 'Montserrat', sans-serif;
   justify-content: space-between;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: calc(100% - 4px);
   padding: 2px;
-
+  height: 60px;
   z-index: 1;
   background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
 }
 
 .header::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 60px;
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
   opacity: 0;
   transition: 0.5s;
@@ -74,7 +74,7 @@
   transform: show 0.5s;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   background-color: rgba(255, 255, 255, 0.7);
   min-width: 100px;
   z-index: 1;
