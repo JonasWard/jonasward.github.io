@@ -1,4 +1,46 @@
 .project-card {
+  transition: 0.3s;
   font-weight: 500;
   margin: 20px;
+  padding: 8px;
+}
+
+.architecture {
+  border: 2px solid black;
+  box-shadow: 10px 10px 10px 0 rgba(255, 234, 0, 0.3);
+}
+
+.urbanism {
+  border: 2px solid black;
+  box-shadow: 10px 10px 10px 0 rgba(111, 255, 0, 0.3);
+}
+
+.design {
+  border: 2px solid black;
+  box-shadow: 10px 10px 10px 0 rgba(255, 0, 0, 0.3);
+}
+
+.art {
+  border: 2px solid black;
+  box-shadow: 10px 10px 10px 0 rgba(8, 0, 255, 0.3);
+}
+
+.architecture:hover {
+  border: 2px solid rgba(255, 234, 0);
+  box-shadow: 10px 10px 0 0 rgba(255, 234, 0, 1);
+}
+
+.urbanism:hover {
+  border: 2px solid rgba(111, 255, 0);
+  box-shadow: 10px 10px 0 0 rgba(111, 255, 0, 1);
+}
+
+.design:hover {
+  border: 2px solid rgba(255, 0, 0);
+  box-shadow: 10px 10px 0 0 rgba(255, 0, 0, 1);
+}
+
+.art:hover {
+  border: 2px solid rgba(8, 0, 255);
+  box-shadow: 10px 10px 0 0 rgba(8, 0, 255, 1);
 }
