@@ -4,7 +4,8 @@
   display: flex;
   font-family: 'Montserrat', sans-serif;
   justify-content: space-between;
-  position: fixed;
+  position: absolute;
+  top: 0;
   width: calc(100% - 4px);
   padding: 2px;
 
