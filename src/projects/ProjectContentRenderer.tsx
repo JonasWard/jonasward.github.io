@@ -1,6 +1,7 @@
 import { ProjectContent } from '../types/projectContent/projectContent';
 import { ProjectContentType } from '../types/projectContent/projectContentType';
 import { ProjectImageRenderer } from './projectComponents/ProjectImageRenderer';
+import { ProjectImagesRenderer } from './projectComponents/ProjectImagesRenderer';
 import { ProjectImageTextRenderer } from './projectComponents/ProjectImageTextRenderer';
 import { ProjectTextRenderer } from './projectComponents/ProjectTextRenderer';
 import './ProjectOverview.css';
@@ -16,6 +17,9 @@ export const ProjectContentRenderer: React.FC<{ content: ProjectContent[] }> = (
             return <ProjectTextRenderer key={index} content={content} />;
           case ProjectContentType.ImageText:
             return <ProjectImageTextRenderer key={index} content={content} />;
+          case ProjectContentType.Images:
+          case ProjectContentType.ImageGrid:
+            return <ProjectImagesRenderer key={index} content={content} />;
           default:
             return null;
         }

@@ -3,7 +3,6 @@
   flex-direction: row;
   justify-items: start;
   flex-wrap: wrap;
-  width: 100vw;
   align-items: flex-start;
   gap: 25px;
   padding: 20px;

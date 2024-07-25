@@ -8,6 +8,11 @@
   border-color: black;
 }
 
+.project-card img {
+  min-height: 100px;
+  transition: all 0.5s;
+}
+
 .keywords {
   display: flex;
   flex-wrap: wrap;

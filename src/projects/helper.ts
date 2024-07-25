@@ -12,6 +12,12 @@ export const createTitleImage = (href: string, title: string): ProjectImage => (
   imageTextAlignment: 'center',
 });
 
+export const createImage = (href: string, text?: string): ProjectImage => ({
+  type: ProjectContentType.Image,
+  imageHref: href,
+  imageText: text,
+});
+
 export const createText = (...texts: [string, string | undefined][]): ProjectText => ({
   type: ProjectContentType.Text,
   content: texts,

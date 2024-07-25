@@ -2,13 +2,14 @@ import { ProjectImage } from '../../types/projectContent/projectImage';
 import './projectImage.css';
 
 interface IProjectImageRendererProps {
+  className?: string;
   content: ProjectImage;
   isMainImage?: boolean;
 }
 
-export const ProjectImageRenderer: React.FC<IProjectImageRendererProps> = ({ content, isMainImage = false }) => {
+export const ProjectImageRenderer: React.FC<IProjectImageRendererProps> = ({ content, isMainImage = false, className }) => {
   return (
-    <div className={`project-image ${isMainImage ? 'main-image' : ''} ${isMainImage ? 'fade-in' : ''}`}>
+    <div className={`project-image ${isMainImage ? 'main-image' : ''} ${isMainImage ? 'fade-in' : ''} ${className ?? ''}`}>
       <img src={content.imageHref} />
       {content.imageText && (
         <div

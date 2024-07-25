@@ -5,4 +5,6 @@ export enum Keywords {
   Frontend = 'frontend',
   Shaders = 'shaders',
   Geometry = 'geometry',
+  Knitting = 'knitting',
+  Patterns = 'patterns',
 }

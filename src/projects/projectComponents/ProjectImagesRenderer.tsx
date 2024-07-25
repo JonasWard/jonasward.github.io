@@ -1,15 +1,24 @@
+import { ProjectContentType } from '../../types/projectContent/projectContentType';
 import { ProjectImages } from '../../types/projectContent/projectImages';
-import { ProjectImageRenderer } from './ProjectImageRenderer';
 
 export interface IProjectImages {
   content: ProjectImages;
 }
 
 export const ProjectImagesRenderer: React.FC<IProjectImages> = ({ content }) => {
+  const className = content.type === ProjectContentType.ImageGrid ? 'image-grid' : 'images';
+
   return (
-    <div>
+    <div className={className}>
       {content.images.map((image) => (
-        <ProjectImageRenderer key={image.imageHref} content={image} />
+        <div className={`${className}-content`}>
+          <img src={image.imageHref} />
+          {image.imageText && (
+            <div className={`font-${image.imageTextSize ?? 'small'} ${image.imageTextPosition ?? 'bottom'}-${image.imageTextAlignment ?? 'right'} `}>
+              {image.imageText}
+            </div>
+          )}
+        </div>
       ))}
     </div>
   );

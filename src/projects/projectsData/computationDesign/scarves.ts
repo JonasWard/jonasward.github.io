@@ -6,7 +6,7 @@ import { ProjectCategory } from '../../../types/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { createTitleImage } from '../../helper';
 
-const id = '2019-01';
+const id = '2022-01';
 
 const metaData: ProjectMetaData = {
   id,
