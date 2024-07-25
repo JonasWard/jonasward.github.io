@@ -7,4 +7,5 @@ export enum Keywords {
   Geometry = 'geometry',
   Knitting = 'knitting',
   Patterns = 'patterns',
+  DigitalFabrication = 'dfab',
 }
