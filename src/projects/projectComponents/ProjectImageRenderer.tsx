@@ -10,7 +10,7 @@ interface IProjectImageRendererProps {
 export const ProjectImageRenderer: React.FC<IProjectImageRendererProps> = ({ content, isMainImage = false, className }) => {
   return (
     <div className={`project-image ${isMainImage ? 'main-image' : ''} ${isMainImage ? 'fade-in' : ''} ${className ?? ''}`}>
-      <img src={content.imageHref} />
+      <img src={content.imageHref} alt='red-dot' />
       {content.imageText && (
         <div
           className={`font-${content.imageTextSize ?? isMainImage ? 'large' : 'small'} ${content.imageTextPosition ?? isMainImage ? 'center' : 'bottom'}-${

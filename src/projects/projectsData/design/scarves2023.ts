@@ -36,6 +36,7 @@ export const scarves2023: ProjectData = {
   projectImage: createTitleImage(projectImage, metaData.name),
   projectContent: [
     createText(
+      2,
       ['first commerical iteration of the pattern generator into knitware', undefined],
       ['thanks a lot to Richa and Roxas for the modelling', undefined]
     ),
@@ -45,8 +46,8 @@ export const scarves2023: ProjectData = {
       images: [
         [picture1, '©️ S.Hild'],
         [picture2, '©️ S.Hild'],
-        [picture3, '©️ JW'],
-        [picture5, '©️ JW'],
+        [picture3, '©️ S.Shein'],
+        [picture5, '©️ S.Hild'],
         [projectImage, '©️ JW'],
         [picture6, '©️ JW'],
       ].map(([img, c]) => createImage(img, c)),
