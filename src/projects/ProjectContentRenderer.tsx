@@ -8,7 +8,7 @@ import './ProjectOverview.css';
 
 export const ProjectContentRenderer: React.FC<{ content: ProjectContent[] }> = ({ content }) => {
   return (
-    <div className='project-content'>
+    <div className='project-content fade-in'>
       {content.map((content, index) => {
         switch (content.type) {
           case ProjectContentType.Image:

@@ -9,6 +9,22 @@
   padding: 0px 20px;
 }
 
+.fade-in {
+  opacity: 0.1;
+  animation-name: shownum;
+  animation-duration: 1.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes shownum {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .text-block {
   /* border-top: 2px solid; */
   /* border-bottom: 2px solid; */

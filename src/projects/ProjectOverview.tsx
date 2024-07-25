@@ -12,7 +12,7 @@ export const ProjectOverview = () => {
   return (
     <>
       <Header />
-      <div className='project-grid'>
+      <div className='project-grid fade-in'>
         {allProjects.map((project) => (
           <ProjectCard metaData={project.metaData} id={project.id} keyImage={project.projectImage.imageHref} />
         ))}
