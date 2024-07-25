@@ -51,7 +51,7 @@ const metaData: ProjectMetaData = {
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
   keywords: [Keywords.Patterns, Keywords.ThreeDPrinting, Keywords.Frontend],
-  projectParners: ['Malcolm Ungers'],
+  projectPartners: ['Malcolm Ungers'],
 };
 
 export const chocoladeChaud: ProjectData = {

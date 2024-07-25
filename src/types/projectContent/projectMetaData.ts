@@ -13,5 +13,5 @@ export type ProjectMetaData = {
   keywords?: Keywords[];
   projectContext: ProjectContext;
   projectPartnerContext: ProjectPartnerContext;
-  projectParners?: string[];
+  projectPartners?: string[];
 };

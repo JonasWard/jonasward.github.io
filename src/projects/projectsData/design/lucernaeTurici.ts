@@ -69,7 +69,7 @@ const metaData: ProjectMetaData = {
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Solo,
   keywords: [Keywords.ThreeDPrinting],
-  projectParners: [],
+  projectPartners: [],
 };
 
 export const lucernaeTurici: ProjectData = {
