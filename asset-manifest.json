@@ -1,19 +1,27 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.0ae717f0.css",
-    "main.js": "/portfolio/static/js/main.3d25a246.js",
+    "main.css": "/portfolio/static/css/main.216171c9.css",
+    "main.js": "/portfolio/static/js/main.7cb813b2.js",
+    "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
+    "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/20221214_jvb_flow_7.jpeg": "/portfolio/static/media/20221214_jvb_flow_7.12352f122a4def44e703.jpeg",
+    "static/media/picture_1.jpg": "/portfolio/static/media/picture_1.0d54387b5264ed59d005.jpg",
+    "static/media/picture_3.jpg": "/portfolio/static/media/picture_3.173a2aef33c3ca545a95.jpg",
     "static/media/topViewTiles.jpg": "/portfolio/static/media/topViewTiles.f6d8b7e1ea0e7c2ac8a9.jpg",
+    "static/media/picture_4.jpg": "/portfolio/static/media/picture_4.026458901e9a6250787a.jpg",
+    "static/media/rawScarves.jpg": "/portfolio/static/media/rawScarves.1eb4a3ed56e9968a4500.jpg",
     "static/media/theCityIsArt.jpg": "/portfolio/static/media/theCityIsArt.a5c7ce8f90c35912048b.jpg",
+    "static/media/picture_2.jpg": "/portfolio/static/media/picture_2.44562e050d68ffff57c9.jpg",
     "static/media/SiteModel.jpg": "/portfolio/static/media/SiteModel.2fcdd850569ddeec436c.jpg",
     "static/media/patternTitle.jpg": "/portfolio/static/media/patternTitle.0de3054abc05826e592f.jpg",
+    "static/media/picture_5.jpg": "/portfolio/static/media/picture_5.7f6daedbfb8db2f7a7d2.jpg",
     "static/media/jonasward_logo_ww.svg": "/portfolio/static/media/jonasward_logo_ww.fca1949febf2443fca018dcb0e6e9880.svg",
     "index.html": "/portfolio/index.html",
-    "main.0ae717f0.css.map": "/portfolio/static/css/main.0ae717f0.css.map",
-    "main.3d25a246.js.map": "/portfolio/static/js/main.3d25a246.js.map"
+    "main.216171c9.css.map": "/portfolio/static/css/main.216171c9.css.map",
+    "main.7cb813b2.js.map": "/portfolio/static/js/main.7cb813b2.js.map"
   },
   "entrypoints": [
-    "static/css/main.0ae717f0.css",
-    "static/js/main.3d25a246.js"
+    "static/css/main.216171c9.css",
+    "static/js/main.7cb813b2.js"
   ]
 }
