@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.216171c9.css",
-    "main.js": "/portfolio/static/js/main.7cb813b2.js",
+    "main.css": "/portfolio/static/css/main.ee16a911.css",
+    "main.js": "/portfolio/static/js/main.7708f42a.js",
     "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
     "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/20221214_jvb_flow_7.jpeg": "/portfolio/static/media/20221214_jvb_flow_7.12352f122a4def44e703.jpeg",
@@ -15,13 +15,42 @@
     "static/media/SiteModel.jpg": "/portfolio/static/media/SiteModel.2fcdd850569ddeec436c.jpg",
     "static/media/patternTitle.jpg": "/portfolio/static/media/patternTitle.0de3054abc05826e592f.jpg",
     "static/media/picture_5.jpg": "/portfolio/static/media/picture_5.7f6daedbfb8db2f7a7d2.jpg",
+    "static/media/freestyle_2.jpg": "/portfolio/static/media/freestyle_2.36af123a11941c16c625.jpg",
+    "static/media/negative_3.jpg": "/portfolio/static/media/negative_3.81c6d9b259bfa5a7e9f5.jpg",
+    "static/media/molds_4.jpg": "/portfolio/static/media/molds_4.f056cf37436ba96526b6.jpg",
+    "static/media/freestyle_1.jpg": "/portfolio/static/media/freestyle_1.20243575488bbed6079d.jpg",
+    "static/media/results_a.jpg": "/portfolio/static/media/results_a.d09b6abc10895474a255.jpg",
+    "static/media/results_1.jpg": "/portfolio/static/media/results_1.ac886b30a7efdfb87918.jpg",
+    "static/media/results_b.jpg": "/portfolio/static/media/results_b.b83a0496790d714251f7.jpg",
+    "static/media/results_3.jpg": "/portfolio/static/media/results_3.6bd63bc9e38d0a9c4597.jpg",
+    "static/media/negative_2.jpg": "/portfolio/static/media/negative_2.c64bd5d5ac5b2bce2c99.jpg",
+    "static/media/mosque_5.jpg": "/portfolio/static/media/mosque_5.cc51cc0ad9ffb0a2b974.jpg",
+    "static/media/results_2.jpg": "/portfolio/static/media/results_2.e543a4ebdab9716c5c44.jpg",
+    "static/media/negative_1.jpg": "/portfolio/static/media/negative_1.ea853900cf13b2b02d67.jpg",
+    "static/media/pompidou_5.jpg": "/portfolio/static/media/pompidou_5.ce2000ed5ac86748f89f.jpg",
+    "static/media/mosque_1.jpg": "/portfolio/static/media/mosque_1.337b2e3caf48f4145845.jpg",
+    "static/media/pompidou_4.jpg": "/portfolio/static/media/pompidou_4.c2b60fb1cdb17d20659c.jpg",
+    "static/media/mosque_2.jpg": "/portfolio/static/media/mosque_2.e61c386834f3e55c3b35.jpg",
+    "static/media/test-marie.webp": "/portfolio/static/media/test-marie.ca90b05605af174a6a4c.webp",
+    "static/media/pompidou_6.jpg": "/portfolio/static/media/pompidou_6.1e3aa5fafdc5601bd9a3.jpg",
+    "static/media/pompidou_1.jpg": "/portfolio/static/media/pompidou_1.0b2d169b04859564f0e9.jpg",
+    "static/media/pompidou_2.jpg": "/portfolio/static/media/pompidou_2.0fb30c856cfd2b8bf47b.jpg",
+    "static/media/molds_3.jpg": "/portfolio/static/media/molds_3.e6d57414b7f6fa4edee8.jpg",
+    "static/media/mosque_6.jpg": "/portfolio/static/media/mosque_6.02b40eaad10654af1f6a.jpg",
+    "static/media/molds_1.jpg": "/portfolio/static/media/molds_1.637aa74c764f6cff10c4.jpg",
+    "static/media/mosque_4.jpg": "/portfolio/static/media/mosque_4.e2f1a6fc49a295f299fe.jpg",
+    "static/media/molds_2.jpg": "/portfolio/static/media/molds_2.111e3b51dd27b3537f5d.jpg",
+    "static/media/pompidou_3.jpg": "/portfolio/static/media/pompidou_3.2814fbce926eb57484af.jpg",
+    "static/media/chocoladeChaud.jpg": "/portfolio/static/media/chocoladeChaud.3328ec69891310b4032a.jpg",
+    "static/media/mosque_3.jpg": "/portfolio/static/media/mosque_3.9c8e9c67712b613a76ba.jpg",
     "static/media/jonasward_logo_ww.svg": "/portfolio/static/media/jonasward_logo_ww.fca1949febf2443fca018dcb0e6e9880.svg",
+    "static/media/brick-marie.webp": "/portfolio/static/media/brick-marie.62c1dcd4dc909edadae8.webp",
     "index.html": "/portfolio/index.html",
-    "main.216171c9.css.map": "/portfolio/static/css/main.216171c9.css.map",
-    "main.7cb813b2.js.map": "/portfolio/static/js/main.7cb813b2.js.map"
+    "main.ee16a911.css.map": "/portfolio/static/css/main.ee16a911.css.map",
+    "main.7708f42a.js.map": "/portfolio/static/js/main.7708f42a.js.map"
   },
   "entrypoints": [
-    "static/css/main.216171c9.css",
-    "static/js/main.7cb813b2.js"
+    "static/css/main.ee16a911.css",
+    "static/js/main.7708f42a.js"
   ]
 }
