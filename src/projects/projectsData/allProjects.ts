@@ -4,9 +4,10 @@ import { patternMachine } from './computationDesign/patternMachine';
 import { scarves } from './computationDesign/scarves';
 import { smartBrick } from './computationDesign/smartBrick';
 import { chocoladeChaud } from './design/chocoladeChaud';
+import { lucernaeTurici } from './design/lucernaeTurici';
 import { coralBricks } from './design/rrreefs';
 import { scarves2023 } from './design/scarves2023';
 
-export const allProjects = [patternMachine, livingOnTheEdge, theCityIsArt, scarves, smartBrick, coralBricks, scarves2023, chocoladeChaud].sort(
+export const allProjects = [patternMachine, livingOnTheEdge, theCityIsArt, scarves, smartBrick, coralBricks, scarves2023, chocoladeChaud, lucernaeTurici].sort(
   (a, b) => -a.id.localeCompare(b.id)
 );
