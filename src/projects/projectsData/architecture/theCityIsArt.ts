@@ -19,25 +19,27 @@ const metaData: ProjectMetaData = {
   projectPartnerContext: ProjectPartnerContext.Solo,
 };
 
+const maxColumnCount = 1;
+
 export const theCityIsArt: ProjectData = {
   id,
   metaData,
   projectImage: createTitleImage(projectImage, metaData.name),
   projectContent: [
-    createText([
+    createText(maxColumnCount, [
       "something else, but really a lot so that we can really see how this works. And that really over very many lines because otherwise we really can't see to much with this. What do you think, does it actually look like something appealing or is it rather meh?",
       'something',
     ]),
-    createText([
+    createText(maxColumnCount, [
       "something else, but really a lot so that we can really see how this works. And that really over very many lines because otherwise we really can't see to much with this. What do you think, does it actually look like something appealing or is it rather meh?",
       'something',
     ]),
-    createText([
+    createText(maxColumnCount, [
       "something else, but really a lot so that we can really see how this works. And that really over very many lines because otherwise we really can't see to much with this. What do you think, does it actually look like something appealing or is it rather meh?",
       'something',
     ]),
     createTextImage(projectImage, "this is some bs text that belong to this image, don't ask me too much about it ...", 'something', 'text', 'left'),
-    createText([
+    createText(maxColumnCount, [
       "something else, but really a lot so that we can really see how this works. And that really over very many lines because otherwise we really can't see to much with this. What do you think, does it actually look like something appealing or is it rather meh?",
       'something',
     ]),

@@ -3,7 +3,7 @@ import './projectContent.css';
 
 export const ProjectTextRenderer: React.FC<{ content: ProjectText }> = ({ content }) => {
   return (
-    <div className='text-block'>
+    <div className={`text-block columns-${content.maxColumnCount}`}>
       {content.content.map(([text, title], index) => (
         <div>
           {title ? <h2>{title}</h2> : null}

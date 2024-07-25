@@ -22,6 +22,7 @@
 
 .project-image.main-image img {
   width: 100vw;
+  object-fit: cover;
 }
 
 .font-large {
@@ -111,7 +112,9 @@
 }
 
 .image-grid-content img {
+  max-width: 100svw;
   height: 450px;
+  object-fit: cover;
 }
 
 .images-content {
