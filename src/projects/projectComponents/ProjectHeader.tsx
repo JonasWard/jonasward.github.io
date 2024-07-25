@@ -18,7 +18,7 @@ export const ProjectHeader: React.FC<IProjectHeader> = ({ id, metaData, keyImage
       <p>{metaData.projectType}</p>
       <p>{metaData.projectContext}</p>
       <p>{metaData.projectPartnerContext}</p>
-      <p>{metaData.projectParners && metaData.projectParners.map((partner) => partner)}</p>
+      <p>{metaData.projectPartners && metaData.projectPartners.map((partner) => partner)}</p>
       {metaData.keywords && metaData.keywords.map((keyword) => keyword)}
     </div>
   );
