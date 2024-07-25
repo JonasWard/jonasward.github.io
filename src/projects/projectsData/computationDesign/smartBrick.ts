@@ -1,10 +1,11 @@
 import { ProjectPartnerContext } from '../../../types/projectPartnerContext';
 import { ProjectContext } from '../../../types/projectContext';
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
-import projectImage from './assets/topViewTiles.jpg';
+import projectImage from './assets/tiles/topViewTiles.jpg';
 import { ProjectCategory } from '../../../types/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { createTitleImage } from '../../helper';
+import { Keywords } from '../../../types/keywords';
 
 const id = '2019-01';
 
@@ -17,7 +18,8 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Team,
-  projectParners: ['Yuta Akizuka'],
+  projectPartners: ['Yuta Akizuka'],
+  keywords: [Keywords.ThreeDPrinting, Keywords.Patterns, Keywords.DigitalFabrication],
 };
 
 export const smartBrick: ProjectData = {
