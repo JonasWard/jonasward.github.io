@@ -1,4 +1,4 @@
-import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import './cv.css';
 import { Header } from '../Header';
 import { CVDocument, CVHTML } from './CVDocument';
@@ -12,11 +12,11 @@ export const CV = () => {
     <>
       <Header />
       <PDFDownloadLink
-        style={{ position: 'absolute', top: '50px' }}
+        style={{ position: 'absolute', top: '100px' }}
         fileName={`JonasWard_CV_${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.pdf`}
         document={<CVDocument data={cv} isPdf={true} />}
       >
-        <div>download me!</div>
+        <div key='download-link'>download me!</div>
       </PDFDownloadLink>
       <CVHTML data={cv} isPdf={false} />
 

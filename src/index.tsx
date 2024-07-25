@@ -8,6 +8,7 @@ import CV from './cv/CV';
 import { allProjects } from './projects/projectsData/allProjects';
 import NotFound from './NotFound';
 import './index.css';
+import { ProjectWrapper } from './projects/ProjectWrapper';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -22,9 +23,7 @@ root.render(
         <Route path='/cv' element={<CV />} />
         <Route path='/about' element={<About />} />
         <Route path='/projects' element={<ProjectOverview />} />
-        {allProjects.map((project) => (
-          <Route path={`/project/${project.metaData.webstring}`} element={project.projectPage} />
-        ))}
+        <Route path='/project/:id' element={<ProjectWrapper />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { Header } from '../Header';
 import { allProjects } from './projectsData/allProjects';
+import './ProjectOverview.css';
+import ProjectCard from './ProjectCard';
 
 export const ProjectOverview = () => {
   useEffect(() => {
@@ -10,7 +12,11 @@ export const ProjectOverview = () => {
   return (
     <>
       <Header />
-      <div>{allProjects.map((project) => project.projectCard)}</div>
+      <div className='project-grid'>
+        {allProjects.map((project) => (
+          <ProjectCard metaData={project.metaData} id={project.id} keyImage={project.projectImage.imageHref} />
+        ))}
+      </div>
     </>
   );
 };

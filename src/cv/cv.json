@@ -74,7 +74,7 @@
         "Anitkabir": "2018 - Bedsidetable lamp of the mausoleum of Mustafa Kemal Atatürk in Ankara by Emin Halid Onat and Ahmet Orhan Arda",
         "Quadrato della Civilta": "2018 - Bedsidetable lamp of the \"Square Colosseum\" in Rome by Giovanni Guerrini, Ernesto Bruno La Padula and Mario Romano",
         "Sensing a Place": "2022 - in-situ 3d printing of clay using the material of the site, design informed by hearing, feeling, seeing. In collaboration with Berlin based artists Joana Schmitz & Leon Kilbert. Funded by an European Horizon 2020 Grant.",
-        "SDF Scarves": "2022 - series of SDF based scarves, design informed by overlaying and scaling different TPMSs with one another, patterns generated using a browser based pattern generator",
+        "SDF Scarves": "2022-2024 - series of SDF based scarves, design informed by overlaying and scaling different TPMSs with one another, patterns generated using a browser based pattern generator",
         "Julierturm": "2023 - Bedsidetable lamp of the \"Julier Tower\" in the Swiss Alps by Giovanni Netzer",
         "ETH Hauptgebäude": "2023 - Bedsidetable lamp of the \"ETH Hauptgebäude\" in Zürich by Gottfried Semper"
       }
@@ -107,7 +107,7 @@
       "position": "Consultant",
       "role": "POC & Software Development",
       "date": "2020 - 2022",
-      "location": "Konstanz, Germany; Zürich, Switzerland",
+      "location": "Konstanz, Germany",
       "projects": {
         "stoHome": "POC using CityGML datasets, point cloud scans and pictures with machine learning models (such as LR, MLP, pix2pix, SVP) for accurately reading and predicting wall surface area compositions of houses in the context of UGDs remodelling tool stoHome",
         "Digitale Augen": "POC tool for simulating and quantifying human perception of architecture through vector math using cloud scans analysis and computer vision techniques in the context of UGDs project Digital Augen, prototyped with gh C# components and currently being ported to Unity using shaders and integrating OpenCV",
@@ -122,7 +122,8 @@
       "date": "2022 - now",
       "location": "Zürich, Switzerland",
       "projects": {
-        "Haas House Configurator": "a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser"
+        "Haas House Configurator": "a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser",
+        "Stauffer Statics": "a cloud-based static analysis tool for timber contractors"
       }
     }
   },
@@ -131,12 +132,28 @@
       "languages": {
         "0": "Dutch",
         "1": "English",
-        "2": "German",
-        "3": "French"
+        "2": "French",
+        "3": "German"
       }
     },
     "digital": {
       "languages": {
+        ".ts/.js/.html/.css": {
+          "0": "node",
+          "1": "turbo",
+          "2": "react",
+          "3": "next.js",
+          "4": "vercel",
+          "5": "tailwind",
+          "6": "babylon.js",
+          "7": "three.js",
+          "8": "pixi.js",
+          "9": "react-pdf",
+          "10": "glsl",
+          "11": "mongodb",
+          "12": "firebase",
+          "13": "scss"
+        },
         ".py": {
           "0": "numpy",
           "1": "pandas",
@@ -153,18 +170,7 @@
           "13": "GeoPython",
           "14": "shapely"
         },
-        ".ts/.js": {
-          "0": "node",
-          "1": "react",
-          "2": "sass",
-          "8": "webpack",
-          "4": "babylon.js",
-          "3": "three.js",
-          "5": "pixi.js",
-          "6": "react-pdf",
-          "7": "glsl",
-          "9": "bootstrap"
-        },
+
         "#c": {
           "0": "Unity",
           "1": "Rhino/Grasshopper",
@@ -191,8 +197,6 @@
           "0": "UR-script",
           "1": "bash",
           "2": "GCode",
-          "3": "html",
-          "4": "css",
           "5": "julia"
         }
       },
@@ -224,7 +228,8 @@
           "4": "Midjourney",
           "5": "Figma",
           "6": "Sketch",
-          "7": "qlab"
+          "7": "qlab",
+          "8": "processing"
         },
         "rapidPrototyping": {
           "0": "Arduino",

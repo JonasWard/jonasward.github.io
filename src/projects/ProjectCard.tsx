@@ -1,6 +1,7 @@
-import { ProjectMetaData } from './projectsData/ProjectData';
+import { ProjectMetaData } from '../types/projectContent/projectMetaData';
 import { useNavigate } from 'react-router-dom';
 import './ProjectCard.css';
+import { ProjectChip } from './ProjectChip';
 
 interface IProjectNameCard {
   id: string;
@@ -10,21 +11,28 @@ interface IProjectNameCard {
 
 export const ProjectCard: React.FC<IProjectNameCard> = ({ id, metaData, keyImage }) => {
   const navigate = useNavigate();
-
   const navigateProject = () => navigate(`/project/${metaData.webstring}`);
 
   return (
-    <div className={`project-card ${metaData.projectType}`} style={{ width: '200px' }} onClick={navigateProject}>
-      <img style={{ width: '100%', objectFit: 'contain' }} src={keyImage} alt='Red dot' />
+    <div
+      className={`project-card ${metaData.projectType}`}
+      style={{
+        width: '200px',
+      }}
+      onClick={navigateProject}
+    >
+      <img style={{ width: '100%', minHeight: '100px', maxHeight: '250px', objectFit: 'cover' }} src={keyImage} alt='Red dot' />
       <h2>{metaData.name}</h2>
       <main>
         <p>{metaData.description}</p>
       </main>
-      <p>{metaData.projectType}</p>
-      <p>{metaData.projectContext}</p>
-      <p>{metaData.projectPartnerContext}</p>
-      <p>{metaData.projectParners && metaData.projectParners.map((partner) => partner)}</p>
-      {metaData.keywords && metaData.keywords.map((keyword) => keyword)}
+      <div className='keywords'>
+        <ProjectChip name={metaData.projectType} />
+        <ProjectChip name={metaData.projectContext} />
+        <ProjectChip name={metaData.projectPartnerContext} />
+        {metaData.projectParners && metaData.projectParners.map((partner) => <ProjectChip name={partner} />)}
+        {metaData.keywords && metaData.keywords.map((keyword) => <ProjectChip name={keyword} />)}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { ProjectMetaData } from '../projectsData/ProjectData';
+import { ProjectMetaData } from '../../types/projectContent/projectMetaData';
 import './projectheader.css';
 
 interface IProjectHeader {

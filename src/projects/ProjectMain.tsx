@@ -1,27 +1,20 @@
-import { useEffect } from 'react';
 import { Header } from '../Header';
-import ProjectHeader from './projectComponents/ProjectHeader';
-import { ProjectMetaData } from './projectsData/ProjectData';
+import { ProjectData } from '../types/projectContent/projectData';
+import { ProjectImageRenderer } from './projectComponents/ProjectImageRenderer';
+import { ProjectContentRenderer } from './ProjectContentRenderer';
 
-interface IProjectMain {
-  id: string;
-  metaData: ProjectMetaData;
-  keyImage: string;
-  otherNodes?: React.ReactNode[];
+interface IProjectRendererProps {
+  project: ProjectData;
 }
 
-export const ProjectMain: React.FC<IProjectMain> = ({ id, metaData, keyImage, otherNodes = [] }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-
+export const ProjectRenderer: React.FC<IProjectRendererProps> = ({ project }) => {
   return (
     <>
       <Header />
-      <ProjectHeader id={id} metaData={metaData} keyImage={keyImage} />
-      {otherNodes}
+      <ProjectImageRenderer content={project.projectImage} isMainImage />
+      <ProjectContentRenderer content={project.projectContent} />
     </>
   );
 };
 
-export default ProjectMain;
+export default ProjectRenderer;
