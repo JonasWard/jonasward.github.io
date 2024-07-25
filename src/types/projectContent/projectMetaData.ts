@@ -10,7 +10,7 @@ export type ProjectMetaData = {
   projectType: ProjectCategory;
   description: string;
   keyImage?: string;
-  keywords?: Keywords[];
+  keywords?: (Keywords | ProjectCategory)[];
   projectContext: ProjectContext;
   projectPartnerContext: ProjectPartnerContext;
   projectPartners?: string[];
