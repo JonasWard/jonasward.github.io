@@ -1,7 +1,7 @@
 import { ProjectPartnerContext } from '../../../types/projectPartnerContext';
 import { ProjectContext } from '../../../types/projectContext';
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
-import projectImage from './assets/patternTitle.jpg';
+import projectImage from './assets/patternGenerator/patternTitle.jpg';
 import { ProjectCategory } from '../../../types/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { createTitleImage } from '../../helper';
