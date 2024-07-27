@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.ee16a911.css",
-    "main.js": "/portfolio/static/js/main.f4911055.js",
+    "main.css": "/portfolio/static/css/main.a8be22b0.css",
+    "main.js": "/portfolio/static/js/main.48a8d598.js",
     "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
     "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/20221214_jvb_flow_7.jpeg": "/portfolio/static/media/20221214_jvb_flow_7.12352f122a4def44e703.jpeg",
@@ -15,7 +15,9 @@
     "static/media/picture_2.jpg": "/portfolio/static/media/picture_2.44562e050d68ffff57c9.jpg",
     "static/media/SiteModel.jpg": "/portfolio/static/media/SiteModel.2fcdd850569ddeec436c.jpg",
     "static/media/patternTitle.jpg": "/portfolio/static/media/patternTitle.0de3054abc05826e592f.jpg",
+    "static/media/references_4.jpg": "/portfolio/static/media/references_4.ecf7102aaadc0c36e01c.jpg",
     "static/media/picture_5.jpg": "/portfolio/static/media/picture_5.7f6daedbfb8db2f7a7d2.jpg",
+    "static/media/references_3.jpg": "/portfolio/static/media/references_3.61b91e44b489f719ef1f.jpg",
     "static/media/config_6.png": "/portfolio/static/media/config_6.199a1ddff27404163106.png",
     "static/media/freestyle_2.jpg": "/portfolio/static/media/freestyle_2.36af123a11941c16c625.jpg",
     "static/media/view_a.png": "/portfolio/static/media/view_a.f3ce9b1cb15dc7c8bf2a.png",
@@ -34,6 +36,7 @@
     "static/media/form_7.jpg": "/portfolio/static/media/form_7.1667b83675d918f3373b.jpg",
     "static/media/form_6.jpg": "/portfolio/static/media/form_6.33901b1cf699fb950e3d.jpg",
     "static/media/form_9.jpg": "/portfolio/static/media/form_9.2ca439f2ae55383ff986.jpg",
+    "static/media/julierTurm_2.jpg": "/portfolio/static/media/julierTurm_2.edb49a2be1c8858327b5.jpg",
     "static/media/form_8.jpg": "/portfolio/static/media/form_8.4578beec40d526bdc7d3.jpg",
     "static/media/form_10.jpg": "/portfolio/static/media/form_10.94a1372182f1979578eb.jpg",
     "static/media/print_2.jpg": "/portfolio/static/media/print_2.643d4b9c3ac586ed4e5c.jpg",
@@ -43,6 +46,7 @@
     "static/media/lamp_2.jpg": "/portfolio/static/media/lamp_2.ed34698cb083007e195b.jpg",
     "static/media/form_5.jpg": "/portfolio/static/media/form_5.78a7ba414eed340a1080.jpg",
     "static/media/config_4.png": "/portfolio/static/media/config_4.ddf1129bcb4d0ce7b8cb.png",
+    "static/media/julierTurm_1.jpg": "/portfolio/static/media/julierTurm_1.66b9607e3f4aeb308b4d.jpg",
     "static/media/config_3.png": "/portfolio/static/media/config_3.a6f4f80f46f373f54720.png",
     "static/media/lamp_3.jpg": "/portfolio/static/media/lamp_3.8612c076927e00b7a368.jpg",
     "static/media/config_11.png": "/portfolio/static/media/config_11.2ead4c3ed874c3366ac5.png",
@@ -58,19 +62,26 @@
     "static/media/results_1.jpg": "/portfolio/static/media/results_1.ac886b30a7efdfb87918.jpg",
     "static/media/config_9.png": "/portfolio/static/media/config_9.d0117fab59bcfc8c429c.png",
     "static/media/config_10.png": "/portfolio/static/media/config_10.a6fbcef1cb40c2aef049.png",
+    "static/media/julierTurm_4.jpg": "/portfolio/static/media/julierTurm_4.e0ec172ba1128429ec78.jpg",
     "static/media/results_b.jpg": "/portfolio/static/media/results_b.b83a0496790d714251f7.jpg",
     "static/media/config_5.jpg": "/portfolio/static/media/config_5.49c3a93ad6294684bed9.jpg",
+    "static/media/julierTurm_3.jpg": "/portfolio/static/media/julierTurm_3.66c61a1b1e9f9bf594c3.jpg",
     "static/media/results_3.jpg": "/portfolio/static/media/results_3.6bd63bc9e38d0a9c4597.jpg",
     "static/media/negative_2.jpg": "/portfolio/static/media/negative_2.c64bd5d5ac5b2bce2c99.jpg",
     "static/media/mosque_5.jpg": "/portfolio/static/media/mosque_5.cc51cc0ad9ffb0a2b974.jpg",
+    "static/media/references_1.jpg": "/portfolio/static/media/references_1.c4962b084c423233c1e3.jpg",
+    "static/media/babylon_4.jpg": "/portfolio/static/media/babylon_4.c31e3d3df74340a5196e.jpg",
     "static/media/results_2.jpg": "/portfolio/static/media/results_2.e543a4ebdab9716c5c44.jpg",
     "static/media/negative_1.jpg": "/portfolio/static/media/negative_1.ea853900cf13b2b02d67.jpg",
+    "static/media/babylon_2.jpg": "/portfolio/static/media/babylon_2.6bfce0c150297df4f3ae.jpg",
+    "static/media/babylon_3.jpg": "/portfolio/static/media/babylon_3.c5384b036a5987f8a202.jpg",
     "static/media/config_8.png": "/portfolio/static/media/config_8.149e870a4d35b26c068c.png",
     "static/media/pompidou_5.jpg": "/portfolio/static/media/pompidou_5.ce2000ed5ac86748f89f.jpg",
     "static/media/mosque_1.jpg": "/portfolio/static/media/mosque_1.337b2e3caf48f4145845.jpg",
     "static/media/config_7.png": "/portfolio/static/media/config_7.3b0cf756ffd878a2d3dc.png",
     "static/media/pompidou_4.jpg": "/portfolio/static/media/pompidou_4.c2b60fb1cdb17d20659c.jpg",
     "static/media/mosque_2.jpg": "/portfolio/static/media/mosque_2.e61c386834f3e55c3b35.jpg",
+    "static/media/references_2.png": "/portfolio/static/media/references_2.82edfb14fd8c8bcb0f5d.png",
     "static/media/test-marie.webp": "/portfolio/static/media/test-marie.ca90b05605af174a6a4c.webp",
     "static/media/pompidou_6.jpg": "/portfolio/static/media/pompidou_6.1e3aa5fafdc5601bd9a3.jpg",
     "static/media/pompidou_1.jpg": "/portfolio/static/media/pompidou_1.0b2d169b04859564f0e9.jpg",
@@ -89,11 +100,11 @@
     "static/media/data_1.png": "/portfolio/static/media/data_1.d78c6935fcdd75a63053.png",
     "static/media/brick-marie.webp": "/portfolio/static/media/brick-marie.62c1dcd4dc909edadae8.webp",
     "index.html": "/portfolio/index.html",
-    "main.ee16a911.css.map": "/portfolio/static/css/main.ee16a911.css.map",
-    "main.f4911055.js.map": "/portfolio/static/js/main.f4911055.js.map"
+    "main.a8be22b0.css.map": "/portfolio/static/css/main.a8be22b0.css.map",
+    "main.48a8d598.js.map": "/portfolio/static/js/main.48a8d598.js.map"
   },
   "entrypoints": [
-    "static/css/main.ee16a911.css",
-    "static/js/main.f4911055.js"
+    "static/css/main.a8be22b0.css",
+    "static/js/main.48a8d598.js"
   ]
 }
