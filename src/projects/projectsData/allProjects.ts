@@ -5,9 +5,19 @@ import { scarves } from './computationDesign/scarves';
 import { smartBrick } from './computationDesign/smartBrick';
 import { chocoladeChaud } from './design/chocoladeChaud';
 import { lucernaeTurici } from './design/lucernaeTurici';
+import { paraSlimShady } from './design/paraSlimShady';
 import { coralBricks } from './design/rrreefs';
 import { scarves2023 } from './design/scarves2023';
 
-export const allProjects = [patternMachine, livingOnTheEdge, theCityIsArt, scarves, smartBrick, coralBricks, scarves2023, chocoladeChaud, lucernaeTurici].sort(
-  (a, b) => -a.id.localeCompare(b.id)
-);
+export const allProjects = [
+  patternMachine,
+  livingOnTheEdge,
+  theCityIsArt,
+  scarves,
+  smartBrick,
+  coralBricks,
+  scarves2023,
+  chocoladeChaud,
+  lucernaeTurici,
+  paraSlimShady,
+].sort((a, b) => -a.id.localeCompare(b.id));
