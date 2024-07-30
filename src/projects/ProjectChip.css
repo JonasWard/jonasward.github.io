@@ -1,0 +1,9 @@
+.project-chip {
+  transition: all 0.5s;
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.project-chip:hover {
+  opacity: 1;
+}
