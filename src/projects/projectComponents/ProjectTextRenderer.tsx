@@ -5,9 +5,9 @@ export const ProjectTextRenderer: React.FC<{ content: ProjectText }> = ({ conten
   return (
     <div className={`text-block columns-${content.maxColumnCount}`}>
       {content.content.map(([text, title], index) => (
-        <div>
+        <div key={index}>
           {title ? <h2>{title}</h2> : null}
-          <p key={index}>{text}</p>
+          <p>{text}</p>
         </div>
       ))}
     </div>
