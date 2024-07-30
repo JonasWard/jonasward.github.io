@@ -15,6 +15,7 @@ const pHeight = 19.5;
 const gap = 25;
 const padding = 20;
 const horizontalGridSpacing = horizontalSpacing + padding + gap;
+const baseY = gap * 3;
 
 const calculateApproximiteProjectCardHeight = (project: ProjectData): number => {
   const imageHeight = getImageHeight(project.projectImage);
@@ -41,7 +42,7 @@ export const ProjectOverview = () => {
   const [hasBeenUpdatedOnce, setHasBeenUpdatedOnce] = useState(false);
   const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, getLeftForColumnIndex(index), 0]));
+  const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, getLeftForColumnIndex(index), baseY]));
 
   useEffect(() => {
     if (!hasBeenUpdatedOnce && projectCardRefs.current && projectCardRefs.current.every((e) => e !== null)) {
@@ -58,7 +59,6 @@ export const ProjectOverview = () => {
 
     allProjects.forEach((p, i) => columns[i % columnCount].push([i, baseX + (i % columnCount) * horizontalGridSpacing, p]));
 
-    const baseY = gap * 3;
     const localPositions: [number, number, number][] = [];
 
     let maximumHeight = 0;
