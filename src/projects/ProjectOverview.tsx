@@ -90,7 +90,7 @@ export const ProjectOverview = () => {
   return (
     <>
       <Header />
-      <div className='project-grid fade-in' style={{ width, height }}>
+      <div className='project-grid' style={{ width, height }}>
         {positions.map(([index, left, top]) => (
           <ProjectCard
             key={index}

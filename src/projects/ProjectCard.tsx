@@ -24,7 +24,7 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyIm
       ref={(element) => {
         if (refArray.current) refArray.current[index] = element;
       }}
-      className={`project-card ${metaData.projectType}`}
+      className={`project-card fade-in ${metaData.projectType}`}
       style={{
         position: 'absolute',
         width: '200px',
