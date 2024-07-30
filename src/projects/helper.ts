@@ -1,6 +1,8 @@
 import { ProjectContentType } from '../types/projectContent/projectContentType';
+import { ProjectData } from '../types/projectContent/projectData';
 import { ProjectImage } from '../types/projectContent/projectImage';
 import { ProjectImageText } from '../types/projectContent/projectImageText';
+import { ProjectMetaData } from '../types/projectContent/projectMetaData';
 import { ProjectText } from '../types/projectContent/projectText';
 
 export const createTitleImage = (href: string, title: string, imageWidth: number, imageHeigth: number): ProjectImage => ({
@@ -46,3 +48,11 @@ export const createTextImage = (
   },
   position,
 });
+
+export const getProjectKeywords = (metaData: ProjectMetaData) => [
+  metaData.projectType,
+  metaData.projectContext,
+  metaData.projectPartnerContext,
+  ...(metaData.projectPartners ? metaData.projectPartners : []),
+  ...(metaData.keywords ? metaData.keywords : []),
+];
