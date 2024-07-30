@@ -28,10 +28,6 @@ export const Header = () => {
     setMobileView(isMobile);
   };
 
-  // useEffect(() => {
-  //   console.log(showDropDown);
-  // }, [showDropDown]);
-
   useEffect(() => {
     if (path.pathname.indexOf('/home') !== -1) setActiveTab(activeTab.home);
     else if (path.pathname.indexOf('/landing') !== -1) setActiveTab(activeTab.home);
