@@ -30,6 +30,7 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyIm
         width: '200px',
         left,
         top,
+        zIndex: -index,
       }}
       onClick={navigateProject}
     >
