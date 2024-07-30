@@ -24,7 +24,7 @@ const maxColumnCount = 1;
 export const theCityIsArt: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name),
+  projectImage: createTitleImage(projectImage, metaData.name, 1970, 2183),
   projectContent: [
     createText(maxColumnCount, [
       "something else, but really a lot so that we can really see how this works. And that really over very many lines because otherwise we really can't see to much with this. What do you think, does it actually look like something appealing or is it rather meh?",

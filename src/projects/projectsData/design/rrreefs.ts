@@ -28,7 +28,7 @@ const metaData: ProjectMetaData = {
 export const coralBricks: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name),
+  projectImage: createTitleImage(projectImage, metaData.name, 903, 677),
   projectContent: [
     createText(
       2,

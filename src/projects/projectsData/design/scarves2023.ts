@@ -33,7 +33,7 @@ const metaData: ProjectMetaData = {
 export const scarves2023: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name),
+  projectImage: createTitleImage(projectImage, metaData.name, 2048, 2491),
   projectContent: [
     createText(
       2,

@@ -57,7 +57,7 @@ const metaData: ProjectMetaData = {
 export const chocoladeChaud: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name),
+  projectImage: createTitleImage(projectImage, metaData.name, 1373, 1888),
   projectContent: [
     createText(
       1,

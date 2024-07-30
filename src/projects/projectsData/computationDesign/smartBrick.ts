@@ -25,6 +25,6 @@ const metaData: ProjectMetaData = {
 export const smartBrick: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name),
+  projectImage: createTitleImage(projectImage, metaData.name, 2048, 2036),
   projectContent: [],
 };

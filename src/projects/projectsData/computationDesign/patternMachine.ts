@@ -22,6 +22,6 @@ const metaData: ProjectMetaData = {
 export const patternMachine: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, 'Pattern Machine'),
+  projectImage: createTitleImage(projectImage, 'Pattern Machine', 1928, 2876),
   projectContent: [],
 };

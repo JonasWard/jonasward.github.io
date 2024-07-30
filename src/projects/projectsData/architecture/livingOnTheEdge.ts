@@ -22,6 +22,6 @@ const metaData: ProjectMetaData = {
 export const livingOnTheEdge: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name),
+  projectImage: createTitleImage(projectImage, metaData.name, 2943, 3890),
   projectContent: [],
 };

@@ -75,7 +75,7 @@ const metaData: ProjectMetaData = {
 export const lucernaeTurici: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name),
+  projectImage: createTitleImage(projectImage, metaData.name, 1988, 2560),
   projectContent: [
     createText(
       2,
