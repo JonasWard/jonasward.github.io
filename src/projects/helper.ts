@@ -1,5 +1,4 @@
 import { ProjectContentType } from '../types/projectContent/projectContentType';
-import { ProjectData } from '../types/projectContent/projectData';
 import { ProjectImage } from '../types/projectContent/projectImage';
 import { ProjectImageText } from '../types/projectContent/projectImageText';
 import { ProjectMetaData } from '../types/projectContent/projectMetaData';
