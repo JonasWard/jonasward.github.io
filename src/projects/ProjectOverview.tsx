@@ -26,15 +26,22 @@ const calculateApproximiteProjectCardHeight = (project: ProjectData): number => 
   return 20 * 3 + padding * 2 + imageHeight + titleHeight + descriptionHeight + keyWordHeight;
 };
 
+const getLeftForColumnIndex = (index: number) => {
+  const columnCount = getColumnsForWidthAndProjects(allProjects, window.innerWidth);
+  const baseX = window.innerWidth < mobileViewWidth ? gap : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
+  return (index % columnCount) * horizontalGridSpacing + baseX;
+};
+
 const getColumnsForWidthAndProjects = (projects: ProjectData[], innerWidth: number) =>
   innerWidth < mobileViewWidth ? projects.length : Math.floor((innerWidth + gap) / horizontalGridSpacing);
 
 export const ProjectOverview = () => {
-  const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, 0, 0]));
   const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing - gap);
   const [height, setHeight] = useState(2000);
   const [hasBeenUpdatedOnce, setHasBeenUpdatedOnce] = useState(false);
   const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, getLeftForColumnIndex(index), 0]));
 
   useEffect(() => {
     if (!hasBeenUpdatedOnce && projectCardRefs.current && projectCardRefs.current.every((e) => e !== null)) {
@@ -46,8 +53,6 @@ export const ProjectOverview = () => {
   const onScreenScale = () => {
     const columnCount = getColumnsForWidthAndProjects(allProjects, window.innerWidth);
     const baseX = window.innerWidth < mobileViewWidth ? gap : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
-
-    setWidth(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing - gap);
 
     const columns: [number, number, ProjectData][][] = [...Array(columnCount)].map((_) => []);
 
@@ -70,8 +75,8 @@ export const ProjectOverview = () => {
       });
     });
 
+    setWidth(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing - gap);
     setHeight(maximumHeight + gap);
-
     setPositions(localPositions);
   };
 
