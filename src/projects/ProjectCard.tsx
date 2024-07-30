@@ -2,36 +2,54 @@ import { ProjectMetaData } from '../types/projectContent/projectMetaData';
 import { useNavigate } from 'react-router-dom';
 import './ProjectCard.css';
 import { ProjectChip } from './ProjectChip';
+import { ProjectImage } from '../types/projectContent/projectImage';
+import { getProjectKeywords } from './helper';
+import { RefObject } from 'react';
 
 interface IProjectNameCard {
-  id: string;
+  index: number;
   metaData: ProjectMetaData;
-  keyImage: string;
+  keyImage: ProjectImage;
+  left: number;
+  top: number;
+  refArray: RefObject<(HTMLDivElement | null)[]>;
 }
 
-export const ProjectCard: React.FC<IProjectNameCard> = ({ id, metaData, keyImage }) => {
+export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyImage, left, top, refArray }) => {
   const navigate = useNavigate();
   const navigateProject = () => navigate(`/project/${metaData.webstring}`);
 
   return (
     <div
+      ref={(element) => {
+        if (refArray.current) refArray.current[index] = element;
+      }}
       className={`project-card ${metaData.projectType}`}
       style={{
+        position: 'absolute',
         width: '200px',
+        left,
+        top,
       }}
       onClick={navigateProject}
     >
-      <img style={{ width: '100%', minHeight: '100px', maxHeight: '250px', objectFit: 'cover' }} src={keyImage} alt='Red dot' />
+      <img
+        style={{
+          width: '100%',
+          height: `${((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * 200}px`,
+          objectFit: 'cover',
+        }}
+        src={keyImage.imageHref}
+        alt='Red dot'
+      />
       <h2>{metaData.name}</h2>
       <main>
         <p>{metaData.description}</p>
       </main>
       <div className='keywords'>
-        <ProjectChip name={metaData.projectType} />
-        <ProjectChip name={metaData.projectContext} />
-        <ProjectChip name={metaData.projectPartnerContext} />
-        {metaData.projectPartners && metaData.projectPartners.map((partner) => <ProjectChip name={partner} />)}
-        {metaData.keywords && metaData.keywords.map((keyword) => <ProjectChip name={keyword} />)}
+        {getProjectKeywords(metaData).map((attribute, index) => (
+          <ProjectChip key={index} name={attribute} />
+        ))}
       </div>
     </div>
   );
