@@ -34,10 +34,10 @@ const getLeftForColumnIndex = (index: number) => {
 };
 
 const getColumnsForWidthAndProjects = (projects: ProjectData[], innerWidth: number) =>
-  innerWidth < mobileViewWidth ? projects.length : Math.floor((innerWidth + gap) / horizontalGridSpacing);
+  innerWidth < mobileViewWidth ? projects.length : Math.floor((innerWidth - gap) / horizontalGridSpacing);
 
 export const ProjectOverview = () => {
-  const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing - gap);
+  const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing + gap);
   const [height, setHeight] = useState(2000);
   const [hasBeenUpdatedOnce, setHasBeenUpdatedOnce] = useState(false);
   const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -75,7 +75,7 @@ export const ProjectOverview = () => {
       });
     });
 
-    setWidth(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing - gap);
+    setWidth(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing + gap);
     setHeight(maximumHeight + gap);
     setPositions(localPositions);
   };
