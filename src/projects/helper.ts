@@ -3,13 +3,15 @@ import { ProjectImage } from '../types/projectContent/projectImage';
 import { ProjectImageText } from '../types/projectContent/projectImageText';
 import { ProjectText } from '../types/projectContent/projectText';
 
-export const createTitleImage = (href: string, title: string): ProjectImage => ({
+export const createTitleImage = (href: string, title: string, imageWidth: number, imageHeigth: number): ProjectImage => ({
   type: ProjectContentType.Image,
   imageHref: href,
   imageText: title,
   imageTextSize: 'large',
   imageTextPosition: 'center',
   imageTextAlignment: 'center',
+  imageWidth,
+  imageHeigth,
 });
 
 export const createImage = (href: string, text?: string): ProjectImage => ({
