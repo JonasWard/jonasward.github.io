@@ -31,6 +31,8 @@ const getColumnsForWidthAndProjects = (projects: ProjectData[], innerWidth: numb
 
 export const ProjectOverview = () => {
   const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, 0, 0]));
+  const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing - gap);
+  const [height, setHeight] = useState(2000);
   const [hasBeenUpdatedOnce, setHasBeenUpdatedOnce] = useState(false);
   const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -45,12 +47,16 @@ export const ProjectOverview = () => {
     const columnCount = getColumnsForWidthAndProjects(allProjects, window.innerWidth);
     const baseX = window.innerWidth < mobileViewWidth ? gap : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
 
+    setWidth(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing - gap);
+
     const columns: [number, number, ProjectData][][] = [...Array(columnCount)].map((_) => []);
 
     allProjects.forEach((p, i) => columns[i % columnCount].push([i, baseX + (i % columnCount) * horizontalGridSpacing, p]));
 
     const baseY = gap * 3;
     const localPositions: [number, number, number][] = [];
+
+    let maximumHeight = 0;
 
     columns.forEach((column) => {
       let localY = baseY;
@@ -59,17 +65,19 @@ export const ProjectOverview = () => {
         localY += (projectCardRefs?.current[index]?.offsetHeight as undefined | null | number)
           ? (projectCardRefs?.current[index]?.offsetHeight as number) + gap
           : calculateApproximiteProjectCardHeight(project);
+
+        if (localY > maximumHeight) maximumHeight = localY;
       });
     });
+
+    setHeight(maximumHeight + gap);
 
     setPositions(localPositions);
   };
 
   useEffect(() => {
-    onScreenScale();
+    onScreenScale(); // initial
     window.addEventListener('resize', onScreenScale);
-    const rerenderAfterFirstRenderling = () => new Promise((res) => setTimeout(onScreenScale, 500));
-    rerenderAfterFirstRenderling();
 
     return window.addEventListener('resize', onScreenScale);
   }, []);
@@ -77,7 +85,7 @@ export const ProjectOverview = () => {
   return (
     <>
       <Header />
-      <div className='project-grid fade-in'>
+      <div className='project-grid fade-in' style={{ width, height }}>
         {positions.map(([index, left, top]) => (
           <ProjectCard
             key={index}
