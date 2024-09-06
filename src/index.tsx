@@ -9,23 +9,27 @@ import { allProjects } from './projects/projectsData/allProjects';
 import NotFound from './NotFound';
 import './index.css';
 import { ProjectWrapper } from './projects/ProjectWrapper';
+import { Header } from './Header';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Router>
-      <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/portfolio' element={<Landing />} />
-        <Route path='/landing' element={<Landing />} />
-        <Route path='/home' element={<Landing />} />
-        <Route path='/main' element={<Landing />} />
-        <Route path='/cv' element={<CV />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/projects' element={<ProjectOverview />} />
-        <Route path='/project/:id' element={<ProjectWrapper />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <Header />
+      <div className='project-page'>
+        <Routes>
+          <Route path='/' element={<Landing />} />
+          <Route path='/portfolio' element={<Landing />} />
+          <Route path='/landing' element={<Landing />} />
+          <Route path='/home' element={<Landing />} />
+          <Route path='/main' element={<Landing />} />
+          <Route path='/cv' element={<CV />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/projects' element={<ProjectOverview />} />
+          <Route path='/project/:id' element={<ProjectWrapper />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </div>
     </Router>
   </React.StrictMode>
 );
