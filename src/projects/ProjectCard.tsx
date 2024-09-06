@@ -4,7 +4,7 @@ import './ProjectCard.css';
 import { ProjectChip } from './ProjectChip';
 import { ProjectImage } from '../types/projectContent/projectImage';
 import { getProjectKeywords } from './helper';
-import { RefObject } from 'react';
+import { RefObject, useState } from 'react';
 
 interface IProjectNameCard {
   index: number;
@@ -13,11 +13,13 @@ interface IProjectNameCard {
   left: number;
   top: number;
   refArray: RefObject<(HTMLDivElement | null)[]>;
+  triggerRerender: () => void;
 }
 
-export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyImage, left, top, refArray }) => {
+export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyImage, left, top, refArray, triggerRerender }) => {
   const navigate = useNavigate();
   const navigateProject = () => navigate(`/project/${metaData.webstring}`);
+  const [showKeywords, setShowKeywords] = useState(false);
 
   return (
     <div
@@ -48,8 +50,20 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyIm
       </main>
       <div className='keywords'>
         {getProjectKeywords(metaData).map((attribute, index) => (
-          <ProjectChip key={index} name={attribute} />
+          <ProjectChip key={index} name={attribute} show={showKeywords} />
         ))}
+      </div>
+      <div className='keywords'>
+        <ProjectChip
+          key={'show keywords trigger'}
+          name={'Keywords +'}
+          onClick={(e: Event) => {
+            e.stopPropagation();
+            triggerRerender();
+            setShowKeywords(true);
+          }}
+          show={!showKeywords}
+        />
       </div>
     </div>
   );

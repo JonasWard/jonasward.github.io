@@ -1,8 +1,10 @@
 import { ProjectContent } from '../types/projectContent/projectContent';
 import { ProjectContentType } from '../types/projectContent/projectContentType';
+import { ProjectExternalLinkRenderer } from './projectComponents/ProjectExternalLinkRenderer';
 import { ProjectImageRenderer } from './projectComponents/ProjectImageRenderer';
 import { ProjectImagesRenderer } from './projectComponents/ProjectImagesRenderer';
 import { ProjectImageTextRenderer } from './projectComponents/ProjectImageTextRenderer';
+import { ProjectListRenderer } from './projectComponents/ProjectListRenderer';
 import { ProjectTextRenderer } from './projectComponents/ProjectTextRenderer';
 import './ProjectOverview.css';
 
@@ -20,6 +22,10 @@ export const ProjectContentRenderer: React.FC<{ content: ProjectContent[] }> = (
           case ProjectContentType.Images:
           case ProjectContentType.ImageGrid:
             return <ProjectImagesRenderer key={index} content={content} />;
+          case ProjectContentType.ExternalLink:
+            return <ProjectExternalLinkRenderer key={index} content={content} />;
+          case ProjectContentType.List:
+            return <ProjectListRenderer key={index} content={content} />;
           default:
             return null;
         }

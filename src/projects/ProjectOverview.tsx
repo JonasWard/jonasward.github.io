@@ -7,7 +7,7 @@ import { ProjectData } from '../types/projectContent/projectData';
 import { ProjectImage } from '../types/projectContent/projectImage';
 import { getProjectKeywords } from './helper';
 
-const mobileViewWidth = 501;
+const mobileViewWidth = 600;
 const getImageHeight = (keyImage: ProjectImage) => ((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * horizontalSpacing;
 const horizontalSpacing = 200;
 const h2Height = 29;
@@ -37,19 +37,16 @@ const getColumnsForWidthAndProjects = (projects: ProjectData[], innerWidth: numb
   innerWidth < mobileViewWidth ? projects.length : Math.floor((innerWidth - gap) / horizontalGridSpacing);
 
 export const ProjectOverview = () => {
+  const [renderIndex, setRenderIndex] = useState(0);
   const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing + gap);
   const [height, setHeight] = useState(2000);
-  const [hasBeenUpdatedOnce, setHasBeenUpdatedOnce] = useState(false);
   const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, getLeftForColumnIndex(index), baseY]));
 
   useEffect(() => {
-    if (!hasBeenUpdatedOnce && projectCardRefs.current && projectCardRefs.current.every((e) => e !== null)) {
-      onScreenScale();
-      setHasBeenUpdatedOnce(true);
-    }
-  }, [projectCardRefs]);
+    if (projectCardRefs.current && projectCardRefs.current.every((e) => e !== null)) onScreenScale();
+  }, [projectCardRefs, renderIndex]);
 
   const onScreenScale = () => {
     const columnCount = getColumnsForWidthAndProjects(allProjects, window.innerWidth);
@@ -75,9 +72,10 @@ export const ProjectOverview = () => {
       });
     });
 
-    setWidth(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing + gap);
-    setHeight(maximumHeight + gap);
-    setPositions(localPositions);
+    const localWidth = getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing + gap;
+    if (width !== localWidth) setWidth(localWidth);
+    if (height !== maximumHeight + gap) setHeight(maximumHeight + gap);
+    if (JSON.stringify(positions) !== JSON.stringify(localPositions)) setPositions(localPositions);
   };
 
   useEffect(() => {
@@ -88,22 +86,20 @@ export const ProjectOverview = () => {
   }, []);
 
   return (
-    <>
-      <Header />
-      <div className='project-grid' style={{ width, height }}>
-        {positions.map(([index, left, top]) => (
-          <ProjectCard
-            key={index}
-            index={index}
-            metaData={allProjects[index].metaData}
-            keyImage={allProjects[index].projectImage}
-            left={left}
-            top={top}
-            refArray={projectCardRefs}
-          />
-        ))}
-      </div>
-    </>
+    <div className='project-grid'>
+      {positions.map(([index, left, top]) => (
+        <ProjectCard
+          key={index}
+          index={index}
+          metaData={allProjects[index].metaData}
+          keyImage={allProjects[index].projectImage}
+          left={left}
+          top={top}
+          refArray={projectCardRefs}
+          triggerRerender={() => setRenderIndex(renderIndex + 1)}
+        />
+      ))}
+    </div>
   );
 };
 
