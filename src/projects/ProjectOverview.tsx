@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { Header } from '../Header';
 import { allProjects } from './projectsData/allProjects';
 import './ProjectOverview.css';
 import ProjectCard from './ProjectCard';
