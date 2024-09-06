@@ -1,99 +1,99 @@
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Uw-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-Thin.ttf') format('truetype');
   font-weight: 100;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvr6Ew-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-ExtraLight.ttf') format('truetype');
   font-weight: 200;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCs16Ew-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-Light.ttf') format('truetype');
   font-weight: 300;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Ew-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtZ6Ew-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-Medium.ttf') format('truetype');
   font-weight: 500;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCu170w-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-SemiBold.ttf') format('truetype');
   font-weight: 600;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-Bold.ttf') format('truetype');
   font-weight: 700;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvr70w-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-ExtraBold.ttf') format('truetype');
   font-weight: 800;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCvC70w-Y3tcoqK5.ttf);
+  src: url('./assets/fonts/Montserrat-Black.ttf') format('truetype');
   font-weight: 900;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq6R8aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-ThinItalic.ttf') format('truetype');
   fontweight: 100;
   font-style: italic;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jqyR9aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-ExtraLightItalic.ttf') format('truetype');
   fontweight: 200;
   font-style: italic;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq_p9aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-LightItalic.ttf') format('truetype');
   fontweight: 300;
   font-style: italic;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq6R9aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-Italic.ttf') format('truetype');
   fontweight: 400;
   font-style: italic;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq5Z9aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-MediumItalic.ttf') format('truetype');
   fontweight: 500;
   font-style: italic;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq3p6aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-SemiBoldItalic.ttf') format('truetype');
   fontweight: 600;
   font-style: italic;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jq0N6aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-BoldItalic.ttf') format('truetype');
   fontweight: 700;
   font-style: italic;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jqyR6aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-ExtraBoldItalic.ttf') format('truetype');
   fontweight: 800;
   font-style: italic;
 }
 @font-face {
   font-family: Montserrat;
-  src: url(http://fonts.gstatic.com/s/montserrat/v25/JTUFjIg1_i6t8kCHKm459Wx7xQYXK0vOoz6jqw16aX9-p7K5ILg.ttf);
+  src: url('./assets/fonts/Montserrat-BlackItalic.ttf') format('truetype');
   fontweight: 900;
   font-style: italic;
 }
@@ -109,4 +109,76 @@ body {
 code {
   font-weight: 200;
   font-family: 'Montserrat', sans-serif;
+}
+
+.project-page {
+  height: 100svh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+.project-page::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background-color: black;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.project-page::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3.5px;
+}
+
+.project-page::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-page::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+}
+
+.project-page::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+}
+
+.project-grid::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background-color: black;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.project-grid::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3.5px;
+}
+
+.project-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-grid::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+}
+
+.project-grid::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+}
+
+.project-grid {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .project-page {
+    overflow-x: auto;
+  }
+
+  .project-grid {
+    overflow-x: auto;
+  }
 }
