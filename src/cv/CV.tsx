@@ -10,7 +10,6 @@ export const CV = () => {
 
   return (
     <>
-      <Header />
       <PDFDownloadLink
         style={{ position: 'absolute', top: '100px' }}
         fileName={`JonasWard_CV_${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.pdf`}

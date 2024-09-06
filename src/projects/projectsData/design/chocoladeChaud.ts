@@ -38,6 +38,7 @@ import pompidou3 from './assets/chocoladeChaud/pompidou_3.jpg';
 import pompidou4 from './assets/chocoladeChaud/pompidou_4.jpg';
 import pompidou5 from './assets/chocoladeChaud/pompidou_5.jpg';
 import pompidou6 from './assets/chocoladeChaud/pompidou_6.jpg';
+import { Technologies } from '../../../types/technologies';
 
 const id = '2023-04';
 
@@ -50,7 +51,15 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Patterns, Keywords.ThreeDPrinting, Keywords.Frontend],
+  keywords: [
+    Keywords.Patterns,
+    Keywords.ThreeDPrinting,
+    Keywords.Frontend,
+    Technologies.BabylonJS,
+    Technologies.React,
+    Technologies.FDM,
+    Technologies.VacuumForming,
+  ],
   projectPartners: ['Malcolm Ungers'],
 };
 
@@ -65,6 +74,20 @@ export const chocoladeChaud: ProjectData = {
       ['These are some images that document the first experiments for an online chocolate bar configurator.', undefined],
       ['This something integrated workflow', 'Process']
     ),
+    {
+      type: ProjectContentType.ExternalLink,
+      href: 'https://jonasward.github.io/chocolade-chaud/',
+      description: 'try it for yourself: ',
+      alternativeName: 'github pages',
+    },
+    {
+      type: ProjectContentType.List,
+      description: 'I would like to thank for their help: ',
+      content: [
+        ['Pyry Takala', 'for some enganging conceptual discussions and chocolate casting sessions'],
+        ['Malcolm Ungers', 'for some very skilled chocolate casts and help with making modlds'],
+      ],
+    },
     {
       type: ProjectContentType.ImageGrid,
       images: [projectImage, freeStyle1, freeStyle2].map((i) => createImage(i, '©️ J.W.')),
@@ -89,6 +112,5 @@ export const chocoladeChaud: ProjectData = {
       type: ProjectContentType.ImageGrid,
       images: [pompidou1, pompidou2, pompidou3, pompidou4, pompidou5, pompidou6].map((i) => createImage(i, '©️ J.W.')),
     },
-    createText(1, ['jonasward.github.io/chocolade-chaud/', 'you can find the configurator at']),
   ],
 };
