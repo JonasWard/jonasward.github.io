@@ -2,10 +2,12 @@
   position: relative;
   text-align: center;
   color: white;
+  width: min(1350px, 100%);
 }
 
 .project-image.main-image img {
-  width: min(1350px, 100vw);
+  width: min(1350px, 100%);
+  z-index: 99;
   object-fit: cover;
 }
 
@@ -99,7 +101,8 @@
 
 .image-grid-content img {
   display: block;
-  height: 450px;
+  max-width: calc(100vw - 20px);
+  max-height: 450px;
   object-fit: cover;
 }
 
