@@ -1,6 +1,8 @@
 export enum Technologies {
   FDM = 'FDM',
   BinderJet = 'Binder Jet',
+  ClayPrinting = 'Clay Printing',
+  VacuumForming = 'Vacuum Forming',
   Java = 'Java',
   Processing = 'Processing',
   JavaScript = 'Java Script',
