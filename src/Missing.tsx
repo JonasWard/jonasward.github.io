@@ -18,7 +18,7 @@ const fsSource = `
         float angle = atan(uv.y, uv.x);
         float radius = length(uv);
         float spiral = sin(10.0 * radius - uTime * 5.0);
-        vec3 color = vec3(0.5 + 0.5 * cos(6.2831 * spiral), 0.5 + 0.5 * sin(6.2831 * spiral), 0.5);
+        vec3 color = vec3(0.5 + 0.5 * sin(6.2831 * spiral - 1.0), 0.5 + 0.5 * sin(6.2831 * spiral), 0.5 + 0.5 * sin(6.2831 * spiral + 1.0));
         gl_FragColor = vec4(color, 1.0);
     }
 `;
