@@ -38,7 +38,7 @@ const Missing = () => {
       >
         <span>You must have taken a wrong turn</span>
         <span>why don't you go back to the projects page</span>
-        <img src={logo} />
+        <img src={logo} alt={'missing logo'} />
       </div>
     </div>
   );
