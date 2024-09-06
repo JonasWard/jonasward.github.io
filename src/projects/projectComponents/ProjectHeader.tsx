@@ -9,7 +9,7 @@ interface IProjectHeader {
 
 export const ProjectHeader: React.FC<IProjectHeader> = ({ id, metaData, keyImage }) => {
   return (
-    <div className={'project-header'}>
+    <div className='project-header'>
       <img src={keyImage} alt='Red dot' />
       <h2>{metaData.name}</h2>
       <main>

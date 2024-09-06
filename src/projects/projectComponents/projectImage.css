@@ -3,6 +3,7 @@
   text-align: center;
   color: white;
   width: min(1350px, 100%);
+  margin: 0px auto;
 }
 
 .project-image.main-image img {
@@ -41,21 +42,21 @@
 
 .center-center {
   position: absolute;
-  top: 50%;
+  top: min(50%, 50vh);
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .center-left {
   position: absolute;
-  top: 50%;
+  top: min(50%, 50vh);
   left: 0;
   transform: translateY(-50%);
 }
 
 .center-right {
   position: absolute;
-  top: 50%;
+  top: min(50%, 50vh);
   right: 0;
   transform: translateY(-50%);
 }
