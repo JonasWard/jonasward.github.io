@@ -31,13 +31,14 @@ const getColorFromUUIDViridis = (t: number): [number, number, number] => {
   return [VIRIDIS[i0][0] * (1 - f) + VIRIDIS[i1][0] * f, VIRIDIS[i0][1] * (1 - f) + VIRIDIS[i1][1] * f, VIRIDIS[i0][2] * (1 - f) + VIRIDIS[i1][2] * f];
 };
 
-const missingAttributesPlasma: (Keywords | ProjectContext | ProjectPartnerContext)[] = [
+const missingAttributesPlasma: (Keywords | ProjectContext | ProjectPartnerContext | Technologies)[] = [
   ...Object.values(Keywords),
   ...Object.values(ProjectContext),
   ...Object.values(ProjectPartnerContext),
+  ...Object.values(Technologies),
 ];
 
-const missingAttributesViridis: Technologies[] = [...Object.values(Technologies)];
+const missingAttributesViridis: (Keywords | ProjectContext | ProjectPartnerContext | Technologies)[] = [];
 
 export const PrimaryColorMap: Record<NamedColor, string> = {
   [ProjectCategory.Design]: 'white',

@@ -4,4 +4,6 @@ export enum ProjectContentType {
   ImageText = 'imageText',
   Images = 'images',
   ImageGrid = 'imageGrid',
+  ExternalLink = 'externalLink',
+  List = 'list',
 }
