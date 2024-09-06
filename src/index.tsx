@@ -5,10 +5,10 @@ import Landing from './Landing';
 import About from './me/About';
 import ProjectOverview from './projects/ProjectOverview';
 import CV from './cv/CV';
-import NotFound from './NotFound';
 import './index.css';
 import { ProjectWrapper } from './projects/ProjectWrapper';
 import { Header } from './Header';
+import Missing from './Missing';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -26,7 +26,7 @@ root.render(
           <Route path='/about' element={<About />} />
           <Route path='/projects' element={<ProjectOverview />} />
           <Route path='/project/:id' element={<ProjectWrapper />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path='*' element={<Missing />} />
         </Routes>
       </div>
     </Router>
