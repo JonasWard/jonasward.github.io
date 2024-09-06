@@ -149,7 +149,7 @@ const Landing = () => {
     <div className='missing-page'>
       <canvas className='missing-page canvas' ref={canvasRef} />
       <div className='missing-link' onClick={goToProjects}>
-        <img src={logo} alt={'missing logo'} />
+        <img style={{ maxWidth: '100%', maxHeight: '100%', height: '800px' }} src={logo} alt={'missing logo'} />
       </div>
     </div>
   );
