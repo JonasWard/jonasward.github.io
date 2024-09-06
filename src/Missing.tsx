@@ -12,13 +12,16 @@ const vsSource = `
 const fsSource = `
     precision mediump float;
     uniform float uTime;
+    uniform vec2 uCenter;
+    uniform vec2 uInverseResolution;
+    uniform float uProportion;
+    const float amplitude = 100.0;
     void main(void) {
-        vec2 uv = gl_FragCoord.xy / vec2(800.0, 600.0); // Adjust to your canvas size
-        uv = uv * 2.0 - 1.0;
+        vec2 uv = (vec2(gl_FragCoord.xy) * vec2(uProportion, 1.0) - uCenter );
         float angle = atan(uv.y, uv.x);
         float radius = length(uv);
-        float spiral = sin(10.0 * radius - uTime * 5.0);
-        vec3 color = vec3(0.5 + 0.5 * sin(6.2831 * spiral - 1.0), 0.5 + 0.5 * sin(6.2831 * spiral), 0.5 + 0.5 * sin(6.2831 * spiral + 1.0));
+        radius = radius / amplitude + (angle + uTime) / 6.2831;
+        vec3 color = vec3(0.5 + 0.5 * sin(6.2831 * radius - 1.0), 0.5 + 0.5 * sin(6.2831 * radius), 0.5 + 0.5 * sin(6.2831 * radius + 1.0));
         gl_FragColor = vec4(color, 1.0);
     }
 `;
@@ -78,11 +81,34 @@ const Missing = () => {
     }
 
     const timeUniformLocation = gl.getUniformLocation(shaderProgram, 'uTime');
+    const centerUniformLocation = gl.getUniformLocation(shaderProgram, 'uCenter');
+    const resolution = gl.getUniformLocation(shaderProgram, 'uInverseResolution');
+    const uProportion = gl.getUniformLocation(shaderProgram, 'uProportion');
 
     const render = (time: number) => {
+      const localTime = time * 0.0005;
+      const proportion = (window.innerWidth * 0.5) / window.innerHeight;
+
+      const sizeMultiplier = window.innerWidth * 0.25 * 0.25;
+
+      // time based lisajoue figures
+      const a = (Math.sin(localTime * 0.01) + 1.5) * 5.0;
+      const b = (Math.cos(localTime * 0.01) + 1.5) * 5.0;
+      const t = localTime * 0.02;
+      const delta = Math.cos(localTime * 0.05);
+
+      const x = sizeMultiplier * (Math.sin(a * t * 2.0 + delta) + 1.5);
+      const y = sizeMultiplier * (Math.sin(b * t * 2.0) + 1.5);
+
+      // const x = sizeMultiplier * 0.5;
+      // const y = sizeMultiplier * 0.5;
+
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(shaderProgram);
-      gl.uniform1f(timeUniformLocation, time * 0.0001); // Convert time to seconds
+      gl.uniform1f(timeUniformLocation, localTime * 2.0); // Convert time to seconds
+      gl.uniform2f(centerUniformLocation, x, y);
+      gl.uniform2f(resolution, 1 / window.innerWidth, 1 / window.innerHeight);
+      gl.uniform1f(uProportion, proportion);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       requestAnimationFrame(render);
     };
