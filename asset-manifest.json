@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.882497c3.css",
-    "main.js": "/portfolio/static/js/main.887e1f28.js",
+    "main.css": "/portfolio/static/css/main.54df3071.css",
+    "main.js": "/portfolio/static/js/main.ea16f0e1.js",
     "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
     "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/picture_1.jpg": "/portfolio/static/media/picture_1.0d54387b5264ed59d005.jpg",
@@ -92,9 +92,27 @@
     "static/media/results_3.jpg": "/portfolio/static/media/results_3.6bd63bc9e38d0a9c4597.jpg",
     "static/media/negative_2.jpg": "/portfolio/static/media/negative_2.c64bd5d5ac5b2bce2c99.jpg",
     "static/media/mosque_5.jpg": "/portfolio/static/media/mosque_5.cc51cc0ad9ffb0a2b974.jpg",
+    "static/media/Montserrat-ExtraBoldItalic.ttf": "/portfolio/static/media/Montserrat-ExtraBoldItalic.a22f67090d6cf291405a.ttf",
+    "static/media/Montserrat-BlackItalic.ttf": "/portfolio/static/media/Montserrat-BlackItalic.9be75be0721b5c54a837.ttf",
+    "static/media/Montserrat-BoldItalic.ttf": "/portfolio/static/media/Montserrat-BoldItalic.a169c71c1eb466896fe1.ttf",
+    "static/media/Montserrat-SemiBoldItalic.ttf": "/portfolio/static/media/Montserrat-SemiBoldItalic.60907ef6dc10bb4e826a.ttf",
     "static/media/references_1.jpg": "/portfolio/static/media/references_1.c4962b084c423233c1e3.jpg",
+    "static/media/Montserrat-LightItalic.ttf": "/portfolio/static/media/Montserrat-LightItalic.ac3843da62f0afac7929.ttf",
+    "static/media/Montserrat-MediumItalic.ttf": "/portfolio/static/media/Montserrat-MediumItalic.67e6dda3939a21720991.ttf",
+    "static/media/Montserrat-Italic.ttf": "/portfolio/static/media/Montserrat-Italic.f4a742d68090a0bfc33f.ttf",
+    "static/media/Montserrat-ExtraLightItalic.ttf": "/portfolio/static/media/Montserrat-ExtraLightItalic.8df5777e3ea85687bdf0.ttf",
+    "static/media/Montserrat-ThinItalic.ttf": "/portfolio/static/media/Montserrat-ThinItalic.c9656dd4aed2ca4f5b1d.ttf",
     "static/media/babylon_4.jpg": "/portfolio/static/media/babylon_4.c31e3d3df74340a5196e.jpg",
+    "static/media/Montserrat-ExtraBold.ttf": "/portfolio/static/media/Montserrat-ExtraBold.6c8b198832c88c649faa.ttf",
+    "static/media/Montserrat-Black.ttf": "/portfolio/static/media/Montserrat-Black.beacc26b4bbaaf608567.ttf",
+    "static/media/Montserrat-Bold.ttf": "/portfolio/static/media/Montserrat-Bold.50f0257aa1e905f4bfaf.ttf",
     "static/media/results_2.jpg": "/portfolio/static/media/results_2.e543a4ebdab9716c5c44.jpg",
+    "static/media/Montserrat-SemiBold.ttf": "/portfolio/static/media/Montserrat-SemiBold.93b37a465fc4ec0d0415.ttf",
+    "static/media/Montserrat-Medium.ttf": "/portfolio/static/media/Montserrat-Medium.b8c6753baa964ccac1ba.ttf",
+    "static/media/Montserrat-Light.ttf": "/portfolio/static/media/Montserrat-Light.7179b7d2ac9b599db5f9.ttf",
+    "static/media/Montserrat-Regular.ttf": "/portfolio/static/media/Montserrat-Regular.24785cc015b27a3e964b.ttf",
+    "static/media/Montserrat-ExtraLight.ttf": "/portfolio/static/media/Montserrat-ExtraLight.d928d1131a9af02cb672.ttf",
+    "static/media/Montserrat-Thin.ttf": "/portfolio/static/media/Montserrat-Thin.9a7aece9cfe235bc0920.ttf",
     "static/media/negative_1.jpg": "/portfolio/static/media/negative_1.ea853900cf13b2b02d67.jpg",
     "static/media/babylon_2.jpg": "/portfolio/static/media/babylon_2.6bfce0c150297df4f3ae.jpg",
     "static/media/babylon_3.jpg": "/portfolio/static/media/babylon_3.c5384b036a5987f8a202.jpg",
@@ -123,11 +141,11 @@
     "static/media/data_1.png": "/portfolio/static/media/data_1.d78c6935fcdd75a63053.png",
     "static/media/brick-marie.webp": "/portfolio/static/media/brick-marie.62c1dcd4dc909edadae8.webp",
     "index.html": "/portfolio/index.html",
-    "main.882497c3.css.map": "/portfolio/static/css/main.882497c3.css.map",
-    "main.887e1f28.js.map": "/portfolio/static/js/main.887e1f28.js.map"
+    "main.54df3071.css.map": "/portfolio/static/css/main.54df3071.css.map",
+    "main.ea16f0e1.js.map": "/portfolio/static/js/main.ea16f0e1.js.map"
   },
   "entrypoints": [
-    "static/css/main.882497c3.css",
-    "static/js/main.887e1f28.js"
+    "static/css/main.54df3071.css",
+    "static/js/main.ea16f0e1.js"
   ]
 }
