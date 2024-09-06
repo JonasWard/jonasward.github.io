@@ -10,18 +10,20 @@ const vsSource = `
 `;
 
 const fsSource = `
+#define TAU                         6.2831853071795862
     precision mediump float;
     uniform float uTime;
     uniform vec2 uCenter;
     uniform vec2 uInverseResolution;
     uniform float uProportion;
     const float amplitude = 100.0;
+
     void main(void) {
         vec2 uv = (vec2(gl_FragCoord.xy) * vec2(uProportion, 1.0) - uCenter );
         float angle = atan(uv.y, uv.x);
-        float radius = length(uv);
-        radius = radius / amplitude + (angle + uTime) / 6.2831;
-        vec3 color = vec3(0.5 + 0.5 * sin(6.2831 * radius - 1.0), 0.5 + 0.5 * sin(6.2831 * radius), 0.5 + 0.5 * sin(6.2831 * radius + 1.0));
+        float radius = length(uv) * 0.1;
+        radius = radius / amplitude + (angle + uTime) / TAU;
+        vec3 color = vec3(0.5 + 0.5 * sin(TAU * radius - 1.0), 0.5 + 0.5 * sin(TAU * radius), 0.5 + 0.5 * sin(TAU * radius + 1.0));
         gl_FragColor = vec4(color, 1.0);
     }
 `;
@@ -65,6 +67,9 @@ const Missing = () => {
   };
 
   const initWebGL = (canvas: HTMLCanvasElement) => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
     const gl = canvas.getContext('webgl');
     if (!gl) {
       console.error('WebGL not supported');
@@ -85,27 +90,30 @@ const Missing = () => {
     const resolution = gl.getUniformLocation(shaderProgram, 'uInverseResolution');
     const uProportion = gl.getUniformLocation(shaderProgram, 'uProportion');
 
-    const render = (time: number) => {
-      const localTime = time * 0.0005;
-      const proportion = (window.innerWidth * 0.5) / window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-      const sizeMultiplier = window.innerWidth * 0.25 * 0.25;
+    const render = (time: number) => {
+      const localTime = time * 0.0005 * (100 / window.innerWidth) ** 0.5;
+      const proportion = ((canvas.height / canvas.width) * window.innerWidth) / window.innerHeight;
+
+      const sizeMultiplier = window.innerWidth * 0.2;
 
       // time based lisajoue figures
-      const a = (Math.sin(localTime * 0.01) + 1.5) * 5.0;
-      const b = (Math.cos(localTime * 0.01) + 1.5) * 5.0;
-      const t = localTime * 0.02;
+      const a = Math.sin(localTime * 0.01) * 5.0;
+      const b = Math.cos(localTime * 0.01) * 5.0;
+      const t = localTime * 0.2;
       const delta = Math.cos(localTime * 0.05);
 
-      const x = sizeMultiplier * (Math.sin(a * t * 2.0 + delta) + 1.5);
-      const y = sizeMultiplier * (Math.sin(b * t * 2.0) + 1.5);
+      const x = window.innerWidth * 1.5 + sizeMultiplier * Math.sin(a * t * 2.0 + delta);
+      const y = window.innerHeight * 1.5 + sizeMultiplier * proportion * Math.sin(b * t * 2.0);
 
-      // const x = sizeMultiplier * 0.5;
-      // const y = sizeMultiplier * 0.5;
+      // const x = window.innerWidth * 0.5;
+      // const y = window.innerHeight * 0.5;
 
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(shaderProgram);
-      gl.uniform1f(timeUniformLocation, localTime * 2.0); // Convert time to seconds
+      gl.uniform1f(timeUniformLocation, localTime * 10.0); // Convert time to seconds
       gl.uniform2f(centerUniformLocation, x, y);
       gl.uniform2f(resolution, 1 / window.innerWidth, 1 / window.innerHeight);
       gl.uniform1f(uProportion, proportion);
@@ -153,7 +161,7 @@ const Missing = () => {
       >
         <span>You must have taken a wrong turn</span>
         <span>why don't you go back to the projects page</span>
-        <img style={{ cursor: 'pointer' }} src={logo} alt={'missing logo'} onClick={goToProjects} />
+        <img style={{ cursor: 'pointer', opacity: 0.5, filter: 'invert()' }} src={logo} alt={'missing logo'} onClick={goToProjects} />
       </div>
     </div>
   );
