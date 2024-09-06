@@ -17,11 +17,11 @@ root.render(
       <Header />
       <div className='project-page'>
         <Routes>
-          <Route path='/' element={<Landing />} />
-          <Route path='/portfolio' element={<Landing />} />
-          <Route path='/landing' element={<Landing />} />
-          <Route path='/home' element={<Landing />} />
-          <Route path='/main' element={<Landing />} />
+          <Route path='/' element={<Missing />} />
+          <Route path='/portfolio' element={<Missing />} />
+          <Route path='/landing' element={<Missing />} />
+          <Route path='/home' element={<Missing />} />
+          <Route path='/main' element={<Missing />} />
           <Route path='/cv' element={<CV />} />
           <Route path='/about' element={<About />} />
           <Route path='/projects' element={<ProjectOverview />} />
