@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import Landing from './Landing';
+import Landing from './components/Landing';
 import About from './me/About';
 import ProjectOverview from './projects/ProjectOverview';
 import CV from './cv/CV';
@@ -17,10 +17,10 @@ root.render(
       <Header />
       <div className='project-page'>
         <Routes>
-          <Route path='/' element={<Missing />} />
+          <Route path='/' element={<Landing />} />
           <Route path='/portfolio' element={<Missing />} />
           <Route path='/landing' element={<Missing />} />
-          <Route path='/home' element={<Missing />} />
+          <Route path='/home' element={<Landing />} />
           <Route path='/main' element={<Missing />} />
           <Route path='/cv' element={<CV />} />
           <Route path='/about' element={<About />} />
