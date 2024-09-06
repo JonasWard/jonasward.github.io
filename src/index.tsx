@@ -5,7 +5,6 @@ import Landing from './Landing';
 import About from './me/About';
 import ProjectOverview from './projects/ProjectOverview';
 import CV from './cv/CV';
-import { allProjects } from './projects/projectsData/allProjects';
 import NotFound from './NotFound';
 import './index.css';
 import { ProjectWrapper } from './projects/ProjectWrapper';
