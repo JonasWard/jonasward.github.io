@@ -110,7 +110,7 @@ const Missing = () => {
 
   return (
     <div style={{ width: '100svw', height: '100svh', overflow: 'hidden' }}>
-      <canvas style={{ width: '100svw', height: '100svh', overflow: 'hidden' }} ref={canvasRef} />
+      <canvas style={{ position: 'fixed', width: '100svw', height: '100svh', overflow: 'hidden' }} ref={canvasRef} />
       <div
         style={{
           display: 'flex',
