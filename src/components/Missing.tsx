@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
-import logo from './assets/icons/jonasward_logo_ww.svg';
+import logo from '../assets/icons/jonasward_logo_ww.svg';
 import { useNavigate } from 'react-router-dom';
+import './missing.css';
 
 const vsSource = `
     attribute vec4 aVertexPosition;
@@ -143,25 +144,12 @@ const Missing = () => {
   }, []);
 
   return (
-    <div style={{ width: '100svw', height: '100svh', overflow: 'hidden' }}>
-      <canvas style={{ position: 'fixed', width: '100svw', height: '100svh', overflow: 'hidden' }} ref={canvasRef} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          position: 'absolute',
-          textAlign: 'center',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          color: 'white',
-          gap: 20,
-        }}
-      >
+    <div className='missing-page'>
+      <canvas className='missing-page canvas' ref={canvasRef} />
+      <div className='missing-link' onClick={goToProjects}>
         <span>You must have taken a wrong turn</span>
         <span>why don't you go back to the projects page</span>
-        <img style={{ cursor: 'pointer', opacity: 0.5, filter: 'invert()' }} src={logo} alt={'missing logo'} onClick={goToProjects} />
+        <img src={logo} alt={'missing logo'} />
       </div>
     </div>
   );

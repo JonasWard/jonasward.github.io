@@ -8,7 +8,7 @@ import CV from './cv/CV';
 import './index.css';
 import { ProjectWrapper } from './projects/ProjectWrapper';
 import { Header } from './Header';
-import Missing from './Missing';
+import Missing from './components/Missing';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

@@ -1,0 +1,29 @@
+.missing-page {
+  width: 100svw;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.canvas {
+  position: fixed;
+}
+
+.missing-link {
+  transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 20px;
+  cursor: pointer;
+  opacity: 0.4;
+  filter: invert();
+}
+
+.missing-link:hover {
+  opacity: 1;
+}
