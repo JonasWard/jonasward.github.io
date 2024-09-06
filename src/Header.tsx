@@ -15,10 +15,26 @@ export const Header = () => {
   const path = useLocation();
   const [acitveTab, setActiveTab] = useState<activeTab | null>(null);
 
-  const navigateHome = () => navigate('/home');
-  const navigateAbout = () => navigate('/about');
-  const navigateProjects = () => navigate('/projects');
-  const navigateCV = () => navigate('/cv');
+  const navigateHome = () => {
+    setShowDropDown(!showDropDown);
+    navigate('/home');
+  };
+
+  const navigateAbout = () => {
+    setShowDropDown(!showDropDown);
+    navigate('/about');
+  };
+
+  const navigateProjects = () => {
+    setShowDropDown(!showDropDown);
+    navigate('/projects');
+  };
+
+  const navigateCV = () => {
+    setShowDropDown(!showDropDown);
+    navigate('/cv');
+  };
+
   const [mobileView, setMobileView] = useState<boolean>(false);
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
@@ -41,8 +57,6 @@ export const Header = () => {
     window.addEventListener('resize', onResize);
 
     return () => window.removeEventListener('resize', onResize);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
