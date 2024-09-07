@@ -94,7 +94,8 @@ const Missing = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const render = (time: number) => {
+    const render = () => {
+      const time = (0.75 + 0.5 * Math.sin(Date.now() * 0.00005)) * 100000;
       const localTime = time * 0.0005 * (100 / window.innerWidth) ** 0.5;
       const proportion = ((canvas.height / canvas.width) * window.innerWidth) / window.innerHeight;
 
