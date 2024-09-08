@@ -110,9 +110,6 @@ const Missing = () => {
       const x = window.innerWidth * 1.5 + sizeMultiplier * Math.sin(a * t * 2.0 + delta);
       const y = window.innerHeight * 1.5 + sizeMultiplier * proportion * Math.sin(b * t * 2.0);
 
-      // const x = window.innerWidth * 0.5;
-      // const y = window.innerHeight * 0.5;
-
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(shaderProgram);
       gl.uniform1f(timeUniformLocation, localTime * 10.0); // Convert time to seconds
