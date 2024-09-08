@@ -7,26 +7,25 @@ import ProjectOverview from './projects/ProjectOverview';
 import CV from './cv/CV';
 import './index.css';
 import { ProjectWrapper } from './projects/ProjectWrapper';
-import { Header } from './Header';
 import Missing from './components/Missing';
+import { HeaderWrapper } from './components/HeaderWrapper';
+import { ProjectRoutes } from './types/navigation/projectroutes';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Router>
-      <Header />
       <div className='project-page'>
         <Routes>
-          <Route path='/' element={<Landing />} />
-          <Route path='/portfolio' element={<Missing />} />
-          <Route path='/landing' element={<Missing />} />
-          <Route path='/home' element={<Landing />} />
-          <Route path='/main' element={<Missing />} />
-          <Route path='/cv' element={<CV />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/projects' element={<ProjectOverview />} />
-          <Route path='/project/:id' element={<ProjectWrapper />} />
-          <Route path='*' element={<Missing />} />
+          <Route path={ProjectRoutes.Home} element={<Landing />} />
+          <Route path={ProjectRoutes.Portfolio} element={<HeaderWrapper children={<Missing />} />} />
+          <Route path={ProjectRoutes.Landing} element={<HeaderWrapper children={<Missing />} />} />
+          <Route path={ProjectRoutes.Main} element={<Landing />} />
+          <Route path={ProjectRoutes.CV} element={<HeaderWrapper children={<CV />} />} />
+          <Route path={ProjectRoutes.About} element={<HeaderWrapper children={<About />} />} />
+          <Route path={ProjectRoutes.Projects} element={<HeaderWrapper children={<ProjectOverview />} />} />
+          <Route path={ProjectRoutes.Project} element={<HeaderWrapper children={<ProjectWrapper />} />} />
+          <Route path={ProjectRoutes.Missing} element={<HeaderWrapper children={<Missing />} />} />
         </Routes>
       </div>
     </Router>
