@@ -54,8 +54,7 @@ export const ProjectOverview = () => {
     const workingWidth = getInnerWidth();
 
     const columnCount = getColumnsForWidthAndProjects(allProjects, workingWidth);
-    const baseX =
-      workingWidth < mobileViewWidth ? (window.innerWidth - workingWidth) * 0.5 + gap : 0.5 * (workingWidth + gap - columnCount * horizontalGridSpacing);
+    const baseX = workingWidth < mobileViewWidth ? gap : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
 
     const columns: [number, number, ProjectData][][] = [...Array(columnCount)].map((_) => []);
 
