@@ -18,7 +18,7 @@
   transition: all 0.3s;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 570px) {
   .font-large {
     font-size: 50px;
     padding: 20px;
@@ -107,7 +107,7 @@
   object-fit: cover;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 570px) {
   .image-grid-content img {
     width: 100%;
     height: min-content;

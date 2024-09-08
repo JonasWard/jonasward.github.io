@@ -168,11 +168,12 @@ code {
 
 .project-grid {
   width: 100%;
+  height: 100%;
   position: relative;
   overflow-x: hidden;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 570px) {
   .project-page {
     overflow-x: auto;
   }
