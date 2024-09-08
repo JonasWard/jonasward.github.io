@@ -13,7 +13,7 @@ const metaData: ProjectMetaData = {
   webstring: 'living-on-the-edge',
   name: 'Living on the Edge',
   projectType: ProjectCategory.Architecture,
-  description: 'lorum ipsum dolor',
+  description: 'UGent Urban Design Master Thesis',
   keyImage: undefined,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Solo,
