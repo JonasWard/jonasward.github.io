@@ -1,4 +1,4 @@
-import { NamedColor } from '../types/colorLocalisation';
+import { NamedColor } from '../types/keywords/colorLocalisation';
 import { PrimaryColorMap, SecondaryColorMap } from './colorMap';
 
 export const getPrimaryColorForString = (str: string): string => PrimaryColorMap[str as NamedColor] || '#ffffff';

@@ -1,9 +1,9 @@
-import { ProjectCategory } from '../types/categoryTypes';
-import { NamedColor } from '../types/colorLocalisation';
-import { Keywords } from '../types/keywords';
-import { ProjectContext } from '../types/projectContext';
-import { ProjectPartnerContext } from '../types/projectPartnerContext';
-import { Technologies } from '../types/technologies';
+import { ProjectCategory } from '../types/keywords/categoryTypes';
+import { NamedColor } from '../types/keywords/colorLocalisation';
+import { Keywords } from '../types/keywords/keywords';
+import { ProjectContext } from '../types/keywords/projectContext';
+import { ProjectPartnerContext } from '../types/keywords/projectPartnerContext';
+import { Technologies } from '../types/keywords/technologies';
 import { PLASMA } from './plasma';
 import { VIRIDIS } from './viridis';
 

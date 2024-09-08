@@ -1,8 +1,8 @@
-import { ProjectCategory } from '../categoryTypes';
-import { Keywords } from '../keywords';
-import { ProjectContext } from '../projectContext';
-import { ProjectPartnerContext } from '../projectPartnerContext';
-import { Technologies } from '../technologies';
+import { ProjectCategory } from '../keywords/categoryTypes';
+import { Keywords } from '../keywords/keywords';
+import { ProjectContext } from '../keywords/projectContext';
+import { ProjectPartnerContext } from '../keywords/projectPartnerContext';
+import { Technologies } from '../keywords/technologies';
 
 export type ProjectMetaData = {
   id: string;
