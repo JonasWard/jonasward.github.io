@@ -6,7 +6,14 @@ import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { createImage, createText } from '../../../utils/projectconstructor';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
+import keyImage from './assets/v&a/VA_Hello_Robot_51.jpg';
+import keyImage2 from './assets/v&a/VA_Hello_Robot_64.jpg';
+import stresstest1 from './assets/v&a/start_stressTest.jpg';
 import stresstest2 from './assets/v&a/30h_stressTest.jpg';
+import va1 from './assets/v&a/Side_a.jpg';
+import va2 from './assets/v&a/Side_b.jpg';
+import assemblyLogic from './assets/v&a/ikea-sketch.png';
+import models from './assets/v&a/Picture Models.jpg';
 import joint2 from './assets/v&a/Different Profiles.jpg';
 import joint3 from './assets/v&a/DoubleReciprocal 1.jpg';
 import joint4 from './assets/v&a/DoubleReciprocal 3.jpg';
@@ -17,22 +24,15 @@ import joint8 from './assets/v&a/FabricationSetup.jpg';
 import joint9 from './assets/v&a/Growth A 1.jpg';
 import joint10 from './assets/v&a/Growth A 2.jpg';
 import joint11 from './assets/v&a/Grwoth B 1.jpg';
-import joint12 from './assets/v&a/ikea-sketch.png';
 import joint13 from './assets/v&a/model_a_b.jpg';
 import joint14 from './assets/v&a/model_a_c.jpg';
 import joint15 from './assets/v&a/model_a.jpg';
-import image16 from './assets/v&a/Picture Models.jpg';
-import va1 from './assets/v&a/Side_a.jpg';
-import va2 from './assets/v&a/Side_b.jpg';
 import joint19 from './assets/v&a/Single-TripleJoint C 2.jpg';
 import joint20 from './assets/v&a/Single-TripleJoint D.jpg';
 import joint21 from './assets/v&a/Single-TripleJoint E.jpg';
-import stresstest1 from './assets/v&a/start_stressTest.jpg';
 import joint23 from './assets/v&a/TripleJoint Stack IncreasedLever.jpg';
 import joint24 from './assets/v&a/TripleJoint Stack OriginalLever.jpg';
 import joint25 from './assets/v&a/TripleJoint Stack Single.jpg';
-import keyImage from './assets/v&a/VA_Hello_Robot_51.jpg';
-import keyImage2 from './assets/v&a/VA_Hello_Robot_64.jpg';
 import joint28 from './assets/v&a/Y-joint A.jpg';
 import joint29 from './assets/v&a/Y-joint B 1.jpg';
 import joint30 from './assets/v&a/Y-joint D 1.jpg';
@@ -78,11 +78,11 @@ export const vAnda: ProjectData = {
       type: ProjectContentType.ImageGrid,
       images: [
         keyImage2,
-        image16,
-        stresstest1,
-        stresstest2,
+        models,
         va1,
         va2,
+        stresstest1,
+        stresstest2,
         joint2,
         joint3,
         joint4,
@@ -93,7 +93,7 @@ export const vAnda: ProjectData = {
         joint9,
         joint10,
         joint11,
-        joint12,
+        assemblyLogic,
         joint13,
         joint14,
         joint15,
