@@ -6,6 +6,8 @@ import { ProjectData } from '../types/projectContent/projectData';
 import { ProjectImage } from '../types/projectContent/projectImage';
 import { getProjectKeywords } from './helper';
 
+const getInnerWidth = (): number => Math.min(1495, window.innerWidth);
+
 const mobileViewWidth = 600;
 const getImageHeight = (keyImage: ProjectImage) => ((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * horizontalSpacing;
 const horizontalSpacing = 200;
@@ -27,8 +29,10 @@ const calculateApproximiteProjectCardHeight = (project: ProjectData): number => 
 };
 
 const getLeftForColumnIndex = (index: number) => {
-  const columnCount = getColumnsForWidthAndProjects(allProjects, window.innerWidth);
-  const baseX = window.innerWidth < mobileViewWidth ? gap : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
+  const workingWidth = getInnerWidth();
+
+  const columnCount = getColumnsForWidthAndProjects(allProjects, workingWidth);
+  const baseX = workingWidth < mobileViewWidth ? gap : 0.5 * (workingWidth + gap - columnCount * horizontalGridSpacing);
   return (index % columnCount) * horizontalGridSpacing + baseX;
 };
 
@@ -37,7 +41,7 @@ const getColumnsForWidthAndProjects = (projects: ProjectData[], innerWidth: numb
 
 export const ProjectOverview = () => {
   const [renderIndex, setRenderIndex] = useState(0);
-  const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing + gap);
+  const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, getInnerWidth()) * horizontalGridSpacing + gap);
   const [height, setHeight] = useState(2000);
   const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -48,8 +52,11 @@ export const ProjectOverview = () => {
   }, [projectCardRefs, renderIndex]);
 
   const onScreenScale = () => {
-    const columnCount = getColumnsForWidthAndProjects(allProjects, window.innerWidth);
-    const baseX = window.innerWidth < mobileViewWidth ? gap : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
+    const workingWidth = getInnerWidth();
+
+    const columnCount = getColumnsForWidthAndProjects(allProjects, workingWidth);
+    const baseX =
+      (window.innerWidth - workingWidth) * 0.5 + (workingWidth < mobileViewWidth ? gap : 0.5 * (workingWidth + gap - columnCount * horizontalGridSpacing));
 
     const columns: [number, number, ProjectData][][] = [...Array(columnCount)].map((_) => []);
 
@@ -71,7 +78,7 @@ export const ProjectOverview = () => {
       });
     });
 
-    const localWidth = getColumnsForWidthAndProjects(allProjects, window.innerWidth) * horizontalGridSpacing + gap;
+    const localWidth = getColumnsForWidthAndProjects(allProjects, workingWidth) * horizontalGridSpacing + gap;
     if (width !== localWidth) setWidth(localWidth);
     if (height !== maximumHeight + gap) setHeight(maximumHeight + gap);
     if (JSON.stringify(positions) !== JSON.stringify(localPositions)) setPositions(localPositions);
