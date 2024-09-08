@@ -1,6 +1,6 @@
 import { ProjectContentType } from './projectContentType';
 
-export interface ProjectImage {
+export type ProjectImage = {
   type: ProjectContentType.Image;
   imageHref: string;
   imageWidth?: number;
@@ -9,4 +9,4 @@ export interface ProjectImage {
   imageTextSize?: 'small' | 'medium' | 'large';
   imageTextPosition?: 'top' | 'bottom' | 'center';
   imageTextAlignment?: 'left' | 'center' | 'right';
-}
+};

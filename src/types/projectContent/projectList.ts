@@ -1,8 +1,8 @@
 import { ProjectContentType } from './projectContentType';
 
-export interface ProjectList {
+export type ProjectList = {
   type: ProjectContentType.List;
   title?: string;
   description?: string;
   content: [string, string][] | string[];
-}
+};
