@@ -7,7 +7,7 @@ import { getProjectKeywords } from '../../../utils/projectconstructor';
 
 const getInnerWidth = (): number => Math.min(1495, window.innerWidth);
 
-const mobileViewWidth = 600;
+const mobileViewWidth = 570;
 const getImageHeight = (keyImage: ProjectImage) => ((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * horizontalSpacing;
 const horizontalSpacing = 200;
 const h2Height = 29;
@@ -55,7 +55,7 @@ export const ProjectOverview = () => {
 
     const columnCount = getColumnsForWidthAndProjects(allProjects, workingWidth);
     const baseX =
-      (window.innerWidth - workingWidth) * 0.5 + (workingWidth < mobileViewWidth ? gap : 0.5 * (workingWidth + gap - columnCount * horizontalGridSpacing));
+      workingWidth < mobileViewWidth ? (window.innerWidth - workingWidth) * 0.5 + gap : 0.5 * (workingWidth + gap - columnCount * horizontalGridSpacing);
 
     const columns: [number, number, ProjectData][][] = [...Array(columnCount)].map((_) => []);
 
@@ -79,7 +79,7 @@ export const ProjectOverview = () => {
 
     const localWidth = getColumnsForWidthAndProjects(allProjects, workingWidth) * horizontalGridSpacing + gap;
     if (width !== localWidth) setWidth(localWidth);
-    if (height !== maximumHeight + gap) setHeight(maximumHeight + gap);
+    if (height !== maximumHeight + gap) setHeight(Math.max(maximumHeight + gap, window.innerHeight));
     if (JSON.stringify(positions) !== JSON.stringify(localPositions)) setPositions(localPositions);
   };
 
@@ -91,7 +91,7 @@ export const ProjectOverview = () => {
   }, []);
 
   return (
-    <div className='project-grid' style={{ height }}>
+    <div className='project-grid'>
       {positions.map(([index, left, top]) => (
         <ProjectCard
           key={index}
