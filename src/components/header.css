@@ -1,0 +1,132 @@
+/* Style the header with a grey background and some padding */
+
+.header {
+  display: flex;
+  font-family: 'Montserrat', sans-serif;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 53px;
+  z-index: 1;
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+}
+
+.header::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 53px;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
+  opacity: 0;
+  transition: 0.6s;
+  z-index: -1;
+}
+
+.header:hover::before {
+  opacity: 1;
+}
+
+.header-content {
+  width: min(100vw - 40px, 1408px + 40px);
+  padding: 0 20px 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.header-right {
+  position: relative;
+}
+
+/* Style the header links */
+.header button {
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  float: left;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+  transition: 0.6s;
+}
+
+/* Header Text */
+
+.navigation-button {
+  display: none;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 600px) {
+  .navigation-button.show {
+    display: block;
+  }
+
+  /* Style the dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+  }
+
+  .dropdown-content.show {
+    position: absolute;
+    right: -20px;
+    top: 0;
+    display: flex;
+    transform: show 0.5s;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+  }
+
+  button.button {
+    min-width: 100px;
+  }
+
+  button.button-active {
+    min-width: 100px;
+  }
+}
+
+button {
+  transition: 0.6s;
+  font-size: 1rem;
+  text-align: center;
+  min-height: 40px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+button.button {
+  filter: invert(0);
+}
+
+button.button-active {
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  filter: invert(18%) sepia(52%) saturate(4747%) hue-rotate(241deg) brightness(63%) contrast(127%);
+}
+
+/* Change the background color on mouse-over */
+button.button:hover {
+  filter: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
+}
+
+button:hover {
+  filter: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
+}
+
+/* Change the background color on mouse-over */
+button.button-active:hover {
+  opacity: 80%;
+  transition: 0.5s;
+}
