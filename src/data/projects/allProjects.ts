@@ -13,6 +13,7 @@ import { coralBricks } from './design/rrreefs';
 import { scarves2023 } from './design/scarves2023';
 import { haasHausConfigurator } from './software/haashausconfigurator';
 import { mundoA } from './architecture/mundoa';
+import { lamps } from './architecture/lamps';
 
 export const allProjects = [
   patternMachine,
@@ -30,4 +31,5 @@ export const allProjects = [
   paraSlimShady,
   haasHausConfigurator,
   mundoA,
+  lamps,
 ].sort((a, b) => -a.id.localeCompare(b.id));
