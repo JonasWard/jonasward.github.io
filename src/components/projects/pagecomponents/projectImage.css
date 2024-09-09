@@ -16,6 +16,8 @@
   font-size: 80px;
   padding: 30px;
   transition: all 0.3s;
+  -webkit-text-stroke: 2px black;
+  paint-order: stroke fill;
 }
 
 @media screen and (max-width: 570px) {
