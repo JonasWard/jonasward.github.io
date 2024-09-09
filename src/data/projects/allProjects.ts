@@ -14,6 +14,8 @@ import { scarves2023 } from './design/scarves2023';
 import { haasHausConfigurator } from './software/haashausconfigurator';
 import { mundoA } from './architecture/mundoa';
 import { lamps } from './architecture/lamps';
+import { jokerweek } from './architecture/jokerweek';
+import { concreteChoreography } from './architecture/concreteChoreography';
 
 export const allProjects = [
   patternMachine,
@@ -32,4 +34,6 @@ export const allProjects = [
   haasHausConfigurator,
   mundoA,
   lamps,
+  jokerweek,
+  concreteChoreography,
 ].sort((a, b) => -a.id.localeCompare(b.id));

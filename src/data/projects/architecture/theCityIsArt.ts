@@ -39,7 +39,7 @@ const metaData: ProjectMetaData = {
   projectPartnerContext: ProjectPartnerContext.Solo,
 };
 
-const maxColumnCount = 1;
+const maxColumnCount = 2;
 
 export const theCityIsArt: ProjectData = {
   id,
