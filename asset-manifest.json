@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.f9d6e6fc.css",
-    "main.js": "/portfolio/static/js/main.a8cba183.js",
+    "main.js": "/portfolio/static/js/main.617e2d4d.js",
     "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
     "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/picture_1.jpg": "/portfolio/static/media/picture_1.0d54387b5264ed59d005.jpg",
@@ -16,14 +16,19 @@
     "static/media/20221214_jvb_Mandelbrot_C_4.jpeg": "/portfolio/static/media/20221214_jvb_Mandelbrot_C_4.4978c67c8dcf8575dcd1.jpeg",
     "static/media/20221214_jvb_sylvain_quotations_1.jpg": "/portfolio/static/media/20221214_jvb_sylvain_quotations_1.378fbd18b84bcd8e70d3.jpg",
     "static/media/san_michele2muqarnas_shah.jpg": "/portfolio/static/media/san_michele2muqarnas_shah.db466bda7871975c9bd4.jpg",
+    "static/media/PlacingDetail.jpg": "/portfolio/static/media/PlacingDetail.b3f10ccc24b4b1f9f0d1.jpg",
     "static/media/20221209_jvb_mandelbrot_5.jpeg": "/portfolio/static/media/20221209_jvb_mandelbrot_5.1a6d0e61e666b3fa0a8b.jpeg",
     "static/media/rawScarves.jpg": "/portfolio/static/media/rawScarves.1eb4a3ed56e9968a4500.jpg",
+    "static/media/SideDetail.jpg": "/portfolio/static/media/SideDetail.2838c63b01571348fdce.jpg",
     "static/media/theCityIsArt.jpg": "/portfolio/static/media/theCityIsArt.a5c7ce8f90c35912048b.jpg",
+    "static/media/PackedvsUnpacked.jpg": "/portfolio/static/media/PackedvsUnpacked.0febcd6811d4d2539db1.jpg",
     "static/media/stripes2lodz2victoria-2.jpg": "/portfolio/static/media/stripes2lodz2victoria-2.d03bcbea2ffdda379e50.jpg",
     "static/media/picture_2.jpg": "/portfolio/static/media/picture_2.44562e050d68ffff57c9.jpg",
     "static/media/konstanz2victoria.jpg": "/portfolio/static/media/konstanz2victoria.a4b550aa3fe8e73598c4.jpg",
     "static/media/stripes2lodz2dogma_kgdvs_1.jpg": "/portfolio/static/media/stripes2lodz2dogma_kgdvs_1.850a8cef5c210fd7d83e.jpg",
     "static/media/SiteModel.jpg": "/portfolio/static/media/SiteModel.2fcdd850569ddeec436c.jpg",
+    "static/media/concept.0.B.StackedTiles.2.jpg": "/portfolio/static/media/concept.0.B.StackedTiles.2.1f73826ac50313a46ef6.jpg",
+    "static/media/DetailStack.jpg": "/portfolio/static/media/DetailStack.cd9c01813fd74eee5720.jpg",
     "static/media/20221214_jvb_disjunct_b_0.jpeg": "/portfolio/static/media/20221214_jvb_disjunct_b_0.486fd54d23602838580d.jpeg",
     "static/media/patternTitle.jpg": "/portfolio/static/media/patternTitle.0de3054abc05826e592f.jpg",
     "static/media/20221214_jvb_sylvain_quotations_0.jpg": "/portfolio/static/media/20221214_jvb_sylvain_quotations_0.a343767de1d30725b8d6.jpg",
@@ -57,6 +62,7 @@
     "static/media/20221214_jvb_flow_7.jpeg": "/portfolio/static/media/20221214_jvb_flow_7.2486a39418239dc31e73.jpeg",
     "static/media/group_4.jpg": "/portfolio/static/media/group_4.688930c1219429b001d4.jpg",
     "static/media/20221214_jvb_flow_10.jpeg": "/portfolio/static/media/20221214_jvb_flow_10.39b417d1151033d1e394.jpeg",
+    "static/media/Screen Shot 2018-10-26 at 14.34.34.jpg": "/portfolio/static/media/Screen Shot 2018-10-26 at 14.34.34.c38c1d9a11468bb613e8.jpg",
     "static/media/group_2.jpg": "/portfolio/static/media/group_2.eb223f44f9e9015f3350.jpg",
     "static/media/20221214_jvb_disjunct_b_1.jpeg": "/portfolio/static/media/20221214_jvb_disjunct_b_1.45a22238a36c464436bc.jpeg",
     "static/media/lamp_1.jpg": "/portfolio/static/media/lamp_1.4218338ee4142ca9086e.jpg",
@@ -95,6 +101,7 @@
     "static/media/form_3.jpg": "/portfolio/static/media/form_3.35318490f945f368c947.jpg",
     "static/media/lamp_2.jpg": "/portfolio/static/media/lamp_2.ed34698cb083007e195b.jpg",
     "static/media/20221214_jvb_flow_13.jpeg": "/portfolio/static/media/20221214_jvb_flow_13.799fcb89b9735e17c512.jpeg",
+    "static/media/Plane.jpg": "/portfolio/static/media/Plane.84ba4de6b6a38267225e.jpg",
     "static/media/form_5.jpg": "/portfolio/static/media/form_5.78a7ba414eed340a1080.jpg",
     "static/media/config_4.png": "/portfolio/static/media/config_4.ddf1129bcb4d0ce7b8cb.png",
     "static/media/30h_stressTest.jpg": "/portfolio/static/media/30h_stressTest.c9278193fb2c1ab0b1b0.jpg",
@@ -119,6 +126,7 @@
     "static/media/model_a_c.jpg": "/portfolio/static/media/model_a_c.9bfea46daf62f08e3cfe.jpg",
     "static/media/Marie_Griesmar_claytiles_2019.jpg": "/portfolio/static/media/Marie_Griesmar_claytiles_2019.5327197679613f25f7a8.jpg",
     "static/media/FabricationSetup.jpg": "/portfolio/static/media/FabricationSetup.bd9d2c43a703fc6372ab.jpg",
+    "static/media/ReactionDiffusion.png": "/portfolio/static/media/ReactionDiffusion.2d732cdd7afc487af76f.png",
     "static/media/results_1.jpg": "/portfolio/static/media/results_1.ac886b30a7efdfb87918.jpg",
     "static/media/TripleJoint Stack Single.jpg": "/portfolio/static/media/TripleJoint Stack Single.43e7cb419d4adaf84d10.jpg",
     "static/media/config_9.png": "/portfolio/static/media/config_9.d0117fab59bcfc8c429c.png",
@@ -182,6 +190,7 @@
     "static/media/pompidou_1.jpg": "/portfolio/static/media/pompidou_1.0b2d169b04859564f0e9.jpg",
     "static/media/pompidou_2.jpg": "/portfolio/static/media/pompidou_2.0fb30c856cfd2b8bf47b.jpg",
     "static/media/molds_3.jpg": "/portfolio/static/media/molds_3.e6d57414b7f6fa4edee8.jpg",
+    "static/media/concept.0.G.Tesseleation-Interlocking.jpg": "/portfolio/static/media/concept.0.G.Tesseleation-Interlocking.0b99f5d601b59aa97ca7.jpg",
     "static/media/mosque_6.jpg": "/portfolio/static/media/mosque_6.02b40eaad10654af1f6a.jpg",
     "static/media/Tiles_Maldives_April21_©MaRHE-scaled-800x4800.jpg": "/portfolio/static/media/Tiles_Maldives_April21_©MaRHE-scaled-800x4800.2a7b17cc7b97cdbda6b0.jpg",
     "static/media/molds_1.jpg": "/portfolio/static/media/molds_1.637aa74c764f6cff10c4.jpg",
@@ -212,10 +221,10 @@
     "static/media/CoralesdePaz2-600x338-1.jpg": "/portfolio/static/media/CoralesdePaz2-600x338-1.4bc574e93e0a840b88fe.jpg",
     "index.html": "/portfolio/index.html",
     "main.f9d6e6fc.css.map": "/portfolio/static/css/main.f9d6e6fc.css.map",
-    "main.a8cba183.js.map": "/portfolio/static/js/main.a8cba183.js.map"
+    "main.617e2d4d.js.map": "/portfolio/static/js/main.617e2d4d.js.map"
   },
   "entrypoints": [
     "static/css/main.f9d6e6fc.css",
-    "static/js/main.a8cba183.js"
+    "static/js/main.617e2d4d.js"
   ]
 }
