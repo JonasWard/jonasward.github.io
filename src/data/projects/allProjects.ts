@@ -1,6 +1,7 @@
 import { livingOnTheEdge } from './architecture/livingOnTheEdge';
 import { theCityIsArt } from './architecture/theCityIsArt';
 import { vAnda } from './architecture/v&a';
+import { guerillaBeehive } from './computationDesign/guerillaBeehive';
 import { impactClay } from './computationDesign/impactClay';
 import { patternMachine } from './computationDesign/patternMachine';
 import { scarves } from './computationDesign/scarves';
@@ -14,6 +15,7 @@ import { scarves2023 } from './design/scarves2023';
 export const allProjects = [
   patternMachine,
   livingOnTheEdge,
+  guerillaBeehive,
   theCityIsArt,
   impactClay,
   vAnda,
