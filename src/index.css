@@ -1,3 +1,11 @@
+:root {
+  --Design: red;
+  --Architecture: red;
+  --Art: red;
+  --Urbanism: red;
+  --Software: red;
+}
+
 @font-face {
   font-family: Montserrat;
   src: url('./assets/fonts/Montserrat-Thin.ttf') format('truetype');

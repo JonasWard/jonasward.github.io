@@ -3,4 +3,5 @@ export enum ProjectCategory {
   Architecture = 'Architecture',
   Art = 'Art',
   Urbanism = 'Urbanism',
+  Software = 'Software',
 }
