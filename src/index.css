@@ -1,9 +1,9 @@
 :root {
-  --Design: rgb(151, 0, 0);
-  --Architecture: rgb(113, 14, 113);
-  --Art: rgb(35, 35, 255);
-  --Urbanism: rgb(77, 169, 245);
-  --Software: rgb(0, 70, 128);
+  --Design: rgb(172, 25, 25);
+  --Art: rgb(163, 0, 212);
+  --Architecture: rgb(55, 38, 242);
+  --Urbanism: rgb(24, 73, 113);
+  --Software: rgb(95, 138, 173);
 }
 
 @font-face {

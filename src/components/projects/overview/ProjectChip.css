@@ -2,7 +2,7 @@
   transition: all 0.5s;
   opacity: 0.85;
   box-shadow: none;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 .project-chip.hidden {

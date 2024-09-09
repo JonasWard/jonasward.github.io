@@ -1,11 +1,16 @@
+:root {
+  --background_transparency: 60%;
+  --background_main_color: 40%;
+}
+
 .project-card {
   transition: 0.6s;
   font-weight: 500;
   padding: 8px;
   border: 1px solid;
   cursor: pointer;
-  border: 2px solid;
-  border-color: black;
+  border: 3px solid;
+  border-color: rgb(25, 26, 36);
   background-color: white;
 }
 
@@ -23,23 +28,23 @@
 }
 
 .Architecture {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Architecture) 40%, transparent 80%);
+  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Architecture) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Urbanism {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Urbanism) 40%, transparent 80%);
+  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Urbanism) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Design {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Design) 40%, transparent 80%);
+  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Design) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Art {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Art) 40%, transparent 80%);
+  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Art) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Software {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Software) 40%, transparent 80%);
+  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Software) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Architecture:hover {

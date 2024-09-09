@@ -16,8 +16,9 @@ export const ProjectChip: React.FC<IProjectChipProps> = ({ name, size = 24, onCl
         backgroundColor: getSecondaryColorForString(name),
         color: getPrimaryColorForString(name),
         display: 'inline-block',
-        fontSize: size * 0.55,
-        padding: '0 4px',
+        fontSize: size * 0.5,
+        borderRadius: size * 0.25,
+        padding: `${0.05 * size}px ${0.25 * size}px`,
       }}
       onClick={onClick as any}
     >
