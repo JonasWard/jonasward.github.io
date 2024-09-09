@@ -11,6 +11,7 @@ import { lucernaeTurici } from './software/lucernaeTurici';
 import { paraSlimShady } from './software/paraSlimShady';
 import { coralBricks } from './design/rrreefs';
 import { scarves2023 } from './design/scarves2023';
+import { haasHausConfigurator } from './software/haashausconfigurator';
 
 export const allProjects = [
   patternMachine,
@@ -26,4 +27,5 @@ export const allProjects = [
   chocoladeChaud,
   lucernaeTurici,
   paraSlimShady,
+  haasHausConfigurator,
 ].sort((a, b) => -a.id.localeCompare(b.id));
