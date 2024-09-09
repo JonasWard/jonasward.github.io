@@ -6,10 +6,10 @@ import { createImage, createTitleImage } from '../../../utils/projectconstructor
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import lampsBoekentorenLogo from './assets/lamps/Boekentoren Logo.png';
-import lampsBoekentorenInSitu from './assets/lamps/Boekentoren In Situ.jpg';
-import lampsBoekentoren from './assets/lamps/Boekentoren Solo.jpg';
-import lampsBoekentorenvBoekentoren from './assets/lamps/Boekentoren vs Boekentoren.jpg';
+import lampsBoekentorenLogo from './assets/lamps/boekentorenLogo.png';
+import lampsBoekentorenInSitu from './assets/lamps/boekentorenInSitu.jpg';
+import lampsBoekentoren from './assets/lamps/boekentorenSolo.jpg';
+import lampsBoekentorenvBoekentoren from './assets/lamps/boekentorenVsBoekentoren.jpg';
 import lampsFrituurLogo from './assets/lamps/Futurist Logo.png';
 import lampsFrituurMultiple from './assets/lamps/frituurMultiple.jpg';
 import lampsFrituurSingle from './assets/lamps/frituurSingle.jpg';
@@ -18,7 +18,7 @@ import lampsMAS1 from './assets/lamps/mas800.jpg';
 import lampsMAS2 from './assets/lamps/mas2.jpg';
 import lampsQuadrato from './assets/lamps/quadrato.jpg';
 import lampsQuadratoLogo from './assets/lamps/quadratoLogo.png';
-import lampsAntikabirLogo from './assets/lamps/Antikabir Logo.png';
+import lampsAntikabirLogo from './assets/lamps/antikabirLogo.png';
 import lampsAntikabir1 from './assets/lamps/Voor.jpg';
 import lampsAntikabir2 from './assets/lamps/Zij.jpg';
 import lampsAntikabir3 from './assets/lamps/Perspectief 2.jpg';
