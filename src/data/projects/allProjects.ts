@@ -16,6 +16,7 @@ import { mundoA } from './architecture/mundoa';
 import { lamps } from './architecture/lamps';
 import { jokerweek } from './architecture/jokerweek';
 import { concreteChoreography } from './architecture/concreteChoreography';
+import { staufferStatic } from './software/staufferStatic';
 
 export const allProjects = [
   patternMachine,
@@ -36,4 +37,5 @@ export const allProjects = [
   lamps,
   jokerweek,
   concreteChoreography,
+  staufferStatic,
 ].sort((a, b) => -a.id.localeCompare(b.id));
