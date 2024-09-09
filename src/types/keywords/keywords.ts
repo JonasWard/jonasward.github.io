@@ -9,4 +9,5 @@ export enum Keywords {
   Patterns = 'patterns',
   DigitalFabrication = 'dfab',
   Workshop = 'workshop',
+  Timber = 'timber',
 }
