@@ -1,10 +1,11 @@
 import { ProjectPartnerContext } from '../../../types/keywords/projectPartnerContext';
 import { ProjectContext } from '../../../types/keywords/projectContext';
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
-import projectImage from './assets/SiteModel.jpg';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
+
+import projectImage from './assets/living-on-the-edge/SiteModel.jpg';
 
 const id = '2017-01';
 
