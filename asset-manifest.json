@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.19db985d.css",
-    "main.js": "/portfolio/static/js/main.7d58d191.js",
+    "main.css": "/portfolio/static/css/main.35157439.css",
+    "main.js": "/portfolio/static/js/main.ea9a0c62.js",
     "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
     "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/picture_1.jpg": "/portfolio/static/media/picture_1.0d54387b5264ed59d005.jpg",
@@ -142,6 +142,8 @@
     "static/media/lamp_3.jpg": "/portfolio/static/media/lamp_3.8612c076927e00b7a368.jpg",
     "static/media/config_11.png": "/portfolio/static/media/config_11.2ead4c3ed874c3366ac5.png",
     "static/media/jokerweek-2015_17020376252_o.jpg": "/portfolio/static/media/jokerweek-2015_17020376252_o.a66667c76b39871fed59.jpg",
+    "static/media/plateBuckling.png": "/portfolio/static/media/plateBuckling.faf9a5a955c4c295da50.png",
+    "static/media/results.png": "/portfolio/static/media/results.fcb912dc8924701141b7.png",
     "static/media/form_22.jpg": "/portfolio/static/media/form_22.59b61ee5c99f6b0f3414.jpg",
     "static/media/form_13.jpg": "/portfolio/static/media/form_13.752d29a8b6b5844f7718.jpg",
     "static/media/BeesDetail.png": "/portfolio/static/media/BeesDetail.27d6e066e07234ff953f.png",
@@ -153,6 +155,7 @@
     "static/media/SectionA.jpg": "/portfolio/static/media/SectionA.6aebb16d4249a3923520.jpg",
     "static/media/lucernae-turici.jpg": "/portfolio/static/media/lucernae-turici.a8ea618d0570dea99d3b.jpg",
     "static/media/freestyle_1.jpg": "/portfolio/static/media/freestyle_1.20243575488bbed6079d.jpg",
+    "static/media/indeterminateBeam.png": "/portfolio/static/media/indeterminateBeam.d253be6281731ad69817.png",
     "static/media/haasCover.png": "/portfolio/static/media/haasCover.c4ea3ad6ea76f2c7bea4.png",
     "static/media/results_a.jpg": "/portfolio/static/media/results_a.d09b6abc10895474a255.jpg",
     "static/media/form_11.jpg": "/portfolio/static/media/form_11.e314fe164eaefb3b3256.jpg",
@@ -164,12 +167,15 @@
     "static/media/ikea-sketch.png": "/portfolio/static/media/ikea-sketch.4ab30018d3dcb9ff25da.png",
     "static/media/ilse_liekens-mundo_A.jpg": "/portfolio/static/media/ilse_liekens-mundo_A.ada80376e32b871e66a7.jpg",
     "static/media/form_12.jpg": "/portfolio/static/media/form_12.bdc025b22e333e3e9263.jpg",
+    "static/media/buckling.png": "/portfolio/static/media/buckling.18532f13ab1e9b938df5.png",
     "static/media/fabrication-setup-1.jpg": "/portfolio/static/media/fabrication-setup-1.236905443cea6248da7b.jpg",
     "static/media/model_a_c.jpg": "/portfolio/static/media/model_a_c.9bfea46daf62f08e3cfe.jpg",
     "static/media/mas2.jpg": "/portfolio/static/media/mas2.f062d245596e8dc84ca6.jpg",
     "static/media/Zij.jpg": "/portfolio/static/media/Zij.2b017aef38481663dbda.jpg",
+    "static/media/resources.png": "/portfolio/static/media/resources.b269e331957bd757d971.png",
     "static/media/Marie_Griesmar_claytiles_2019.jpg": "/portfolio/static/media/Marie_Griesmar_claytiles_2019.5327197679613f25f7a8.jpg",
     "static/media/jokerweek-2015_16809953620_o.jpg": "/portfolio/static/media/jokerweek-2015_16809953620_o.1593a4ff504ce6b66cee.jpg",
+    "static/media/calculations.png": "/portfolio/static/media/calculations.380cd475f3aa8f1b2b78.png",
     "static/media/1.OpeningPresentationOnTheFirstDay.jpg": "/portfolio/static/media/1.OpeningPresentationOnTheFirstDay.6ff29a90064244b9cd85.jpg",
     "static/media/FabricationSetup.jpg": "/portfolio/static/media/FabricationSetup.bd9d2c43a703fc6372ab.jpg",
     "static/media/Perspectief.jpg": "/portfolio/static/media/Perspectief.37317296e22f54c09c3f.jpg",
@@ -179,6 +185,7 @@
     "static/media/TripleJoint Stack Single.jpg": "/portfolio/static/media/TripleJoint Stack Single.43e7cb419d4adaf84d10.jpg",
     "static/media/config_9.png": "/portfolio/static/media/config_9.d0117fab59bcfc8c429c.png",
     "static/media/VSL-3d-11.jpg": "/portfolio/static/media/VSL-3d-11.2738ab5eb494273302d7.jpg",
+    "static/media/tenants.png": "/portfolio/static/media/tenants.09241858f7428bc3382d.png",
     "static/media/config_10.png": "/portfolio/static/media/config_10.a6fbcef1cb40c2aef049.png",
     "static/media/makingDetails.jpg": "/portfolio/static/media/makingDetails.48694a7158bc57bb381c.jpg",
     "static/media/DoubleReciprocal 1.jpg": "/portfolio/static/media/DoubleReciprocal 1.06589d32c029e6361200.jpg",
@@ -246,6 +253,7 @@
     "static/media/0.TheCalmBeforeTheStorm.jpg": "/portfolio/static/media/0.TheCalmBeforeTheStorm.8f700960275d80b1ba9a.jpg",
     "static/media/pompidou_6.jpg": "/portfolio/static/media/pompidou_6.1e3aa5fafdc5601bd9a3.jpg",
     "static/media/Growth A 2.jpg": "/portfolio/static/media/Growth A 2.07618dae6818a3f1017c.jpg",
+    "static/media/keyImage.png": "/portfolio/static/media/keyImage.afe2e84429c3172cba33.png",
     "static/media/TripleJoint Stack OriginalLever.jpg": "/portfolio/static/media/TripleJoint Stack OriginalLever.e08cd0ad2cc1149badba.jpg",
     "static/media/mas800.jpg": "/portfolio/static/media/mas800.f05221291ae44dda0505.jpg",
     "static/media/Marie_Griesmar_BTS_BrickSystem_2_1.jpg": "/portfolio/static/media/Marie_Griesmar_BTS_BrickSystem_2_1.26eeb88be8022d2df214.jpg",
@@ -289,11 +297,11 @@
     "static/media/CoralesdePaz2-600x338-1.jpg": "/portfolio/static/media/CoralesdePaz2-600x338-1.4bc574e93e0a840b88fe.jpg",
     "static/media/Tiles.png": "/portfolio/static/media/Tiles.62aea4d3be9f0fe6b7c3.png",
     "index.html": "/portfolio/index.html",
-    "main.19db985d.css.map": "/portfolio/static/css/main.19db985d.css.map",
-    "main.7d58d191.js.map": "/portfolio/static/js/main.7d58d191.js.map"
+    "main.35157439.css.map": "/portfolio/static/css/main.35157439.css.map",
+    "main.ea9a0c62.js.map": "/portfolio/static/js/main.ea9a0c62.js.map"
   },
   "entrypoints": [
-    "static/css/main.19db985d.css",
-    "static/js/main.7d58d191.js"
+    "static/css/main.35157439.css",
+    "static/js/main.ea9a0c62.js"
   ]
 }
