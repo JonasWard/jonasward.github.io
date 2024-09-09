@@ -12,7 +12,7 @@ interface IProjectNameCard {
   keyImage: ProjectImage;
   left: number;
   top: number;
-  refArray: RefObject<(HTMLDivElement | null)[]>;
+  refArray?: RefObject<(HTMLDivElement | null)[]>;
   triggerRerender: () => void;
 }
 
@@ -24,7 +24,7 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyIm
   return (
     <div
       ref={(element) => {
-        if (refArray.current) refArray.current[index] = element;
+        if (refArray?.current) refArray.current[index] = element;
       }}
       className={`project-card fade-in ${metaData.projectType}`}
       style={{
