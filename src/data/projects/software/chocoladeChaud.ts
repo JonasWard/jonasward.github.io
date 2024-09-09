@@ -46,7 +46,7 @@ const metaData: ProjectMetaData = {
   id,
   webstring: 'chocolade-chaud',
   name: 'Chocolade Chaud',
-  projectType: ProjectCategory.Design,
+  projectType: ProjectCategory.Software,
   description: 'First experiments for an online chocolate bar configurator',
   keyImage: undefined,
   projectContext: ProjectContext.Personal,

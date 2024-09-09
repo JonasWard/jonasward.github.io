@@ -4,11 +4,11 @@ import { vAnda } from './architecture/v&a';
 import { guerillaBeehive } from './computationDesign/guerillaBeehive';
 import { impactClay } from './computationDesign/impactClay';
 import { patternMachine } from './computationDesign/patternMachine';
-import { scarves } from './computationDesign/scarves';
+import { scarves } from './design/scarves';
 import { smartBrick } from './computationDesign/smartBrick';
-import { chocoladeChaud } from './design/chocoladeChaud';
-import { lucernaeTurici } from './design/lucernaeTurici';
-import { paraSlimShady } from './design/paraSlimShady';
+import { chocoladeChaud } from './software/chocoladeChaud';
+import { lucernaeTurici } from './software/lucernaeTurici';
+import { paraSlimShady } from './software/paraSlimShady';
 import { coralBricks } from './design/rrreefs';
 import { scarves2023 } from './design/scarves2023';
 

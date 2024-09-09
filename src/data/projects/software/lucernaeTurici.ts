@@ -63,7 +63,7 @@ const metaData: ProjectMetaData = {
   id,
   webstring: 'lucernae-turici',
   name: 'Home Lamp Configurator',
-  projectType: ProjectCategory.Design,
+  projectType: ProjectCategory.Software,
   description: 'POC and WIP lamp configurator',
   keyImage: undefined,
   projectContext: ProjectContext.Professional,
