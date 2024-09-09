@@ -1,6 +1,6 @@
 :root {
-  --background_transparency: 60%;
-  --background_main_color: 40%;
+  --background_transparency: 80%;
+  --background_main_color: 20%;
 }
 
 .project-card {
@@ -28,23 +28,23 @@
 }
 
 .Architecture {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Architecture) var(--background_main_color), transparent var(--background_transparency));
+  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Architecture) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Urbanism {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Urbanism) var(--background_main_color), transparent var(--background_transparency));
+  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Urbanism) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Design {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Design) var(--background_main_color), transparent var(--background_transparency));
+  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Design) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Art {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Art) var(--background_main_color), transparent var(--background_transparency));
+  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Art) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Software {
-  box-shadow: 10px 10px 10px 0 color-mix(in oklab, var(--Software) var(--background_main_color), transparent var(--background_transparency));
+  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Software) var(--background_main_color), transparent var(--background_transparency));
 }
 
 .Architecture:hover {
