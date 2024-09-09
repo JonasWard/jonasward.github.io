@@ -1,6 +1,7 @@
 import { livingOnTheEdge } from './architecture/livingOnTheEdge';
 import { theCityIsArt } from './architecture/theCityIsArt';
 import { vAnda } from './architecture/v&a';
+import { impactClay } from './computationDesign/impactClay';
 import { patternMachine } from './computationDesign/patternMachine';
 import { scarves } from './computationDesign/scarves';
 import { smartBrick } from './computationDesign/smartBrick';
@@ -14,6 +15,7 @@ export const allProjects = [
   patternMachine,
   livingOnTheEdge,
   theCityIsArt,
+  impactClay,
   vAnda,
   scarves,
   smartBrick,
