@@ -9,4 +9,5 @@ export enum ProjectRoutes {
   Project = '/project/:id',
   AnyProject = '/project',
   Missing = '*',
+  Colors = '/colors',
 }
