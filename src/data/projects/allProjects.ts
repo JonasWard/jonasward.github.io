@@ -12,6 +12,7 @@ import { paraSlimShady } from './software/paraSlimShady';
 import { coralBricks } from './design/rrreefs';
 import { scarves2023 } from './design/scarves2023';
 import { haasHausConfigurator } from './software/haashausconfigurator';
+import { mundoA } from './architecture/mundoa';
 
 export const allProjects = [
   patternMachine,
@@ -28,4 +29,5 @@ export const allProjects = [
   lucernaeTurici,
   paraSlimShady,
   haasHausConfigurator,
+  mundoA,
 ].sort((a, b) => -a.id.localeCompare(b.id));
