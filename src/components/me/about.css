@@ -1,0 +1,23 @@
+:root {
+  --profileSize: min(450px, max(200px, min(50vh, 50vw)));
+}
+
+.about-page img {
+  width: var(--profileSize);
+  height: var(--profileSize);
+  border-radius: calc(0.5 * var(--profileSize));
+  display: block;
+  border: solid 2px black;
+  margin: auto;
+}
+
+.about-page p {
+  max-width: min(100vw, 450px);
+  margin: 20px auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-weight: 300;
+  text-align: justify;
+}
