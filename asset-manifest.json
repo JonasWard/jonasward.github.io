@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.c42fd7ed.css",
-    "main.js": "/portfolio/static/js/main.8a3cc00f.js",
+    "main.css": "/portfolio/static/css/main.da4d68cb.css",
+    "main.js": "/portfolio/static/js/main.642a967b.js",
     "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
     "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/picture_1.jpg": "/portfolio/static/media/picture_1.0d54387b5264ed59d005.jpg",
@@ -13,6 +13,7 @@
     "static/media/campi2muqarnas_shah.jpg": "/portfolio/static/media/campi2muqarnas_shah.0e5cc3a654c58bf0e25f.jpg",
     "static/media/20221209_jvb_mandelbrot_2.jpeg": "/portfolio/static/media/20221209_jvb_mandelbrot_2.955a52f8183ddecfba0f.jpeg",
     "static/media/lodz2ishtar_gate.jpg": "/portfolio/static/media/lodz2ishtar_gate.e2d8ed248b7f887009b3.jpg",
+    "static/media/searsCatalogue.jpg": "/portfolio/static/media/searsCatalogue.abcee7ec25865dad5f32.jpg",
     "static/media/20221214_jvb_Mandelbrot_C_4.jpeg": "/portfolio/static/media/20221214_jvb_Mandelbrot_C_4.4978c67c8dcf8575dcd1.jpeg",
     "static/media/20221214_jvb_sylvain_quotations_1.jpg": "/portfolio/static/media/20221214_jvb_sylvain_quotations_1.378fbd18b84bcd8e70d3.jpg",
     "static/media/san_michele2muqarnas_shah.jpg": "/portfolio/static/media/san_michele2muqarnas_shah.db466bda7871975c9bd4.jpg",
@@ -111,11 +112,14 @@
     "static/media/form_3.jpg": "/portfolio/static/media/form_3.35318490f945f368c947.jpg",
     "static/media/lamp_2.jpg": "/portfolio/static/media/lamp_2.ed34698cb083007e195b.jpg",
     "static/media/20221214_jvb_flow_13.jpeg": "/portfolio/static/media/20221214_jvb_flow_13.799fcb89b9735e17c512.jpeg",
+    "static/media/221031_HFB_Screenshot_jvb_1.png": "/portfolio/static/media/221031_HFB_Screenshot_jvb_1.00571e5f0c82b2c4cb28.png",
     "static/media/ImpactClay_BaselineTests.jpg": "/portfolio/static/media/ImpactClay_BaselineTests.eced8f74626928789d30.jpg",
     "static/media/Plane.jpg": "/portfolio/static/media/Plane.84ba4de6b6a38267225e.jpg",
     "static/media/form_5.jpg": "/portfolio/static/media/form_5.78a7ba414eed340a1080.jpg",
     "static/media/config_4.png": "/portfolio/static/media/config_4.ddf1129bcb4d0ce7b8cb.png",
     "static/media/30h_stressTest.jpg": "/portfolio/static/media/30h_stressTest.c9278193fb2c1ab0b1b0.jpg",
+    "static/media/221031_HFB_Screenshot_jvb_4.png": "/portfolio/static/media/221031_HFB_Screenshot_jvb_4.66f03ab6138a234f6462.png",
+    "static/media/overview.png": "/portfolio/static/media/overview.d68dd82b862f555e08e0.png",
     "static/media/DetailHAMBURG.jpg": "/portfolio/static/media/DetailHAMBURG.576794a550c3b41e2b8a.jpg",
     "static/media/SetUp.jpg": "/portfolio/static/media/SetUp.d47a1817e5695f35702a.jpg",
     "static/media/Production.jpg": "/portfolio/static/media/Production.ce0a51165a7289ba283d.jpg",
@@ -138,8 +142,10 @@
     "static/media/SectionA.jpg": "/portfolio/static/media/SectionA.6aebb16d4249a3923520.jpg",
     "static/media/lucernae-turici.jpg": "/portfolio/static/media/lucernae-turici.a8ea618d0570dea99d3b.jpg",
     "static/media/freestyle_1.jpg": "/portfolio/static/media/freestyle_1.20243575488bbed6079d.jpg",
+    "static/media/haasCover.png": "/portfolio/static/media/haasCover.c4ea3ad6ea76f2c7bea4.png",
     "static/media/results_a.jpg": "/portfolio/static/media/results_a.d09b6abc10895474a255.jpg",
     "static/media/form_11.jpg": "/portfolio/static/media/form_11.e314fe164eaefb3b3256.jpg",
+    "static/media/221031_HFB_Screenshot_jvb_3.png": "/portfolio/static/media/221031_HFB_Screenshot_jvb_3.cd9b787c949e0b3999bf.png",
     "static/media/Stacking.jpg": "/portfolio/static/media/Stacking.3537c837a51080fc5ab7.jpg",
     "static/media/data_2.png": "/portfolio/static/media/data_2.bc17ea01d9890cf606fa.png",
     "static/media/ikea-sketch.png": "/portfolio/static/media/ikea-sketch.4ab30018d3dcb9ff25da.png",
@@ -159,6 +165,7 @@
     "static/media/results_b.jpg": "/portfolio/static/media/results_b.b83a0496790d714251f7.jpg",
     "static/media/config_5.jpg": "/portfolio/static/media/config_5.49c3a93ad6294684bed9.jpg",
     "static/media/julierTurm_3.jpg": "/portfolio/static/media/julierTurm_3.66c61a1b1e9f9bf594c3.jpg",
+    "static/media/221031_HFB_Screenshot_jvb_2.png": "/portfolio/static/media/221031_HFB_Screenshot_jvb_2.5956382ec5c8f0aa9942.png",
     "static/media/results_3.jpg": "/portfolio/static/media/results_3.6bd63bc9e38d0a9c4597.jpg",
     "static/media/Picture Models.jpg": "/portfolio/static/media/Picture Models.45067da9170cad1bc8ae.jpg",
     "static/media/Different Profiles.jpg": "/portfolio/static/media/Different Profiles.1de0877f0c0bcfc76301.jpg",
@@ -230,6 +237,7 @@
     "static/media/Y-joint B 1.jpg": "/portfolio/static/media/Y-joint B 1.3e6e3f9b5ecd1da5f348.jpg",
     "static/media/Zollinger 2.jpg": "/portfolio/static/media/Zollinger 2.41b0253151ecf108ccc1.jpg",
     "static/media/chocoladeChaud.jpg": "/portfolio/static/media/chocoladeChaud.3328ec69891310b4032a.jpg",
+    "static/media/221031_HFB_Screenshot_jvb_5.png": "/portfolio/static/media/221031_HFB_Screenshot_jvb_5.45e1292f9c89081586c0.png",
     "static/media/Y-joint E.jpg": "/portfolio/static/media/Y-joint E.c53d5625d512f73e8ddc.jpg",
     "static/media/Y-joint D 2.jpg": "/portfolio/static/media/Y-joint D 2.f7ba4d711669ca0d33d6.jpg",
     "static/media/Single-TripleJoint E.jpg": "/portfolio/static/media/Single-TripleJoint E.dd30b75af6d6f55c9b7d.jpg",
@@ -242,11 +250,11 @@
     "static/media/CoralesdePaz2-600x338-1.jpg": "/portfolio/static/media/CoralesdePaz2-600x338-1.4bc574e93e0a840b88fe.jpg",
     "static/media/Tiles.png": "/portfolio/static/media/Tiles.62aea4d3be9f0fe6b7c3.png",
     "index.html": "/portfolio/index.html",
-    "main.c42fd7ed.css.map": "/portfolio/static/css/main.c42fd7ed.css.map",
-    "main.8a3cc00f.js.map": "/portfolio/static/js/main.8a3cc00f.js.map"
+    "main.da4d68cb.css.map": "/portfolio/static/css/main.da4d68cb.css.map",
+    "main.642a967b.js.map": "/portfolio/static/js/main.642a967b.js.map"
   },
   "entrypoints": [
-    "static/css/main.c42fd7ed.css",
-    "static/js/main.8a3cc00f.js"
+    "static/css/main.da4d68cb.css",
+    "static/js/main.642a967b.js"
   ]
 }
