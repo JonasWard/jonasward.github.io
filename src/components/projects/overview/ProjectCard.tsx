@@ -7,21 +7,21 @@ import { getProjectKeywords } from 'src/utils/projectconstructor';
 import { RefObject, useState } from 'react';
 import { ProjectCategory } from 'src/types/keywords/categoryTypes';
 
-import architecture from '/resources/hatches/architecture.svg';
-import software from '/resources/hatches/software.svg';
-import weaving from '/resources/hatches/weaving.svg';
-import design from '/resources/hatches/design.svg';
+import architecture from 'src/assets/hatches/architecture.svg?raw';
+import software from 'src/assets/hatches/software.svg?raw';
+import weaving from 'src/assets/hatches/weaving.svg?raw';
+import design from 'src/assets/hatches/design.svg?raw';
 
 const getBackgroundForProjectType = (projectType: ProjectCategory) => {
   switch (projectType) {
     case ProjectCategory.Design:
-      return design;
+      return `url("data:image/svg+xml;utf8,${design.replaceAll('\n', '')}")`;
     case ProjectCategory.Architecture:
-      return architecture;
+      return `url("data:image/svg+xml;utf8,${architecture.replaceAll('\n', '')}")`;
     case ProjectCategory.Software:
-      return software;
+      return `url("data:image/svg+xml;utf8,${software.replaceAll('\n', '')}")`;
     default:
-      return weaving;
+      return `url("data:image/svg+xml;utf8,${weaving.replaceAll('\n', '')}")`;
   }
 };
 
@@ -49,15 +49,16 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyIm
       style={{
         left,
         top,
-        backgroundImage: `url(${getBackgroundForProjectType(metaData.projectType)})`,
+        zIndex: 0,
       }}
       onClick={navigateProject}
     >
+      <div style={{ backgroundImage: getBackgroundForProjectType(metaData.projectType) }} className='project-card foreground' />
       <div className='project-card foreground' />
       <div
         className='project-card background'
         style={{
-          backgroundImage: `url(${getBackgroundForProjectType(metaData.projectType)})`,
+          backgroundImage: getBackgroundForProjectType(metaData.projectType),
         }}
       />
       <div>
