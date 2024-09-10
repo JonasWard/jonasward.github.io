@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.35157439.css",
-    "main.js": "/portfolio/static/js/main.ea9a0c62.js",
+    "main.css": "/portfolio/static/css/main.27e0545e.css",
+    "main.js": "/portfolio/static/js/main.08ecbfec.js",
     "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
     "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/picture_1.jpg": "/portfolio/static/media/picture_1.0d54387b5264ed59d005.jpg",
@@ -297,11 +297,11 @@
     "static/media/CoralesdePaz2-600x338-1.jpg": "/portfolio/static/media/CoralesdePaz2-600x338-1.4bc574e93e0a840b88fe.jpg",
     "static/media/Tiles.png": "/portfolio/static/media/Tiles.62aea4d3be9f0fe6b7c3.png",
     "index.html": "/portfolio/index.html",
-    "main.35157439.css.map": "/portfolio/static/css/main.35157439.css.map",
-    "main.ea9a0c62.js.map": "/portfolio/static/js/main.ea9a0c62.js.map"
+    "main.27e0545e.css.map": "/portfolio/static/css/main.27e0545e.css.map",
+    "main.08ecbfec.js.map": "/portfolio/static/js/main.08ecbfec.js.map"
   },
   "entrypoints": [
-    "static/css/main.35157439.css",
-    "static/js/main.ea9a0c62.js"
+    "static/css/main.27e0545e.css",
+    "static/js/main.08ecbfec.js"
   ]
 }
