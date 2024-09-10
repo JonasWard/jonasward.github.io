@@ -1,4 +1,3 @@
-import { getPrimaryColorForString, getSecondaryColorForString } from '../../../localisation/colorForString';
 import './ProjectChip.css';
 
 interface IProjectChipProps {
@@ -13,11 +12,8 @@ export const ProjectChip: React.FC<IProjectChipProps> = ({ name, size = 24, onCl
     <div
       className={`project-chip ${show ? 'show' : 'hidden'}`}
       style={{
-        backgroundColor: getSecondaryColorForString(name),
-        color: getPrimaryColorForString(name),
         display: 'inline-block',
         fontSize: size * 0.5,
-        borderRadius: size * 0.25,
         padding: `${0.05 * size}px ${0.25 * size}px`,
       }}
       onClick={onClick as any}
