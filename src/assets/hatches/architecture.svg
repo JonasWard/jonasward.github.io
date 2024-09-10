@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'>
+  <rect width='12' height='12' fill='black'/>
+  <path d='M2 1 L3 3 L7 1' stroke='white' stroke-linecap='round'/>
+  <path d='M1 10 L3 9 L1 4' stroke='white' stroke-linecap='round'/>
+  <path d='M10 11 L9 9 L5 11' stroke='white' stroke-linecap='round'/>
+  <path d='M11 2 L9 3 L11 8' stroke='white' stroke-linecap='round'/>
+  <circle cx='6' cy='6' r='.7' stroke='white'/>
+  <circle cx='0' cy='0' r='.3' stroke='white'/>
+  <circle cx='12' cy='0' r='.3' stroke='white'/>
+  <circle cx='12' cy='12' r='.3' stroke='white'/>
+  <circle cx='0' cy='12' r='.3' stroke='white'/>
+</svg>
