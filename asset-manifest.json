@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.27e0545e.css",
-    "main.js": "/portfolio/static/js/main.bd8fa571.js",
+    "main.css": "/portfolio/static/css/main.40317c3c.css",
+    "main.js": "/portfolio/static/js/main.8635a4a1.js",
     "static/media/picture_6.jpg": "/portfolio/static/media/picture_6.d432347fe084710420c6.jpg",
     "static/media/rawScarvesBlue.jpg": "/portfolio/static/media/rawScarvesBlue.52703eb418343d396c45.jpg",
     "static/media/picture_1.jpg": "/portfolio/static/media/picture_1.0d54387b5264ed59d005.jpg",
@@ -296,12 +296,16 @@
     "static/media/CoralesdePaz1-600x338-1.jpg": "/portfolio/static/media/CoralesdePaz1-600x338-1.c51ab94a153c0913e822.jpg",
     "static/media/CoralesdePaz2-600x338-1.jpg": "/portfolio/static/media/CoralesdePaz2-600x338-1.4bc574e93e0a840b88fe.jpg",
     "static/media/Tiles.png": "/portfolio/static/media/Tiles.62aea4d3be9f0fe6b7c3.png",
+    "static/media/software.svg": "/portfolio/static/media/software.343e3cc36e9c8bca29348080fe63d0fc.svg",
     "index.html": "/portfolio/index.html",
-    "main.27e0545e.css.map": "/portfolio/static/css/main.27e0545e.css.map",
-    "main.bd8fa571.js.map": "/portfolio/static/js/main.bd8fa571.js.map"
+    "static/media/architecture.svg": "/portfolio/static/media/architecture.589d1494651e8f632e19396023924072.svg",
+    "static/media/design.svg": "/portfolio/static/media/design.2415c6a94babed3cfa010699eb141a20.svg",
+    "static/media/weaving.svg": "/portfolio/static/media/weaving.9ce591ffb3a373a53c27809190475ba3.svg",
+    "main.40317c3c.css.map": "/portfolio/static/css/main.40317c3c.css.map",
+    "main.8635a4a1.js.map": "/portfolio/static/js/main.8635a4a1.js.map"
   },
   "entrypoints": [
-    "static/css/main.27e0545e.css",
-    "static/js/main.bd8fa571.js"
+    "static/css/main.40317c3c.css",
+    "static/js/main.8635a4a1.js"
   ]
 }
