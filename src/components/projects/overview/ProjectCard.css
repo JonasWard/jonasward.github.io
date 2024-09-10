@@ -8,13 +8,75 @@
   font-weight: 500;
   padding: 8px;
   cursor: pointer;
-  border: 2px solid;
-  border-color: rgb(25, 26, 36);
+  position: absolute;
+  width: 200px;
+  background-repeat: repeat;
+  background-size: 30px 30px;
+  background-position: 3px 3px;
+  transition: all 0.6s;
+}
+
+.project-card:hover {
+  opacity: 1;
+}
+
+.project-card.foreground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0.88;
   background-color: white;
+  border: 1px solid rgb(0, 0, 0, 0.12);
+}
+
+.project-card:hover .project-card.foreground {
+  opacity: 0.8;
+  border: 1px solid #ffffff99;
+}
+
+.project-card.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translate(15px, 12px);
+  background-repeat: repeat;
+  background-size: 30px 30px;
+  background-position: -12px -9px;
+  z-index: -2;
+  opacity: 0.02;
+}
+
+.project-card:hover .project-card.background {
+  opacity: 0.9;
 }
 
 .project-card h2 {
+  font-weight: 700;
+  text-shadow: 0 0 0.6rem white;
+}
+
+.project-card h3 {
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
   font-weight: 500;
+  text-shadow: 0 0 0.6rem white;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-block-start: auto;
+  margin-block-end: 8px;
+}
+
+.project-card p {
+  font-weight: 600;
+  text-shadow: 0 0 0.6rem white;
 }
 
 .project-card img {
@@ -29,7 +91,7 @@
   justify-content: space-between;
   align-items: center;
 }
-
+/* 
 .Architecture {
   box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Architecture) var(--background_main_color), transparent var(--background_transparency));
 }
@@ -73,4 +135,4 @@
 .Software:hover {
   border-color: var(--Software);
   box-shadow: 10px 10px 0 0 var(--Software);
-}
+} */

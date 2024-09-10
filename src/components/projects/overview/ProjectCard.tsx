@@ -4,7 +4,26 @@ import './ProjectCard.css';
 import { ProjectChip } from './ProjectChip';
 import { ProjectImage } from '../../../types/projectContent/projectImage';
 import { getProjectKeywords } from '../../../utils/projectconstructor';
-import { RefObject, useState } from 'react';
+import { MouseEventHandler, RefObject, useState } from 'react';
+import { ProjectCategory } from '../../../types/keywords/categoryTypes';
+
+import architecture from '../../../assets/hatches/architecture.svg';
+import software from '../../../assets/hatches/software.svg';
+import weaving from '../../../assets/hatches/weaving.svg';
+import design from '../../../assets/hatches/design.svg';
+
+const getBackgroundForProjectType = (projectType: ProjectCategory) => {
+  switch (projectType) {
+    case ProjectCategory.Design:
+      return design;
+    case ProjectCategory.Architecture:
+      return architecture;
+    case ProjectCategory.Software:
+      return software;
+    default:
+      return weaving;
+  }
+};
 
 interface IProjectNameCard {
   index: number;
@@ -28,42 +47,54 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyIm
       }}
       className={`project-card fade-in ${metaData.projectType}`}
       style={{
-        position: 'absolute',
-        width: '200px',
         left,
         top,
+        backgroundImage: `url(${getBackgroundForProjectType(metaData.projectType)})`,
       }}
       onClick={navigateProject}
     >
-      <img
+      <div className='project-card foreground' />
+      <div
+        className='project-card background'
         style={{
-          width: '100%',
-          height: `${((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * 200}px`,
-          objectFit: 'cover',
+          backgroundImage: `url(${getBackgroundForProjectType(metaData.projectType)})`,
         }}
-        src={keyImage.imageHref}
-        alt='Red dot'
       />
-      <h2>{metaData.name}</h2>
-      <main>
-        <p>{metaData.description}</p>
-      </main>
-      <div className='keywords'>
-        {getProjectKeywords(metaData).map((attribute, index) => (
-          <ProjectChip key={index} name={attribute} show={showKeywords} />
-        ))}
-      </div>
-      <div className='keywords'>
-        <ProjectChip
-          key={'show keywords trigger'}
-          name={'Keywords +'}
-          onClick={(e: Event) => {
+      <div>
+        <img
+          style={{
+            width: '100%',
+            height: `${((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * 200}px`,
+            objectFit: 'cover',
+          }}
+          src={keyImage.imageHref}
+          alt='Red dot'
+        />
+        <h2>{metaData.name}</h2>
+        <main>
+          <p>{metaData.description}</p>
+        </main>
+        <h3
+          onClick={(e: any) => {
             e.stopPropagation();
             triggerRerender();
-            setShowKeywords(true);
+            setShowKeywords(!showKeywords);
           }}
-          show={!showKeywords}
-        />
+        >
+          <span>keywords </span>
+          <svg
+            style={{ width: 13, height: 13, transition: 'all 0.6s', transform: showKeywords ? 'scale(1, 1)' : 'scale(1, -1)' }}
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 12 12'
+          >
+            <path d='M2 9 L6 3 L10 9' stroke='black' strokeWidth='1.4' fill='none' strokeLinecap='round' />
+          </svg>
+        </h3>
+        <div className='keywords'>
+          {getProjectKeywords(metaData).map((attribute, index) => (
+            <ProjectChip key={index} name={attribute} show={showKeywords} />
+          ))}
+        </div>
       </div>
     </div>
   );
