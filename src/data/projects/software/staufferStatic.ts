@@ -34,7 +34,7 @@ const metaData: ProjectMetaData = {
 export const staufferStatic: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(keyImage, metaData.name, 968, 996),
+  projectImage: createTitleImage(keyImage, metaData.name, 1205, 1195),
   projectContent: [
     createText(2, [
       'Stauffer Static is a static calculator for Timber contracters. All calculations are done fully clientside, though through the backend certain shared input data can be accesed. All calculation are done according to the SIA norms.',
