@@ -24,7 +24,7 @@ import lampsAntikabir2 from './assets/lamps/Zij.jpg';
 import lampsAntikabir3 from './assets/lamps/Perspectief 2.jpg';
 import lampsAntikabir4 from './assets/lamps/Perspectief.jpg';
 
-const id = '2018-03';
+const id = '2018-01';
 
 const metaData: ProjectMetaData = {
   id,

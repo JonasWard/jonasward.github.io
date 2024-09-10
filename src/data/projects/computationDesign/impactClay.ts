@@ -20,7 +20,7 @@ import image10 from './assets/impact-clay/SetUp2.jpg';
 import image11 from './assets/impact-clay/Stacking.jpg';
 import image12 from './assets/impact-clay/Tiles.png';
 
-const id = '2019-03';
+const id = '2018-03';
 
 const metaData: ProjectMetaData = {
   id,

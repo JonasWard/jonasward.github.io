@@ -16,7 +16,7 @@ import resources from './assets/stauffer-static/resources.png';
 import results from './assets/stauffer-static/results.png';
 import tenants from './assets/stauffer-static/tenants.png';
 
-const id = '2023-03';
+const id = '2023-02';
 
 const metaData: ProjectMetaData = {
   id,
