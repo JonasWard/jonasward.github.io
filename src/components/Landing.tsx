@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import logo from '../assets/icons/jonasward_logo_ww.svg';
+import logo from '/resources/icons/jonasward_logo_ww.svg';
 import { useNavigate } from 'react-router-dom';
 import './missing.css';
 

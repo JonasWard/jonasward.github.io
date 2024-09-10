@@ -1,16 +1,16 @@
-import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
+import { ProjectMetaData } from 'src/types/projectContent/projectMetaData';
 import { useNavigate } from 'react-router-dom';
 import './ProjectCard.css';
 import { ProjectChip } from './ProjectChip';
-import { ProjectImage } from '../../../types/projectContent/projectImage';
-import { getProjectKeywords } from '../../../utils/projectconstructor';
+import { ProjectImage } from 'src/types/projectContent/projectImage';
+import { getProjectKeywords } from 'src/utils/projectconstructor';
 import { RefObject, useState } from 'react';
-import { ProjectCategory } from '../../../types/keywords/categoryTypes';
+import { ProjectCategory } from 'src/types/keywords/categoryTypes';
 
-import architecture from '../../../assets/hatches/architecture.svg';
-import software from '../../../assets/hatches/software.svg';
-import weaving from '../../../assets/hatches/weaving.svg';
-import design from '../../../assets/hatches/design.svg';
+import architecture from '/resources/hatches/architecture.svg';
+import software from '/resources/hatches/software.svg';
+import weaving from '/resources/hatches/weaving.svg';
+import design from '/resources/hatches/design.svg';
 
 const getBackgroundForProjectType = (projectType: ProjectCategory) => {
   switch (projectType) {

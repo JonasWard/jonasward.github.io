@@ -1,4 +1,4 @@
-import profileImage from '../../assets/pictures/profilePicture-crop.jpg';
+import profileImage from 'resources/pictures/profilePicture-crop.jpg';
 import './about.css';
 
 export const About = () => {

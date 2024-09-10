@@ -14,6 +14,7 @@ import lampsFrituurLogo from './assets/lamps/Futurist Logo.png';
 import lampsFrituurMultiple from './assets/lamps/frituurMultiple.jpg';
 import lampsFrituurSingle from './assets/lamps/frituurSingle.jpg';
 import lampsMASLogo from './assets/lamps/MAS Logo.png';
+
 import lampsMAS1 from './assets/lamps/mas800.jpg';
 import lampsMAS2 from './assets/lamps/mas2.jpg';
 import lampsQuadrato from './assets/lamps/quadrato.jpg';
