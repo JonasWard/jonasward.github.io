@@ -70,6 +70,7 @@ export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyIm
           src={keyImage.imageHref}
           alt='Red dot'
         />
+        <h4>{metaData.id}</h4>
         <h2>{metaData.name}</h2>
         <main>
           <p>{metaData.description}</p>
