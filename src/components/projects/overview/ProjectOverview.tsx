@@ -20,11 +20,11 @@ const baseY = gap * 3;
 const calculateApproximiteProjectCardHeight = (project: ProjectData): number => {
   const imageHeight = getImageHeight(project.projectImage);
   const titleHeight = Math.ceil(project.metaData.name.length / 10) * h2Height;
-  const descriptionHeight = Math.ceil(project.metaData.description.length / 35) * h2Height;
+  const descriptionHeight = Math.ceil(project.metaData.description.length / 25) * h2Height;
   const keyWordLines = Math.ceil(getProjectKeywords(project.metaData).length / 2.5) * pHeight;
   const keyWordHeight = keyWordLines !== 0 ? keyWordLines * 16.5 + (keyWordLines - 1) * 4 : 0;
 
-  return 20 * 3 + padding * 2 + imageHeight + titleHeight + descriptionHeight + keyWordHeight;
+  return 20 * 3 + padding * 2 + imageHeight + titleHeight + descriptionHeight + keyWordHeight + 20;
 };
 
 const getLeftForColumnIndex = (index: number) => {
@@ -85,6 +85,7 @@ export const ProjectOverview = () => {
   useEffect(() => {
     onScreenScale(); // initial
     window.addEventListener('resize', onScreenScale);
+    setTimeout(onScreenScale, 1000);
 
     return window.addEventListener('resize', onScreenScale);
   }, []);
