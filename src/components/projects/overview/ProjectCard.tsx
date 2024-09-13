@@ -46,7 +46,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({ index, metaData, keyImage,
       ref={(element) => {
         if (refArray?.current) refArray.current[index] = element;
       }}
-      className={`project-card fade-in ${metaData.projectType}`}
+      className={`project-card fade-in ${metaData.projectType} ${Math.abs(currentCenterPosition[0] - left) < 115 ? 'in-focus' : ''}`}
       style={{
         left,
         top,
