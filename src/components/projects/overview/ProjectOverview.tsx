@@ -43,12 +43,20 @@ export const ProjectOverview = () => {
   const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, getInnerWidth()) * horizontalGridSpacing + gap);
   const [height, setHeight] = useState(2000);
   const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const overviewGridRef = useRef<HTMLDivElement>(null);
+  const [centerPosition, setCenterPosition] = useState<[number, number]>([115, window.innerHeight * 0.5]);
 
   const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, getLeftForColumnIndex(index), baseY]));
 
-  useEffect(() => {
-    if (projectCardRefs.current && projectCardRefs.current.every((e) => e !== null)) onScreenScale();
-  }, [projectCardRefs, renderIndex]);
+  const onScroll = () => {
+    if (overviewGridRef.current) {
+      const relativeXPosition = overviewGridRef.current.scrollLeft / overviewGridRef.current.scrollWidth;
+      setCenterPosition([
+        overviewGridRef.current.scrollLeft + 115 * (1 - relativeXPosition) + (window.innerWidth - 115) * relativeXPosition,
+        overviewGridRef.current.scrollTop + window.innerHeight * 0.5,
+      ]);
+    }
+  };
 
   const onScreenScale = () => {
     const workingWidth = getInnerWidth();
@@ -83,15 +91,33 @@ export const ProjectOverview = () => {
   };
 
   useEffect(() => {
+    if (projectCardRefs.current && projectCardRefs.current.every((e) => e !== null)) onScreenScale();
+  }, [projectCardRefs, renderIndex]);
+
+  useEffect(() => {
     onScreenScale(); // initial
     window.addEventListener('resize', onScreenScale);
     setTimeout(onScreenScale, 1000);
 
-    return window.addEventListener('resize', onScreenScale);
+    return () => {
+      window.removeEventListener('resize', onScreenScale);
+    };
   }, []);
 
+  useEffect(() => {
+    if (overviewGridRef.current) {
+      overviewGridRef.current.addEventListener('scroll', onScroll);
+    }
+
+    return () => {
+      if (overviewGridRef.current) {
+        overviewGridRef.current.removeEventListener('scroll', onScroll);
+      }
+    };
+  }, [overviewGridRef]);
+
   return (
-    <div className='project-grid'>
+    <div ref={overviewGridRef} className='project-grid'>
       {positions.map(([index, left, top]) => (
         <ProjectCard
           key={index}
@@ -102,6 +128,7 @@ export const ProjectOverview = () => {
           top={top}
           refArray={projectCardRefs}
           triggerRerender={() => setRenderIndex(renderIndex + 1)}
+          currentCenterPosition={centerPosition}
         />
       ))}
     </div>
