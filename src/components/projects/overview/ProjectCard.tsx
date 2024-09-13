@@ -25,17 +25,18 @@ const getBackgroundForProjectType = (projectType: ProjectCategory) => {
   }
 };
 
-interface IProjectNameCard {
+interface IProjectCard {
   index: number;
   metaData: ProjectMetaData;
   keyImage: ProjectImage;
   left: number;
   top: number;
+  currentCenterPosition: [number, number];
   refArray?: RefObject<(HTMLDivElement | null)[]>;
   triggerRerender: () => void;
 }
 
-export const ProjectCard: React.FC<IProjectNameCard> = ({ index, metaData, keyImage, left, top, refArray, triggerRerender }) => {
+export const ProjectCard: React.FC<IProjectCard> = ({ index, metaData, keyImage, left, top, refArray, triggerRerender, currentCenterPosition }) => {
   const navigate = useNavigate();
   const navigateProject = () => navigate(`/project/${metaData.webstring}`);
   const [showKeywords, setShowKeywords] = useState(false);
