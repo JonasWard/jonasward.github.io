@@ -2,13 +2,13 @@
   position: relative;
   text-align: center;
   color: white;
-  width: min(1495px, 100%);
+  width: 100%;
   margin: 0px auto;
 }
 
 .project-image.main-image img {
-  width: min(1495px, 100%);
   z-index: 99;
+  width: 100%;
   object-fit: cover;
 }
 

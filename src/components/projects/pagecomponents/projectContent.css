@@ -1,11 +1,14 @@
+.project-layout {
+  margin: 0px auto;
+  max-width: min(1495px, 100vw);
+}
+
 .project-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 30px;
-  margin: 0px auto;
-  max-width: min(1495px, 100vw);
   padding: 30px 16px 30px 20px;
 }
 

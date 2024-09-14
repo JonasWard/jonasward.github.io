@@ -13,10 +13,10 @@ export const ProjectRenderer: React.FC<IProjectRendererProps> = ({ project }) =>
   }, []);
 
   return (
-    <>
+    <div className='project-layout'>
       <ProjectImageRenderer content={project.projectImage} isMainImage />
       <ProjectContentRenderer content={project.projectContent} />
-    </>
+    </div>
   );
 };
 
