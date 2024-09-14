@@ -11,6 +11,9 @@ const padding = 20;
 const horizontalGridSpacing = horizontalSpacing + padding + gap;
 const rawCardWidth = 216;
 
+const PROJECT_POSITION_OFFSET_X = 'project-position-offset-x';
+const PROJECT_POSITION_OFFSET_Y = 'project-position-offset-y';
+
 const getColumnsForWidthAndProjects = (projects: ProjectData[], innerWidth: number) =>
   innerWidth < mobileViewWidth ? projects.length : Math.floor((innerWidth - gap) / horizontalGridSpacing);
 
@@ -30,7 +33,11 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
   const [marginLeft, setMarginLeft] = useState<string>('calc((100vw - 216px) * 0.5)');
   const [minWidth, setMinWidth] = useState<number>(0);
 
-  const onScroll = () => setCenterPosition([window.scrollX, window.scrollY + window.innerHeight * 0.5]);
+  const onScroll = () => {
+    setCenterPosition([window.scrollX, window.scrollY + window.innerHeight * 0.5]);
+    localStorage.setItem(PROJECT_POSITION_OFFSET_X, `${window.scrollX}`);
+    localStorage.setItem(PROJECT_POSITION_OFFSET_Y, `${window.scrollY}`);
+  };
 
   const onScreenScale = () => {
     const columnData = getColumnLogic(projects);
@@ -56,15 +63,21 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
     window.addEventListener('scroll', onScroll);
     setTimeout(onScreenScale, 1000);
 
+    const scrollX = Number(localStorage.getItem(PROJECT_POSITION_OFFSET_X) ?? 0);
+    const scrollY = Number(localStorage.getItem(PROJECT_POSITION_OFFSET_Y) ?? 0);
+
+    window.scrollTo(scrollX, scrollY);
+
     return () => {
       window.removeEventListener('resize', onScreenScale);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
   return (
     <div style={{ marginLeft, minWidth }} className='project-grid'>
-      {positions.map((column) => (
-        <div style={{ display: 'flex', flexDirection: 'column', gap }}>
+      {positions.map((column, jndex) => (
+        <div key={jndex} style={{ display: 'flex', flexDirection: 'column', gap }}>
           {column.map((project, index) => (
             <ProjectCard key={index} index={index} metaData={project.metaData} keyImage={project.projectImage} currentCenterPosition={centerPosition} />
           ))}

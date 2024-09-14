@@ -1,12 +1,17 @@
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectImageRenderer } from './ProjectImageRenderer';
 import { ProjectContentRenderer } from './ProjectContentRenderer';
+import { useEffect } from 'react';
 
 interface IProjectRendererProps {
   project: ProjectData;
 }
 
 export const ProjectRenderer: React.FC<IProjectRendererProps> = ({ project }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <ProjectImageRenderer content={project.projectImage} isMainImage />
