@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { allProjects } from '../../../data/projects/allProjects';
 import ProjectCard from './ProjectCard';
 import { ProjectData } from '../../../types/projectContent/projectData';
 
@@ -24,17 +23,17 @@ const getColumnLogic = (allProjects: ProjectData[]): ProjectData[][] => {
   return columnLogic;
 };
 
-export const ProjectOverview = () => {
+export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
   const [centerPosition, setCenterPosition] = useState<[number, number]>([115, window.innerHeight * 0.5]);
 
-  const [positions, setPositions] = useState<ProjectData[][]>(getColumnLogic(allProjects));
+  const [positions, setPositions] = useState<ProjectData[][]>(getColumnLogic(projects));
   const [marginLeft, setMarginLeft] = useState<string>('calc((100vw - 216px) * 0.5)');
   const [minWidth, setMinWidth] = useState<number>(0);
 
   const onScroll = () => setCenterPosition([window.scrollX, window.scrollY + window.innerHeight * 0.5]);
 
   const onScreenScale = () => {
-    const columnData = getColumnLogic(allProjects);
+    const columnData = getColumnLogic(projects);
 
     window.innerWidth < mobileViewWidth
       ? setMarginLeft(`${(window.innerWidth - rawCardWidth) * 0.5}px`)
@@ -44,8 +43,12 @@ export const ProjectOverview = () => {
       ? setMinWidth(columnData.length * (rawCardWidth + gap) - gap + (window.innerWidth - rawCardWidth) * 0.5)
       : setMinWidth(columnData.length * (rawCardWidth + gap) - gap);
 
-    setPositions(getColumnLogic(allProjects));
+    setPositions(getColumnLogic(projects));
   };
+
+  useEffect(() => {
+    onScreenScale();
+  }, [projects]);
 
   useEffect(() => {
     onScreenScale(); // initial

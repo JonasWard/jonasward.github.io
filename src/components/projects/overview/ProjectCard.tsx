@@ -4,7 +4,7 @@ import './ProjectCard.css';
 import { ProjectChip } from './ProjectChip';
 import { ProjectImage } from 'src/types/projectContent/projectImage';
 import { getProjectKeywords } from 'src/utils/projectconstructor';
-import { RefObject, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ProjectCategory } from 'src/types/keywords/categoryTypes';
 
 import architecture from 'src/assets/hatches/architecture.svg?raw';

@@ -11,6 +11,7 @@ import Missing from './components/Missing';
 import { HeaderWrapper } from './components/HeaderWrapper';
 import { ProjectRoutes } from './types/navigation/projectroutes';
 import { ProjectColorView } from './components/ColorConfig';
+import { allProjects } from './data/projects/allProjects';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -24,7 +25,7 @@ root.render(
           <Route path={ProjectRoutes.Main} element={<Landing />} />
           <Route path={ProjectRoutes.CV} element={<HeaderWrapper children={<CV />} />} />
           <Route path={ProjectRoutes.About} element={<HeaderWrapper children={<About />} />} />
-          <Route path={ProjectRoutes.Projects} element={<HeaderWrapper children={<ProjectOverview />} />} />
+          <Route path={ProjectRoutes.Projects} element={<HeaderWrapper children={<ProjectOverview projects={allProjects} />} />} />
           <Route path={ProjectRoutes.Project} element={<HeaderWrapper children={<ProjectWrapper />} />} />
           <Route path={ProjectRoutes.Missing} element={<HeaderWrapper children={<Missing />} />} />
           <Route path={ProjectRoutes.Colors} element={<HeaderWrapper children={<ProjectColorView />} />} />
