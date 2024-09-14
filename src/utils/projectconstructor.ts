@@ -21,7 +21,7 @@ export const createImage = (href: string, text?: string): ProjectImage => ({
   imageText: text,
 });
 
-export const createText = (maxColumnCount: 1 | 2 | 3 = 1, ...texts: [string, string | undefined][]): ProjectText => ({
+export const createText = (maxColumnCount: 1 | 2 | 3 = 1, ...texts: (string | [string, string])[]): ProjectText => ({
   maxColumnCount,
   type: ProjectContentType.Text,
   content: texts,
