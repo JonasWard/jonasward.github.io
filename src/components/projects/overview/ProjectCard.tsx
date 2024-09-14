@@ -4,7 +4,7 @@ import './ProjectCard.css';
 import { ProjectChip } from './ProjectChip';
 import { ProjectImage } from 'src/types/projectContent/projectImage';
 import { getProjectKeywords } from 'src/utils/projectconstructor';
-import { RefObject, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import { ProjectCategory } from 'src/types/keywords/categoryTypes';
 
 import architecture from 'src/assets/hatches/architecture.svg?raw';
@@ -29,29 +29,21 @@ interface IProjectCard {
   index: number;
   metaData: ProjectMetaData;
   keyImage: ProjectImage;
-  left: number;
-  top: number;
   currentCenterPosition: [number, number];
-  refArray?: RefObject<(HTMLDivElement | null)[]>;
-  triggerRerender: () => void;
 }
 
-export const ProjectCard: React.FC<IProjectCard> = ({ index, metaData, keyImage, left, top, refArray, triggerRerender, currentCenterPosition }) => {
+export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, currentCenterPosition }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const navigateProject = () => navigate(`/project/${metaData.webstring}`);
   const [showKeywords, setShowKeywords] = useState(false);
 
   return (
     <div
-      ref={(element) => {
-        if (refArray?.current) refArray.current[index] = element;
-      }}
-      className={`project-card fade-in ${metaData.projectType} ${Math.abs(currentCenterPosition[0] - left) < 115 ? 'in-focus' : ''}`}
-      style={{
-        left,
-        top,
-        zIndex: 0,
-      }}
+      ref={cardRef}
+      className={`project-card fade-in ${metaData.projectType} ${
+        cardRef.current && (Math.abs(currentCenterPosition[0] - cardRef.current!.offsetLeft) < 115 ? 'in-focus' : '')
+      }`}
       onClick={navigateProject}
     >
       <div style={{ backgroundImage: getBackgroundForProjectType(metaData.projectType) }} className='project-card foreground' />
@@ -80,7 +72,6 @@ export const ProjectCard: React.FC<IProjectCard> = ({ index, metaData, keyImage,
         <h3
           onClick={(e: any) => {
             e.stopPropagation();
-            triggerRerender();
             setShowKeywords(!showKeywords);
           }}
         >

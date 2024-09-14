@@ -1,107 +1,56 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { allProjects } from '../../../data/projects/allProjects';
 import ProjectCard from './ProjectCard';
 import { ProjectData } from '../../../types/projectContent/projectData';
-import { ProjectImage } from '../../../types/projectContent/projectImage';
-import { getProjectKeywords } from '../../../utils/projectconstructor';
 
 const getInnerWidth = (): number => Math.min(1495, window.innerWidth);
 
-const PREVIOUS_SCROLL_X = 'previous-scroll-left';
-const PREVIOUS_SCROLL_Y = 'previous-scroll-top';
-
 const mobileViewWidth = 570;
-const getImageHeight = (keyImage: ProjectImage) => ((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * horizontalSpacing;
 const horizontalSpacing = 200;
-const h2Height = 29;
-const pHeight = 19.5;
 const gap = 25;
 const padding = 20;
 const horizontalGridSpacing = horizontalSpacing + padding + gap;
-const baseY = gap * 3;
-const rawCardWidth = 216 + gap;
-
-const calculateApproximiteProjectCardHeight = (project: ProjectData): number => {
-  const imageHeight = getImageHeight(project.projectImage);
-  const titleHeight = Math.ceil(project.metaData.name.length / 10) * h2Height;
-  const descriptionHeight = Math.ceil(project.metaData.description.length / 25) * h2Height;
-  const keyWordLines = Math.ceil(getProjectKeywords(project.metaData).length / 2.5) * pHeight;
-  const keyWordHeight = keyWordLines !== 0 ? keyWordLines * 16.5 + (keyWordLines - 1) * 4 : 0;
-
-  return 20 * 3 + padding * 2 + imageHeight + titleHeight + descriptionHeight + keyWordHeight + 20;
-};
-
-const getLeftForColumnIndex = (index: number) => {
-  const workingWidth = getInnerWidth();
-
-  const columnCount = getColumnsForWidthAndProjects(allProjects, workingWidth);
-  const baseX = workingWidth < mobileViewWidth ? gap : 0.5 * (workingWidth + gap - columnCount * horizontalGridSpacing);
-  return (index % columnCount) * horizontalGridSpacing + baseX;
-};
+const rawCardWidth = 216;
 
 const getColumnsForWidthAndProjects = (projects: ProjectData[], innerWidth: number) =>
   innerWidth < mobileViewWidth ? projects.length : Math.floor((innerWidth - gap) / horizontalGridSpacing);
 
+const getColumnLogic = (allProjects: ProjectData[]): ProjectData[][] => {
+  const columnCount = getColumnsForWidthAndProjects(allProjects, getInnerWidth());
+  const columnLogic: ProjectData[][] = [...Array(columnCount)].map(() => []);
+
+  allProjects.forEach((projectData, index) => columnLogic[index % columnCount].push(projectData));
+
+  return columnLogic;
+};
+
 export const ProjectOverview = () => {
-  const [renderIndex, setRenderIndex] = useState(0);
-  const [width, setWidth] = useState(getColumnsForWidthAndProjects(allProjects, getInnerWidth()) * horizontalGridSpacing + gap);
-  const [height, setHeight] = useState(2000);
-  const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const overviewGridRef = useRef<HTMLDivElement>(null);
-  const innerGridRef = useRef<HTMLDivElement>(null);
   const [centerPosition, setCenterPosition] = useState<[number, number]>([115, window.innerHeight * 0.5]);
 
-  const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, getLeftForColumnIndex(index), baseY]));
+  const [positions, setPositions] = useState<ProjectData[][]>(getColumnLogic(allProjects));
+  const [marginLeft, setMarginLeft] = useState<string>('calc((100vw - 216px) * 0.5)');
+  const [minWidth, setMinWidth] = useState<number>(0);
 
-  const onScroll = () => {
-    if (overviewGridRef.current && innerGridRef.current) {
-      console.log(`writing in current scroll position: ${innerGridRef.current.scrollLeft}, ${overviewGridRef.current.scrollTop}`);
-      localStorage.setItem(PREVIOUS_SCROLL_X, JSON.stringify(overviewGridRef.current.scrollLeft));
-      localStorage.setItem(PREVIOUS_SCROLL_Y, JSON.stringify(innerGridRef.current.scrollTop));
-      setCenterPosition([overviewGridRef.current.scrollLeft + rawCardWidth * 0.5 + gap, innerGridRef.current.scrollTop + window.innerHeight * 0.5]);
-    }
-  };
+  const onScroll = () => setCenterPosition([window.scrollX, window.scrollY + window.innerHeight * 0.5]);
 
   const onScreenScale = () => {
-    const workingWidth = getInnerWidth();
+    const columnData = getColumnLogic(allProjects);
 
-    const columnCount = getColumnsForWidthAndProjects(allProjects, workingWidth);
-    const baseX =
-      workingWidth < mobileViewWidth ? (window.innerWidth - rawCardWidth) * 0.5 : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
+    window.innerWidth < mobileViewWidth
+      ? setMarginLeft(`${(window.innerWidth - rawCardWidth) * 0.5}px`)
+      : setMarginLeft(`${(window.innerWidth - columnData.length * (rawCardWidth + gap) + gap) * 0.5}px`);
 
-    const columns: [number, number, ProjectData][][] = [...Array(columnCount)].map((_) => []);
+    window.innerWidth < mobileViewWidth
+      ? setMinWidth(columnData.length * (rawCardWidth + gap) - gap + (window.innerWidth - rawCardWidth) * 0.5)
+      : setMinWidth(columnData.length * (rawCardWidth + gap) - gap);
 
-    allProjects.forEach((p, i) => columns[i % columnCount].push([i, baseX + (i % columnCount) * horizontalGridSpacing, p]));
-
-    const localPositions: [number, number, number][] = [];
-
-    let maximumHeight = 0;
-
-    columns.forEach((column) => {
-      let localY = baseY;
-      column.forEach(([index, x, project]) => {
-        localPositions.push([index, x, localY]);
-        localY += (projectCardRefs?.current[index]?.offsetHeight as undefined | null | number)
-          ? (projectCardRefs?.current[index]?.offsetHeight as number) + gap
-          : calculateApproximiteProjectCardHeight(project);
-
-        if (localY > maximumHeight) maximumHeight = localY;
-      });
-    });
-
-    const localWidth = getColumnsForWidthAndProjects(allProjects, workingWidth) * horizontalGridSpacing + gap;
-    setWidth(localWidth);
-    if (height !== maximumHeight + gap) setHeight(Math.max(maximumHeight + gap, window.innerHeight));
-    if (JSON.stringify(positions) !== JSON.stringify(localPositions)) setPositions(localPositions);
+    setPositions(getColumnLogic(allProjects));
   };
-
-  useEffect(() => {
-    if (projectCardRefs.current && projectCardRefs.current.every((e) => e !== null)) onScreenScale();
-  }, [projectCardRefs, renderIndex]);
 
   useEffect(() => {
     onScreenScale(); // initial
     window.addEventListener('resize', onScreenScale);
+    window.addEventListener('scroll', onScroll);
     setTimeout(onScreenScale, 1000);
 
     return () => {
@@ -109,45 +58,15 @@ export const ProjectOverview = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (overviewGridRef.current && innerGridRef.current) {
-      console.log('adding scroll listener');
-      overviewGridRef.current.addEventListener('scroll', onScroll);
-      innerGridRef.current.addEventListener('wheel', onScroll);
-      if (overviewGridRef.current) {
-        console.log(`reading previous scroll position: ${localStorage.getItem(PREVIOUS_SCROLL_X)}, ${localStorage.getItem(PREVIOUS_SCROLL_Y)}`);
-        overviewGridRef.current.scrollLeft = JSON.parse(localStorage.getItem(PREVIOUS_SCROLL_X) ?? '0');
-        innerGridRef.current.scrollTop = JSON.parse(localStorage.getItem(PREVIOUS_SCROLL_Y) ?? '0');
-      }
-    }
-
-    return () => {
-      if (overviewGridRef.current) {
-        overviewGridRef.current.removeEventListener('scroll', onScroll);
-      }
-    };
-  }, [overviewGridRef, innerGridRef]);
-
   return (
-    <div ref={overviewGridRef} className='project-grid'>
-      <div
-        ref={innerGridRef}
-        style={{ width: getInnerWidth() < mobileViewWidth ? width + (window.innerWidth - rawCardWidth - gap) : undefined, height: height - 7 }}
-      >
-        {positions.map(([index, left, top]) => (
-          <ProjectCard
-            key={index}
-            index={index}
-            metaData={allProjects[index].metaData}
-            keyImage={allProjects[index].projectImage}
-            left={left}
-            top={top}
-            refArray={projectCardRefs}
-            triggerRerender={() => setRenderIndex(renderIndex + 1)}
-            currentCenterPosition={centerPosition}
-          />
-        ))}
-      </div>
+    <div style={{ marginLeft, minWidth }} className='project-grid'>
+      {positions.map((column) => (
+        <div style={{ display: 'flex', flexDirection: 'column', gap }}>
+          {column.map((project, index) => (
+            <ProjectCard key={index} index={index} metaData={project.metaData} keyImage={project.projectImage} currentCenterPosition={centerPosition} />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };
