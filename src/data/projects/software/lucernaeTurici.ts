@@ -77,12 +77,7 @@ export const lucernaeTurici: ProjectData = {
   metaData,
   projectImage: createTitleImage(projectImage, metaData.name, 1988, 2560),
   projectContent: [
-    createText(
-      2,
-      ['Boiler Plate Lamp configurator text', 'Lamp Configurator'],
-      ['A bit more about the configurator', undefined],
-      ['A bit more about the printing', undefined]
-    ),
+    createText(2, ['Lamp Configurator', 'Boiler Plate Lamp configurator text'], 'A bit more about the configurator', 'A bit more about the printing'),
     {
       type: ProjectContentType.ImageGrid,
       images: [projectImage, lamp1, lamp2, lamp3].map((i) => createImage(i, '©️ J.W.')),

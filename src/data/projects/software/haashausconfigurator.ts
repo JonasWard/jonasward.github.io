@@ -39,17 +39,11 @@ export const haasHausConfigurator: ProjectData = {
     createText(
       2,
       [
-        'The Haas House Configurator was developed by Design-to-Production for Haas Fertigbau. It is a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their web browser.',
         'Web application for digital building process',
+        'The Haas House Configurator was developed by Design-to-Production for Haas Fertigbau. It is a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their web browser.',
       ],
-      [
-        'In a first step, a series of filters allows to find the best match in a collection of pre-configured houses of various sizes, floor levels, and typologies. After having picked one, the user can adapt the house to their desire . Possible changes range from architectural level (draw walls, join or split rooms, add balconies, garages, or annexes, pick the roof shape, change size and position of doors and windows) via technical configuration (heating, insulation, photovoltaics) to appearance and materialisation of every element.',
-        undefined,
-      ],
-      [
-        'Every change is applied in real-time and visualised using 2D and 3D models of the building, accompanied by a live cost estimation. After a house has been contracted, Haas staff can export the 3D model into Revit and eventually Cadwork, forming a continuous digital chain from design to fabrication.',
-        undefined,
-      ]
+      'In a first step, a series of filters allows to find the best match in a collection of pre-configured houses of various sizes, floor levels, and typologies. After having picked one, the user can adapt the house to their desire . Possible changes range from architectural level (draw walls, join or split rooms, add balconies, garages, or annexes, pick the roof shape, change size and position of doors and windows) via technical configuration (heating, insulation, photovoltaics) to appearance and materialisation of every element.',
+      'Every change is applied in real-time and visualised using 2D and 3D models of the building, accompanied by a live cost estimation. After a house has been contracted, Haas staff can export the 3D model into Revit and eventually Cadwork, forming a continuous digital chain from design to fabrication.'
     ),
     {
       type: ProjectContentType.ImageGrid,

@@ -51,7 +51,7 @@ export const scarves: ProjectData = {
   metaData,
   projectImage: createTitleImage(projectImage, metaData.name, 2048, 1536),
   projectContent: [
-    createText(2, ['This project is about knitting scarves using a pattern generator.', undefined]),
+    createText(2, 'This project is about knitting scarves using a pattern generator.'),
     {
       type: ProjectContentType.ImageGrid,
       images: [

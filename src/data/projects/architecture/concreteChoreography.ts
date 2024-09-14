@@ -41,22 +41,10 @@ export const concreteChoreography: ProjectData = {
         'From ancient civilizations to the present day, columns have served as elements of architecture particularly tied to the harmony, balance and proportion of architectural orders – so much so that they have come to be recognised as works of art in their own right. What could the contemporary design of a new column order enabled by emerging digital technologies be like?',
         'utopian columns',
       ],
-      [
-        'In collaboration with the Origen Festival in Riom, Switzerland the installation Concrete Choreography consists of nine, individually designed, 2.7m tall columns. Each column is concrete 3D printed at full height in 2.5 hours with the process developed at ETH Zürich.',
-        undefined,
-      ],
-      [
-        'Students of the Master of Advanced Studies in Digital Fabrication and Architecture explore the unique possibilities of layered extrusion printing, demonstrating the potential of computational design and digital fabrication for future concrete construction.',
-        undefined,
-      ],
-      [
-        'This novel fabrication process allows the production of concrete elements without the need for any form work. In addition, one-of-a-kind designs with complex geometries can be fabricated in a fully automated manner. Hollow concrete structures are printed in a way where the material can be strategically used only where needed, allowing a more sustainable approach to concrete architecture.',
-        undefined,
-      ],
-      [
-        'Framing and informing the dance performances of the 2019 summer season in Riom, the project showcases how technological advancements can bring efficient and novel expressions to concrete architecture.',
-        undefined,
-      ]
+      'In collaboration with the Origen Festival in Riom, Switzerland the installation Concrete Choreography consists of nine, individually designed, 2.7m tall columns. Each column is concrete 3D printed at full height in 2.5 hours with the process developed at ETH Zürich.',
+      'Students of the Master of Advanced Studies in Digital Fabrication and Architecture explore the unique possibilities of layered extrusion printing, demonstrating the potential of computational design and digital fabrication for future concrete construction.',
+      'This novel fabrication process allows the production of concrete elements without the need for any form work. In addition, one-of-a-kind designs with complex geometries can be fabricated in a fully automated manner. Hollow concrete structures are printed in a way where the material can be strategically used only where needed, allowing a more sustainable approach to concrete architecture.',
+      'Framing and informing the dance performances of the 2019 summer season in Riom, the project showcases how technological advancements can bring efficient and novel expressions to concrete architecture.'
     ),
     {
       type: ProjectContentType.ImageGrid,

@@ -36,10 +36,10 @@ export const staufferStatic: ProjectData = {
   metaData,
   projectImage: createTitleImage(keyImage, metaData.name, 1205, 1195),
   projectContent: [
-    createText(2, [
-      'Stauffer Static is a static calculator for Timber contracters. All calculations are done fully clientside, though through the backend certain shared input data can be accesed. All calculation are done according to the SIA norms.',
-      undefined,
-    ]),
+    createText(
+      2,
+      'Stauffer Static is a static calculator for Timber contracters. All calculations are done fully clientside, though through the backend certain shared input data can be accesed. All calculation are done according to the SIA norms.'
+    ),
     {
       type: ProjectContentType.ImageGrid,
       images: [buckling, calculations, indeterminateBeam, plateBuckling, resources, results, tenants].map((i) => createImage(i, '©️ Ditronc AG')),

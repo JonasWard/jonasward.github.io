@@ -70,9 +70,9 @@ export const chocoladeChaud: ProjectData = {
   projectContent: [
     createText(
       1,
-      ['Chocolate bars as art project', 'Custom Chocolate Bars'],
-      ['These are some images that document the first experiments for an online chocolate bar configurator.', undefined],
-      ['This something integrated workflow', 'Process']
+      ['Custom Chocolate Bars', 'Chocolate bars as art project'],
+      'These are some images that document the first experiments for an online chocolate bar configurator.',
+      ['Process', 'This something integrated workflow']
     ),
     {
       type: ProjectContentType.ExternalLink,

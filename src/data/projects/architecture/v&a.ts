@@ -66,13 +66,10 @@ export const vAnda: ProjectData = {
     createText(
       maxColumnCount,
       [
-        'Timber dowel assemblies is a new timber construction method, where short slats are held in space and locked by wood dowels. Spatially complex, the process takes full advantage of the potential for cooperative multi-robotic fabrication and human-machine collaboration. The unique setup of two robotic arms suspended from a gantry allows a robot to drill holes for the dowels at a defined angle in the pre-fabrication station, while the other robotic arm picked and positioned the timber slat in space. Taking advantage of the hygroscopic behavior of wood, the dowels are pre-dried in an oven to facilitate their manual insertion into the pre-drilled holes. Robotic placing is highly precise, while human dowel insertion allows a relatively small tolerance of manual adjustment, whose cooperation takes advantage of both sides. Once moisture of the dowel is applied, the volumetric expansion maximizes the frictional force between dowels and slats making any additional nails, glue or screws obsolete.',
         'timber assemblies',
+        'Timber dowel assemblies is a new timber construction method, where short slats are held in space and locked by wood dowels. Spatially complex, the process takes full advantage of the potential for cooperative multi-robotic fabrication and human-machine collaboration. The unique setup of two robotic arms suspended from a gantry allows a robot to drill holes for the dowels at a defined angle in the pre-fabrication station, while the other robotic arm picked and positioned the timber slat in space. Taking advantage of the hygroscopic behavior of wood, the dowels are pre-dried in an oven to facilitate their manual insertion into the pre-drilled holes. Robotic placing is highly precise, while human dowel insertion allows a relatively small tolerance of manual adjustment, whose cooperation takes advantage of both sides. Once moisture of the dowel is applied, the volumetric expansion maximizes the frictional force between dowels and slats making any additional nails, glue or screws obsolete.',
       ],
-      [
-        'Working our way up from 1-1 detail testing, surface propagation to a full fledged, room filling, museum exhibit for the Hello Robot exposition in the V&A Dundee.',
-        undefined,
-      ]
+      'Working our way up from 1-1 detail testing, surface propagation to a full fledged, room filling, museum exhibit for the Hello Robot exposition in the V&A Dundee.'
     ),
     {
       type: ProjectContentType.ImageGrid,

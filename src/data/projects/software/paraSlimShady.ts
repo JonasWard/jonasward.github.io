@@ -44,8 +44,8 @@ export const paraSlimShady: ProjectData = {
   projectContent: [
     createText(
       2,
-      ['This project was developed together during the AEC Hackathon 2024 in Zürich.', 'AEC Hackathon 2024'],
-      ["A derivative of a prototype based on the 'Julierturm' that I made for a friend back in 2023", undefined]
+      ['AEC Hackathon 2024', 'This project was developed together during the AEC Hackathon 2024 in Zürich.'],
+      "A derivative of a prototype based on the 'Julierturm' that I made for a friend back in 2023"
     ),
     {
       type: ProjectContentType.ImageGrid,

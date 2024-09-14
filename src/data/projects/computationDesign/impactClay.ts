@@ -43,13 +43,10 @@ export const impactClay: ProjectData = {
     createText(
       2,
       [
-        'Impact clay was a four-week design and build assignment investigating a novel fabrication process for highly viscous materials. The setup consists of a small-scale six-axis robotic arm manipulating an end-effector that allows to cut out projectiles of different sizes, position them, and press them into their respective shapes by linear pneumatic actuation. Through iterations of empiric testing, design simulation, and physical prototyping different typologies of the technique were explored.',
         'varied impressions',
+        'Impact clay was a four-week design and build assignment investigating a novel fabrication process for highly viscous materials. The setup consists of a small-scale six-axis robotic arm manipulating an end-effector that allows to cut out projectiles of different sizes, position them, and press them into their respective shapes by linear pneumatic actuation. Through iterations of empiric testing, design simulation, and physical prototyping different typologies of the technique were explored.',
       ],
-      [
-        'From a conceptual perspective we decided very quickly to try and develop a workflow that allowed for the production of 2D surface elements. But rather than playing with informed geometries, we opted to delve deeper in one specific aspect of clay namely it’s malleability. Even though this process knows many parameters, we opted to only variate one. Namely the distance between a new bullet to be placed and the once preceding them. By variating only this we were able to introduce a unique expression in our objects which were both of aesthetic as structural relevance. By reducing the distance (what we called the pressure depth) one locally reduces the weight of the detailing while increasing the thickness of the structure. This idea also helped improve the interlocking behavior of the projectiles and made us able to considerably improve the robustness and speed of the fabrication process.',
-        undefined,
-      ]
+      'From a conceptual perspective we decided very quickly to try and develop a workflow that allowed for the production of 2D surface elements. But rather than playing with informed geometries, we opted to delve deeper in one specific aspect of clay namely it’s malleability. Even though this process knows many parameters, we opted to only variate one. Namely the distance between a new bullet to be placed and the once preceding them. By variating only this we were able to introduce a unique expression in our objects which were both of aesthetic as structural relevance. By reducing the distance (what we called the pressure depth) one locally reduces the weight of the detailing while increasing the thickness of the structure. This idea also helped improve the interlocking behavior of the projectiles and made us able to considerably improve the robustness and speed of the fabrication process.'
     ),
     {
       type: ProjectContentType.ImageGrid,

@@ -18,7 +18,7 @@ const metaData: ProjectMetaData = {
   webstring: 'mundo-a',
   name: 'Mundo A',
   projectType: ProjectCategory.Architecture,
-  description: 'UGent Urban Design Master Thesis',
+  description: 'Timber Truss Office Building',
   keyImage: undefined,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,

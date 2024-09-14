@@ -35,11 +35,7 @@ export const scarves2023: ProjectData = {
   metaData,
   projectImage: createTitleImage(projectImage, metaData.name, 2048, 2491),
   projectContent: [
-    createText(
-      2,
-      ['first commerical iteration of the pattern generator into knitware', undefined],
-      ['thanks a lot to Richa and Roxas for the modelling', undefined]
-    ),
+    createText(2, 'first commerical iteration of the pattern generator into knitware', 'thanks a lot to Richa and Roxas for the modelling'),
     { type: ProjectContentType.ImageGrid, images: [patternA, patternB].map((s) => createImage(s, '©️ JW')) },
     {
       type: ProjectContentType.ImageGrid,
