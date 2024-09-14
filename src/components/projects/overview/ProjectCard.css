@@ -60,11 +60,11 @@
 .project-card img {
   min-height: 100px;
   transition: all 0.6s;
-  filter: brightness(0.9) contrast(0.85) saturate(0.85) brightness(1.2);
+  filter: brightness(0.8) contrast(0.85) saturate(0.25) brightness(1.25);
 }
 
 .project-card:hover img {
-  filter: brightness(1) contrast(1) saturate(1) brightness(1.1);
+  filter: brightness(1) contrast(1) saturate(1) brightness(1);
 }
 
 @media screen and (max-width: 570px) {
@@ -97,11 +97,11 @@
   }
 
   .project-card:hover img {
-    filter: brightness(0.9) contrast(0.85) saturate(0.85) brightness(1.2);
+    filter: brightness(0.8) contrast(0.85) saturate(0.25) brightness(1.25);
   }
 
   .project-card.in-focus img {
-    filter: brightness(1) contrast(1) saturate(1) brightness(1.1);
+    filter: brightness(1) contrast(1) saturate(1) brightness(1);
   }
 }
 

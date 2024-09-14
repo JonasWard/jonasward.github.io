@@ -121,6 +121,7 @@ code {
 
 .project-page {
   height: 100svh;
+  width: 100vw;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
