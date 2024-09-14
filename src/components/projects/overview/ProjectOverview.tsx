@@ -7,6 +7,9 @@ import { getProjectKeywords } from '../../../utils/projectconstructor';
 
 const getInnerWidth = (): number => Math.min(1495, window.innerWidth);
 
+const PREVIOUS_SCROLL_X = 'previous-scroll-left';
+const PREVIOUS_SCROLL_Y = 'previous-scroll-top';
+
 const mobileViewWidth = 570;
 const getImageHeight = (keyImage: ProjectImage) => ((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * horizontalSpacing;
 const horizontalSpacing = 200;
@@ -45,14 +48,17 @@ export const ProjectOverview = () => {
   const [height, setHeight] = useState(2000);
   const projectCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const overviewGridRef = useRef<HTMLDivElement>(null);
+  const innerGridRef = useRef<HTMLDivElement>(null);
   const [centerPosition, setCenterPosition] = useState<[number, number]>([115, window.innerHeight * 0.5]);
 
   const [positions, setPositions] = useState<[number, number, number][]>(allProjects.map((_, index) => [index, getLeftForColumnIndex(index), baseY]));
 
   const onScroll = () => {
-    if (overviewGridRef.current) {
-      const relativeXPosition = overviewGridRef.current.scrollLeft / overviewGridRef.current.scrollWidth;
-      setCenterPosition([overviewGridRef.current.scrollLeft + rawCardWidth * 0.5 + gap, overviewGridRef.current.scrollTop + window.innerHeight * 0.5]);
+    if (overviewGridRef.current && innerGridRef.current) {
+      console.log(`writing in current scroll position: ${innerGridRef.current.scrollLeft}, ${overviewGridRef.current.scrollTop}`);
+      localStorage.setItem(PREVIOUS_SCROLL_X, JSON.stringify(overviewGridRef.current.scrollLeft));
+      localStorage.setItem(PREVIOUS_SCROLL_Y, JSON.stringify(innerGridRef.current.scrollTop));
+      setCenterPosition([overviewGridRef.current.scrollLeft + rawCardWidth * 0.5 + gap, innerGridRef.current.scrollTop + window.innerHeight * 0.5]);
     }
   };
 
@@ -84,7 +90,7 @@ export const ProjectOverview = () => {
     });
 
     const localWidth = getColumnsForWidthAndProjects(allProjects, workingWidth) * horizontalGridSpacing + gap;
-    if (width !== localWidth) setWidth(localWidth);
+    setWidth(localWidth);
     if (height !== maximumHeight + gap) setHeight(Math.max(maximumHeight + gap, window.innerHeight));
     if (JSON.stringify(positions) !== JSON.stringify(localPositions)) setPositions(localPositions);
   };
@@ -104,8 +110,15 @@ export const ProjectOverview = () => {
   }, []);
 
   useEffect(() => {
-    if (overviewGridRef.current) {
+    if (overviewGridRef.current && innerGridRef.current) {
+      console.log('adding scroll listener');
       overviewGridRef.current.addEventListener('scroll', onScroll);
+      innerGridRef.current.addEventListener('wheel', onScroll);
+      if (overviewGridRef.current) {
+        console.log(`reading previous scroll position: ${localStorage.getItem(PREVIOUS_SCROLL_X)}, ${localStorage.getItem(PREVIOUS_SCROLL_Y)}`);
+        overviewGridRef.current.scrollLeft = JSON.parse(localStorage.getItem(PREVIOUS_SCROLL_X) ?? '0');
+        innerGridRef.current.scrollTop = JSON.parse(localStorage.getItem(PREVIOUS_SCROLL_Y) ?? '0');
+      }
     }
 
     return () => {
@@ -113,11 +126,14 @@ export const ProjectOverview = () => {
         overviewGridRef.current.removeEventListener('scroll', onScroll);
       }
     };
-  }, [overviewGridRef]);
+  }, [overviewGridRef, innerGridRef]);
 
   return (
     <div ref={overviewGridRef} className='project-grid'>
-      <div style={{ width: getInnerWidth() < mobileViewWidth ? width + (window.innerWidth - rawCardWidth - gap) : undefined }}>
+      <div
+        ref={innerGridRef}
+        style={{ width: getInnerWidth() < mobileViewWidth ? width + (window.innerWidth - rawCardWidth - gap) : undefined, height: height - 7 }}
+      >
         {positions.map(([index, left, top]) => (
           <ProjectCard
             key={index}
