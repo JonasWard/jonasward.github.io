@@ -10,8 +10,8 @@ export const ProjectListRenderer: React.FC<{ content: ProjectList }> = ({ conten
         ? content.content.map((s) => <span>{s}</span>)
         : (content.content as [string, string][]).map(([s0, s1]) => (
             <div>
-              <span>{s0}</span>
-              <span>{s1}</span>
+              <span key='s0'>{s0}</span>
+              <span key='s1'>{s1}</span>
             </div>
           ))}
     </div>

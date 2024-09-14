@@ -7,11 +7,11 @@ export const ProjectTextRenderer: React.FC<{ content: ProjectText }> = ({ conten
       {content.content.map((content, index) =>
         Array.isArray(content) ? (
           <>
-            <h2 key={`${index}-title`}>{content[0]}</h2>
-            <p key={index}>{content[1]}</p>
+            <h2 id={`${index}-title`}>{content[0]}</h2>
+            <p id={`${index}-p`}>{content[1]}</p>
           </>
         ) : (
-          <p key={index}>{content}</p>
+          <p id={`${index}`}>{content}</p>
         )
       )}
     </div>

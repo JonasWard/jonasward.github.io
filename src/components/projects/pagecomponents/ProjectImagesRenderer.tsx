@@ -11,7 +11,7 @@ export const ProjectImagesRenderer: React.FC<IProjectImages> = ({ content }) => 
   return (
     <div className={className}>
       {content.images.map((image, index) => (
-        <div key={index} className={`${className}-content`}>
+        <div key={index} className={`${className}-content justify-between`}>
           <img src={image.imageHref} alt='red-dot' />
           {image.imageText && (
             <div className={`font-${image.imageTextSize ?? 'small'} ${image.imageTextPosition ?? 'bottom'}-${image.imageTextAlignment ?? 'right'} `}>
