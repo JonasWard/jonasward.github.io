@@ -16,6 +16,7 @@ const gap = 25;
 const padding = 20;
 const horizontalGridSpacing = horizontalSpacing + padding + gap;
 const baseY = gap * 3;
+const rawCardWidth = 216 + gap;
 
 const calculateApproximiteProjectCardHeight = (project: ProjectData): number => {
   const imageHeight = getImageHeight(project.projectImage);
@@ -51,10 +52,7 @@ export const ProjectOverview = () => {
   const onScroll = () => {
     if (overviewGridRef.current) {
       const relativeXPosition = overviewGridRef.current.scrollLeft / overviewGridRef.current.scrollWidth;
-      setCenterPosition([
-        overviewGridRef.current.scrollLeft + 115 * (1 - relativeXPosition) + (window.innerWidth - 115) * relativeXPosition,
-        overviewGridRef.current.scrollTop + window.innerHeight * 0.5,
-      ]);
+      setCenterPosition([overviewGridRef.current.scrollLeft + rawCardWidth * 0.5 + gap, overviewGridRef.current.scrollTop + window.innerHeight * 0.5]);
     }
   };
 
@@ -62,7 +60,8 @@ export const ProjectOverview = () => {
     const workingWidth = getInnerWidth();
 
     const columnCount = getColumnsForWidthAndProjects(allProjects, workingWidth);
-    const baseX = workingWidth < mobileViewWidth ? gap : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
+    const baseX =
+      workingWidth < mobileViewWidth ? (window.innerWidth - rawCardWidth) * 0.5 : 0.5 * (window.innerWidth + gap - columnCount * horizontalGridSpacing);
 
     const columns: [number, number, ProjectData][][] = [...Array(columnCount)].map((_) => []);
 
@@ -118,19 +117,21 @@ export const ProjectOverview = () => {
 
   return (
     <div ref={overviewGridRef} className='project-grid'>
-      {positions.map(([index, left, top]) => (
-        <ProjectCard
-          key={index}
-          index={index}
-          metaData={allProjects[index].metaData}
-          keyImage={allProjects[index].projectImage}
-          left={left}
-          top={top}
-          refArray={projectCardRefs}
-          triggerRerender={() => setRenderIndex(renderIndex + 1)}
-          currentCenterPosition={centerPosition}
-        />
-      ))}
+      <div style={{ width: getInnerWidth() < mobileViewWidth ? width + (window.innerWidth - rawCardWidth - gap) : undefined }}>
+        {positions.map(([index, left, top]) => (
+          <ProjectCard
+            key={index}
+            index={index}
+            metaData={allProjects[index].metaData}
+            keyImage={allProjects[index].projectImage}
+            left={left}
+            top={top}
+            refArray={projectCardRefs}
+            triggerRerender={() => setRenderIndex(renderIndex + 1)}
+            currentCenterPosition={centerPosition}
+          />
+        ))}
+      </div>
     </div>
   );
 };
