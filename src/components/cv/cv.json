@@ -9,8 +9,8 @@
     "website": "jonasward.ch",
     "github": "github.com/jonasward",
     "linkedin": "linkedin.com/in/jonasward",
-    "addressLine1": "Rotbuchstrasse 34, 8037, Zürich, CH",
-    "addressLine2": "Schoonmeeersstraat 29, 9000, Gent, BE"
+    "addressLine1": "Käferholzstrasse 46, 8057, Zürich, CH",
+    "addressLine2": "Schoonmeersstraat 29, 9000, Gent, BE"
   },
   "education": {
     "0": {
@@ -130,75 +130,52 @@
   "skills": {
     "soft": {
       "languages": {
-        "0": "Dutch",
-        "1": "English",
-        "2": "French",
-        "3": "German"
+        "0": "Dutch - C2",
+        "1": "English - C1",
+        "2": "German - B2",
+        "3": "French - B2"
       }
     },
     "digital": {
       "languages": {
-        ".ts/.js/.html/.css": {
-          "0": "node",
-          "1": "turbo",
-          "2": "react",
-          "3": "next.js",
-          "4": "vercel",
-          "5": "tailwind",
-          "6": "babylon.js",
-          "7": "three.js",
-          "8": "pixi.js",
-          "9": "react-pdf",
-          "10": "glsl",
-          "11": "mongodb",
-          "12": "firebase",
-          "13": "scss"
-        },
-        ".py": {
-          "0": "numpy",
-          "1": "pandas",
-          "2": "scipy",
-          "3": "matplotlib",
-          "4": "openCV",
-          "6": "tensorflow",
-          "7": "sklearn",
-          "8": "pytorch",
-          "9": "Rhino/Grasshopper",
-          "10": "blender",
-          "11": "processing",
-          "12": "ifcOpenShell",
-          "13": "GeoPython",
-          "14": "shapely"
-        },
+        ".ts/.js/.html/.css": [
+          "node",
+          "react",
+          "turbo",
+          "vite",
+          "mongodb",
+          "firebase",
+          "next.js",
+          "scss",
+          "tailwind",
+          "glsl",
+          "babylon.js",
+          "three.js",
+          "pixi.js",
+          "react-pdf"
+        ],
+        ".py": [
+          "numpy",
+          "pandas",
+          "scipy",
+          "matplotlib",
+          "openCV",
+          "tensorflow",
+          "sklearn",
+          "pytorch",
+          "Rhino/Grasshopper",
+          "blender",
+          "processing",
+          "ifcOpenShell",
+          "GeoPython",
+          "shapely"
+        ],
 
-        "#c": {
-          "0": "Unity",
-          "1": "Rhino/Grasshopper",
-          "2": "mono",
-          "3": "WPF"
-        },
-        "java": {
-          "0": "spring boot",
-          "1": "JTS",
-          "2": "gradle",
-          "3": "openCV",
-          "4": "AWT",
-          "5": "processing"
-        },
-        "rust": {
-          "0": "wasm",
-          "1": "wgpu",
-          "2": "leptos"
-        },
-        ".cpp": {
-          "0": "cgal"
-        },
-        "other": {
-          "0": "UR-script",
-          "1": "bash",
-          "2": "GCode",
-          "5": "julia"
-        }
+        "#c": ["Unity", "Rhino/Grasshopper", "mono", "WPF"],
+        "java": ["spring boot", "JTS", "gradle", "openCV", "AWT", "processing"],
+        "rust": ["wasm", "wgpu", "leptos"],
+        ".cpp": ["cgal"],
+        "other": ["UR-script", "bash", "GCode", "julia"]
       },
       "software": {
         "development": {

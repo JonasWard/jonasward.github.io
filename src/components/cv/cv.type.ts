@@ -32,7 +32,7 @@ export type Experience = {
   };
 };
 
-export type List = { [key: string]: string };
+export type List = { [key: string]: string } | string[];
 export type NestedList = { [key: string]: List };
 
 export type Skills = { [key: string]: { [key: string]: List | NestedList } };
