@@ -13,24 +13,20 @@ export type Info = {
 };
 
 export type Education = {
-  [key: string]: {
-    name: string;
-    place: string;
-    date: string;
-    description: string;
-  };
-};
+  name: string;
+  place: string;
+  date: string;
+  description: string;
+}[];
 
 export type Experience = {
-  [key: string]: {
-    company: string;
-    position: string;
-    role: string;
-    date: string;
-    location: string;
-    projects: List;
-  };
-};
+  company: string;
+  position: string;
+  role: string;
+  date: string;
+  location: string;
+  projects: { [key: string]: string };
+}[];
 
 export type List = { [key: string]: string } | string[];
 export type NestedList = { [key: string]: List };
@@ -43,4 +39,5 @@ export type CVData = {
   experience: Experience;
   skills: Skills;
   extraCurricular: { [key: string]: string };
+  pipeline?: { [key: string]: string };
 };

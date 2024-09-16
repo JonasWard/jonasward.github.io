@@ -1,9 +1,36 @@
-.document {
-  width: 100%;
-  max-width: 900px;
-  height: calc(100% - 80px);
-  display: block;
-  position: absolute;
-  margin-left: calc((100% - min(900px, 100%)) * 0.5);
-  top: 80px;
+.cv-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: min(100vw, 690px);
+  margin: 40px auto;
+  padding: 20px;
+  align-content: left;
+}
+
+.cv-download-link {
+  transition: all 0.6s;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  cursor: pointer;
+  align-items: center;
+  color: blue;
+  filter: opacity(100%);
+}
+
+.cv-download-link:hover {
+  cursor: pointer;
+  filter: opacity(70%);
+}
+
+.cv-download-link a {
+  color: black;
+}
+
+.cv-download-link img {
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
 }

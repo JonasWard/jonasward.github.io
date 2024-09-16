@@ -1,26 +1,27 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import './cv.css';
-import { CVDocument, CVHTML } from './CVDocument';
+import { CVDocument } from './CVDocument';
 import cv from './cv.json';
+import { CVHTML } from './CVDigital';
+import { CVData } from './cv.type';
+import printer from 'src/assets/icons/printer.svg';
 
 export const CV = () => {
   const date = new Date();
 
   return (
-    <>
+    <div className='cv-content'>
       <PDFDownloadLink
-        style={{ position: 'absolute', top: '100px' }}
         fileName={`JonasWard_CV_${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.pdf`}
-        document={<CVDocument data={cv} isPdf={true} />}
+        document={<CVDocument data={cv as any as CVData} />}
       >
-        <div key='download-link'>download me!</div>
+        <div className='cv-download-link'>
+          <img src={printer} />
+          <span>Download</span>
+        </div>
       </PDFDownloadLink>
-      <CVHTML data={cv} isPdf={false} />
-
-      {/* <PDFViewer className={'document'}> */}
-      {/* <CVDocument data={cv as CVData} /> */}
-      {/* </PDFViewer> */}
-    </>
+      <CVHTML data={cv as any as CVData} />
+    </div>
   );
 };
 

@@ -12,28 +12,28 @@
     "addressLine1": "Käferholzstrasse 46, 8057, Zürich, CH",
     "addressLine2": "Schoonmeersstraat 29, 9000, Gent, BE"
   },
-  "education": {
-    "0": {
+  "education": [
+    {
       "name": "UGent",
       "place": "Ghent, Belgium",
       "date": "2010 - 2015",
       "description": "Master of Science in Architecture and Engineering"
     },
-    "1": {
+    {
       "name": "TUM",
       "place": "Munich, Germany",
       "date": "2014 - 2015",
       "description": "Master of Science in Architecture and Urban Design"
     },
-    "2": {
+    {
       "name": "ETH Zürich",
       "place": "Zürich, Switzerland",
       "date": "2018 - 2019",
       "description": "Master of Advanced Studies in Digital Fabrication"
     }
-  },
-  "experience": {
-    "0": {
+  ],
+  "experience": [
+    {
       "company": "Jonas Ward",
       "position": "freelance",
       "role": "Modelbuilder & Design Consultation",
@@ -48,7 +48,7 @@
         "Museum M - Leuven": "2018 - Familie Arenberg, Leuven"
       }
     },
-    "1": {
+    {
       "company": "B-Architecten",
       "position": "Junior Architect",
       "role": "Competions Design & Construction Management",
@@ -60,7 +60,7 @@
         "Turnova": "masterplanning and heritage concept for a highrise development on a brownfield of historic significance in the city of Turnhout"
       }
     },
-    "2": {
+    {
       "company": "Jonas Ward",
       "position": "self-employed",
       "role": "Design",
@@ -79,7 +79,7 @@
         "ETH Hauptgebäude": "2023 - Bedsidetable lamp of the \"ETH Hauptgebäude\" in Zürich by Gottfried Semper"
       }
     },
-    "3": {
+    {
       "company": "Archilyse",
       "position": "Employee",
       "role": "POCs and QA",
@@ -90,7 +90,7 @@
         "Swiss Dwelling Dataset": "QA of data inputed by subcontracters"
       }
     },
-    "4": {
+    {
       "company": "rrreefs",
       "position": "Developer",
       "role": "design and fabrication strategy",
@@ -102,7 +102,7 @@
         "clay-online": "Web configurator for the modules brick using babylon.js."
       }
     },
-    "5": {
+    {
       "company": "UGD",
       "position": "Consultant",
       "role": "POC & Software Development",
@@ -115,7 +115,7 @@
         "INTEGRAL": "automatic acoustic panel planning tool in PCon Planner using IFC and OFML data, prototyping using ghPython and Rhino Common"
       }
     },
-    "6": {
+    {
       "company": "design-to-production",
       "position": "Consultant",
       "role": "FullStack Developer",
@@ -123,18 +123,14 @@
       "location": "Zürich, Switzerland",
       "projects": {
         "Haas House Configurator": "a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser",
-        "Stauffer Statics": "a cloud-based static analysis tool for timber contractors"
+        "Stauffer Statics": "a cloud-based static analysis tool for timber contractors",
+        "Rewe co-co": "a web based supermarket and vertical farming configurator"
       }
     }
-  },
+  ],
   "skills": {
     "soft": {
-      "languages": {
-        "0": "Dutch - C2",
-        "1": "English - C1",
-        "2": "German - B2",
-        "3": "French - B2"
-      }
+      "languages": ["Dutch - C2", "English - C1", "German - B2", "French - B2"]
     },
     "digital": {
       "languages": {
@@ -178,82 +174,28 @@
         "other": ["UR-script", "bash", "GCode", "julia"]
       },
       "software": {
-        "development": {
-          "0": "git",
-          "1": "docker",
-          "2": "VSCode",
-          "3": "mongodb",
-          "4": "postgresql",
-          "5": "JetBrains",
-          "6": "Jupyter / Colab",
-          "7": "Paperspace",
-          "8": "Asana"
-        },
-        "caad": {
-          "0": "AutoCAD",
-          "1": "Revit",
-          "4": "Rhinoceros 3D / Grasshopper",
-          "5": "ArchiCAD",
-          "6": "Blender",
-          "7": "QGIS"
-        },
-        "markup": {
-          "0": "InDesign",
-          "1": "Illustrator / Inkscape",
-          "2": "Photoshop / Photopea",
-          "3": "iWork / Office / google suite",
-          "4": "Midjourney",
-          "5": "Figma",
-          "6": "Sketch",
-          "7": "qlab",
-          "8": "processing"
-        },
-        "rapidPrototyping": {
-          "0": "Arduino",
-          "1": "GRBL",
-          "2": "ABB-robot-suite",
-          "3": "Prusa Slice",
-          "4": "Autodesk Fusion",
-          "5": "Cura",
-          "6": "ideaMaker",
-          "7": "Fusion 360"
-        }
+        "development": ["git", "docker", "VSCode", "mongodb", "postgresql", "JetBrains", "Jupyter / Colab", "Paperspace", "Asana"],
+        "caad": ["AutoCAD", "Revit", "Rhinoceros 3D / Grasshopper", "ArchiCAD", "Blender", "QGIS"],
+        "markup": [
+          "InDesign",
+          "Illustrator / Inkscape",
+          "Photoshop / Photopea",
+          "iWork / Office / google suite",
+          "Midjourney",
+          "Figma",
+          "Sketch",
+          "qlab",
+          "processing"
+        ],
+        "rapidPrototyping": ["Arduino", "GRBL", "ABB-robot-suite", "Prusa Slice", "Autodesk Fusion", "Cura", "ideaMaker", "Fusion 360"]
       }
     },
     "material": {
-      "digital fabrication": {
-        "0": "CNC Milling",
-        "1": "Laser Cutting",
-        "2": "3D Printing",
-        "4": "robotic path planning",
-        "5": "digital kniting"
-      },
-      "ceramics": {
-        "0": "slip casting",
-        "1": "turning table",
-        "2": "glazing"
-      },
-      "glass": {
-        "0": "fusing",
-        "1": "grading",
-        "2": "color mixing"
-      },
-      "modelbuilding": {
-        "0": "laser cutting - paper, wood, PMMA",
-        "1": "3d printing - pla, abs, petg",
-        "2": "cnc milling - wood, EPS",
-        "3": "ceramics"
-      },
-      "3d-printing": {
-        "0": "FDM",
-        "1": "san",
-        "2": "binder-jet",
-        "3": "glass",
-        "4": "clay",
-        "5": "concrete",
-        "6": "chocolate",
-        "7": "sugar"
-      }
+      "digital fabrication": ["CNC Milling", "Laser Cutting", "3D Printing", "robotic path planning", "digital kniting"],
+      "ceramics": ["slip casting", "turning table", "glazing"],
+      "glass": ["fusing", "grading", "color mixing"],
+      "modelbuilding": ["laser cutting - paper, wood, PMMA", "3d printing - pla, abs, petg", "cnc milling - wood, EPS", "ceramics"],
+      "3d-printing": ["FDM", "san", "binder-jet", "glass", "clay", "concrete", "chocolate", "sugar"]
     }
   },
   "extraCurricular": {
