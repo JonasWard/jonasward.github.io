@@ -1,11 +1,15 @@
-import { Page, Document, StyleSheet, Font, Text, Image } from '@react-pdf/renderer';
-import { CVData, Education, Experience, Info, List, NestedList, Skills } from './cv.type';
+import { Page, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
+import { CVData, List, NestedList } from './cv.type';
 import logo from 'src/assets/jonasward_logo_elong.png';
 import profileImage from 'src/assets/pictures/profilePicture-crop.jpg';
 import extraLight from 'src/assets/fonts/Montserrat-ExtraLight.ttf';
 import regular from 'src/assets/fonts/Montserrat-Regular.ttf';
 import extraBold from 'src/assets/fonts/Montserrat-ExtraBold.ttf';
 import italic from 'src/assets/fonts/Montserrat-Italic.ttf';
+import { ExperienceRenderer } from './ExperienceRenderer';
+import { EducationRenderer } from './EducationRenderer';
+import { SkillsRenderer } from './SkillsRenderer';
+import { InfoRenderer } from './InfoRenderer';
 
 Font.register({
   family: 'Montserrat',
@@ -20,7 +24,7 @@ Font.register({
 Font.registerHyphenationCallback((word) => [word]);
 
 // Create styles
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   page: {
     padding: '40px',
     fontFamily: 'Montserrat',
@@ -113,173 +117,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFDivText: React.FC<{ content: React.ReactNode; isPdf: boolean; id: string }> = ({ content, isPdf, id }) =>
-  isPdf ? <Text id={id.replaceAll(' ', '_')}>{content}</Text> : <div id={id.replaceAll(' ', '_')}>{content}</div>;
-
-const InfoRenderer: React.FC<{ info: Info; isPdf: boolean }> = ({ info, isPdf }) => (
-  <div id={'info'} style={styles.block}>
-    <TitleRenderer title={'Info'} leftAlign={false} isPdf={isPdf} />
-    <div style={styles.regularItem}>
-      <PDFDivText isPdf={isPdf} id={'firstName'} content={`${info.firstName}, ${info.name}`} />
-      <PDFDivText isPdf={isPdf} id={'placeOfBirth'} content={`°${info.placeOfBirth}, ${info.dateOfBirth}`} />
-      <DividingSpace id={'1'} />
-      <PDFDivText isPdf={isPdf} id={'addressLine1'} content={`${info.addressLine1}`} />
-      <PDFDivText isPdf={isPdf} id={'addressLine2'} content={`${info.addressLine2}`} />
-      <PDFDivText isPdf={isPdf} id={'telephone'} content={`${info.telephone}`} />
-      <PDFDivText isPdf={isPdf} id={'email'} content={`${info.email}`} />
-      <DividingSpace id={'2'} />
-      <PDFDivText isPdf={isPdf} id={'website'} content={`${info.website}`} />
-      <PDFDivText isPdf={isPdf} id={'github'} content={`${info.github}`} />
-      <PDFDivText isPdf={isPdf} id={'linkedin'} content={`${info.linkedin}`} />
-    </div>
-  </div>
-);
-
-const NamedListRenderer: React.FC<{ data: List; isPdf: boolean }> = ({ data, isPdf }) => (
-  <div id={'NamedListRenderer'}>
-    {Object.entries(data).map(([title, content]) => (
-      <div key={title}>
-        <div key={'title'} style={styles.secondaryItem}>
-          <PDFDivText isPdf={isPdf} content={`${title}`} id={'title'} />
-        </div>
-        <div key={'content'} style={styles.regularItem}>
-          <PDFDivText isPdf={isPdf} content={`${content}`} id={'data'} />
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
-const UnNamedListRenderer: React.FC<{ data: List; isPdf: boolean; style: React.CSSProperties }> = ({ data, isPdf, style }) => (
-  <div key={'UnNamedListRenderer'}>
-    {Object.entries(data).map(([title, data], i) => (
-      <div id={title} style={style}>
-        <PDFDivText isPdf={isPdf} content={`${data}`} id={`${i}`} />
-      </div>
-    ))}
-  </div>
-);
-
-const ConcatenatedUnNamedListRenderer: React.FC<{ data: List; isPdf: boolean }> = ({ data, isPdf }) => (
-  <PDFDivText
-    isPdf={isPdf}
-    content={Object.values(data)
-      .map((value) => value)
-      .join(', ')}
-    id={'ConcatenatedUnNamedListRenderer'}
-  />
-);
-
 const isList = (data: List | string): boolean => typeof data !== 'string';
-const isNestedList = (data: List | NestedList): boolean => (Object.values(data).length > 0 ? isList(Object.values(data)[0]) : true);
-
-const TitleRenderer: React.FC<{ title: string; leftAlign?: boolean; isPdf: boolean }> = ({ title, leftAlign = true, isPdf }) => (
-  <div id={title} style={leftAlign ? styles.mainItemTitle : styles.mainItemTitleRight}>
-    <PDFDivText isPdf={isPdf} content={title} id={'title'} />
-    <div id={'aboveLine'} style={{ height: '10px' }} />
-    <div id={'line'} style={{ height: '4px', backgroundColor: '#000000' }} />
-    <div id={'underneathLine'} style={{ height: '10px' }} />
-  </div>
-);
-
-const SimpleDividingLine = () => (
-  <>
-    <div id={'aboveLine'} style={{ height: '7px' }} />
-    <div id={'line'} style={{ height: '1px', backgroundColor: '#000000' }} />
-    <div id={'underneathLine'} style={{ height: '7px' }} />
-  </>
-);
-
-const DividingSpace: React.FC<{ id?: string }> = ({ id }) => <div id={id ?? 'divider'} style={{ height: '3px' }} />;
-
-const SkillsRenderer: React.FC<{ skills: Skills; isPdf: boolean }> = ({ skills, isPdf }) => (
-  <div id={'skills'} style={styles.blockRight}>
-    <TitleRenderer title={'Skills'} leftAlign={false} isPdf={isPdf} />
-    {Object.entries(skills).map(([parentSkill, subSkills]) => (
-      <div id={parentSkill}>
-        <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
-        {Object.entries(subSkills).map(([parentSkill, subSkills]) => (
-          <div id={parentSkill} style={{ ...styles.skillsInsetRight, ...styles.skillSubTitle }}>
-            <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
-            {isNestedList(subSkills) ? (
-              Object.entries(subSkills as NestedList).map(([parentSkill, subSkills]) => (
-                <div id={'skills'} style={styles.skillsInsetRight}>
-                  <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
-                  <div id={'subSkills'} style={styles.skillsInsetRight}>
-                    <ConcatenatedUnNamedListRenderer data={subSkills} isPdf={isPdf} />
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div id={parentSkill} style={styles.skillsInsetRight}>
-                <UnNamedListRenderer data={subSkills as List} isPdf={isPdf} style={styles.skillsInsetRight} />
-              </div>
-            )}
-          </div>
-        ))}
-        <SimpleDividingLine />
-      </div>
-    ))}
-  </div>
-);
-
-const EducationRenderer: React.FC<{ education: Education; isPdf: boolean }> = ({ education, isPdf }) => (
-  <div id={'education'} style={styles.blockRight}>
-    <TitleRenderer title={'Education'} isPdf={isPdf} />
-    {Object.entries(education).map(([title, data]) => (
-      <div id={title}>
-        <div id={'name'} style={styles.section}>
-          <div id={'1'} style={styles.primaryItem}>
-            <PDFDivText isPdf={isPdf} content={`${data.name} `} id={data.name} />
-          </div>
-          <div id={'2'} style={styles.secondaryItem}>
-            <PDFDivText isPdf={isPdf} content={`- ${data.place}`} id={data.name} />
-          </div>
-        </div>
-        <div style={styles.regularItem}>
-          <PDFDivText isPdf={isPdf} content={`${data.date} - ${data.description}`} id={data.name} />
-        </div>
-        <DividingSpace />
-      </div>
-    ))}
-  </div>
-);
-
-const ExperienceRenderer: React.FC<{ experience: Experience; isPdf: boolean }> = ({ experience, isPdf }) => (
-  <div id={'experience'} style={styles.block}>
-    <TitleRenderer title={'Experience'} isPdf={isPdf} />
-    {Object.entries(experience)
-      .reverse()
-      .map(([title, data]) => (
-        <div id={title}>
-          <div id={'name'} style={styles.section}>
-            <div id={'1'} style={styles.primaryItem}>
-              <PDFDivText isPdf={isPdf} content={`${data.company} `} id={data.company} />
-            </div>
-            <div id={'2'} style={styles.secondaryItem}>
-              <PDFDivText isPdf={isPdf} content={` - ${data.location} - ${data.date}`} id={data.location} />
-            </div>
-          </div>
-          <div id={'regularItem'} style={styles.regularItem}>
-            <PDFDivText isPdf={isPdf} content={`${data.position} - ${data.role}`} id={data.position} />
-          </div>
-          <NamedListRenderer data={data.projects} isPdf={isPdf} />
-          <SimpleDividingLine />
-        </div>
-      ))}
-  </div>
-);
+export const isNestedList = (data: List | NestedList): boolean => (Object.values(data).length > 0 ? isList(Object.values(data)[0]) : true);
 
 // Create Document Component
-export const CVDocument: React.FC<{ data: CVData; isPdf: boolean }> = ({ data, isPdf }) => {
+export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
   const strokeWidth = 2;
   const ellipseHeight = 10;
   const ellipseSpacing = 70;
   const vBW = 150;
   const vBH = 15;
   const startTriangleWidth = 0.86 * ellipseHeight * 2;
-
-  console.log('I am not hot reloading am I?');
 
   const date = new Date();
   return (
@@ -304,18 +152,18 @@ export const CVDocument: React.FC<{ data: CVData; isPdf: boolean }> = ({ data, i
         </div>
         <div id={'section 1'} style={styles.section}>
           <div id={'left'} style={styles.left}>
-            <InfoRenderer info={data.info} isPdf={isPdf} />
+            <InfoRenderer info={data.info} isPdf />
           </div>
           <div id={'right'} style={styles.right}>
-            <EducationRenderer education={data.education} isPdf={isPdf} />
+            <EducationRenderer education={data.education} isPdf />
           </div>
         </div>
         <div id={'section 2'} style={styles.section}>
           <div id={'left'} style={styles.left}>
-            <SkillsRenderer skills={data.skills} isPdf={isPdf} />
+            <SkillsRenderer skills={data.skills} isPdf />
           </div>
           <div id={'right'} style={styles.right}>
-            <ExperienceRenderer experience={data.experience} isPdf={isPdf} />
+            <ExperienceRenderer experience={data.experience} isPdf />
           </div>
           <div id={'svg'}>
             <div>some text</div>
@@ -359,41 +207,3 @@ export const CVDocument: React.FC<{ data: CVData; isPdf: boolean }> = ({ data, i
     </Document>
   );
 };
-
-export const CVHTML: React.FC<{ data: CVData; isPdf: boolean }> = ({ data, isPdf }) => (
-  <div style={{ width: '650px', left: 'max(calc((100vw - 650px) * .5), 0px)', position: 'relative', top: '50px' }}>
-    <div id={'header'} style={styles.section}>
-      <div
-        id={'left'}
-        style={{
-          ...styles.left,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          width: '100%',
-          alignItems: 'top',
-          marginBottom: -30,
-        }}
-      >
-        <img style={{ width: 120, height: 120, borderRadius: 60 }} src={profileImage} />
-        <img style={{ width: 366, height: 77 }} src={logo} />
-      </div>
-    </div>
-    <div id={'section 1'} style={styles.section}>
-      <div id={'left'} style={styles.left}>
-        <InfoRenderer info={data.info} isPdf={isPdf} />
-      </div>
-      <div id={'right'} style={styles.right}>
-        <EducationRenderer education={data.education} isPdf={isPdf} />
-      </div>
-    </div>
-    <div id={'section 2'} style={styles.section}>
-      <div id={'left'} style={styles.left}>
-        <SkillsRenderer skills={data.skills} isPdf={isPdf} />
-      </div>
-      <div id={'right'} style={styles.right}>
-        <ExperienceRenderer experience={data.experience} isPdf={isPdf} />
-      </div>
-    </div>
-  </div>
-);

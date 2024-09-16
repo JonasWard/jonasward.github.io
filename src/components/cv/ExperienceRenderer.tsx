@@ -1,0 +1,31 @@
+import { Experience } from './cv.type';
+import { styles } from './CVDocument';
+import { PDFDivText } from './InfoRenderer';
+import { NamedListRenderer } from './NamedListRenderer';
+import { TitleRenderer } from './TitleRenderer';
+import { SimpleDividingLine } from './SimpleDividingLine';
+
+export const ExperienceRenderer: React.FC<{ experience: Experience; isPdf: boolean }> = ({ experience, isPdf }) => (
+  <div id={'experience'} style={styles.block}>
+    <TitleRenderer title={'Experience'} isPdf={isPdf} />
+    {Object.entries(experience)
+      .reverse()
+      .map(([title, data]) => (
+        <div id={title}>
+          <div id={'name'} style={styles.section}>
+            <div id={'1'} style={styles.primaryItem}>
+              <PDFDivText isPdf={isPdf} content={`${data.company} `} id={data.company} />
+            </div>
+            <div id={'2'} style={styles.secondaryItem}>
+              <PDFDivText isPdf={isPdf} content={` - ${data.location} - ${data.date}`} id={data.location} />
+            </div>
+          </div>
+          <div id={'regularItem'} style={styles.regularItem}>
+            <PDFDivText isPdf={isPdf} content={`${data.position} - ${data.role}`} id={data.position} />
+          </div>
+          <NamedListRenderer data={data.projects} isPdf={isPdf} />
+          <SimpleDividingLine />
+        </div>
+      ))}
+  </div>
+);
