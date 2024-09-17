@@ -27,7 +27,7 @@ const getColumnLogic = (allProjects: ProjectData[]): ProjectData[][] => {
 };
 
 export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
-  const [centerPosition, setCenterPosition] = useState<[number, number]>([115, window.innerHeight * 0.5]);
+  const [centerPosition, setCenterPosition] = useState<[number, number]>([0, window.innerHeight * 0.5]);
 
   const [positions, setPositions] = useState<ProjectData[][]>(getColumnLogic(projects));
   const [marginLeft, setMarginLeft] = useState<string>('calc((100vw - 216px) * 0.5)');
