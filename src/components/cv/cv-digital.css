@@ -30,7 +30,7 @@
 
   .header-grid {
     flex-direction: column-reverse;
-    gap: 10px;
+    gap: 20px;
   }
 
   .header-grid.div-1 {
