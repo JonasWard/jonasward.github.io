@@ -5,6 +5,7 @@ import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Keywords } from '../../../types/keywords/keywords';
 
 import lampsBoekentorenLogo from './assets/lamps/boekentorenLogo.png';
 import lampsBoekentorenInSitu from './assets/lamps/boekentorenInSitu.jpg';
@@ -33,9 +34,10 @@ const metaData: ProjectMetaData = {
   name: 'Lamps',
   projectType: ProjectCategory.Architecture,
   description: 'Table Lamp Designs',
-  keyImage: undefined,
-  projectContext: ProjectContext.Academic,
+  keyImage: lampsBoekentoren,
+  projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Solo,
+  keywords: [Keywords.DigitalFabrication, Keywords.Product],
 };
 
 export const lamps: ProjectData = {
@@ -45,15 +47,27 @@ export const lamps: ProjectData = {
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsBoekentorenLogo, lampsBoekentorenvBoekentoren, lampsBoekentoren, lampsBoekentorenInSitu].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsBoekentorenLogo, lampsBoekentoren].map((i) => createImage(i, '©️ J.W.')),
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsFrituurLogo, lampsFrituurSingle, lampsFrituurMultiple].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsBoekentorenvBoekentoren, lampsBoekentorenInSitu].map((i) => createImage(i, '©️ J.W.')),
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsMASLogo, lampsMAS1, lampsMAS2].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsFrituurLogo, lampsFrituurSingle].map((i) => createImage(i, '©️ J.W.')),
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [lampsFrituurMultiple].map((i) => createImage(i, '©️ J.W.')),
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [lampsMASLogo, lampsMAS1].map((i) => createImage(i, '©️ J.W.')),
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [lampsMAS2].map((i) => createImage(i, '©️ J.W.')),
     },
     {
       type: ProjectContentType.ImageGrid,
@@ -61,7 +75,11 @@ export const lamps: ProjectData = {
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsAntikabirLogo, lampsAntikabir3, lampsAntikabir1, lampsAntikabir2, lampsAntikabir4].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsAntikabirLogo, lampsAntikabir3].map((i) => createImage(i, '©️ J.W.')),
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [lampsAntikabir1, lampsAntikabir2, lampsAntikabir4].map((i) => createImage(i, '©️ J.W.')),
     },
   ],
 };
