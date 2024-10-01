@@ -4,6 +4,7 @@ import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
+import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
 import keyImage from './assets/the-city-is-art/theCityIsArt.jpg';
 import image1 from './assets/the-city-is-art/4K_VSL_a_b.jpg';
@@ -24,7 +25,7 @@ import image15 from './assets/the-city-is-art/VSL-3d-8.jpg';
 import image16 from './assets/the-city-is-art/VSL-3d-9.jpg';
 import image17 from './assets/the-city-is-art/VSL-3d-10.jpg';
 import image18 from './assets/the-city-is-art/VSL-3d-11.jpg';
-import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Keywords } from '../../../types/keywords/keywords';
 
 const id = '2020-01';
 
@@ -35,8 +36,9 @@ const metaData: ProjectMetaData = {
   projectType: ProjectCategory.Design,
   description: 'Digital Futures World 2020 Workshop',
   keyImage: keyImage,
-  projectContext: ProjectContext.Personal,
+  projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Solo,
+  keywords: [Keywords.AI],
 };
 
 const maxColumnCount = 2;
