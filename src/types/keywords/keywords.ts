@@ -1,5 +1,6 @@
 export enum Keywords {
   ThreeDPrinting = '3d-printing',
+  Product = 'product',
   Development = 'development',
   Ecology = 'ecology',
   Frontend = 'frontend',
@@ -11,4 +12,5 @@ export enum Keywords {
   Workshop = 'workshop',
   Timber = 'timber',
   Static = 'static',
+  AI = 'ai',
 }
