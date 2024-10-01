@@ -22,7 +22,7 @@ import futuristReferences from './assets/frituur-futurist/futuristReferences.jpg
 import futuristTitle from './assets/frituur-futurist/futuristTitle.png';
 import frituurReferences from './assets/frituur-futurist/frituurReferences.jpg';
 
-const id = '2017-01';
+const id = '2017-02';
 
 const metaData: ProjectMetaData = {
   id,
@@ -33,7 +33,7 @@ const metaData: ProjectMetaData = {
   keyImage: futuristTitle,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Team,
-  projectPartners: ['Jan Verstraete', 'Dominque Girolami'],
+  projectPartners: ['Jan Verstraete', 'Dominique Girolami'],
 };
 
 const maxColumnCount = 1;
