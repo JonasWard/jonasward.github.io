@@ -2,8 +2,12 @@
   position: relative;
   text-align: center;
   color: white;
-  width: 100%;
+  max-width: min(100%, 800px);
   margin: 0px auto;
+}
+
+.project-image.main-image {
+  max-width: 100%;
 }
 
 .project-image.main-image img {
@@ -40,6 +44,7 @@
 
 .project-image img {
   object-fit: cover;
+  max-width: 100%;
 }
 
 .center-center {
