@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     outDir: './build',
   },
-  base: '/portfolio/',
+  base: '/',
   resolve: {
     alias: {
       src: '/src',
