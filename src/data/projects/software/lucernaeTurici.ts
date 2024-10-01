@@ -68,7 +68,7 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.ThreeDPrinting],
+  keywords: [Keywords.ThreeDPrinting, Keywords.Product],
   projectPartners: [],
 };
 
@@ -77,32 +77,66 @@ export const lucernaeTurici: ProjectData = {
   metaData,
   projectImage: createTitleImage(projectImage, metaData.name, 1988, 2560),
   projectContent: [
-    createText(2, ['Lamp Configurator', 'Boiler Plate Lamp configurator text'], 'A bit more about the configurator', 'A bit more about the printing'),
+    createText(1, [
+      'Lamp Configurator',
+      'This project is the culmination of a whole bunch of preceding projects. A trajectory that started of with hand cut models had an intermediate stop at 2D CAD lasercut and 3D stl print files to reaching a first POC milestone in the beginning of 2024. A configurator for my life-long companion: Architectural Lamps.',
+    ]),
+    {
+      type: ProjectContentType.ExternalLink,
+      href: 'https://jonasward.github.io/lucernae-turici/',
+      alternativeName: 'you can try out the configurator on the GitHub pages deployment!',
+    },
     {
       type: ProjectContentType.ImageGrid,
       images: [projectImage, lamp1, lamp2, lamp3].map((i) => createImage(i, '©️ J.W.')),
     },
+
+    createText(1, [
+      'Initial Geometry Experiments',
+      'The lamp geometries consist of two main components: the architectural geometry and the shade. The architectural geometry is defined by three base parameters: the footprint, which includes the cell count and shape; the heights, which refer to the geometry of the cell grid; and the profile of the roof, which can vary from flat to elliptical, gothic arch, nested arch, and more. The shade, on the other hand, utilizes a signed distance field to achieve its design.',
+    ]),
     {
       type: ProjectContentType.ImageGrid,
-      images: [group1, group2, group3, group4].map((i) => createImage(i, '©️ J.W.')),
+      images: [group1, group2].map((i) => createImage(i, '©️ J.W.')),
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [form3, form4, form5, form6, form7, form8, form9, form10, form11, form12, form13, form20, form21, form22].map((i) => createImage(i, '©️ J.W.')),
+      images: [form3, form4, form5, form6].map((i) => createImage(i, '©️ J.W.')),
     },
+    createText(1, [
+      'Post Processing',
+      'As the process started to come along I decided to also try to see how far I could push the deformation of the geometries. Right now one can twist and scale the geoemtries along its z-axis',
+    ]),
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [group3, group4].map((i) => createImage(i, '©️ J.W.')),
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [form7, form8, form9, form10, form11, form12, form13, form20, form21, form22].map((i) => createImage(i, '©️ J.W.')),
+    },
+    createText(1, [
+      'Visualisation',
+      'The whole geometry is rendered in the browser with the help of BabylonJS and a variable paramteric model (using my url-safe-bitpacking library).',
+    ]),
     {
       type: ProjectContentType.ImageGrid,
       images: [config1, config2, config3, config4, config5, config6, config7, config8, config9, config10, config11, config12].map((i) =>
         createImage(i, '©️ J.W.')
       ),
     },
-    {
-      type: ProjectContentType.ImageGrid,
-      images: [print1, print2, print4, print5].map((i) => createImage(i, '©️ J.W.')),
-    },
+    createText(
+      1,
+      'To be sure the geometries are geometrically sound, I heavily constrain the topology of the geometries. All the cells in the end ar extruded prismas which are hollowed out. This makes it so that it is virtually impossible to have geometric inconsistenties'
+    ),
+
     {
       type: ProjectContentType.ImageGrid,
       images: [viewa, viewb, viewc].map((i) => createImage(i, '©️ J.W.')),
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [print1, print2, print4, print5].map((i) => createImage(i, '©️ J.W.')),
     },
     {
       type: ProjectContentType.ImageGrid,
