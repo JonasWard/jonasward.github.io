@@ -55,6 +55,7 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
 
   useEffect(() => {
     onScreenScale();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projects]);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
       window.removeEventListener('resize', onScreenScale);
       window.removeEventListener('scroll', onScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
