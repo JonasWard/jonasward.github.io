@@ -18,6 +18,7 @@ import { jokerweek } from './architecture/jokerweek';
 import { concreteChoreography } from './architecture/concreteChoreography';
 import { staufferStatic } from './software/staufferStatic';
 import { frituurFuturist } from './architecture/frituurFuturist';
+import { urlSafeBitpacker } from './software/urlSafeBitpacker';
 
 export const allProjects = [
   patternMachine,
@@ -40,4 +41,5 @@ export const allProjects = [
   concreteChoreography,
   staufferStatic,
   frituurFuturist,
+  urlSafeBitpacker,
 ].sort((a, b) => -a.id.localeCompare(b.id));
