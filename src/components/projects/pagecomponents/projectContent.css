@@ -96,6 +96,20 @@
   text-align: justify;
 }
 
+@media screen and (max-width: 750px) {
+  .text-block a {
+    font-size: 1rem;
+  }
+
+  .text-block p {
+    font-size: 1rem;
+  }
+
+  .text-block h2 {
+    font-size: 1rem;
+  }
+}
+
 .text-block.image {
   max-height: 100svh;
 }
