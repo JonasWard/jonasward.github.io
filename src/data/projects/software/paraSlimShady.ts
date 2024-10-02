@@ -28,7 +28,7 @@ const metaData: ProjectMetaData = {
   id,
   webstring: 'para-slim-shady',
   name: 'Santini at Home',
-  projectType: ProjectCategory.Software,
+  projectType: ProjectCategory.Design,
   description: 'POC for a browser based lamp configurator',
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
