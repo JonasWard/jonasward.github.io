@@ -19,6 +19,7 @@ import { concreteChoreography } from './architecture/concreteChoreography';
 import { staufferStatic } from './software/staufferStatic';
 import { frituurFuturist } from './architecture/frituurFuturist';
 import { urlSafeBitpacker } from './software/urlSafeBitpacker';
+import { napoliSotterana } from './urbanism/napolitSotterana';
 
 export const allProjects = [
   patternMachine,
@@ -42,4 +43,5 @@ export const allProjects = [
   staufferStatic,
   frituurFuturist,
   urlSafeBitpacker,
+  napoliSotterana,
 ].sort((a, b) => -a.id.localeCompare(b.id));
