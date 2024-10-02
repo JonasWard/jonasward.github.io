@@ -27,7 +27,7 @@ const metaData: ProjectMetaData = {
 export const urlSafeBitpacker: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage1, metaData.name, 1988, 2560),
+  projectImage: createTitleImage(projectImage1, metaData.name, 1748, 1262),
   projectContent: [
     createText(
       2,
