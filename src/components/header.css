@@ -32,12 +32,13 @@
 }
 
 .header-content {
-  width: min(100vw - 40px, 1408px + 40px);
-  padding: 0 20px 0 20px;
+  left: max(20px, calc((100vw - 1408px) * 0.5));
+  right: max(20px, calc((100vw - 1408px) * 0.5));
+  position: relative;
+  width: min(100vw - 40px, 1408px);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: auto;
   height: 60px;
   align-items: center;
 }
@@ -46,6 +47,7 @@
   position: relative;
   height: 100%;
   align-items: center;
+  transform: translateX(10px);
 }
 
 /* Style the header links */
