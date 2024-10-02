@@ -21,4 +21,9 @@ export enum Technologies {
   ROS = 'ROS',
   GRBL = 'GRBL',
   GCode = 'GCode',
+  Photoshop = 'Photoshop',
+  AutoCAD = 'AutoCAD',
+  Illustrator = 'Illustrator',
+  QGis = 'QGis',
+  DotNet = '.Net',
 }
