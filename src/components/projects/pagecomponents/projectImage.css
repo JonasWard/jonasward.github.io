@@ -107,6 +107,7 @@
   margin: 0px auto;
   color: white;
   font-weight: 300;
+  max-width: min(100%, 714px);
 }
 
 .image-grid-content img {
