@@ -40,7 +40,7 @@ export const urlSafeBitpacker: ProjectData = {
     ),
     {
       type: ProjectContentType.ExternalLink,
-      href: 'https://github.com/jonasward/url-safe-bitpacker',
+      href: 'https://github.com/JonasWard/url-safe-bitpacking',
       alternativeName: 'github rep',
     },
     {
