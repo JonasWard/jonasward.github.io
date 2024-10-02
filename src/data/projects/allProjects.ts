@@ -20,6 +20,7 @@ import { staufferStatic } from './software/staufferStatic';
 import { frituurFuturist } from './architecture/frituurFuturist';
 import { urlSafeBitpacker } from './software/urlSafeBitpacker';
 import { napoliSotterana } from './urbanism/napolitSotterana';
+import { digitaleAugen } from './software/digitaleAugen';
 
 export const allProjects = [
   patternMachine,
@@ -44,4 +45,5 @@ export const allProjects = [
   frituurFuturist,
   urlSafeBitpacker,
   napoliSotterana,
+  digitaleAugen,
 ].sort((a, b) => -a.id.localeCompare(b.id));
