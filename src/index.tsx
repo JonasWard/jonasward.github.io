@@ -12,6 +12,7 @@ import { HeaderWrapper } from './components/HeaderWrapper';
 import { ProjectRoutes } from './types/navigation/projectroutes';
 import { ProjectColorView } from './components/ColorConfig';
 import { allProjects } from './data/projects/allProjects';
+import { MotivationLetterGenerator } from './components/cv/MotivationLetterGenerator';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -29,6 +30,7 @@ root.render(
           <Route path={ProjectRoutes.Project} element={<HeaderWrapper children={<ProjectWrapper />} />} />
           <Route path={ProjectRoutes.Missing} element={<HeaderWrapper children={<Missing />} />} />
           <Route path={ProjectRoutes.Colors} element={<HeaderWrapper children={<ProjectColorView />} />} />
+          <Route path={ProjectRoutes.CreateMotivationLetter} element={<HeaderWrapper children={<MotivationLetterGenerator />} />} />
         </Routes>
       </div>
     </Router>

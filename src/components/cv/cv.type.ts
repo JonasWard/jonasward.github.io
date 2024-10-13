@@ -2,6 +2,8 @@ export type Info = {
   name: string;
   firstName: string;
   placeOfBirth: string;
+  citizenship: string;
+  titles: string;
   dateOfBirth: string;
   telephone: string;
   email: string;
@@ -25,10 +27,10 @@ export type Experience = {
   role: string;
   date: string;
   location: string;
-  projects: { [key: string]: string };
+  projects: { [key: string]: string | [string, string] };
 }[];
 
-export type List = { [key: string]: string } | string[];
+export type List = { [key: string]: string | [string, string] } | string[];
 export type NestedList = { [key: string]: List };
 
 export type Skills = { [key: string]: { [key: string]: List | NestedList } };

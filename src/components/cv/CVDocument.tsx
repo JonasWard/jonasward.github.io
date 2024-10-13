@@ -1,4 +1,4 @@
-import { Page, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
+import { Page, Document, StyleSheet, Font, Image, Text } from '@react-pdf/renderer';
 import { CVData, List, NestedList } from './cv.type';
 import logo from 'src/assets/jonasward_logo_elong.png';
 import profileImage from 'src/assets/pictures/profilePicture-crop.jpg';
@@ -10,6 +10,7 @@ import { ExperienceRenderer } from './ExperienceRenderer';
 import { EducationRenderer } from './EducationRenderer';
 import { SkillsRenderer } from './SkillsRenderer';
 import { InfoRenderer } from './InfoRenderer';
+import { ExtraCurricularRenderer } from './ExtraCurricularRenderer';
 
 Font.register({
   family: 'Montserrat',
@@ -98,14 +99,14 @@ export const styles = StyleSheet.create({
     textAlign: 'right',
   },
   skillsInset: {
-    margin: '3.5px 12px 3.5px 0px',
+    padding: '3.5px 8px 3.5px 0px',
     fontSize: 9,
     fontWeight: 400,
     fontStyle: 'italic',
     textAlign: 'left',
   },
   skillsInsetRight: {
-    margin: '3.5px 12px 3.5px 0px',
+    padding: '3.5px 8px 3.5px 0px',
     fontSize: 9,
     fontWeight: 400,
     fontStyle: 'italic',
@@ -122,17 +123,10 @@ export const isNestedList = (data: List | NestedList): boolean => (Object.values
 
 // Create Document Component
 export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
-  const strokeWidth = 2;
-  const ellipseHeight = 10;
-  const ellipseSpacing = 70;
-  const vBW = 150;
-  const vBH = 15;
-  const startTriangleWidth = 0.86 * ellipseHeight * 2;
-
   const date = new Date();
   return (
     <Document title={`JonasWard_CV_${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.pdf`}>
-      <Page size='A4' style={styles.page}>
+      <Page dpi={90} size='A4' style={styles.page}>
         <div id={'header'} style={styles.section}>
           <div
             id={'left'}
@@ -146,8 +140,8 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
               marginBottom: -30,
             }}
           >
-            <Image style={{ width: 104, height: 104, borderRadius: 52 }} src={profileImage} />
-            <Image style={{ width: 285, height: 60 }} src={logo} />
+            <Image style={{ width: 114, height: 114, borderRadius: 57 }} src={profileImage} />
+            <Image style={{ width: 375, height: 79 }} src={logo} />
           </div>
         </div>
         <div id={'section 1'} style={styles.section}>
@@ -164,45 +158,23 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
           </div>
           <div id={'right'} style={styles.right}>
             <ExperienceRenderer experience={data.experience} isPdf />
-          </div>
-          <div id={'svg'}>
-            <div>some text</div>
-            {/* <svg viewBox={`0 0 ${vBW}px ${vBH}px`}>
-              <polygon
-                points={`0,0 ${0.86 * ellipseHeight * 2},${ellipseHeight} ${0},${ellipseHeight * 2}`}
-                fill='white'
-                stroke='red'
-                strokeWidth={strokeWidth}
-              />
-              <ellipse
-                cx={startTriangleWidth + ellipseHeight}
-                cy={ellipseHeight}
-                rx={ellipseHeight}
-                ry={ellipseHeight}
-                fill='white'
-                stroke='red'
-                strokeWidth={strokeWidth}
-              />
-              <line
-                x1={startTriangleWidth + ellipseHeight * 2}
-                y1={ellipseHeight}
-                x2={startTriangleWidth + ellipseSpacing - ellipseHeight}
-                y2={ellipseHeight}
-                stroke='red'
-                strokeWidth={strokeWidth}
-              />
-              <ellipse
-                cx={startTriangleWidth + ellipseSpacing}
-                cy={ellipseHeight}
-                rx={ellipseHeight}
-                ry={ellipseHeight}
-                fill='white'
-                stroke='red'
-                strokeWidth={strokeWidth}
-              />
-            </svg> */}
+            <div style={{ height: '20px', width: '100%' }} />
+            <ExtraCurricularRenderer data={data.extraCurricular} isPdf />
           </div>
         </div>
+        <Text
+          style={{ position: 'absolute', bottom: 30, right: 0, left: 0, textAlign: 'center', fontSize: 10 }}
+          render={({ pageNumber, totalPages }) =>
+            pageNumber === totalPages && (
+              <>
+                {`Created on ${date.getFullYear()}.${date.getMonth()}.${date.getDate()}. `}
+                <a style={{ textDecoration: 'underline' }} href='https://jonasward.eu/#/cv'>
+                  jonasward.eu/#/cv
+                </a>
+              </>
+            )
+          }
+        />
       </Page>
     </Document>
   );

@@ -1,4 +1,4 @@
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import './cv.css';
 import { CVDocument } from './CVDocument';
 import cv from './cv.json';
@@ -16,10 +16,13 @@ export const CV = () => {
         document={<CVDocument data={cv as any as CVData} />}
       >
         <div className='cv-download-link'>
-          <img src={printer} />
+          <img src={printer} alt='red-dot' />
           <span>Download</span>
         </div>
       </PDFDownloadLink>
+      <PDFViewer style={{ height: 'calc(100vh - 150px)' }}>
+        <CVDocument data={cv as any as CVData} />
+      </PDFViewer>
       <CVHTML data={cv as any as CVData} />
     </div>
   );

@@ -4,14 +4,15 @@ import { PDFDivText } from './InfoRenderer';
 import { NamedListRenderer } from './NamedListRenderer';
 import { TitleRenderer } from './TitleRenderer';
 import { SimpleDividingLine } from './SimpleDividingLine';
+import { View } from '@react-pdf/renderer';
 
 export const ExperienceRenderer: React.FC<{ experience: Experience; isPdf: boolean }> = ({ experience, isPdf }) => (
   <div id={'experience'} style={styles.block}>
     <TitleRenderer title={'Experience'} isPdf={isPdf} />
     {Object.entries(experience)
       .reverse()
-      .map(([title, data]) => (
-        <div id={title}>
+      .map(([title, data], i, array) => (
+        <View wrap={false} id={title}>
           <div id={'name'} style={styles.section}>
             <div id={'1'} style={styles.primaryItem}>
               <PDFDivText isPdf={isPdf} content={`${data.company} `} id={data.company} />
@@ -24,8 +25,8 @@ export const ExperienceRenderer: React.FC<{ experience: Experience; isPdf: boole
             <PDFDivText isPdf={isPdf} content={`${data.position} - ${data.role}`} id={data.position} />
           </div>
           <NamedListRenderer data={data.projects} isPdf={isPdf} />
-          <SimpleDividingLine />
-        </div>
+          {i < array.length - 1 ? <SimpleDividingLine /> : null}
+        </View>
       ))}
   </div>
 );

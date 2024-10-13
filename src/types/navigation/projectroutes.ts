@@ -10,4 +10,5 @@ export enum ProjectRoutes {
   AnyProject = '/project',
   Missing = '*',
   Colors = '/colors',
+  CreateMotivationLetter = '/create-motivation-letter',
 }

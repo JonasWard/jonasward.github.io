@@ -2,22 +2,24 @@
   "info": {
     "name": "Van den Bulcke",
     "firstName": "Jonas Ward",
+    "titles": "IR arch. MAS ETH",
+    "citizenship": "Belgian, Swiss B-permit (EU-citizen), Brazilian",
     "placeOfBirth": "Rio de Janeiro, BR",
     "dateOfBirth": "08.12.1991",
     "telephone": "+41 76 232 76 27",
     "email": "jonas.vandenbulcke@gmail.com",
-    "website": "jonasward.ch",
-    "github": "github.com/jonasward",
-    "linkedin": "linkedin.com/in/jonasward",
+    "website": ["https://jonasward.eu", "jonasward.eu"],
+    "github": ["https://github.com/jonasward", "github.com/jonasward"],
+    "linkedin": ["https://linkedin.com/in/wardjonas", "linkedin.com/in/wardjonas"],
     "addressLine1": "Käferholzstrasse 46, 8057, Zürich, CH",
     "addressLine2": "Schoonmeersstraat 29, 9000, Gent, BE"
   },
   "education": [
     {
-      "name": "UGent",
-      "place": "Ghent, Belgium",
-      "date": "2010 - 2015",
-      "description": "Master of Science in Architecture and Engineering"
+      "name": "ETH Zürich",
+      "place": "Zürich, Switzerland",
+      "date": "2018 - 2019",
+      "description": "Master of Advanced Studies in Digital Fabrication"
     },
     {
       "name": "TUM",
@@ -26,28 +28,13 @@
       "description": "Master of Science in Architecture and Urban Design"
     },
     {
-      "name": "ETH Zürich",
-      "place": "Zürich, Switzerland",
-      "date": "2018 - 2019",
-      "description": "Master of Advanced Studies in Digital Fabrication"
+      "name": "UGent",
+      "place": "Ghent, Belgium",
+      "date": "2010 - 2015",
+      "description": "Master of Science in Architecture and Engineering"
     }
   ],
   "experience": [
-    {
-      "company": "Jonas Ward",
-      "position": "freelance",
-      "role": "Modelbuilder & Design Consultation",
-      "date": "2012 - 2018",
-      "location": "Ghent, BE; Zürich, CH",
-      "projects": {
-        "Stephane Beel architecten": "2013 - Bierpaleis, Brussels",
-        "Architectuur Atelier Ambiorix": "2014 - Rivierenhof, Antwerp",
-        "L.U.S.T - architecten": "2015 - Parking Ledeberg, Ghent",
-        "Dierendonck-Blancke architecten": "2016 - Leopolds Kazerne, Ghent",
-        "Poot Architectuur": "2017 - WAZ Wevelgem, Wevelgem",
-        "Museum M - Leuven": "2018 - Familie Arenberg, Leuven"
-      }
-    },
     {
       "company": "B-Architecten",
       "position": "Junior Architect",
@@ -55,8 +42,13 @@
       "date": "2017 - 2018",
       "location": "Antwerp, BE",
       "projects": {
-        "Mundo-A": "planningphase and construction site manage- ment for ecological office building constructed out of CLT (ARC19 Architecture Award, winner)",
         "Pelikaanstraat": "masterplanning project for high rise development in the area of Antwerpen Centraal",
+        "Mundo-A": [
+          "https://jonasward.eu/#/project/mundo-a",
+          "planningphase and construction site manage- ment for ecological office building constructed out of CLT (ARC19 Architecture Award, winner)"
+        ]
+      },
+      "projectsNoShow": {
         "Turnova": "masterplanning and heritage concept for a highrise development on a brownfield of historic significance in the city of Turnhout"
       }
     },
@@ -64,19 +56,34 @@
       "company": "Jonas Ward",
       "position": "self-employed",
       "role": "Design",
-      "date": "2017 - now",
+      "date": "2013 - now",
       "location": "Ghent, BE; Zürich, CH",
       "projects": {
-        "Boekentoren": "2017 - Bedsidetable lamp of the UGent 's central library tower the \"Boekentoren\" by Henry Van de Velde",
-        "Frietkot": "2017 - Competion on the Frietkot in Brussels for a new iconic frying house for Brussels, sending in an out of CLT constructed proposal inspired by Expo ‘58 Philips pavilion and the typical Belgian \"Frietzak\". Collaboration with Jan Verstraete & Dominque Girolami - honorary mention.",
-        "Elbe Bienen": "2019 - 21st century beehive blending biology, informatics to help curb mass starvation due to air pollution. Design made for Brussels based artist Anne- marie Maes, funded through Hamburg Machine. In collaboration with Die Angewandte Wien. Funded by Flemish Government and Hamburg Stadskuratorerin.",
-        "MAS": "2018 - Bedsidetable lamp of Antwerp's antropological museum the \"Museum aan de Stroom\" by Neutelings Riedyck Architecten",
-        "Anitkabir": "2018 - Bedsidetable lamp of the mausoleum of Mustafa Kemal Atatürk in Ankara by Emin Halid Onat and Ahmet Orhan Arda",
-        "Quadrato della Civilta": "2018 - Bedsidetable lamp of the \"Square Colosseum\" in Rome by Giovanni Guerrini, Ernesto Bruno La Padula and Mario Romano",
+        "SDF Scarves": [
+          "https://jonasward.eu/#/project/scarves",
+          "2022-2024 - series of SDF based scarves, design informed by overlaying and scaling different TPMSs with one another, patterns generated using a browser based pattern generator"
+        ],
         "Sensing a Place": "2022 - in-situ 3d printing of clay using the material of the site, design informed by hearing, feeling, seeing. In collaboration with Berlin based artists Joana Schmitz & Leon Kilbert. Funded by an European Horizon 2020 Grant.",
-        "SDF Scarves": "2022-2024 - series of SDF based scarves, design informed by overlaying and scaling different TPMSs with one another, patterns generated using a browser based pattern generator",
-        "Julierturm": "2023 - Bedsidetable lamp of the \"Julier Tower\" in the Swiss Alps by Giovanni Netzer",
-        "ETH Hauptgebäude": "2023 - Bedsidetable lamp of the \"ETH Hauptgebäude\" in Zürich by Gottfried Semper"
+        "Elbe Bienen": [
+          "https://jonasward.eu/#/project/guerilla-beehive",
+          "2019 - 21st century beehive blending biology, informatics to help curb mass starvation due to air pollution. Design made for Brussels based artist Anne- marie Maes, funded through Hamburg Machine. In collaboration with Die Angewandte Wien. Funded by Flemish Government and Hamburg Stadskuratorerin."
+        ],
+        "Frituur Futurist": [
+          "https://jonasward.eu/#/project/futurist",
+          "2017 - Competion on the Frietkot in Brussels for a new iconic frying house for Brussels, sending in an out of CLT constructed proposal inspired by Expo ‘58 Philips pavilion and the typical Belgian \"Frietzak\". Collaboration with Jan Verstraete & Dominque Girolami - honorary mention."
+        ],
+        "Boekentoren": [
+          "https://jonasward.eu/#/project/lamps",
+          "2017 - Bedsidetable lamp of the UGent 's central library tower the \"Boekentoren\" by Henry Van de Velde"
+        ],
+        "Architectuur Atelier Ambiorix": "2014 - Rivierenhof, Antwerp, modelbuilding",
+        "Stephane Beel architecten": "2013 - Bierpaleis, Brussels, modelbuilding"
+      },
+      "projectsNoShow": {
+        "L.U.S.T - architecten": "2015 - Parking Ledeberg, Ghent",
+        "Dierendonck-Blancke architecten": "2016 - Leopolds Kazerne, Ghent",
+        "Poot Architectuur": "2017 - WAZ Wevelgem, Wevelgem",
+        "Museum M - Leuven": "2018 - Familie Arenberg, Leuven"
       }
     },
     {
@@ -86,20 +93,24 @@
       "date": "2019 - 2020",
       "location": "Zürich, Switzerland",
       "projects": {
-        "Proptech KPI & Digitization": "Building POCs for solving topological issues in mesh divisions with shapely, IFC handling using ifcopenshell.",
-        "Swiss Dwelling Dataset": "QA of data inputed by subcontracters"
+        "Swiss Dwelling Dataset": "Proptech KPI & Digitization, Building POCs for solving topological issues in mesh divisions with shapely, IFC handling using ifcopenshell. QA of data inputed by subcontracters"
       }
     },
     {
       "company": "rrreefs",
-      "position": "Developer",
+      "position": "Consultant",
       "role": "design and fabrication strategy",
       "date": "2019 - 2022",
       "location": "Zürich, Switzerland",
       "projects": {
-        "Coral Voxels": "concrete binderjetted continuation of the Modules project with SDF based designs. In collaboration with Netherlands based 3d printing engineer Nadia Fani. Funded by an European Horizon 2020 Grant.",
-        "Modules": "3d printed clay structures that function as preservative art. They help keeping corals thriving despite rising ocean temperatures and acidification. Test in maldives, real prototype will be installed in San Andrea, Colombia summer 2021. Funded by crowdfunding on WeMakeIt & ETH Library Lab. - Awarded with the Hochparterre Golder Hase 2021",
-        "clay-online": "Web configurator for the modules brick using babylon.js."
+        "Modules": [
+          "https://jonasward.eu/#/project/coral-bricks",
+          "3d printed clay structures that function as preservative art. They help keeping corals thriving despite rising ocean temperatures and acidification. Test in maldives, real prototype will be installed in San Andrea, Colombia summer 2021. Funded by crowdfunding on WeMakeIt & ETH Library Lab. - Awarded with the Hochparterre Golder Hase 2021"
+        ],
+        "clay-online": ["https://jonasward.eu/clay-online/", "Web configurator for the modules brick using babylon.js."]
+      },
+      "projectsNoShow": {
+        "Coral Voxels": "concrete binderjetted continuation of the Modules project with SDF based designs. In collaboration with Netherlands based 3d printing engineer Nadia Fani. Funded by an European Horizon 2020 Grant."
       }
     },
     {
@@ -110,8 +121,14 @@
       "location": "Konstanz, Germany",
       "projects": {
         "stoHome": "POC using CityGML datasets, point cloud scans and pictures with machine learning models (such as LR, MLP, pix2pix, SVP) for accurately reading and predicting wall surface area compositions of houses in the context of UGDs remodelling tool stoHome",
-        "Digitale Augen": "POC tool for simulating and quantifying human perception of architecture through vector math using cloud scans analysis and computer vision techniques in the context of UGDs project Digital Augen, prototyped with gh C# components and currently being ported to Unity using shaders and integrating OpenCV",
+        "Digitale Augen": [
+          "https://jonasward.eu/#/project/digitale-augen",
+          "POC tool for simulating and quantifying human perception of architecture through vector math using cloud scans analysis and computer vision techniques in the context of UGDs project Digital Augen, prototyped with gh C# components and currently being ported to Unity using shaders and integrating OpenCV"
+        ],
         "Haworth CoDesigner": "Evolutionary Algorithm based automatic planning tool for American furniture company Haworth. Built a lightweight CAD database using the JTS framework for a cloud based 2D drawing tool. developed and implemented various space syntax algorithms for interior and urban space analysis; worked on reading out and commu- nicating with infrared sensors for anonymous space occupation analysis",
+        "Alcubond Facademaker": "Panelizer visualisation tool for 3A's Alcubond CNC'ed and folded panels"
+      },
+      "projectsNoShow": {
         "INTEGRAL": "automatic acoustic panel planning tool in PCon Planner using IFC and OFML data, prototyping using ghPython and Rhino Common"
       }
     },
@@ -122,8 +139,11 @@
       "date": "2022 - now",
       "location": "Zürich, Switzerland",
       "projects": {
-        "Haas House Configurator": "a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser",
-        "Stauffer Statics": "a cloud-based static analysis tool for timber contractors",
+        "Haas House Configurator": [
+          "https://jonasward.eu/#/project/haas-haus-configurator",
+          "a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser"
+        ],
+        "Stauffer Statics": ["https://jonasward.eu/#/project/stauffer-static", "a cloud-based static analysis tool for timber contractors"],
         "Rewe co-co": "a web based supermarket and vertical farming configurator"
       }
     }
@@ -133,85 +153,69 @@
       "languages": ["Dutch - C2", "English - C1", "German - B2", "French - B2"]
     },
     "digital": {
-      "languages": {
-        ".ts/.js/.html/.css": [
-          "node",
-          "react",
-          "turbo",
-          "vite",
-          "mongodb",
-          "firebase",
-          "next.js",
-          "scss",
-          "tailwind",
-          "glsl",
-          "babylon.js",
-          "three.js",
-          "pixi.js",
-          "react-pdf"
-        ],
-        ".py": [
-          "numpy",
-          "pandas",
-          "scipy",
-          "matplotlib",
-          "openCV",
-          "tensorflow",
-          "sklearn",
-          "pytorch",
-          "Rhino/Grasshopper",
-          "blender",
-          "processing",
-          "ifcOpenShell",
-          "GeoPython",
-          "shapely"
-        ],
-
-        "#c": ["Unity", "Rhino/Grasshopper", "mono", "WPF"],
-        "java": ["spring boot", "JTS", "gradle", "openCV", "AWT", "processing"],
-        "rust": ["wasm", "wgpu", "leptos"],
-        ".cpp": ["cgal"],
-        "other": ["UR-script", "bash", "GCode", "julia"]
+      "web dev": {
+        "languages": [".ts", ".js", "wasm (C#, rust)", "java", "python"],
+        "react": ["react-pdf", "redux", "zustand", "react-router", "next.js"],
+        "styling": ["css", "sass", "tailwind", "scss", "MUI", "antd", "bootstrap"],
+        "dev": ["npm", "yarn", "bun", "vite", "turbo", "docker"],
+        "database": ["mongodb", "firebase", "supabase", "prisma", "mysql"],
+        "backend": ["node", "express", "springboot", "flask"],
+        "webGL": ["glsl", "threejs", "babylonjs", "pixi.js", "svg"],
+        "other": ["leaflet", "IFCjs", "axios", "tensorflowjs", "onnxjs"]
       },
+      ".py": {
+        "geography": ["GDAL", "GeoPython", "GeoPandas", "shapely", "qgis scripting"],
+        "geometry": ["blender", "Rhino/Grasshopper", "processing", "ifcOpenShell", "shapely", "cgal (bindings)", "processing"],
+        "analysis": ["numpy", "pandas", "scipy", "matplotlib", "openCV", "sklearn", "tensorflow", "pytorch"]
+      },
+      "#c": ["Unity, Rhino/Grasshopper, mono, WPF"],
+      "java": ["spring boot, JTS, gradle, openCV, AWT, processing"],
+      "rust": ["wasm, wgpu, leptos"],
+      "other": ["go, julia, GCode, UR-script"],
       "software": {
-        "development": ["git", "docker", "VSCode", "mongodb", "postgresql", "JetBrains", "Jupyter / Colab", "Paperspace", "Asana"],
-        "caad": ["AutoCAD", "Revit", "Rhinoceros 3D / Grasshopper", "ArchiCAD", "Blender", "QGIS"],
-        "markup": [
-          "InDesign",
-          "Illustrator / Inkscape",
-          "Photoshop / Photopea",
-          "iWork / Office / google suite",
-          "Midjourney",
-          "Figma",
-          "Sketch",
-          "qlab",
-          "processing"
-        ],
+        "code-editors": ["VSCode", "JetBrains", "VisualStudio", "Jupyter / Colab"],
+        "development-tools": ["git", "bash", "MongoDB compass", "docker", "github", "gitlab"],
+        "markup": ["InDesign", "Illustrator / Inkscape", "Photoshop", "iWork / Office / google suite", "Midjourney", "Figma", "Sketch"],
+        "urban planning": ["QGIS", "maptiler", "AutoCAD"],
+        "caad": ["Rhinoceros 3D / Grasshopper", "Revit", "ArchiCAD", "AutoCAD", "Blender"],
         "rapidPrototyping": ["Arduino", "GRBL", "ABB-robot-suite", "Prusa Slice", "Autodesk Fusion", "Cura", "ideaMaker", "Fusion 360"]
       }
     },
-    "material": {
+    "physical": {
       "digital fabrication": ["CNC Milling", "Laser Cutting", "3D Printing", "robotic path planning", "digital kniting"],
+      "3d-printing": ["FDM", "sand", "binder-jet", "glass (fusing)", "clay", "concrete", "chocolate", "sugar"],
       "ceramics": ["slip casting", "turning table", "glazing"],
-      "glass": ["fusing", "grading", "color mixing"],
-      "modelbuilding": ["laser cutting - paper, wood, PMMA", "3d printing - pla, abs, petg", "cnc milling - wood, EPS", "ceramics"],
-      "3d-printing": ["FDM", "san", "binder-jet", "glass", "clay", "concrete", "chocolate", "sugar"]
+      "modelbuilding": ["laser cutting - paper, wood, PMMA", "3d printing - pla, abs, petg", "cnc milling - wood, EPS", "ceramics"]
     }
   },
   "extraCurricular": {
+    "url-safe-bitpacking": ["https://jonasward.eu/#/project/url-safe-bitpacker", "2024 - open source bitpacking library for complicated parametric models"],
+    "AEC Hackathon - Copenhagen": "2024 - Open Detail (LCA detail database) - Innovation Price",
+    "AEC Hackathon - Zürich": ["https://jonasward.eu/#/project/para-slim-shady", "2024 - Santini at home Lamp Configurator"],
+    "Hackathon Kosmos Klee": "2023 - Art as a message board",
+    "open3D": "2023 -contributed to a typescript open source 3D geometry library based on the Rhinoceros 3D syntax",
     "craft talks UGD": "2020 - 2021 organizer of internal lectures by colleagues for colleagues",
-    "digital futures world - deep design": "2020 - Neural Style Transfers for Urbanism, taught by Alexandra Carlson & Matias del Campo",
+    "digital futures world - deep design": [
+      "https://jonasward.eu/#/project/the-city-is-art",
+      "2020 - Neural Style Transfers for Urbanism, taught by Alexandra Carlson & Matias del Campo"
+    ],
     "bc-architects - rammed earth": "2019 - Preparing and building with rammed earth , taught by Ken De Cooman",
     "samen voor singles": "2018 - Poster design for SPa Gent’s campaign for the communal elections",
-    "history under the dust - Lodz": "2016 - Summercourse on Urban Revitalization in Polish 19th century industrial city Lodz",
+    "history under the dust - Łodz": "2016 - Summercourse on Urban Revitalization in Polish 19th century industrial city Lodz",
     "jokerweek - BOX office": "2015 - Workshop week organised for bachelor students - coordination & head of scenography",
     "palimpsestuous Napoli - urban": "2014 - Springcourse on Urban Revitalization of the historic city centre of Napels",
     "design DLK - lunch lectures": "2014-2015 - Organizer of lunch lectures introducing students to the work of their teachers",
     "DLK - after hour student event": " 2010-2015 - Organizer of many drinks, parties and social occasions"
   },
+  "extraCurricularBis": {},
   "pipeline": {
     "Kunsthaus": "Bedsidetable lamp of the \"Kunsthaus\" in Zürich by Karl Moser",
     "Frauenkirche": "Bedsidetable lamp of the \"Frauenkirche\" in Zürich by Hans Auer",
-    "Belfort": "Bedsidetable lamp of the Belfry of Ghent by Arthur Verhaegen"
+    "Belfort": "Bedsidetable lamp of the Belfry of Ghent by Arthur Verhaegen",
+    "MAS": "2018 - Bedsidetable lamp of Antwerp's antropological museum the \"Museum aan de Stroom\" by Neutelings Riedyck Architecten",
+    "Anitkabir": "2018 - Bedsidetable lamp of the mausoleum of Mustafa Kemal Atatürk in Ankara by Emin Halid Onat and Ahmet Orhan Arda",
+    "Quadrato della Civilta": "2018 - Bedsidetable lamp of the \"Square Colosseum\" in Rome by Giovanni Guerrini, Ernesto Bruno La Padula and Mario Romano",
+    "ETH Hauptgebäude": "2023 - Bedsidetable lamp of the \"ETH Hauptgebäude\" in Zürich by Gottfried Semper",
+    "Julierturm": "2023 - Bedsidetable lamp of the \"Julier Tower\" in the Swiss Alps by Giovanni Netzer"
   }
 }
