@@ -20,9 +20,6 @@ export const CV = () => {
           <span>Download</span>
         </div>
       </PDFDownloadLink>
-      <PDFViewer style={{ height: 'calc(100vh - 150px)' }}>
-        <CVDocument data={cv as any as CVData} />
-      </PDFViewer>
       <CVHTML data={cv as any as CVData} />
     </div>
   );
