@@ -125,7 +125,7 @@ export const isNestedList = (data: List | NestedList): boolean => (Object.values
 export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
   const date = new Date();
   return (
-    <Document title={`JonasWard_CV_${date.getFullYear()}-${date.getMonth()}-${date.getDay()}.pdf`}>
+    <Document title={`Van_den_Bulcke_Jonas-CV-${date.getFullYear()}-${date.getUTCMonth()}-${date.getDate()}.pdf`}>
       <Page dpi={90} size='A4' style={styles.page}>
         <div id={'header'} style={styles.section}>
           <div
@@ -167,7 +167,7 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
           render={({ pageNumber, totalPages }) =>
             pageNumber === totalPages && (
               <>
-                {`Created on ${date.getFullYear()}.${date.getMonth()}.${date.getDate()}. `}
+                {`Created on ${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}. `}
                 <a style={{ textDecoration: 'underline' }} href='https://jonasward.eu/#/cv'>
                   jonasward.eu/#/cv
                 </a>
