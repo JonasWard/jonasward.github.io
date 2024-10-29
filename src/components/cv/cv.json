@@ -36,23 +36,6 @@
   ],
   "experience": [
     {
-      "company": "B-Architecten",
-      "position": "Junior Architect",
-      "role": "Competions Design & Construction Management",
-      "date": "2017 - 2018",
-      "location": "Antwerp, BE",
-      "projects": {
-        "Pelikaanstraat": "masterplanning project for high rise development in the area of Antwerpen Centraal",
-        "Mundo-A": [
-          "https://jonasward.eu/#/project/mundo-a",
-          "planningphase and construction site manage- ment for ecological office building constructed out of CLT (ARC19 Architecture Award, winner)"
-        ]
-      },
-      "projectsNoShow": {
-        "Turnova": "masterplanning and heritage concept for a highrise development on a brownfield of historic significance in the city of Turnhout"
-      }
-    },
-    {
       "company": "Jonas Ward",
       "position": "self-employed",
       "role": "Design",
@@ -93,7 +76,7 @@
       "date": "2019 - 2020",
       "location": "Zürich, Switzerland",
       "projects": {
-        "Swiss Dwelling Dataset": "Proptech KPI & Digitization, Building POCs for solving topological issues in mesh divisions with shapely, IFC handling using ifcopenshell. QA of data inputed by subcontracters"
+        "Swiss Dwelling Dataset": "Proptech KPI & Digitization, Building POCs for solving topological issues in mesh divisions with shapely, IFC handling using ifcopenshell. QA of data inputed by subcontracters. QA with pandas, numpy"
       }
     },
     {
@@ -120,16 +103,17 @@
       "date": "2020 - 2022",
       "location": "Konstanz, Germany",
       "projects": {
-        "stoHome": "POC using CityGML datasets, point cloud scans and pictures with machine learning models (such as LR, MLP, pix2pix, SVP) for accurately reading and predicting wall surface area compositions of houses in the context of UGDs remodelling tool stoHome",
+        "": "larger projects were SCRUM based, much individual work, ",
+        "stoHome": "POC using CityGML datasets, point cloud scans and pictures with machine learning models (such as LR, MLP, pix2pix, SVP) for accurately reading and predicting wall surface area compositions of houses in the context of UGDs remodelling tool stoHome. Prototyping with python, trained models used on web with tensorflowjs.",
         "Digitale Augen": [
           "https://jonasward.eu/#/project/digitale-augen",
           "POC tool for simulating and quantifying human perception of architecture through vector math using cloud scans analysis and computer vision techniques in the context of UGDs project Digital Augen, prototyped with gh C# components and currently being ported to Unity using shaders and integrating OpenCV"
         ],
-        "Haworth CoDesigner": "Evolutionary Algorithm based automatic planning tool for American furniture company Haworth. Built a lightweight CAD database using the JTS framework for a cloud based 2D drawing tool. developed and implemented various space syntax algorithms for interior and urban space analysis; worked on reading out and commu- nicating with infrared sensors for anonymous space occupation analysis",
+        "Haworth CoDesigner": "Evolutionary Algorithm based automatic planning tool for American furniture company Haworth. Built a lightweight CAD database using the JTS framework for a cloud based 2D drawing tool. developed and implemented various space syntax algorithms for interior and urban space analysis; worked on reading out and commu- nicating with infrared sensors for anonymous space occupation analysis. Hosted on Azure",
         "Alcubond Facademaker": "Panelizer visualisation tool for 3A's Alcubond CNC'ed and folded panels"
       },
       "projectsNoShow": {
-        "INTEGRAL": "automatic acoustic panel planning tool in PCon Planner using IFC and OFML data, prototyping using ghPython and Rhino Common"
+        "INTEGRAL": "automatic acoustic panel planning tool in PCon Planner using IFC and OFML data, prototyping using ghPython and Rhino Common. .Net Project"
       }
     },
     {
@@ -139,12 +123,17 @@
       "date": "2022 - now",
       "location": "Zürich, Switzerland",
       "projects": {
+        "": "At D2P we always work agile, sprint based, using gitlabs 'Kanban' features.",
+        "LCA Analysis": "LLM based inference of material categories to retrieve LCA scores for different construction elements. Python project, hosted on Azure",
         "Haas House Configurator": [
           "https://jonasward.eu/#/project/haas-haus-configurator",
-          "a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser"
+          "a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser. Typescript client side project, Hosted on AWS."
         ],
-        "Stauffer Statics": ["https://jonasward.eu/#/project/stauffer-static", "a cloud-based static analysis tool for timber contractors"],
-        "Rewe co-co": "a web based supermarket and vertical farming configurator"
+        "Stauffer Statics": [
+          "https://jonasward.eu/#/project/stauffer-static",
+          "a cloud-based static analysis tool for timber contractors. Typescript project. Responsible from start to finish, Hosted on Google Cloud"
+        ],
+        "Rewe co-co": "a web based supermarket and vertical farming configurator, team project, prototyping in python, .Net backend, typescript backend, hosted on Azure."
       }
     }
   ],
@@ -154,19 +143,21 @@
     },
     "digital": {
       "web dev": {
-        "languages": [".ts", ".js", "wasm (C#, rust)", "java", "python"],
-        "react": ["react-pdf", "redux", "zustand", "react-router", "next.js"],
-        "styling": ["css", "sass", "tailwind", "scss", "MUI", "antd", "bootstrap"],
-        "dev": ["npm", "yarn", "bun", "vite", "turbo", "docker"],
+        "languages": [".ts", ".js", "python", "wasm (C#, rust)", "java"],
+        "dev": ["npm", "yarn", "conda", "docker", "vite", "turbo"],
+        "backend": ["node", "express", "springboot", "flask", "django"],
+        "CI/CD": ["azure pipeline", "gitlab", "bitbucket"],
+        "devOps": ["AWS", "azure", "kubernetes", "Google Cloud", "GitHub"],
+        "ai": ["OpenAi API", "AzureOpenAPI", "tensorflowjs", "onnxjs (pytorch)"],
         "database": ["mongodb", "firebase", "supabase", "prisma", "mysql"],
-        "backend": ["node", "express", "springboot", "flask"],
+        "react": ["react-pdf", "redux", "zustand", "react-router", "next.js"],
         "webGL": ["glsl", "threejs", "babylonjs", "pixi.js", "svg"],
-        "other": ["leaflet", "IFCjs", "axios", "tensorflowjs", "onnxjs"]
+        "styling": ["css", "sass", "tailwind", "scss", "MUI", "antd", "bootstrap"]
       },
       ".py": {
+        "ml": ["numpy", "pandas", "scipy", "matplotlib", "openCV", "sklearn", "tensorflow", "pytorch"],
         "geography": ["GDAL", "GeoPython", "GeoPandas", "shapely", "qgis scripting"],
-        "geometry": ["blender", "Rhino/Grasshopper", "processing", "ifcOpenShell", "shapely", "cgal (bindings)", "processing"],
-        "analysis": ["numpy", "pandas", "scipy", "matplotlib", "openCV", "sklearn", "tensorflow", "pytorch"]
+        "geometry": ["blender", "Rhino/Grasshopper", "processing", "ifcOpenShell", "shapely", "cgal (bindings)", "processing"]
       },
       "#c": ["Unity, Rhino/Grasshopper, mono, WPF"],
       "java": ["spring boot, JTS, gradle, openCV, AWT, processing"],
@@ -180,12 +171,6 @@
         "caad": ["Rhinoceros 3D / Grasshopper", "Revit", "ArchiCAD", "AutoCAD", "Blender"],
         "rapidPrototyping": ["Arduino", "GRBL", "ABB-robot-suite", "Prusa Slice", "Autodesk Fusion", "Cura", "ideaMaker", "Fusion 360"]
       }
-    },
-    "physical": {
-      "digital fabrication": ["CNC Milling", "Laser Cutting", "3D Printing", "robotic path planning", "digital kniting"],
-      "3d-printing": ["FDM", "sand", "binder-jet", "glass (fusing)", "clay", "concrete", "chocolate", "sugar"],
-      "ceramics": ["slip casting", "turning table", "glazing"],
-      "modelbuilding": ["laser cutting - paper, wood, PMMA", "3d printing - pla, abs, petg", "cnc milling - wood, EPS", "ceramics"]
     }
   },
   "extraCurricular": {
@@ -217,5 +202,35 @@
     "Quadrato della Civilta": "2018 - Bedsidetable lamp of the \"Square Colosseum\" in Rome by Giovanni Guerrini, Ernesto Bruno La Padula and Mario Romano",
     "ETH Hauptgebäude": "2023 - Bedsidetable lamp of the \"ETH Hauptgebäude\" in Zürich by Gottfried Semper",
     "Julierturm": "2023 - Bedsidetable lamp of the \"Julier Tower\" in the Swiss Alps by Giovanni Netzer"
+  },
+  "excluded": {
+    "web": {
+      "other": ["leaflet", "IFCjs", "axios"]
+    },
+    "physical": {
+      "digital fabrication": ["CNC Milling", "Laser Cutting", "3D Printing", "robotic path planning", "digital kniting"],
+      "3d-printing": ["FDM", "sand", "binder-jet", "glass (fusing)", "clay", "concrete", "chocolate", "sugar"],
+      "ceramics": ["slip casting", "turning table", "glazing"],
+      "modelbuilding": ["laser cutting - paper, wood, PMMA", "3d printing - pla, abs, petg", "cnc milling - wood, EPS", "ceramics"]
+    },
+    "experience": [
+      {
+        "company": "B-Architecten",
+        "position": "Junior Architect",
+        "role": "Competions Design & Construction Management",
+        "date": "2017 - 2018",
+        "location": "Antwerp, BE",
+        "projects": {
+          "Pelikaanstraat": "masterplanning project for high rise development in the area of Antwerpen Centraal",
+          "Mundo-A": [
+            "https://jonasward.eu/#/project/mundo-a",
+            "planningphase and construction site manage- ment for ecological office building constructed out of CLT (ARC19 Architecture Award, winner)"
+          ]
+        },
+        "projectsNoShow": {
+          "Turnova": "masterplanning and heritage concept for a highrise development on a brownfield of historic significance in the city of Turnhout"
+        }
+      }
+    ]
   }
 }
