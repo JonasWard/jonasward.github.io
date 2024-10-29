@@ -1,4 +1,4 @@
-import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import './cv.css';
 import { CVDocument } from './CVDocument';
 import cv from './cv.json';
