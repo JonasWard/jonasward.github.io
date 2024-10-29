@@ -22,6 +22,7 @@ import { urlSafeBitpacker } from './software/urlSafeBitpacker';
 import { napoliSotterana } from './urbanism/napolitSotterana';
 import { digitaleAugen } from './software/digitaleAugen';
 import { kwatrecht } from './urbanism/kwatrecht';
+import { gradedGlass } from './computationDesign/roboticGlass';
 
 export const allProjects = [
   patternMachine,
@@ -48,4 +49,5 @@ export const allProjects = [
   napoliSotterana,
   digitaleAugen,
   kwatrecht,
+  gradedGlass,
 ].sort((a, b) => -a.id.localeCompare(b.id));
