@@ -59,7 +59,7 @@ const MotivationPDF: React.FC<{ motivationContent: MotivationLetterContent }> = 
             ))}
             <DividingSpace id={'1'} />
             <PDFDivText isPdf content={'I am looking forward to your response'} id={'response'} />
-            <PDFDivText isPdf content={'Sincerly yours, Jonas Van den Bulcke'} id={'wishes'} />
+            <PDFDivText isPdf content={'Kind Regards,\nJonas Van den Bulcke'} id={'wishes'} />
             <DividingSpace id={'2'} />
             <PDFDivText isPdf content={`Zürich, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`} id={'date'} />
           </div>

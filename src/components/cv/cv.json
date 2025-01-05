@@ -123,8 +123,6 @@
       "date": "2022 - now",
       "location": "Zürich, Switzerland",
       "projects": {
-        "": "At D2P we always work agile, sprint based, using gitlabs 'Kanban' features.",
-        "LCA Analysis": "LLM based inference of material categories to retrieve LCA scores for different construction elements. Python project, hosted on Azure",
         "Haas House Configurator": [
           "https://jonasward.eu/#/project/haas-haus-configurator",
           "a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser. Typescript client side project, Hosted on AWS."
@@ -133,7 +131,7 @@
           "https://jonasward.eu/#/project/stauffer-static",
           "a cloud-based static analysis tool for timber contractors. Typescript project. Responsible from start to finish, Hosted on Google Cloud"
         ],
-        "Rewe co-co": "a web based supermarket and vertical farming configurator, team project, prototyping in python, .Net backend, typescript backend, hosted on Azure."
+        "Rewe co-co": "a web based supermarket and vertical farming configurator, team project, .Net backend, typescript backend, hosted on Google Cloud."
       }
     }
   ],
