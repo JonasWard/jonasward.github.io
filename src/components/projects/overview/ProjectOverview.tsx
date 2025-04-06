@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { ProjectData } from '../../../types/projectContent/projectData';
+import { ProjectCategory } from '../../../types/keywords/categoryTypes';
+import { useParams } from 'react-router-dom';
 
 const getInnerWidth = (): number => Math.min(1495, window.innerWidth);
 
@@ -26,8 +28,24 @@ const getColumnLogic = (allProjects: ProjectData[]): ProjectData[][] => {
   return columnLogic;
 };
 
+type ProjectFilter = ProjectCategory | 'All';
+const filterProjects = (projects: ProjectData[], filter: ProjectFilter) => {
+  switch (filter) {
+    case 'All':
+      return projects;
+    default:
+      return projects.filter((p) => p.metaData.projectType === filter);
+  }
+};
+
+const isProjectFilter = (s: string) => Object.values(ProjectCategory).includes(s as ProjectCategory) || s === 'All';
+
 export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
+  const { filter } = useParams();
+
   const [centerPosition, setCenterPosition] = useState<[number, number]>([0, window.innerHeight * 0.5]);
+  const [projectFilter, setProjectFilter] = useState<ProjectFilter>(filter && isProjectFilter(filter) ? (filter as ProjectFilter) : 'All');
+  const [activeProjects, setActiveProjects] = useState<ProjectData[]>(projects);
 
   const [positions, setPositions] = useState<ProjectData[][]>(getColumnLogic(projects));
   const [marginLeft, setMarginLeft] = useState<string>('calc((100vw - 216px) * 0.5)');
@@ -39,8 +57,8 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
     localStorage.setItem(PROJECT_POSITION_OFFSET_Y, `${window.scrollY}`);
   };
 
-  const onScreenScale = () => {
-    const columnData = getColumnLogic(projects);
+  const onScreenScale = (activeProjects: ProjectData[]) => {
+    const columnData = getColumnLogic(activeProjects);
 
     window.innerWidth < mobileViewWidth
       ? setMarginLeft(`${(window.innerWidth - rawCardWidth) * 0.5}px`)
@@ -50,17 +68,19 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
       ? setMinWidth(columnData.length * (rawCardWidth + gap) - gap + (window.innerWidth - rawCardWidth) * 0.5)
       : setMinWidth(columnData.length * (rawCardWidth + gap) - gap);
 
-    setPositions(getColumnLogic(projects));
+    setActiveProjects(activeProjects);
+    setPositions(getColumnLogic(activeProjects));
   };
 
   useEffect(() => {
-    onScreenScale();
+    onScreenScale(filterProjects(projects, projectFilter));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projects]);
+  }, [projects, projectFilter]);
 
   useEffect(() => {
-    onScreenScale(); // initial
-    window.addEventListener('resize', onScreenScale);
+    onScreenScale(filterProjects(projects, projectFilter)); // initial
+    const localOnScreenScale = () => onScreenScale(activeProjects);
+    window.addEventListener('resize', localOnScreenScale);
     window.addEventListener('scroll', onScroll);
     setTimeout(onScreenScale, 1000);
 
@@ -70,22 +90,39 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
     window.scrollTo(scrollX, scrollY);
 
     return () => {
-      window.removeEventListener('resize', onScreenScale);
+      window.removeEventListener('resize', localOnScreenScale);
       window.removeEventListener('scroll', onScroll);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [activeProjects]);
+
+  const handleFilterChange = (filter: ProjectFilter) => {
+    setProjectFilter(filter);
+    window.location.hash = `projects/${filter}`;
+  };
 
   return (
-    <div style={{ marginLeft, minWidth }} className='project-grid'>
-      {positions.map((column, jndex) => (
-        <div key={jndex} style={{ display: 'flex', flexDirection: 'column', gap }}>
-          {column.map((project, index) => (
-            <ProjectCard key={index} index={index} metaData={project.metaData} keyImage={project.projectImage} currentCenterPosition={centerPosition} />
-          ))}
-        </div>
-      ))}
-    </div>
+    <>
+      <div style={{ marginLeft, minWidth }} className='project-grid'>
+        {positions.map((column, jndex) => (
+          <div key={jndex} style={{ display: 'flex', flexDirection: 'column', gap }}>
+            {column.map((project, index) => (
+              <ProjectCard key={index} index={index} metaData={project.metaData} keyImage={project.projectImage} currentCenterPosition={centerPosition} />
+            ))}
+          </div>
+        ))}
+      </div>
+      <select
+        style={{ position: 'fixed', zIndex: 1000, left: '50svw', top: 19, border: 'none', background: '#f5f5f5', borderRadius: 7, padding: 2 }}
+        value={projectFilter}
+        onChange={(v) => handleFilterChange(v.target.value as ProjectFilter)}
+      >
+        <option value={'All'}>All</option>
+        {Object.values(ProjectCategory).map((k) => (
+          <option value={k}>{k}</option>
+        ))}
+      </select>
+    </>
   );
 };
 
