@@ -27,6 +27,7 @@ root.render(
           <Route path={ProjectRoutes.CV} element={<HeaderWrapper children={<CV />} />} />
           <Route path={ProjectRoutes.About} element={<HeaderWrapper children={<About />} />} />
           <Route path={ProjectRoutes.Projects} element={<HeaderWrapper children={<ProjectOverview projects={allProjects} />} />} />
+          <Route path={ProjectRoutes.ProjectsFilter} element={<HeaderWrapper children={<ProjectOverview projects={allProjects} />} />} />
           <Route path={ProjectRoutes.Project} element={<HeaderWrapper children={<ProjectWrapper />} />} />
           <Route path={ProjectRoutes.Missing} element={<HeaderWrapper children={<Missing />} />} />
           <Route path={ProjectRoutes.Colors} element={<HeaderWrapper children={<ProjectColorView />} />} />

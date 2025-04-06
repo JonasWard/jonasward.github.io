@@ -6,6 +6,7 @@ export enum ProjectRoutes {
   About = '/about',
   CV = '/cv',
   Projects = '/projects',
+  ProjectsFilter = '/projects/:filter',
   Project = '/project/:id',
   AnyProject = '/project',
   Missing = '*',
