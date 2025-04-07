@@ -29,7 +29,7 @@ const getColumnLogic = (allProjects: ProjectData[]): ProjectData[][] => {
   return columnLogic;
 };
 
-const filterProjects = (projects: ProjectData[], filter: ProjectFilter) => {
+const filterProjects = (projects: ProjectData[], filter: ProjectCategoryFilterType) => {
   switch (filter) {
     case 'All':
       return projects;
@@ -38,13 +38,15 @@ const filterProjects = (projects: ProjectData[], filter: ProjectFilter) => {
   }
 };
 
-const isProjectFilter = (s: string) => Object.values(ProjectCategory).includes(s as ProjectCategory) || s === 'All';
+const isProjectCategoryFilterType = (s: string) => Object.values(ProjectCategory).includes(s as ProjectCategory) || s === 'All';
 
 export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
   const { filter } = useParams();
 
   const [centerPosition, setCenterPosition] = useState<[number, number]>([0, window.innerHeight * 0.5]);
-  const [projectFilter, setProjectFilter] = useState<ProjectFilter>(filter && isProjectFilter(filter) ? (filter as ProjectFilter) : 'All');
+  const [projectFilter, setProjectCategoryFilterType] = useState<ProjectCategoryFilterType>(
+    filter && isProjectCategoryFilterType(filter) ? (filter as ProjectCategoryFilterType) : 'All'
+  );
   const [activeProjects, setActiveProjects] = useState<ProjectData[]>(projects);
 
   const [positions, setPositions] = useState<ProjectData[][]>(getColumnLogic(projects));
@@ -96,8 +98,8 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeProjects]);
 
-  const handleFilterChange = (filter: ProjectFilter) => {
-    setProjectFilter(filter);
+  const handleFilterChange = (filter: ProjectCategoryFilterType) => {
+    setProjectCategoryFilterType(filter);
     window.location.hash = `projects/${filter}`;
   };
 
@@ -115,7 +117,7 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
       <select
         style={{ position: 'fixed', zIndex: 1000, left: '50svw', top: 19, border: 'none', background: '#f5f5f5', borderRadius: 7, padding: 2 }}
         value={projectFilter}
-        onChange={(v) => handleFilterChange(v.target.value as ProjectFilter)}
+        onChange={(v) => handleFilterChange(v.target.value as ProjectCategoryFilterType)}
       >
         <option value={'All'}>All</option>
         {Object.values(ProjectCategory).map((k) => (
