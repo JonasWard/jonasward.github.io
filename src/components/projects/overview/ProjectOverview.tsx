@@ -3,6 +3,7 @@ import ProjectCard from './ProjectCard';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { useParams } from 'react-router-dom';
+import { ProjectCategoryFilterType } from '../../../types/navigation/filterType';
 
 const getInnerWidth = (): number => Math.min(1495, window.innerWidth);
 
@@ -28,7 +29,6 @@ const getColumnLogic = (allProjects: ProjectData[]): ProjectData[][] => {
   return columnLogic;
 };
 
-type ProjectFilter = ProjectCategory | 'All';
 const filterProjects = (projects: ProjectData[], filter: ProjectFilter) => {
   switch (filter) {
     case 'All':
