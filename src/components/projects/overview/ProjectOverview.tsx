@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { useParams } from 'react-router-dom';
 import { ProjectCategoryFilterType } from '../../../types/navigation/filterType';
+import { useProjectStore } from '../../../state/projectStore';
 
 const getInnerWidth = (): number => Math.min(1495, window.innerWidth);
 
@@ -29,25 +30,19 @@ const getColumnLogic = (allProjects: ProjectData[]): ProjectData[][] => {
   return columnLogic;
 };
 
-const filterProjects = (projects: ProjectData[], filter: ProjectCategoryFilterType) => {
-  switch (filter) {
-    case 'All':
-      return projects;
-    default:
-      return projects.filter((p) => p.metaData.projectType === filter);
-  }
-};
+const isProjectCategoryFilterType = (s: string | undefined) =>
+  Object.values(ProjectCategory).includes(s as ProjectCategory) || s === 'All';
 
-const isProjectCategoryFilterType = (s: string) => Object.values(ProjectCategory).includes(s as ProjectCategory) || s === 'All';
-
-export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ projects }) => {
+export const ProjectOverview: React.FC = () => {
   const { filter } = useParams();
+  const projectFilter = useProjectStore((s) => s.filter);
+  const projects = useProjectStore((s) => s.activeProjects);
+
+  useEffect(() => {
+    if (isProjectCategoryFilterType(filter)) useProjectStore.getState().setFilter(filter as ProjectCategoryFilterType);
+  }, [filter]);
 
   const [centerPosition, setCenterPosition] = useState<[number, number]>([0, window.innerHeight * 0.5]);
-  const [projectFilter, setProjectCategoryFilterType] = useState<ProjectCategoryFilterType>(
-    filter && isProjectCategoryFilterType(filter) ? (filter as ProjectCategoryFilterType) : 'All'
-  );
-  const [activeProjects, setActiveProjects] = useState<ProjectData[]>(projects);
 
   const [positions, setPositions] = useState<ProjectData[][]>(getColumnLogic(projects));
   const [marginLeft, setMarginLeft] = useState<string>('calc((100vw - 216px) * 0.5)');
@@ -59,8 +54,8 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
     localStorage.setItem(PROJECT_POSITION_OFFSET_Y, `${window.scrollY}`);
   };
 
-  const onScreenScale = (activeProjects: ProjectData[]) => {
-    const columnData = getColumnLogic(activeProjects);
+  const onScreenScale = () => {
+    const columnData = getColumnLogic(useProjectStore.getState().activeProjects);
 
     window.innerWidth < mobileViewWidth
       ? setMarginLeft(`${(window.innerWidth - rawCardWidth) * 0.5}px`)
@@ -70,18 +65,11 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
       ? setMinWidth(columnData.length * (rawCardWidth + gap) - gap + (window.innerWidth - rawCardWidth) * 0.5)
       : setMinWidth(columnData.length * (rawCardWidth + gap) - gap);
 
-    setActiveProjects(activeProjects);
-    setPositions(getColumnLogic(activeProjects));
+    setPositions(getColumnLogic(useProjectStore.getState().activeProjects));
   };
 
   useEffect(() => {
-    onScreenScale(filterProjects(projects, projectFilter));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projects, projectFilter]);
-
-  useEffect(() => {
-    onScreenScale(filterProjects(projects, projectFilter)); // initial
-    const localOnScreenScale = () => onScreenScale(activeProjects);
+    const localOnScreenScale = () => onScreenScale();
     window.addEventListener('resize', localOnScreenScale);
     window.addEventListener('scroll', onScroll);
     setTimeout(onScreenScale, 1000);
@@ -96,35 +84,28 @@ export const ProjectOverview: React.FC<{ projects: ProjectData[] }> = ({ project
       window.removeEventListener('scroll', onScroll);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeProjects]);
+  }, []);
 
-  const handleFilterChange = (filter: ProjectCategoryFilterType) => {
-    setProjectCategoryFilterType(filter);
-    window.location.hash = `projects/${filter}`;
-  };
+  useEffect(() => {
+    onScreenScale();
+  }, [projects, projectFilter]);
 
   return (
-    <>
-      <div style={{ marginLeft, minWidth }} className='project-grid'>
-        {positions.map((column, jndex) => (
-          <div key={jndex} style={{ display: 'flex', flexDirection: 'column', gap }}>
-            {column.map((project, index) => (
-              <ProjectCard key={index} index={index} metaData={project.metaData} keyImage={project.projectImage} currentCenterPosition={centerPosition} />
-            ))}
-          </div>
-        ))}
-      </div>
-      <select
-        style={{ position: 'fixed', zIndex: 1000, left: '50svw', top: 19, border: 'none', background: '#f5f5f5', borderRadius: 7, padding: 2 }}
-        value={projectFilter}
-        onChange={(v) => handleFilterChange(v.target.value as ProjectCategoryFilterType)}
-      >
-        <option value={'All'}>All</option>
-        {Object.values(ProjectCategory).map((k) => (
-          <option value={k}>{k}</option>
-        ))}
-      </select>
-    </>
+    <div style={{ marginLeft, minWidth }} className="project-grid">
+      {positions.map((column, jndex) => (
+        <div key={jndex} style={{ display: 'flex', flexDirection: 'column', gap }}>
+          {column.map((project, index) => (
+            <ProjectCard
+              key={index}
+              index={index}
+              metaData={project.metaData}
+              keyImage={project.projectImage}
+              currentCenterPosition={centerPosition}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
   );
 };
 
