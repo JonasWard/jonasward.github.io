@@ -23,6 +23,11 @@ import { napoliSotterana } from './urbanism/napolitSotterana';
 import { digitaleAugen } from './software/digitaleAugen';
 import { kwatrecht } from './urbanism/kwatrecht';
 import { gradedGlass } from './computationDesign/roboticGlass';
+import { volumeStudies } from './art/volumeStudies';
+import { sdfAsMeaning } from './art/sdfAsMeaning';
+import { sdfVases } from './art/sdfVases';
+import { chocoStudies } from './art/chocoStudies';
+import { sdfLamps } from './art/sdfLamps';
 
 export const allProjects = [
   patternMachine,
@@ -50,4 +55,9 @@ export const allProjects = [
   digitaleAugen,
   kwatrecht,
   gradedGlass,
+  volumeStudies,
+  sdfAsMeaning,
+  sdfVases,
+  chocoStudies,
+  sdfLamps
 ].sort((a, b) => -a.id.localeCompare(b.id));
