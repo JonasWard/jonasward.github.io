@@ -147,10 +147,14 @@ const Landing = () => {
   }, []);
 
   return (
-    <div className='missing-page'>
-      <canvas className='missing-page canvas' ref={canvasRef} />
-      <div className='missing-link' onClick={goToProjects}>
-        <img style={{ maxWidth: '100%', maxHeight: '100%', height: '800px' }} src={logo} alt={'missing logo'} />
+    <div className="missing-page" onClick={goToProjects}>
+      <canvas className="missing-page canvas" ref={canvasRef} />
+      <div className="missing-link">
+        <img
+          style={{ maxWidth: '100%', maxHeight: '100%', height: '800px', width: '894.5px' }}
+          src={logo}
+          alt={'missing logo'}
+        />
       </div>
     </div>
   );
