@@ -39,7 +39,9 @@ export const ProjectOverview: React.FC = () => {
   const projects = useProjectStore((s) => s.activeProjects);
 
   useEffect(() => {
-    if (isProjectCategoryFilterType(filter)) useProjectStore.getState().setFilter(filter as ProjectCategoryFilterType);
+    useProjectStore
+      .getState()
+      .setFilter(isProjectCategoryFilterType(filter) ? (filter as ProjectCategoryFilterType) : 'All');
   }, [filter]);
 
   const [centerPosition, setCenterPosition] = useState<[number, number]>([0, window.innerHeight * 0.5]);
