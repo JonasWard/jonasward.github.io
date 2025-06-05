@@ -7,9 +7,9 @@ export type Info = {
   dateOfBirth: string;
   telephone: string;
   email: string;
-  website: string;
-  github: string;
-  linkedin: string;
+  website: [string, string];
+  github: [string, string];
+  linkedin: [string, string];
   addressLine1: string;
   addressLine2: string;
 };
@@ -40,6 +40,6 @@ export type CVData = {
   education: Education;
   experience: Experience;
   skills: Skills;
-  extraCurricular: { [key: string]: string };
+  extraCurricular: { [key: string]: string | [string, string] };
   pipeline?: { [key: string]: string };
 };
