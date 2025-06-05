@@ -1,7 +1,7 @@
 import { CVData } from '../../types/cv/cvType';
 import { EducationRenderer } from './EducationRenderer';
 import { ExperienceRenderer } from './ExperienceRenderer';
-import { InfoRenderer } from './InfoRenderer';
+import { InfoRenderer, PDFDivText } from './InfoRenderer';
 import { SkillsRenderer } from './SkillsRenderer';
 import profileImage from 'src/assets/pictures/profilePicture-crop.jpg';
 import logo from 'src/assets/jonasward_logo_elong.png';
@@ -21,6 +21,15 @@ export const CVHTML: React.FC<{ data: CVData }> = ({ data }) => (
       </div>
     </div>
     <div id="section 1" className="content-grid">
+      <div id={'left'} />
+      <div id={'right'}>
+        <div id={'section 1'}>
+          <div style={{ textAlign: 'justify', fontSize: 14, fontWeight: 600 }}>
+            <PDFDivText isPdf={false} content={data.tagline[0]} id={'1'} />
+            <PDFDivText isPdf={false} content={data.tagline[1]} id={'2'} />
+          </div>
+        </div>
+      </div>
       <InfoRenderer info={data.info} isPdf={false} />
       <EducationRenderer education={data.education} isPdf={false} />
       <SkillsRenderer skills={data.skills} isPdf={false} />

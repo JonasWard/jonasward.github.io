@@ -9,7 +9,7 @@ import italic from 'src/assets/fonts/Montserrat-Italic.ttf';
 import { ExperienceRenderer } from './ExperienceRenderer';
 import { EducationRenderer } from './EducationRenderer';
 import { SkillsRenderer } from './SkillsRenderer';
-import { InfoRenderer } from './InfoRenderer';
+import { InfoRenderer, PDFDivText } from './InfoRenderer';
 import { ExtraCurricularRenderer } from './ExtraCurricularRenderer';
 
 Font.register({
@@ -146,6 +146,15 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
           </div>
         </div>
         <div id={'section 1'} style={styles.section}>
+          <div id={'left'} style={styles.left} />
+          <div id={'right'} style={styles.right}>
+            <div style={{ ...styles.primaryItem, paddingTop: 5, paddingBottom: 5 }}>
+              <PDFDivText isPdf content={data.tagline[0]} id={'1'} />
+              <PDFDivText isPdf content={data.tagline[1]} id={'2'} />
+            </div>
+          </div>
+        </div>
+        <div id={'section 1'} style={styles.section}>
           <div id={'left'} style={styles.left}>
             <InfoRenderer info={data.info} isPdf />
           </div>
@@ -169,8 +178,8 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
             pageNumber === totalPages && (
               <>
                 {`Created on ${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}. `}
-                <a style={{ textDecoration: 'underline' }} href="https://jonasward.eu/#/cv">
-                  jonasward.eu/#/cv
+                <a style={{ textDecoration: 'underline' }} href="https://jonasward.eu/#cv">
+                  jonasward.eu/#cv
                 </a>
               </>
             )
