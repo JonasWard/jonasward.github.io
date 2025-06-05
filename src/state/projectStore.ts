@@ -12,7 +12,7 @@ export type ProjectStoreType = {
   clearFilter: () => void;
 };
 
-export const useProjectStore = create<ProjectStoreType>()((set, get) => ({
+export const useProjectStore = create<ProjectStoreType>()((set) => ({
   projects: allProjects,
   setProjects: (projects: ProjectData[]) => set(() => ({ projects })),
   activeProjects: [],
