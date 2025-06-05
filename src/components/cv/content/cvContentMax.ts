@@ -1,11 +1,15 @@
 import { CVData } from 'src/types/cv/cvType';
 
 export const CVContent: CVData = {
+  tagline: [
+    'Web Developer Making the World a Greener Place.',
+    '5 years of Full-Stack, 10 years Creative Problem-Solving'
+  ],
   info: {
     name: 'Van den Bulcke',
     firstName: 'Jonas Ward',
     titles: 'IR arch. MAS ETH',
-    citizenship: 'Belgian, Swiss B-permit (EU-citizen), Brazilian',
+    citizenship: ' Swiss B-permit (EU-citizen), Belgian, Brazilian',
     placeOfBirth: 'Rio de Janeiro, BR',
     dateOfBirth: '08.12.1991',
     telephone: '+41 76 232 76 27',
@@ -44,12 +48,18 @@ export const CVContent: CVData = {
       date: '2013 - now',
       location: 'Ghent, BE; Zürich, CH',
       projects: {
+        'Lucerna Lecto': [
+          'https://jonasward.eu/lucerna-lecto',
+          '2024-2025 - configurable lamp shades with SDFs. Multiple iterations exists.'
+        ],
         'SDF Scarves': [
           'https://jonasward.eu/#/project/scarves',
           '2022-2024 - series of SDF based scarves, design informed by overlaying and scaling different TPMSs with one another, patterns generated using a browser based pattern generator'
         ],
-        'Sensing a Place':
-          '2022 - in-situ 3d printing of clay using the material of the site, design informed by hearing, feeling, seeing. In collaboration with Berlin based artists Joana Schmitz & Leon Kilbert. Funded by an European Horizon 2020 Grant.',
+        'Sensing a Place': [
+          'https://www.youtube.com/watch?v=tIDVZ1KbwcA&ab_channel=LaurinKilbert',
+          '2022 - in-situ 3d printing of clay using the material of the site, design informed by hearing, feeling, seeing. In collaboration with Berlin based artists Joana Schmitz & Leon Kilbert. Funded by an European Horizon 2020 Grant.'
+        ],
         'Elbe Bienen': [
           'https://jonasward.eu/#/project/guerilla-beehive',
           '2019 - 21st century beehive blending biology, informatics to help curb mass starvation due to air pollution. Design made for Brussels based artist Anne- marie Maes, funded through Hamburg Machine. In collaboration with Die Angewandte Wien. Funded by Flemish Government and Hamburg Stadskuratorerin.'
@@ -74,7 +84,7 @@ export const CVContent: CVData = {
       company: 'B-Architecten',
       position: 'Junior Architect',
       role: 'Competions Design & Construction Management',
-      date: '2017 - 2018',
+      date: 'May 2017 - September 2018',
       location: 'Antwerp, BE',
       projects: {
         Pelikaanstraat: 'masterplanning project for high rise development in the area of Antwerpen Centraal',
@@ -90,7 +100,7 @@ export const CVContent: CVData = {
       company: 'Archilyse',
       position: 'Employee',
       role: 'POCs and QA',
-      date: '2019 - 2020',
+      date: 'October 2019 - March 2020',
       location: 'Zürich, Switzerland',
       projects: {
         'Swiss Dwelling Dataset':
@@ -120,7 +130,7 @@ export const CVContent: CVData = {
       company: 'UGD',
       position: 'Consultant',
       role: 'POC & Software Development',
-      date: '2020 - 2022',
+      date: 'March 2020 - March 2022 ',
       location: 'Konstanz, Germany',
       projects: {
         '': 'larger projects were SCRUM based, much individual work, ',
@@ -132,7 +142,10 @@ export const CVContent: CVData = {
         ],
         'Haworth CoDesigner':
           'Evolutionary Algorithm based automatic planning tool for American furniture company Haworth. Built a lightweight CAD database using the JTS framework for a cloud based 2D drawing tool. developed and implemented various space syntax algorithms for interior and urban space analysis; worked on reading out and commu- nicating with infrared sensors for anonymous space occupation analysis. Hosted on Azure',
-        'Alcubond Facademaker': "Panelizer visualisation tool for 3A's Alcubond CNC'ed and folded panels",
+        'Alcubond Facademaker': [
+          'https://www.facademaker.alucobond.com/',
+          "Panelizer visualisation tool for 3A's Alcubond CNC'ed and folded panels"
+        ],
         INTEGRAL:
           'automatic acoustic panel planning tool in PCon Planner using IFC and OFML data, prototyping using ghPython and Rhino Common. .Net Project'
       }
@@ -141,19 +154,36 @@ export const CVContent: CVData = {
       company: 'design-to-production',
       position: 'Consultant',
       role: 'FullStack Developer',
-      date: '2022 - now',
+      date: 'April 2022 - now',
       location: 'Zürich, Switzerland',
       projects: {
-        'Haas House Configurator': [
-          'https://jonasward.eu/#/project/haas-haus-configurator',
-          'a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser. Typescript client side project, Hosted on AWS.'
+        'Holzvision Max': [
+          'https://holzvisionmax.ch/',
+          'MES for the timber industry, developed in the context of "Max der Muni" being developed for the ESAF 2025 by the "Säntis Innovations Cluster Holz"'
+        ],
+        'Rewe co-co': [
+          'https://www.red-dot.org/de/rewe-group',
+          'a web based supermarket and vertical farming configurator, team project, .Net backend, typescript backend, hosted on Google Cloud.'
         ],
         'Stauffer Statics': [
           'https://jonasward.eu/#/project/stauffer-static',
           'a cloud-based static analysis tool for timber contractors. Typescript project. Responsible from start to finish, Hosted on Google Cloud'
         ],
-        'Rewe co-co':
-          'a web based supermarket and vertical farming configurator, team project, .Net backend, typescript backend, hosted on Google Cloud.'
+        'Haas House Configurator': [
+          'https://jonasward.eu/#/project/haas-haus-configurator',
+          'a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser. Typescript client side project, Hosted on AWS.'
+        ]
+      }
+    },
+    {
+      company: 'Circrete',
+      position: 'Tech Lead',
+      role: 'FullStack Developer',
+      date: '2025 - now',
+      location: 'Copenhagen, Denmarkt (Remote)',
+      projects: {
+        'Circretes Digital Toolchain':
+          'Circrete is a Copenhagen based Start-up focusing on re-use of concrete elements. My role is developing the technical toolchain, from testing to populating data.'
       }
     }
   ],
@@ -164,10 +194,10 @@ export const CVContent: CVData = {
     digital: {
       'web dev': {
         languages: ['.ts', '.js', 'python', 'wasm (C#, rust)', 'java'],
-        dev: ['npm', 'yarn', 'conda', 'docker', 'vite', 'turbo'],
-        backend: ['node', 'express', 'springboot', 'flask', 'django'],
+        dev: ['bun', 'npm', 'yarn', 'conda', 'docker', 'vite', 'turbo'],
+        backend: ['bun', 'Elysia', 'express', 'springboot', 'flask', 'django'],
         'CI/CD': ['azure pipeline', 'gitlab', 'bitbucket'],
-        devOps: ['AWS', 'azure', 'kubernetes', 'Google Cloud', 'GitHub'],
+        devOps: ['AWS', 'azure', 'kubernetes', 'Google Cloud', 'GitHub', 'Docker'],
         ai: ['OpenAi API', 'AzureOpenAPI', 'tensorflowjs', 'onnxjs (pytorch)'],
         database: ['mongodb', 'firebase', 'supabase', 'prisma', 'mysql'],
         react: ['react-pdf', 'redux', 'zustand', 'react-router', 'next.js'],
@@ -237,14 +267,21 @@ export const CVContent: CVData = {
     }
   },
   extraCurricular: {
+    'Green Tech Hackathon - Zürich 2025': 'Grid Carbon Intensity Load Balancing for cron jobs',
+    'AEC Hackathon - Copenhagen 2025': [
+      'https://janinloui.github.io/Slab2Reuse/',
+      'AEC Flow - UI POC for complex data visualisation in AEC - Price: Best Mashup'
+    ],
+    'AEC Hackathon - Zürich 2025':
+      'Projects Talking - CAM ERP for the Timber industry - Price: Most Potential for a Start-Up',
     'url-safe-bitpacking': [
       'https://jonasward.eu/#/project/url-safe-bitpacker',
       '2024 - open source bitpacking library for complicated parametric models'
     ],
-    'AEC Hackathon - Copenhagen': '2024 - Open Detail (LCA detail database) - Innovation Price',
-    'AEC Hackathon - Zürich': [
+    'AEC Hackathon - Copenhagen 2024': 'Open Detail (LCA detail database) - Price: Innovation',
+    'AEC Hackathon - Zürich 2024': [
       'https://jonasward.eu/#/project/para-slim-shady',
-      '2024 - Santini at home Lamp Configurator'
+      'Santini at home Lamp Configurator'
     ],
     'Hackathon Kosmos Klee': '2023 - Art as a message board',
     open3D: '2023 -contributed to a typescript open source 3D geometry library based on the Rhinoceros 3D syntax',

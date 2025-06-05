@@ -6,7 +6,7 @@ import { PDFDivText } from './InfoRenderer';
 import { DividingSpace } from './DividingSpace';
 import { TitleRenderer } from './TitleRenderer';
 import logo from 'src/assets/jonasward_logo_elong.png';
-import { CVContent } from './cvContent';
+import { CVContent } from './content/cvContent';
 
 type MotivationLetterContent = {
   title: string;

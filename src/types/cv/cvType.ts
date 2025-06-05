@@ -36,6 +36,7 @@ export type NestedList = { [key: string]: List };
 export type Skills = { [key: string]: { [key: string]: List | NestedList } };
 
 export type CVData = {
+  tagline: string[];
   info: Info;
   education: Education;
   experience: Experience;

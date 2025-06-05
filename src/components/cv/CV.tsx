@@ -3,7 +3,7 @@ import './cv.css';
 import { CVDocument } from './CVDocument';
 import { CVHTML } from './CVDigital';
 import printer from 'src/assets/icons/printer.svg';
-import { CVContent } from './cvContent';
+import { CVContent } from './content/cvContent';
 
 export const CV = () => {
   const date = new Date();
