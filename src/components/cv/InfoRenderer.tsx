@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
-import { Info } from './cv.type';
+
 import { styles } from './CVDocument';
 import { DividingSpace } from './DividingSpace';
 import { TitleRenderer } from './TitleRenderer';
 import { Link, Text } from '@react-pdf/renderer';
+import { Info } from '../../types/cv/cvType';
 
 const contentRenderer = (content: ReactNode, href?: string, isPdf?: boolean) =>
   href ? (

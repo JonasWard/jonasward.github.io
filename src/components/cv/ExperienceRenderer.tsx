@@ -1,4 +1,4 @@
-import { Experience } from './cv.type';
+import { Experience } from '../../types/cv/cvType';
 import { styles } from './CVDocument';
 import { PDFDivText } from './InfoRenderer';
 import { NamedListRenderer } from './NamedListRenderer';

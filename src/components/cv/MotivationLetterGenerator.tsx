@@ -5,8 +5,8 @@ import { styles } from './CVDocument';
 import { PDFDivText } from './InfoRenderer';
 import { DividingSpace } from './DividingSpace';
 import { TitleRenderer } from './TitleRenderer';
-import cv from './cv.json';
 import logo from 'src/assets/jonasward_logo_elong.png';
+import { CVContent } from './cvContent';
 
 type MotivationLetterContent = {
   title: string;
@@ -19,8 +19,10 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 const MotivationPDF: React.FC<{ motivationContent: MotivationLetterContent }> = ({ motivationContent }) => {
   const date = new Date();
   return (
-    <Document title={`Van_den_Bulcke_Jonas-Motivation_Letter-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}.pdf`}>
-      <Page dpi={90} size='A4' style={styles.page}>
+    <Document
+      title={`Van_den_Bulcke_Jonas-Motivation_Letter-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}.pdf`}
+    >
+      <Page dpi={90} size="A4" style={styles.page}>
         <div id={'header'} style={styles.section}>
           <div
             id={'left'}
@@ -31,16 +33,16 @@ const MotivationPDF: React.FC<{ motivationContent: MotivationLetterContent }> = 
               justifyContent: 'space-between',
               width: '100%',
               alignItems: 'top',
-              marginBottom: 30,
+              marginBottom: 30
             }}
           >
             <div id={'left'} style={styles.left}>
               <div style={styles.regularItem}>
-                <PDFDivText isPdf id={'firstName'} content={`Jonas, ${cv.info.name}`} />
+                <PDFDivText isPdf id={'firstName'} content={`Jonas, ${CVContent.info.name}`} />
                 <DividingSpace id={'1'} />
-                <PDFDivText isPdf id={'addressLine1'} content={`${cv.info.addressLine1}`} />
-                <PDFDivText isPdf id={'telephone'} content={`${cv.info.telephone}`} />
-                <PDFDivText isPdf id={'email'} content={`${cv.info.email}`} />
+                <PDFDivText isPdf id={'addressLine1'} content={`${CVContent.info.addressLine1}`} />
+                <PDFDivText isPdf id={'telephone'} content={`${CVContent.info.telephone}`} />
+                <PDFDivText isPdf id={'email'} content={`${CVContent.info.email}`} />
                 <Link id={'website'} style={{ color: 'black' }} href={'https://jonasward.eu'}>
                   jonasward.eu
                 </Link>
@@ -61,7 +63,11 @@ const MotivationPDF: React.FC<{ motivationContent: MotivationLetterContent }> = 
             <PDFDivText isPdf content={'I am looking forward to your response'} id={'response'} />
             <PDFDivText isPdf content={'Kind Regards,\nJonas Van den Bulcke'} id={'wishes'} />
             <DividingSpace id={'2'} />
-            <PDFDivText isPdf content={`Zürich, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`} id={'date'} />
+            <PDFDivText
+              isPdf
+              content={`Zürich, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`}
+              id={'date'}
+            />
           </div>
         </div>
       </Page>

@@ -1,5 +1,5 @@
 import { Page, Document, StyleSheet, Font, Image, Text } from '@react-pdf/renderer';
-import { CVData, List, NestedList } from './cv.type';
+import { CVData, List, NestedList } from '../../types/cv/cvType';
 import logo from 'src/assets/jonasward_logo_elong.png';
 import profileImage from 'src/assets/pictures/profilePicture-crop.jpg';
 import extraLight from 'src/assets/fonts/Montserrat-ExtraLight.ttf';
@@ -18,8 +18,8 @@ Font.register({
     { src: extraLight, fontWeight: 200 },
     { src: regular, fontWeight: 400 },
     { src: extraBold, fontWeight: 800 },
-    { src: italic, fontWeight: 400, fontStyle: 'italic' },
-  ],
+    { src: italic, fontWeight: 400, fontStyle: 'italic' }
+  ]
 });
 
 Font.registerHyphenationCallback((word) => [word]);
@@ -30,103 +30,104 @@ export const styles = StyleSheet.create({
     padding: '40px',
     fontFamily: 'Montserrat',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   left: {
     width: '40%',
-    paddingRight: '10px',
+    paddingRight: '10px'
   },
   right: {
     width: '60%',
-    paddingLeft: '10px',
+    paddingLeft: '10px'
   },
   block: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    width: '100%'
   },
   blockRight: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    textAlign: 'right',
+    textAlign: 'right'
   },
   section: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   primaryItem: {
     padding: 0,
     fontSize: 14,
-    fontWeight: 200,
+    fontWeight: 200
   },
   primaryItemRight: {
     padding: 0,
     fontSize: 12,
     fontWeight: 200,
-    textAlign: 'right',
+    textAlign: 'right'
   },
   secondaryItem: {
     marginTop: '3.5px',
     padding: 0,
     fontSize: 9.5,
-    fontWeight: 200,
+    fontWeight: 200
   },
   regularItem: {
     margin: 0,
     padding: 0,
     fontSize: 9,
-    textAlign: 'justify',
+    textAlign: 'justify'
   },
   mainItemTitle: {
     margin: '2px 0px',
     padding: 0,
     fontSize: 30,
     fontWeight: 800,
-    textAlign: 'left',
+    textAlign: 'left'
   },
   mainItemTitleRight: {
     margin: '2px 0px',
     padding: 0,
     fontSize: 30,
     fontWeight: 800,
-    textAlign: 'right',
+    textAlign: 'right'
   },
   skillSubTitle: {
     fontSize: 10.5,
     fontWeight: 400,
     fontStyle: 'normal',
-    textAlign: 'right',
+    textAlign: 'right'
   },
   skillsInset: {
     padding: '3.5px 8px 3.5px 0px',
     fontSize: 9,
     fontWeight: 400,
     fontStyle: 'italic',
-    textAlign: 'left',
+    textAlign: 'left'
   },
   skillsInsetRight: {
     padding: '3.5px 8px 3.5px 0px',
     fontSize: 9,
     fontWeight: 400,
     fontStyle: 'italic',
-    textAlign: 'right',
+    textAlign: 'right'
   },
   namedTitle: {
     fontWeight: 200,
-    fontSize: 12,
-  },
+    fontSize: 12
+  }
 });
 
 const isList = (data: List | string): boolean => typeof data !== 'string';
-export const isNestedList = (data: List | NestedList): boolean => (Object.values(data).length > 0 ? isList(Object.values(data)[0]) : true);
+export const isNestedList = (data: List | NestedList): boolean =>
+  Object.values(data).length > 0 ? isList(Object.values(data)[0]) : true;
 
 // Create Document Component
 export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
   const date = new Date();
   return (
     <Document title={`Van_den_Bulcke_Jonas-CV-${date.getFullYear()}-${date.getUTCMonth()}-${date.getDate()}.pdf`}>
-      <Page dpi={90} size='A4' style={styles.page}>
+      <Page dpi={90} size="A4" style={styles.page}>
         <div id={'header'} style={styles.section}>
           <div
             id={'left'}
@@ -137,7 +138,7 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
               justifyContent: 'space-between',
               width: '100%',
               alignItems: 'top',
-              marginBottom: -30,
+              marginBottom: -30
             }}
           >
             <Image style={{ width: 114, height: 114, borderRadius: 57 }} src={profileImage} />
@@ -168,7 +169,7 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
             pageNumber === totalPages && (
               <>
                 {`Created on ${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}. `}
-                <a style={{ textDecoration: 'underline' }} href='https://jonasward.eu/#/cv'>
+                <a style={{ textDecoration: 'underline' }} href="https://jonasward.eu/#/cv">
                   jonasward.eu/#/cv
                 </a>
               </>

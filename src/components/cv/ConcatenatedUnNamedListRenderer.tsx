@@ -1,4 +1,4 @@
-import { List } from './cv.type';
+import { List } from '../../types/cv/cvType';
 import { PDFDivText } from './InfoRenderer';
 
 export const ConcatenatedUnNamedListRenderer: React.FC<{ data: List; isPdf: boolean }> = ({ data, isPdf }) => (

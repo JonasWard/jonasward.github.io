@@ -1,4 +1,4 @@
-import { Skills, NestedList, List } from './cv.type';
+import { Skills, NestedList, List } from '../../types/cv/cvType';
 import { styles, isNestedList } from './CVDocument';
 import { PDFDivText } from './InfoRenderer';
 import { UnNamedListRenderer } from './UnNamedListRenderer';

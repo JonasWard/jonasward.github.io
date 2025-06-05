@@ -1,4 +1,4 @@
-import { Education } from './cv.type';
+import { Education } from '../../types/cv/cvType';
 import { styles } from './CVDocument';
 import { PDFDivText } from './InfoRenderer';
 import { TitleRenderer } from './TitleRenderer';
