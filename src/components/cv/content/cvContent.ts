@@ -50,11 +50,11 @@ export const CVContent: CVData = {
       projects: {
         'Lucerna Lecto': [
           'https://jonasward.eu/lucerna-lecto',
-          '2024-2025 - configurable lamp shades with SDFs. Multiple iterations exists. Build with R3F'
+          '2024 - 2025 - configurable lamp shades with SDFs. Multiple iterations exists. Build with R3F'
         ],
         'SDF Scarves': [
           'https://jonasward.eu/#project/scarves',
-          '2022-2024 - series of SDF based scarves, design informed by overlaying and scaling different TPMSs with one another, patterns generated using a browser based pattern generator'
+          '2022 - 2024 - series of SDF based scarves, design informed by overlaying and scaling different TPMSs with one another, patterns generated using a browser based pattern generator'
         ],
         'Sensing a Place': [
           'https://www.youtube.com/watch?v=tIDVZ1KbwcA&ab_channel=LaurinKilbert',
@@ -103,7 +103,7 @@ export const CVContent: CVData = {
       company: 'rrreefs',
       position: 'Consultant',
       role: 'design and fabrication strategy',
-      date: '2019 - 2022',
+      date: 'September 2019 - 2022',
       location: 'Zürich, Switzerland',
       projects: {
         Modules: [
@@ -247,12 +247,12 @@ export const CVContent: CVData = {
       'Santini at home Lamp Configurator'
     ],
     'Hackathon Kosmos Klee': '2023 - Art as a message board',
-    open3D: '2023 -contributed to a typescript open source 3D geometry library based on the Rhinoceros 3D syntax',
+    open3D: '2023 - Contributed to a typescript open source 3D geometry library based on the Rhinoceros 3D syntax',
     'jokerweek - BOX office':
       '2015 - Workshop week organised for bachelor students - coordination & head of scenography',
     'design DLK - lunch lectures':
-      '2014-2015 - Organizer of lunch lectures introducing students to the work of their teachers',
-    'DLK - after hour student event': ' 2010-2015 - Organizer of many drinks, parties and social occasions'
+      '2014 - 2015 - Organizer of lunch lectures introducing students to the work of their teachers',
+    'DLK - after hour student event': ' 2010 - 2015 - Organizer of many drinks, parties and social occasions'
   },
   pipeline: {
     Kunsthaus: 'Bedsidetable lamp of the "Kunsthaus" in Zürich by Karl Moser',
