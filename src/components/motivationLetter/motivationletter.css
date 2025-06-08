@@ -1,0 +1,63 @@
+.drawer {
+  width: 438px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #111;
+  transition: 0.3s;
+  padding: 60px 10px 10px 12px;
+  color: white;
+  font-weight: 600;
+  font-family: montserrat;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.drawer a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.drawer a:hover {
+  color: #f1f1f1;
+}
+
+.drawer input {
+  border: none;
+  border-radius: 8px;
+  font-family: montserrat;
+  text-align: justify;
+  padding: 6px;
+}
+
+.drawer textarea {
+  height: calc(100vh - 500px);
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 6px;
+  font-family: montserrat;
+  text-align: justify;
+  max-width: 100%;
+  min-width: 100%;
+  gap: 10px;
+}
+
+.drawer button {
+  width: 162px;
+  position: fixed;
+  background: darkslategray;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 2px solid white;
+  color: white;
+  bottom: 10px;
+  left: 12px;
+}
+
+.drawer button:hover {
+  background: black;
+  filter: none;
+}
