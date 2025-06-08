@@ -2,32 +2,8 @@ import { useEffect, useRef } from 'react';
 import logo from 'src/assets/icons/jonasward_logo_ww.svg';
 import { useNavigate } from 'react-router-dom';
 import './missing.css';
-
-const vsSource = `
-    attribute vec4 aVertexPosition;
-    void main(void) {
-        gl_Position = aVertexPosition;
-    }
-`;
-
-const fsSource = `
-#define TAU                         6.2831853071795862
-    precision mediump float;
-    uniform float uTime;
-    uniform vec2 uCenter;
-    uniform vec2 uInverseResolution;
-    uniform float uProportion;
-    const float amplitude = 100.0;
-
-    void main(void) {
-        vec2 uv = (vec2(gl_FragCoord.xy) * vec2(uProportion, 1.0) - uCenter );
-        float angle = atan(uv.y, uv.x);
-        float radius = length(uv) * 0.1;
-        radius = radius / amplitude + (angle + uTime) / TAU;
-        vec3 color = vec3(0.5 + 0.5 * sin(TAU * radius - 1.0), 0.5 + 0.5 * sin(TAU * radius), 0.5 + 0.5 * sin(TAU * radius + 1.0));
-        gl_FragColor = vec4(color, 1.0);
-    }
-`;
+import vsSource from './shaders/missingVertexShader.glsl?raw';
+import fsSource from './shaders/missingFragmentShader.glsl?raw';
 
 const loadShader = (gl: WebGLRenderingContext, type: GLenum, source: string) => {
   const shader = gl.createShader(type);
@@ -142,9 +118,9 @@ const Missing = () => {
   }, []);
 
   return (
-    <div className='missing-page'>
-      <canvas className='missing-page canvas' ref={canvasRef} />
-      <div className='missing-link' onClick={goToProjects}>
+    <div className="missing-page">
+      <canvas className="missing-page canvas" ref={canvasRef} />
+      <div className="missing-link" onClick={goToProjects}>
         <span>You must have taken a wrong turn</span>
         <span>why don't you go back to the projects page</span>
         <img src={logo} alt={'missing logo'} />

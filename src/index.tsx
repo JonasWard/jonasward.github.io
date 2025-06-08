@@ -1,13 +1,13 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import Landing from './components/Landing';
+import Landing from './components/landingMissing/Landing';
 import About from './components/me/About';
 import ProjectOverview from './components/projects/overview/ProjectOverview';
 import CV from './components/cv/CV';
 import './index.css';
 import { ProjectWrapper } from './components/projects/overview/ProjectWrapper';
-import Missing from './components/Missing';
+import Missing from './components/landingMissing/Missing';
 import { HeaderWrapper } from './components/HeaderWrapper';
 import { ProjectRoutes } from './types/navigation/projectroutes';
 import { MotivationLetterGenerator } from './components/motivationLetter/MotivationLetterGenerator';
