@@ -29,6 +29,7 @@ import { sdfVases } from './art/sdfVases';
 import { chocoStudies } from './art/chocoStudies';
 import { sdfLamps } from './art/sdfLamps';
 import { holzvisionMax } from './software/holzvisionMax';
+import { chocoladeChaudD2P } from './art/chocoladeChaudD2P';
 
 export const allProjects = [
   patternMachine,
@@ -61,5 +62,6 @@ export const allProjects = [
   sdfVases,
   chocoStudies,
   sdfLamps,
-  holzvisionMax
+  holzvisionMax,
+  chocoladeChaudD2P
 ].sort((a, b) => -a.id.localeCompare(b.id));
