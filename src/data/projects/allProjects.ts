@@ -28,6 +28,7 @@ import { sdfAsMeaning } from './art/sdfAsMeaning';
 import { sdfVases } from './art/sdfVases';
 import { chocoStudies } from './art/chocoStudies';
 import { sdfLamps } from './art/sdfLamps';
+import { holzvisionMax } from './software/holzvisionMax';
 
 export const allProjects = [
   patternMachine,
@@ -59,5 +60,6 @@ export const allProjects = [
   sdfAsMeaning,
   sdfVases,
   chocoStudies,
-  sdfLamps
+  sdfLamps,
+  holzvisionMax
 ].sort((a, b) => -a.id.localeCompare(b.id));
