@@ -68,7 +68,7 @@ Error generating stack: `+a.message+`
 void main(void) {
   gl_Position = aVertexPosition;
 }`,tO=`#define TAU                         6.2831853071795862
-precision mediump float;
+precision highp float;
 uniform float uTime;
 uniform vec2 uCenter;
 uniform vec2 uInverseResolution;
@@ -362,7 +362,7 @@ Esri's reputation for innovation in geospatial technology and its commitment to 
 void main(void) {
   gl_Position = aVertexPosition;
 }`,FCe=`#define TAU                         6.2831853071795862
-precision mediump float;
+precision highp float;
 uniform float uTime;
 uniform vec2 uCenter;
 uniform vec2 uInverseResolution;
