@@ -11,7 +11,7 @@ import Missing from './components/Missing';
 import { HeaderWrapper } from './components/HeaderWrapper';
 import { ProjectRoutes } from './types/navigation/projectroutes';
 import { ProjectColorView } from './components/ColorConfig';
-import { MotivationLetterGenerator } from './components/cv/MotivationLetterGenerator';
+import { MotivationLetterGenerator } from './components/motivationLetter/MotivationLetterGenerator';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
