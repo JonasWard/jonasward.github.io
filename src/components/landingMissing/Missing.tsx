@@ -47,9 +47,9 @@ const Missing = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const gl = canvas.getContext('webgl');
+    const gl = canvas.getContext('webgl2');
     if (!gl) {
-      console.error('WebGL not supported');
+      console.error('WebGL2 not supported');
       return;
     }
 
