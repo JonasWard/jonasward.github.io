@@ -30,7 +30,7 @@ const DropDownContent: React.FC = () => {
         About
       </button>
       <button className={path.pathname.includes(ProjectRoutes.CV) ? 'button-active' : 'button'} onClick={navigateCV}>
-        Cv
+        CV
       </button>
     </>
   );
