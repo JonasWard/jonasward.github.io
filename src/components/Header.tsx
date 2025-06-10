@@ -47,10 +47,10 @@ const Navigation: React.FC = () => {
   return (
     <div className="header-right">
       <div className={`navigation-button ${showDropDown ? '' : 'show'}`} onClick={() => setShowDropDown(!showDropDown)}>
-        <svg height="40" width="30" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 10 L30 10" stroke="black" strokeWidth="3px" />
-          <path d="M0 20 L30 20" stroke="black" strokeWidth="3px" />
-          <path d="M0 30 L30 30" stroke="black" strokeWidth="3px" />
+        <svg height="30" width="30" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 5 L30 5" stroke="black" strokeWidth="2px" />
+          <path d="M0 15 L30 15" stroke="black" strokeWidth="2px" />
+          <path d="M0 25 L30 25" stroke="black" strokeWidth="2px" />
         </svg>
       </div>
       <div className={`dropdown-content ${showDropDown ? 'show' : ''}`}>
