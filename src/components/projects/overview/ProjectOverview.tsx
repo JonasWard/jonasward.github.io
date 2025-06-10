@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { ProjectCategoryFilterType } from '../../../types/navigation/filterType';
 import { useProjectStore } from '../../../state/projectStore';
 
-const getInnerWidth = (): number => Math.min(1495, window.innerWidth);
+const getInnerWidth = (): number => Math.min(1495, window?.visualViewport?.width ?? window.innerWidth);
 
 const mobileViewWidth = 570;
 const horizontalSpacing = 200;
