@@ -17,19 +17,14 @@ export const CVHTML: React.FC<{ data: CVData }> = ({ data }) => (
         </div>
         <div className="header-grid div-2">
           <img style={{ width: '100%', height: '75%' }} alt="red-dot" src={logo} />
-        </div>
-      </div>
-    </div>
-    <div id="section 1" className="content-grid">
-      <div id={'left'} />
-      <div id={'right'}>
-        <div id={'section 1'}>
           <div style={{ textAlign: 'justify', fontSize: 14, fontWeight: 600 }}>
             <PDFDivText isPdf={false} content={data.tagline[0]} id={'1'} />
             <PDFDivText isPdf={false} content={data.tagline[1]} id={'2'} />
           </div>
         </div>
       </div>
+    </div>
+    <div id="section 1" className="content-grid">
       <InfoRenderer info={data.info} isPdf={false} />
       <EducationRenderer education={data.education} isPdf={false} />
       <SkillsRenderer skills={data.skills} isPdf={false} />

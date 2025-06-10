@@ -2,23 +2,23 @@ import { CVData } from 'src/types/cv/cvType';
 
 export const CVContent: CVData = {
   tagline: [
-    'Web Developer Making the World a Greener Place.',
-    '5 years of Full-Stack, 10 years Creative Problem-Solving'
+    'Web developer — making the world a greener place.',
+    '5 years of full-stack, 10 years creative problem-solving.'
   ],
   info: {
     name: 'Van den Bulcke',
     firstName: 'Jonas Ward',
     titles: 'IR arch. MAS ETH',
     citizenship: ' Swiss B-permit (EU-citizen), Belgian, Brazilian',
-    placeOfBirth: 'Rio de Janeiro, BR',
+    placeOfBirth: 'Rio de Janeiro, Brazil',
     dateOfBirth: '08.12.1991',
     telephone: '+41 76 232 76 27',
     email: 'jonas.vandenbulcke@gmail.com',
     website: ['https://jonasward.eu', 'jonasward.eu'],
     github: ['https://github.com/jonasward', 'github.com/jonasward'],
     linkedin: ['https://linkedin.com/in/wardjonas', 'linkedin.com/in/wardjonas'],
-    addressLine1: 'Käferholzstrasse 40, 8057, Zürich, CH',
-    addressLine2: 'Schoonmeersstraat 29, 9000, Gent, BE'
+    addressLine1: 'Käferholzstrasse 46, 8057, Zürich, Switzerland',
+    addressLine2: 'Schoonmeersstraat 29, 9000, Gent, Belgium'
   },
   education: [
     {
