@@ -68,9 +68,12 @@ export const Header: React.FC<{ withFilter?: boolean }> = ({ withFilter = false 
   return (
     <div className="header">
       <div className="header-content">
-        <button className={'button'} onClick={navigateHome}>
-          <img alt={''} src={logo} style={{ width: '200px', marginLeft: -12 }} />
-        </button>
+        <img
+          alt={''}
+          onClick={navigateHome}
+          src={logo}
+          style={{ width: '180px', marginLeft: -12, cursor: 'pointer' }}
+        />
         {withFilter ? (
           <select
             style={{

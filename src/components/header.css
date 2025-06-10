@@ -43,6 +43,15 @@
   align-items: center;
 }
 
+.header-content img {
+  transition: 0.6s;
+  filter: none;
+}
+
+.header-content img:hover {
+  filter: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
+}
+
 .header-right {
   position: relative;
   height: 100%;
