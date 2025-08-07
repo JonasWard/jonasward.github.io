@@ -102,7 +102,7 @@ export const CVContent: CVData = {
     {
       company: 'rrreefs',
       position: 'Consultant',
-      role: 'design and fabrication strategy',
+      role: 'Design and Fabrication Strategy',
       date: 'September 2019 - 2022',
       location: 'Zürich, Switzerland',
       projects: {
@@ -157,7 +157,7 @@ export const CVContent: CVData = {
     },
     {
       company: 'Circrete',
-      position: 'Tech Lead',
+      position: 'Tech Lead (part-time)',
       role: 'FullStack Developer',
       date: 'May 2025 - now',
       location: 'Copenhagen, Denmarkt (Remote)',
