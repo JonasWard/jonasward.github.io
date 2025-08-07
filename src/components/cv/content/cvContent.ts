@@ -17,7 +17,7 @@ export const CVContent: CVData = {
     website: ['https://jonasward.eu', 'jonasward.eu'],
     github: ['https://github.com/jonasward', 'github.com/jonasward'],
     linkedin: ['https://linkedin.com/in/wardjonas', 'linkedin.com/in/wardjonas'],
-    addressLine1: 'Käferholzstrasse 46, 8057, Zürich, Switzerland',
+    addressLine1: 'Käferholzstrasse 40, 8057, Zürich, Switzerland',
     addressLine2: 'Schoonmeersstraat 29, 9000, Gent, Belgium'
   },
   education: [
