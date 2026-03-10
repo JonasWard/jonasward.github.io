@@ -156,9 +156,9 @@ export const CVContent: CVData = {
       }
     },
     {
-      company: 'Circrete',
-      position: 'Tech Lead (part-time)',
-      role: 'FullStack Developer',
+      company: 'circrete',
+      position: 'Advisory Board Member',
+      role: 'Tech Strategy',
       date: 'May 2025 - now',
       location: 'Copenhagen, Denmarkt (Remote)',
       projects: {
@@ -171,62 +171,52 @@ export const CVContent: CVData = {
     soft: {
       languages: ['Dutch - C2', 'English - C2', 'German - C1', 'French - B2']
     },
-    digital: {
-      'web dev': {
-        languages: ['.ts', '.js', 'python', 'wasm (C#, rust)', 'java'],
-        dev: ['bun', 'npm', 'yarn', 'conda', 'docker', 'vite', 'turbo'],
-        backend: ['bun', 'Elysia', 'express', 'springboot', 'flask', 'django'],
-        'CI/CD': ['azure pipeline', 'gitlab', 'bitbucket'],
-        devOps: ['AWS', 'azure', 'kubernetes', 'Google Cloud', 'GitHub', 'Docker'],
-        ai: ['OpenAi API', 'AzureOpenAPI', 'tensorflowjs', 'onnxjs (pytorch)'],
-        database: ['mongodb', 'firebase', 'supabase', 'prisma', 'mysql'],
-        react: ['zustand', 'react-router', 'redux', 'next.js', 'react-pdf'],
-        webGL: ['glsl', 'threejs', 'R3F', 'babylonjs', 'pixi.js', 'svg'],
-        styling: ['css', 'sass', 'tailwind', 'scss', 'MUI', 'antd', 'bootstrap'],
-        other: ['leaflet', 'IFCjs', 'axios']
-      },
-      '.py': {
-        ml: ['numpy', 'pandas', 'scipy', 'matplotlib', 'openCV', 'sklearn', 'tensorflow', 'pytorch'],
-        geography: ['GDAL', 'GeoPython', 'GeoPandas', 'shapely', 'qgis scripting'],
-        geometry: [
-          'blender',
-          'Rhino/Grasshopper',
-          'processing',
-          'ifcOpenShell',
-          'shapely',
-          'cgal (bindings)',
-          'processing'
-        ]
-      },
-      '#c': ['Unity, Rhino/Grasshopper, mono, WPF'],
+    'web dev': {
+      languages: ['.ts', '.js', 'python', 'wasm (C#, rust)', 'java'],
+      dev: ['bun', 'npm', 'yarn', 'conda', 'docker', 'vite', 'turbo'],
+      backend: ['bun', 'Elysia', 'express', 'springboot', 'flask', 'django'],
+      'CI/CD': ['azure pipeline', 'gitlab', 'bitbucket'],
+      devOps: ['AWS', 'azure', 'kubernetes', 'Google Cloud', 'GitHub', 'Docker'],
+      ai: ['OpenAi API', 'AzureOpenAPI', 'tensorflowjs', 'onnxjs (pytorch)'],
+      database: ['mongodb', 'firebase', 'supabase', 'prisma', 'mysql'],
+      react: ['zustand', 'react-router', 'redux', 'next.js', 'react-pdf'],
+      webGL: ['glsl', 'threejs', 'R3F', 'babylonjs', 'pixi.js', 'svg'],
+      styling: ['css', 'sass', 'tailwind', 'scss', 'MUI', 'antd', 'bootstrap'],
       java: ['spring boot, JTS, gradle, openCV, AWT, processing'],
-      rust: ['wasm, wgpu, leptos'],
-      other: ['go, julia, GCode, UR-script'],
-      software: {
-        'code-editors': ['VSCode', 'JetBrains', 'VisualStudio', 'Jupyter / Colab'],
-        'development-tools': ['git', 'bash', 'MongoDB compass', 'docker', 'github', 'gitlab'],
-        markup: [
-          'InDesign',
-          'Illustrator / Inkscape',
-          'Photoshop',
-          'iWork / Office / google suite',
-          'Midjourney',
-          'Figma',
-          'Sketch'
-        ],
-        'urban planning': ['QGIS', 'maptiler', 'AutoCAD'],
-        caad: ['Rhinoceros 3D / Grasshopper', 'Revit', 'ArchiCAD', 'AutoCAD', 'Blender']
-      }
+      other: ['leaflet', 'IFCjs', 'axios']
     },
-    physical: {
-      'digital tools': {
-        dfab: ['CNC Milling', 'Laser Cutting', '3D Printing', 'robotic path planning', 'digital kniting'],
-        '3d-printing': ['FDM', 'sand', 'binder-jet', 'glass (fusing)', 'clay', 'concrete', 'chocolate', 'sugar']
-      },
-      physical: {
-        ceramics: ['slip casting', 'turning table', 'glazing'],
-        modelbuilding: ['laser cutting - paper, wood, PMMA', '3d printing - pla, abs, petg', 'cnc milling - wood, EPS']
-      }
+    '.py': {
+      ml: ['numpy', 'pandas', 'scipy', 'matplotlib', 'openCV', 'sklearn', 'tensorflow', 'pytorch'],
+      geography: ['GDAL', 'GeoPython', 'GeoPandas', 'shapely', 'qgis scripting'],
+      geometry: [
+        'blender',
+        'Rhino/Grasshopper',
+        'processing',
+        'ifcOpenShell',
+        'shapely',
+        'cgal (bindings)',
+        'processing'
+      ]
+    },
+    more: {
+      '#c': ['Unity, Rhino/Grasshopper, mono, WPF'],
+      rust: ['wasm, wgpu, leptos'],
+      other: ['go, julia, GCode, UR-script']
+    },
+    software: {
+      'code-editors': ['VSCode', 'JetBrains', 'VisualStudio', 'Jupyter / Colab'],
+      'development-tools': ['git', 'bash', 'MongoDB compass', 'docker', 'github', 'gitlab'],
+      markup: [
+        'InDesign',
+        'Illustrator / Inkscape',
+        'Photoshop',
+        'iWork / Office / google suite',
+        'Midjourney',
+        'Figma',
+        'Sketch'
+      ],
+      'urban planning': ['QGIS', 'maptiler', 'AutoCAD'],
+      caad: ['Rhinoceros 3D / Grasshopper', 'Revit', 'ArchiCAD', 'AutoCAD', 'Blender']
     }
   },
   extraCurricular: {
