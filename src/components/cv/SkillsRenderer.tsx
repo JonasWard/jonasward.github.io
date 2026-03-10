@@ -20,7 +20,7 @@ export const SkillsRenderer: React.FC<{ skills: Skills; isPdf: boolean }> = ({ s
               <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
               {isNestedList(subSkills) ? (
                 Object.entries(subSkills as NestedList).map(([parentSkill, subSkills]) => (
-                  <View wrap={false} id={'skills'} style={styles.skillsInsetRight}>
+                  <View wrap={true} id={'skills'} style={{ ...styles.skillsInsetRight }}>
                     <PDFDivText isPdf={isPdf} content={`${parentSkill}`} id={parentSkill} />
                     <div id={'subSkills'} style={styles.skillsInsetRight}>
                       <ConcatenatedUnNamedListRenderer data={subSkills} isPdf={isPdf} />
@@ -29,7 +29,7 @@ export const SkillsRenderer: React.FC<{ skills: Skills; isPdf: boolean }> = ({ s
                 ))
               ) : (
                 <View wrap={false} id={parentSkill} style={styles.skillsInsetRight}>
-                  <UnNamedListRenderer data={subSkills as List} isPdf={isPdf} style={styles.skillsInsetRight} />
+                  <ConcatenatedUnNamedListRenderer data={subSkills as List} isPdf={isPdf} />
                 </View>
               )}
             </View>

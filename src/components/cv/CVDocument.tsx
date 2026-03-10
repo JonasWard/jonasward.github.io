@@ -93,20 +93,21 @@ export const styles = StyleSheet.create({
     textAlign: 'right'
   },
   skillSubTitle: {
-    fontSize: 10.5,
-    fontWeight: 400,
+    fontSize: 11,
+    fontWeight: 500,
+    padding: '8px 0px 10px 0px',
     fontStyle: 'normal',
     textAlign: 'right'
   },
   skillsInset: {
-    padding: '3.5px 8px 3.5px 0px',
-    fontSize: 9,
+    padding: '7px 0px 7px 0px',
+    fontSize: 10,
     fontWeight: 400,
     fontStyle: 'italic',
     textAlign: 'left'
   },
   skillsInsetRight: {
-    padding: '3.5px 8px 3.5px 0px',
+    padding: '6px 0px 5px 0px',
     fontSize: 9,
     fontWeight: 400,
     fontStyle: 'italic',
