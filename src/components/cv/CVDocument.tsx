@@ -1,4 +1,4 @@
-import { Page, Document, StyleSheet, Font, Image, Text } from '@react-pdf/renderer';
+import { Page, Document, StyleSheet, Font, Image, Text, View } from '@react-pdf/renderer';
 import { CVData, List, NestedList } from '../../types/cv/cvType';
 import logo from 'src/assets/jonasward_logo_elong.png';
 import profileImage from 'src/assets/pictures/profilePicture-crop.jpg';
@@ -11,6 +11,7 @@ import { EducationRenderer } from './EducationRenderer';
 import { SkillsRenderer } from './SkillsRenderer';
 import { InfoRenderer, PDFDivText } from './InfoRenderer';
 import { ExtraCurricularRenderer } from './ExtraCurricularRenderer';
+import qrCode from 'src/assets/jonasward-cv-qr.png';
 
 Font.register({
   family: 'Montserrat',
@@ -173,19 +174,35 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
             <ExtraCurricularRenderer data={data.extraCurricular} isPdf />
           </div>
         </div>
-        <Text
-          style={{ position: 'absolute', bottom: 30, right: 0, left: 0, textAlign: 'center', fontSize: 10 }}
-          render={({ pageNumber, totalPages }) =>
-            pageNumber === totalPages && (
-              <>
-                {`Created on ${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}. `}
-                <a style={{ textDecoration: 'underline' }} href="https://jonasward.eu/#cv">
-                  jonasward.eu/#cv
-                </a>
-              </>
-            )
-          }
-        />
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 30,
+            right: 0,
+            left: 0,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: 10,
+            gap: 10
+          }}
+        >
+          <Text
+            style={{ textAlign: 'center', fontSize: 10 }}
+            render={({ pageNumber, totalPages }) =>
+              pageNumber === totalPages && (
+                <>
+                  {`Created on ${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}. `}
+                  <a style={{ textDecoration: 'underline' }} href="https://jonasward.eu/#cv">
+                    jonasward.eu/#cv
+                  </a>
+                </>
+              )
+            }
+          />
+          <Image src={qrCode} style={{ width: 30, height: 30 }} />
+        </View>
       </Page>
     </Document>
   );
