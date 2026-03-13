@@ -194,8 +194,8 @@ export const CVDocument: React.FC<{ data: CVData }> = ({ data }) => {
               pageNumber === totalPages && (
                 <>
                   {`Created on ${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}. `}
-                  <a style={{ textDecoration: 'underline' }} href="https://jonasward.eu/#cv">
-                    jonasward.eu/#cv
+                  <a style={{ textDecoration: 'underline' }} href="https://jonasward.ch/#cv">
+                    jonasward.ch/#cv
                   </a>
                 </>
               )

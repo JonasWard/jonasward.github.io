@@ -5,15 +5,15 @@ dns.setDefaultResultOrder('verbatim');
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: 3117,
+    port: 3111
   },
   build: {
-    outDir: './build',
+    outDir: './build'
   },
   base: '/',
   resolve: {
     alias: {
-      src: '/src',
-    },
-  },
+      src: '/src'
+    }
+  }
 });

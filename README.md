@@ -2,7 +2,7 @@
 
 I am Jonas - Front End Developer, designer, architect - based in Zürich CH.
 
-you can view my portfolio at: [jonasward.eu](https://jonasward.eu)
+you can view my portfolio at: [jonasward.ch](https://jonasward.ch)
 
 ### stack
 

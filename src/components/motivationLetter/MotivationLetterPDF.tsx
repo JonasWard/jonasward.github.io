@@ -50,8 +50,8 @@ export const MotivationPDF: React.FC<{ motivationContent: MotivationLetterConten
               <PDFDivText isPdf id={'addressLine1'} content={`${CVContent.info.addressLine1}`} />
               <PDFDivText isPdf id={'telephone'} content={`${CVContent.info.telephone}`} />
               <PDFDivText isPdf id={'email'} content={`${CVContent.info.email}`} />
-              <Link id={'website'} style={{ color: 'black' }} href={'https://jonasward.eu/#cv'}>
-                jonasward.eu/#cv
+              <Link id={'website'} style={{ color: 'black' }} href={'https://jonasward.ch/#cv'}>
+                jonasward.ch/#cv
               </Link>
             </div>
           </div>

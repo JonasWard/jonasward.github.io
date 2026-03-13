@@ -14,7 +14,7 @@ export const CVContent: CVData = {
     dateOfBirth: '08.12.1991',
     telephone: '+41 76 232 76 27',
     email: 'jonas@jonasward.ch',
-    website: ['https://jonasward.eu', 'jonasward.eu'],
+    website: ['https://jonasward.ch', 'jonasward.ch'],
     github: ['https://github.com/jonasward', 'github.com/jonasward'],
     linkedin: ['https://linkedin.com/in/wardjonas', 'linkedin.com/in/wardjonas'],
     addressLine1: 'Mühlehalde 11, 8032, Zürich, Switzerland',
@@ -49,11 +49,11 @@ export const CVContent: CVData = {
       location: 'Ghent, BE; Zürich, CH',
       projects: {
         'Lucerna Lecto': [
-          'https://jonasward.eu/lucerna-lecto',
+          'https://jonasward.ch/lucerna-lecto',
           '2024 - 2025 - configurable lamp shades with SDFs. Multiple iterations exists. Build with R3F'
         ],
         'SDF Scarves': [
-          'https://jonasward.eu/#project/scarves',
+          'https://jonasward.ch/#project/scarves',
           '2022 - 2024 - series of SDF based scarves, design informed by overlaying and scaling different TPMSs with one another, patterns generated using a browser based pattern generator'
         ],
         'Sensing a Place': [
@@ -61,15 +61,15 @@ export const CVContent: CVData = {
           '2022 - in-situ 3d printing of clay using the material of the site, design informed by hearing, feeling, seeing. In collaboration with Berlin based artists Joana Schmitz & Leon Kilbert. Funded by an European Horizon 2020 Grant.'
         ],
         'Elbe Bienen': [
-          'https://jonasward.eu/#project/guerilla-beehive',
+          'https://jonasward.ch/#project/guerilla-beehive',
           '2019 - 21st century beehive blending biology, informatics to help curb mass starvation due to air pollution. Design made for Brussels based artist Anne- marie Maes, funded through Hamburg Machine. In collaboration with Die Angewandte Wien. Funded by Flemish Government and Hamburg Stadskuratorerin.'
         ],
         'Frituur Futurist': [
-          'https://jonasward.eu/#project/futurist',
+          'https://jonasward.ch/#project/futurist',
           '2017 - Competion on the Frietkot in Brussels for a new iconic frying house for Brussels, sending in an out of CLT constructed proposal inspired by Expo ‘58 Philips pavilion and the typical Belgian "Frietzak". Collaboration with Jan Verstraete & Dominque Girolami - honorary mention.'
         ],
         Boekentoren: [
-          'https://jonasward.eu/#project/lamps',
+          'https://jonasward.ch/#project/lamps',
           '2017 - Bedsidetable lamp of the UGent \'s central library tower the "Boekentoren" by Henry Van de Velde'
         ]
       }
@@ -83,7 +83,7 @@ export const CVContent: CVData = {
       projects: {
         Pelikaanstraat: 'masterplanning project for high rise development in the area of Antwerpen Centraal',
         'Mundo-A': [
-          'https://jonasward.eu/#project/mundo-a',
+          'https://jonasward.ch/#project/mundo-a',
           'planningphase and construction site manage- ment for ecological office building constructed out of CLT (ARC19 Architecture Award, winner)'
         ]
       }
@@ -107,10 +107,10 @@ export const CVContent: CVData = {
       location: 'Zürich, Switzerland',
       projects: {
         Modules: [
-          'https://jonasward.eu/#project/coral-bricks',
+          'https://jonasward.ch/#project/coral-bricks',
           '3d printed clay structures that function as preservative art. They help keeping corals thriving despite rising ocean temperatures and acidification. Test in maldives, real prototype will be installed in San Andrea, Colombia summer 2021. Funded by crowdfunding on WeMakeIt & ETH Library Lab. - Awarded with the Hochparterre Golder Hase 2021'
         ],
-        'clay-online': ['https://jonasward.eu/clay-online/', 'Web configurator for the modules brick using babylon.js.']
+        'clay-online': ['https://jonasward.ch/clay-online/', 'Web configurator for the modules brick using babylon.js.']
       }
     },
     {
@@ -146,11 +146,11 @@ export const CVContent: CVData = {
           'a web based supermarket and vertical farming configurator, team project, .Net backend, typescript backend, hosted on Google Cloud.'
         ],
         'Stauffer Statics': [
-          'https://jonasward.eu/#project/stauffer-static',
+          'https://jonasward.ch/#project/stauffer-static',
           'a cloud-based static analysis tool for timber contractors. Typescript project. Responsible from start to finish, Hosted on Google Cloud'
         ],
         'Haas House Configurator': [
-          'https://jonasward.eu/#project/haas-haus-configurator',
+          'https://jonasward.ch/#project/haas-haus-configurator',
           'a cloud-based application that allows prospective clients to give shape to their dream house using a 2D/3D editor directly in their webbrowser. Typescript client side project, Hosted on AWS.'
         ]
       }
@@ -228,12 +228,12 @@ export const CVContent: CVData = {
     'AEC Hackathon - Zürich 2025':
       'Projects Talking - CAM ERP for the Timber industry - Price: Most Potential for a Start-Up',
     'url-safe-bitpacking': [
-      'https://jonasward.eu/#project/url-safe-bitpacker',
+      'https://jonasward.ch/#project/url-safe-bitpacker',
       '2024 - open source bitpacking library for complicated parametric models'
     ],
     'AEC Hackathon - Copenhagen 2024': 'Open Detail (LCA detail database) - Price: Innovation',
     'AEC Hackathon - Zürich 2024': [
-      'https://jonasward.eu/#project/para-slim-shady',
+      'https://jonasward.ch/#project/para-slim-shady',
       'Santini at home Lamp Configurator'
     ],
     'Hackathon Kosmos Klee': '2023 - Art as a message board',
