@@ -13,7 +13,7 @@ export const CVContent: CVData = {
     placeOfBirth: 'Rio de Janeiro, Brazil',
     dateOfBirth: '08.12.1991',
     telephone: '+41 76 232 76 27',
-    email: 'jonas.vandenbulcke@gmail.com',
+    email: 'jonas@jonasward.ch',
     website: ['https://jonasward.eu', 'jonasward.eu'],
     github: ['https://github.com/jonasward', 'github.com/jonasward'],
     linkedin: ['https://linkedin.com/in/wardjonas', 'linkedin.com/in/wardjonas'],
