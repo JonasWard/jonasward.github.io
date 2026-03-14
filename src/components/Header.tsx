@@ -3,9 +3,6 @@ import './header.css';
 import { useEffect, useState } from 'react';
 import logo from '../assets/icons/jonasward_logo_ww.svg';
 import { ProjectRoutes } from '../types/navigation/projectroutes';
-import { useProjectStore } from 'src/state/projectStore';
-import { ProjectCategory } from 'src/types/keywords/categoryTypes';
-import { ProjectCategoryFilterType } from 'src/types/navigation/filterType';
 
 const DropDownContent: React.FC = () => {
   const navigate = useNavigate();
@@ -60,41 +57,17 @@ const Navigation: React.FC = () => {
   );
 };
 
-export const Header: React.FC<{ withFilter?: boolean }> = ({ withFilter = false }) => {
+export const Header: React.FC<{ children?: React.ReactNode }> = ({ children = null }) => {
   const navigate = useNavigate();
   const navigateHome = () => navigate(ProjectRoutes.Home);
-  const projectFilter = useProjectStore((s) => s.filter);
 
   return (
     <div className="header">
       <div className="header-content">
-        <img
-          alt={''}
-          onClick={navigateHome}
-          src={logo}
-          style={{ width: '180px', marginLeft: -12, cursor: 'pointer' }}
-        />
-        {withFilter ? (
-          <select
-            style={{
-              border: 'none',
-              background: '#f5f5f5',
-              borderRadius: 7,
-              padding: 2
-            }}
-            value={projectFilter}
-            onChange={(v) => useProjectStore.getState().setFilter(v.target.value as ProjectCategoryFilterType)}
-          >
-            <option value={'All'}>All</option>
-            {Object.values(ProjectCategory).map((k) => (
-              <option key={k} value={k}>
-                {k}
-              </option>
-            ))}
-          </select>
-        ) : null}
+        <img alt={''} onClick={navigateHome} src={logo} style={{ width: '180px', cursor: 'pointer' }} />
         <Navigation />
       </div>
+      {children}
     </div>
   );
 };

@@ -2,15 +2,17 @@
 
 .header {
   display: flex;
+  flex-direction: column;
   font-family: 'Montserrat', sans-serif;
   justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 53px;
   z-index: 1;
-  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .header::before {
@@ -20,7 +22,6 @@
   left: 0;
   right: 0;
   width: 100vw;
-  height: 53px;
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
   opacity: 0;
   transition: 0.6s;
@@ -32,15 +33,14 @@
 }
 
 .header-content {
-  left: max(20px, calc((100vw - 1408px) * 0.5));
-  right: max(20px, calc((100vw - 1408px) * 0.5));
+  left: var(--header-content-inset);
+  right: var(--header-content-inset);
   position: relative;
-  width: min(100vw - 40px, 1408px);
+  width: var(--header-content-width);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
   align-items: center;
 }
 
@@ -57,7 +57,6 @@
   position: relative;
   height: 100%;
   align-items: center;
-  transform: translateX(10px);
 }
 
 /* Style the header links */
@@ -82,14 +81,12 @@
 .dropdown-content {
   display: flex;
   flex-direction: row;
-  height: 60px;
   align-items: center;
 }
 
 @media screen and (max-width: 570px) {
   .navigation-button.show {
     display: flex;
-    height: 60px;
     align-items: center;
   }
 

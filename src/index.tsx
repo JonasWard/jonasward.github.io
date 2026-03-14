@@ -11,6 +11,7 @@ import Missing from './components/landingMissing/Missing';
 import { HeaderWrapper } from './components/HeaderWrapper';
 import { ProjectRoutes } from './types/navigation/projectroutes';
 import { MotivationLetterGenerator } from './components/motivationLetter/MotivationLetterGenerator';
+import { KeywordFilterBar } from './components/projects/overview/KeywordFilterBar';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -19,21 +20,20 @@ root.render(
       <div className="project-page">
         <Routes>
           <Route path={ProjectRoutes.Home} element={<Landing />} />
-          <Route path={ProjectRoutes.Portfolio} element={<HeaderWrapper children={<Missing />} />} />
-          <Route path={ProjectRoutes.Landing} element={<HeaderWrapper children={<Missing />} />} />
+          <Route path={ProjectRoutes.Portfolio} element={<HeaderWrapper content={<Missing />} />} />
+          <Route path={ProjectRoutes.Landing} element={<HeaderWrapper content={<Missing />} />} />
           <Route path={ProjectRoutes.Main} element={<Landing />} />
-          <Route path={ProjectRoutes.CV} element={<HeaderWrapper children={<CV />} />} />
-          <Route path={ProjectRoutes.About} element={<HeaderWrapper children={<About />} />} />
-          <Route path={ProjectRoutes.Projects} element={<HeaderWrapper withFilter children={<ProjectOverview />} />} />
+          <Route path={ProjectRoutes.CV} element={<HeaderWrapper content={<CV />} />} />
+          <Route path={ProjectRoutes.About} element={<HeaderWrapper content={<About />} />} />
           <Route
-            path={ProjectRoutes.ProjectsFilter}
-            element={<HeaderWrapper withFilter children={<ProjectOverview />} />}
+            path={ProjectRoutes.Projects}
+            element={<HeaderWrapper children={<KeywordFilterBar />} content={<ProjectOverview />} />}
           />
-          <Route path={ProjectRoutes.Project} element={<HeaderWrapper children={<ProjectWrapper />} />} />
-          <Route path={ProjectRoutes.Missing} element={<HeaderWrapper children={<Missing />} />} />
+          <Route path={ProjectRoutes.Project} element={<HeaderWrapper content={<ProjectWrapper />} />} />
+          <Route path={ProjectRoutes.Missing} element={<HeaderWrapper content={<Missing />} />} />
           <Route
             path={ProjectRoutes.CreateMotivationLetter}
-            element={<HeaderWrapper children={<MotivationLetterGenerator />} />}
+            element={<HeaderWrapper content={<MotivationLetterGenerator />} />}
           />
         </Routes>
       </div>

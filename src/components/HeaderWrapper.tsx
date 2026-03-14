@@ -1,9 +1,11 @@
-import { ReactNode } from 'react';
 import { Header } from './Header';
 
-export const HeaderWrapper: React.FC<{ children: ReactNode; withFilter?: boolean }> = ({ children, withFilter }) => (
+export const HeaderWrapper: React.FC<{ content: React.ReactNode; children?: React.ReactNode }> = ({
+  content,
+  children
+}) => (
   <>
-    <Header withFilter={withFilter} />
-    {children}
+    <Header children={children} />
+    {content}
   </>
 );

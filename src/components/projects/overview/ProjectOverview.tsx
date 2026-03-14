@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { ProjectCategoryFilterType } from '../../../types/navigation/filterType';
 import { useProjectStore } from '../../../state/projectStore';
 
-const getInnerWidth = (): number => Math.min(1495, window?.visualViewport?.width ?? window.innerWidth);
+const getInnerWidth = (): number => Math.min(1200 + 50, window?.visualViewport?.width ?? window.innerWidth);
 
 const mobileViewWidth = 570;
 const horizontalSpacing = 200;
@@ -35,14 +35,37 @@ const isProjectCategoryFilterType = (s: string | undefined) =>
 
 export const ProjectOverview: React.FC = () => {
   const { filter } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const projectFilter = useProjectStore((s) => s.filter);
+  const keywordFilters = useProjectStore((s) => s.keywordFilters);
   const projects = useProjectStore((s) => s.activeProjects);
 
+  // Sync category filter from path param
   useEffect(() => {
     useProjectStore
       .getState()
       .setFilter(isProjectCategoryFilterType(filter) ? (filter as ProjectCategoryFilterType) : 'All');
   }, [filter]);
+
+  // Seed keyword filters from URL on first load
+  useEffect(() => {
+    const k = searchParams.get('k');
+    const initial = k ? k.split(',').filter(Boolean) : [];
+    if (initial.length > 0) useProjectStore.getState().setKeywordFilters(initial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Keep URL in sync with keyword filter state
+  useEffect(() => {
+    setSearchParams(
+      (prev) => {
+        if (keywordFilters.length > 0) prev.set('k', keywordFilters.join(','));
+        else prev.delete('k');
+        return prev;
+      },
+      { replace: true }
+    );
+  }, [keywordFilters, setSearchParams]);
 
   const [centerPosition, setCenterPosition] = useState<[number, number]>([0, window.innerHeight * 0.5]);
 
