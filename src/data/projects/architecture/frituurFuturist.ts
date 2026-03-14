@@ -41,46 +41,53 @@ const maxColumnCount = 1;
 export const frituurFuturist: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(futuristTitle, metaData.name, 1350, 1362),
+  projectImage: createTitleImage(futuristTitle, metaData.name, 1350, 1362, 'black-on-white'),
   projectContent: [
     createText(maxColumnCount, [
       'frituur futurist',
-      'This competition invited designers from all over Belgium to develop a new - iconic - model for the languishing fritkot typology. We approached it as such. The frying house as an icon for the Belgian zeitgeist of the today, yesterday and tomorrow, heavily influenced by the work of the "French Fries Professor" Paul Illegems.',
+      'This competition invited designers from all over Belgium to develop a new - iconic - model for the languishing fritkot typology. We approached it as such. The frying house as an icon for the Belgian zeitgeist of the today, yesterday and tomorrow, heavily influenced by the work of the "French Fries Professor" Paul Illegems.'
     ]),
     {
       type: ProjectContentType.ImageGrid,
-      images: [futuristBelgie].map((image) => createImage(image, '©️ J.W.')),
+      images: [futuristBelgie].map((image) => createImage(image, '© J.W.'))
     },
     createText(
       maxColumnCount,
       'Although Brussels is a multicultural hub, an administrative powerhouse and a cultural incubator very few of the architecture realisations of the past five decades are iconic or actually even noteworthy ... Though there are plenty of inspiring examples of architectural marvels to find in the post-war (re)development boom upto the sixties. A prime example was the World Fair of 1958 organised in Brussels.'
     ),
-    createImage(futuristExpo58, '©️ J.W.'),
+    createImage(futuristExpo58, '© J.W.'),
     createText(maxColumnCount, [
       'EXPO 58 - Iconic Brussels',
-      'Although Brussels is a multicultural hub, an administrative powerhouse and a cultural incubator very few of the architecture realisations of the past five decades are iconic or actually even noteworthy ... Though there are plenty of inspiring examples of architectural marvels to find in the post-war (re)development boom upto the sixties. A prime example was the World Fair of 1958 organised in Brussels.',
+      'Although Brussels is a multicultural hub, an administrative powerhouse and a cultural incubator very few of the architecture realisations of the past five decades are iconic or actually even noteworthy ... Though there are plenty of inspiring examples of architectural marvels to find in the post-war (re)development boom upto the sixties. A prime example was the World Fair of 1958 organised in Brussels.'
     ]),
-    createImage(frituurReferences, '©️ J.W.'),
+    createImage(frituurReferences, '© J.W.'),
     createText(maxColumnCount, [
       'The Frituur / Fritkot / Friterie',
-      'Besides what is on offering, nothing about the Frituur is iconic. The most important thing they all have in common is the high degree of bricolage they seem to feature. Though it is possible to distinguish to a certain degree few distinct typologies, none of those typologies would be recognisable in their bareform. All Friteries are depending on eye-catchers to make themselves legible. Often using sigs - with or without bright neon lights - but nearly always using upscaled models of the typical conical paper bag in which Belgian french-fries are served.',
+      'Besides what is on offering, nothing about the Frituur is iconic. The most important thing they all have in common is the high degree of bricolage they seem to feature. Though it is possible to distinguish to a certain degree few distinct typologies, none of those typologies would be recognisable in their bareform. All Friteries are depending on eye-catchers to make themselves legible. Often using sigs - with or without bright neon lights - but nearly always using upscaled models of the typical conical paper bag in which Belgian french-fries are served.'
     ]),
-    createImage(futuristLogo, '©️ J.W.'),
+    createImage(futuristLogo, '© J.W.'),
     createText(
       maxColumnCount,
-      ['The Iconic Frituur', 'After some form-finding we came up with an upscaled version of the iconic conical fry packaging.'],
+      [
+        'The Iconic Frituur',
+        'After some form-finding we came up with an upscaled version of the iconic conical fry packaging.'
+      ],
       'Though we also had a socio-economical aspect to our design. The typical freestanding frying houses as a typology is slowly falling out of favour for more typical restaurant/internalised typologies. As is the menu. Originally only serving french fries with a large area of sauces and some small extras, modern fastfood joints offer a plethora of options to choose from, with french-fries becoming an optional extra. We concluded that the only way the frituur could somehow remain the same was to ally itself to another function. The resulting gestalt typology would enable it to remain a relevant and justified feature of the ever more gentrified Belgian cityscapes, without having to compromise its original function namely: selling French fries.'
     ),
-    createImage(futuristReferences, '©️ J.W.'),
+    createImage(futuristReferences, '© J.W.'),
     createText(maxColumnCount, ['Plans & Sections', '']),
     {
       type: ProjectContentType.ImageGrid,
-      images: [frituurOrtho1, frituurOrtho2, frituurOrtho3, frituurOrtho4, frituurOrtho5].map((image) => createImage(image)),
+      images: [frituurOrtho1, frituurOrtho2, frituurOrtho3, frituurOrtho4, frituurOrtho5].map((image) =>
+        createImage(image)
+      )
     },
     createText(maxColumnCount, ['Visualizations', '']),
     {
       type: ProjectContentType.ImageGrid,
-      images: [frituurRender, futuristCharlesDemeer, futuristEeuwfeestlaan, futuristLakenstraat].map((image) => createImage(image)),
-    },
-  ],
+      images: [frituurRender, futuristCharlesDemeer, futuristEeuwfeestlaan, futuristLakenstraat].map((image) =>
+        createImage(image)
+      )
+    }
+  ]
 };

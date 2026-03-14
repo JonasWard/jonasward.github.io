@@ -44,19 +44,19 @@ export const sdfVases: ProjectData = {
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,
-      images: [sdfVases_16, sdfVases_17, sdfVases_18].map((i) => createImage(i, '©️ R.Huber'))
+      images: [sdfVases_16, sdfVases_17, sdfVases_18].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [sdfVases_1, sdfVases_2, sdfVases_3, sdfVases_4].map((i) => createImage(i, '©️ R.Huber'))
+      images: [sdfVases_1, sdfVases_2, sdfVases_3, sdfVases_4].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [sdfVases_6, sdfVases_7, sdfVases_8, sdfVases_9, sdfVases_10].map((i) => createImage(i, '©️ R.Huber'))
+      images: [sdfVases_6, sdfVases_7, sdfVases_8, sdfVases_9, sdfVases_10].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [sdfVases_12, sdfVases_13, sdfVases_14, sdfVases_15].map((i) => createImage(i, '©️ R.Huber'))
+      images: [sdfVases_12, sdfVases_13, sdfVases_14, sdfVases_15].map((i) => createImage(i, '© R.Huber'))
     }
   ]
 };

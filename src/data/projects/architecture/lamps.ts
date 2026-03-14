@@ -47,39 +47,39 @@ export const lamps: ProjectData = {
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsBoekentorenLogo, lampsBoekentoren].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsBoekentorenLogo, lampsBoekentoren].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsBoekentorenvBoekentoren, lampsBoekentorenInSitu].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsBoekentorenvBoekentoren, lampsBoekentorenInSitu].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsFrituurLogo, lampsFrituurSingle].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsFrituurLogo, lampsFrituurSingle].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsFrituurMultiple].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsFrituurMultiple].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsMASLogo, lampsMAS1].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsMASLogo, lampsMAS1].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsMAS2].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsMAS2].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsQuadratoLogo, lampsQuadrato].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsQuadratoLogo, lampsQuadrato].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsAntikabirLogo, lampsAntikabir3].map((i) => createImage(i, '©️ J.W.')),
+      images: [lampsAntikabirLogo, lampsAntikabir3].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsAntikabir1, lampsAntikabir2, lampsAntikabir4].map((i) => createImage(i, '©️ J.W.')),
-    },
-  ],
+      images: [lampsAntikabir1, lampsAntikabir2, lampsAntikabir4].map((i) => createImage(i, '© J.W.'))
+    }
+  ]
 };

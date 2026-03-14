@@ -41,7 +41,7 @@ export const jokerweek: ProjectData = {
       maxColumnCount,
       [
         'box office',
-        'Every year the Department of Architecture and Urban Planning at the University of Ghent organizes a vertical seminar week around a certain topic relevant in contemporary architecture. The practical organization is in the hands of the last year students. All the Department’s students can participate. This time it was our turn to roll up our sleeves and get our hands dirty...',
+        'Every year the Department of Architecture and Urban Planning at the University of Ghent organizes a vertical seminar week around a certain topic relevant in contemporary architecture. The practical organization is in the hands of the last year students. All the Department’s students can participate. This time it was our turn to roll up our sleeves and get our hands dirty...'
       ],
       'My role in this whole ‘endeavor’ was coordinating the design and the realization of the scenography. With a team of 8 people we stitched, cut and drilled over the course of a week 400 pillows (filled with foam instead of more traditional feathers for a more comfortable sitting experience - to compensate for the lack of chairs in many locations), 500 meters of textile for the boxes used by the students working on the interior (and as projection screens), 92 2.5 meter beams used for the carrying structure of the boxes, 2 km of rope carrying the bearing structure, 1200 square meter of floor covering (in the area used for the construction of the exterior) and set-up two bar areas filled with “comfy” living room furniture.',
       'The theme this year was the (changing) office cultures in architecture firms. Ranging from icons of the past like Le Corbusier to modern enfant-terribles like Frank Gehry and even an imaginary one in Howard Roarke from An Rand’s The Fountainhead, we composed a list of 20 architecture offices.',
@@ -52,9 +52,17 @@ export const jokerweek: ProjectData = {
     ),
     {
       type: ProjectContentType.ImageGrid,
-      images: [jokerweek1, jokerweek2, jokerweek3, jokerweek4, jokerweek5, jokerweek6, jokerweek7, jokerweek8, jokerweek9].map((image) =>
-        createImage(image, '©️ J.W.')
-      ),
-    },
-  ],
+      images: [
+        jokerweek1,
+        jokerweek2,
+        jokerweek3,
+        jokerweek4,
+        jokerweek5,
+        jokerweek6,
+        jokerweek7,
+        jokerweek8,
+        jokerweek9
+      ].map((image) => createImage(image, '© J.W.'))
+    }
+  ]
 };

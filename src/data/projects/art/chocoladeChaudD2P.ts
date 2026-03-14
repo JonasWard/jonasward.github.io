@@ -52,7 +52,7 @@ export const chocoladeChaudD2P: ProjectData = {
         chocoladeChaudD2P_14,
         chocoladeChaudD2P_15,
         chocoladeChaudD2P_16
-      ].map((i) => createImage(i, '©️ R.Huber'))
+      ].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
@@ -66,7 +66,7 @@ export const chocoladeChaudD2P: ProjectData = {
         chocoladeChaudD2P_7,
         chocoladeChaudD2P_8,
         chocoladeChaudD2P_9
-      ].map((i) => createImage(i, '©️ R.Huber'))
+      ].map((i) => createImage(i, '© R.Huber'))
     }
   ]
 };

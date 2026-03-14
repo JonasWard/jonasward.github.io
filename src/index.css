@@ -4,6 +4,8 @@
   --Architecture: rgb(55, 38, 242);
   --Urbanism: rgb(24, 73, 113);
   --Software: rgb(95, 138, 173);
+  --global-max-width: 1200px;
+  --padding-tolerance: min(16px, max(0px, calc(var(--global-max-width) - 100vw)));
 }
 
 @font-face {
@@ -108,7 +110,7 @@
 
 body {
   margin: 0;
-  font-weight: 400;
+  font-weight: 500;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

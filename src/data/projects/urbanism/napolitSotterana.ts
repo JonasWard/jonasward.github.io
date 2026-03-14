@@ -37,11 +37,14 @@ export const napoliSotterana: ProjectData = {
   projectContent: [
     createText(2, [
       'palimpsestuous napels',
-      'Modern-day Napoli is a rather illegible maze of canyonesque streets. With this comes a huge lack of qualitative and accessible public spaces. However, when you take a closer look at the form mass plan of Napoli you can really distinguish some very large patios within the blocks.',
+      'Modern-day Napoli is a rather illegible maze of canyonesque streets. With this comes a huge lack of qualitative and accessible public spaces. However, when you take a closer look at the form mass plan of Napoli you can really distinguish some very large patios within the blocks.'
     ]),
     {
       type: ProjectContentType.ImageGrid,
-      images: [createImage(imageCortile, 'Cortile in Napoli'), createImage(imageMonastery, 'View of Monastery Courtyard in the inner city')],
+      images: [
+        createImage(imageCortile, 'Cortile in Napoli'),
+        createImage(imageMonastery, 'View of Monastery Courtyard in the inner city')
+      ]
     },
     createImage(imageDecumani, 'View on the Decumani'),
     createText(
@@ -54,6 +57,6 @@ export const napoliSotterana: ProjectData = {
       1,
       'The final map is a simple proof of concept to show how you can create a whole secondary circulation scheme with very limited interventions by interpreting the two maps.'
     ),
-    createImage(mapIntervention, '©️ J.W.'),
-  ],
+    createImage(mapIntervention, '© J.W.')
+  ]
 };

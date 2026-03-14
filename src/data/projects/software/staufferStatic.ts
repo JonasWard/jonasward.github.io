@@ -42,7 +42,9 @@ export const staufferStatic: ProjectData = {
     ),
     {
       type: ProjectContentType.ImageGrid,
-      images: [buckling, calculations, indeterminateBeam, plateBuckling, resources, results, tenants].map((i) => createImage(i, '©️ Ditronc AG')),
-    },
-  ],
+      images: [buckling, calculations, indeterminateBeam, plateBuckling, resources, results, tenants].map((i) =>
+        createImage(i, '© Ditronc AG')
+      )
+    }
+  ]
 };

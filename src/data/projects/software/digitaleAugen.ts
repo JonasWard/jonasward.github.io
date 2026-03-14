@@ -89,48 +89,56 @@ export const digitaleAugen: ProjectData = {
       2,
       [
         'simulated perception',
-        'Through the years computer algorithms have become better and better at understanding image data. Though most of the algorithms until now have been used to solve very specific problems like object detection or helping with cleaning up images. All of these algorithms form their own interpretation of reality though, not that unsimilar to how our eyes and brain forms theirs.',
+        'Through the years computer algorithms have become better and better at understanding image data. Though most of the algorithms until now have been used to solve very specific problems like object detection or helping with cleaning up images. All of these algorithms form their own interpretation of reality though, not that unsimilar to how our eyes and brain forms theirs.'
       ],
       'The goal of this project is to be able to generate heatmaps of various architectural situations, in a first stage focusing specifically on showrooms of shops. Because of the complexity of the topic this POC project falls apart into three subdomains. A pure geometric analysis of visibility - done using shader like geometrical calculations with grasshopper components -, a computer vision part trying to use different algorithms used for object detection as well as in image editing software packages and finally an urban analysis tool for assessing spatial quality to be able to simulate movement patterns.'
     ),
     {
       type: ProjectContentType.ImageGrid,
-      images: [rebuildAnalysis1, rebuildAnalysis2].map((i) => createImage(i, '©️ J.W.')),
+      images: [rebuildAnalysis1, rebuildAnalysis2].map((i) => createImage(i, '© J.W.'))
     },
     createText(1, [
       '3D analysis: viewing as light-source',
-      'A first step was a simple geometrical analysis. Which surfaces are more clearly visible than others.',
+      'A first step was a simple geometrical analysis. Which surfaces are more clearly visible than others.'
     ]),
     {
       type: ProjectContentType.ImageGrid,
-      images: [shopAnalysis0, shopAnalysis1, shopAnalysis2, shopAnalysis3, shopAnalysis4].map((i) => createImage(i, '©️ J.W.')),
+      images: [shopAnalysis0, shopAnalysis1, shopAnalysis2, shopAnalysis3, shopAnalysis4].map((i) =>
+        createImage(i, '© J.W.')
+      )
     },
     createText(1, [
       'Expressionism',
-      'Ofcourse human perception is more complex than just the interaction with volumes. The first people to use the understanding of the human perception were the Expressionists. They pushed the boundaries of our ability to recognise certain objecst by progressively more abstract paintings.',
+      'Ofcourse human perception is more complex than just the interaction with volumes. The first people to use the understanding of the human perception were the Expressionists. They pushed the boundaries of our ability to recognise certain objecst by progressively more abstract paintings.'
     ]),
     {
       type: ProjectContentType.ImageGrid,
-      images: [abstractionImage1, abstractionImage2, abstractionImage3].map((i) => createImage(i, '©️ J.W.')),
+      images: [abstractionImage1, abstractionImage2, abstractionImage3].map((i) => createImage(i, '© J.W.'))
     },
-    createText(1, ['Piet Mondriaan', 'Perhaps the most succesful Expressionist was Piet Mondriaan with his tree series.']),
+    createText(1, [
+      'Piet Mondriaan',
+      'Perhaps the most succesful Expressionist was Piet Mondriaan with his tree series.'
+    ]),
     {
       type: ProjectContentType.ImageGrid,
-      images: [mondriaan0, mondriaan1, mondriaan2, mondriaan3].map((i) => createImage(i, '©️ J.W.')),
+      images: [mondriaan0, mondriaan1, mondriaan2, mondriaan3].map((i) => createImage(i, '© J.W.'))
     },
-    createText(1, ['Science', 'In parallel to the artists, people also started enganging with the topic from a science perspective.']),
+    createText(1, [
+      'Science',
+      'In parallel to the artists, people also started enganging with the topic from a science perspective.'
+    ]),
     {
       type: ProjectContentType.ImageGrid,
-      images: [expressionism2, expressionism3, expressionism4, expressionism1].map((i) => createImage(i, '©️ J.W.')),
+      images: [expressionism2, expressionism3, expressionism4, expressionism1].map((i) => createImage(i, '© J.W.'))
     },
     createText(1, [
       'Age of the Internet',
-      'Lastly, in the age of the internet the whole field became a lot easier to measuere. Just following the mouse pointer allowed to create detailed heatmaps, allowing UX designers to see which areas of the site were the most watched and interacted with.',
+      'Lastly, in the age of the internet the whole field became a lot easier to measuere. Just following the mouse pointer allowed to create detailed heatmaps, allowing UX designers to see which areas of the site were the most watched and interacted with.'
     ]),
-    createImage(siteHoveringHeighlighting, '©️ J.W.'),
+    createImage(siteHoveringHeighlighting, '© J.W.'),
     createText(1, [
       'Schiele',
-      'The goal then was to see how far this research could be pushed from the screen into 3d space. Starting of with an art piece by Egon Schiele.',
+      'The goal then was to see how far this research could be pushed from the screen into 3d space. Starting of with an art piece by Egon Schiele.'
     ]),
     {
       type: ProjectContentType.ImageGrid,
@@ -153,12 +161,12 @@ export const digitaleAugen: ProjectData = {
         shillerAnalysis15,
         shillerAnalysis16,
         shillerAnalysis17,
-        shillerAnalysis18,
-      ].map((i) => createImage(i, '©️ J.W.')),
+        shillerAnalysis18
+      ].map((i) => createImage(i, '© J.W.'))
     },
     createText(1, [
       'Storfronts',
-      'The same tools allowed us to create an inverse visualization of the site giving us a clear perspective on how storefornts were percieved by passerbys.',
+      'The same tools allowed us to create an inverse visualization of the site giving us a clear perspective on how storefornts were percieved by passerbys.'
     ]),
     {
       type: ProjectContentType.ImageGrid,
@@ -180,8 +188,8 @@ export const digitaleAugen: ProjectData = {
         onlySource14,
         onlySource15,
         onlySource16,
-        onlySource17,
-      ].map((i) => createImage(i, '©️ J.W.')),
-    },
-  ],
+        onlySource17
+      ].map((i) => createImage(i, '© J.W.'))
+    }
+  ]
 };

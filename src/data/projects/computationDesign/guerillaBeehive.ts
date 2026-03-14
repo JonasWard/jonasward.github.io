@@ -41,14 +41,14 @@ export const guerillaBeehive: ProjectData = {
       2,
       [
         'intelligent guerilla beehive',
-        'The Intelligent Guerilla Beehive is a research project interfacing between art, biology and science. It discusses issues of sustainability and biodiversity, giving viewers a glimpse into Annemaries ongoing research on how to deal with the shrinking honeybee population. This makes the Intelligent Beehive a multifunctional project. On one hand it offers a safe refuge for honeybees living in an urban environment while also functioning as a bio-sensor, giving an indication of the air pollution around the beehive.',
+        'The Intelligent Guerilla Beehive is a research project interfacing between art, biology and science. It discusses issues of sustainability and biodiversity, giving viewers a glimpse into Annemaries ongoing research on how to deal with the shrinking honeybee population. This makes the Intelligent Beehive a multifunctional project. On one hand it offers a safe refuge for honeybees living in an urban environment while also functioning as a bio-sensor, giving an indication of the air pollution around the beehive.'
       ],
       'This iteration of the IGB - in the end named Elbe Binnen - was commissioned as a public art project in Hamburg. Populated with a living bee colony it is installed outside the Golden Pavilion in the Entenweder park on the banks of the Elbe. The behavior and wellbeing of the bee colony will be monitored with a camera, heat, humidity and movement sensors of which data is streamed to the exhibition space in the Golden Pavilion. Also the bees foraging fields are being monitored.',
       'The final shape was conceived in collaboration with Annemarie. The body of the beehive consisted of massive spruce wood, containing an inner beehive, completely detached from the outer shell because of the need for a guaranteed waterproof and desalination buffer allowing for insulation and ventilation. Since the outer shell was robotically milled, there was the possibility to apply a pattern to the shell. Through an iterative process using different pattern strategies - trying out how well they were able to accomodate lichen growth, used as a bio air pollution indicator - the choice was made for a mesh based reaction diffusion logic. Finally for the support structure research done into spatial assemblies at the chair of GKR at the ETH Zürich was used to inform the intricate yet structurally and aesthetically optimized insect leg appearance.'
     ),
     {
       type: ProjectContentType.ImageGrid,
-      images: [image1, image2, image3, image4, image5, image6, image7, image8].map((i) => createImage(i, '©️J.W.')),
-    },
-  ],
+      images: [image1, image2, image3, image4, image5, image6, image7, image8].map((i) => createImage(i, '©J.W.'))
+    }
+  ]
 };

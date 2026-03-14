@@ -77,8 +77,8 @@ export const scarves: ProjectData = {
         image20,
         image21,
         image22,
-        image23,
-      ].map((i) => createImage(i, '©️J.W.')),
-    },
-  ],
+        image23
+      ].map((i) => createImage(i, '©J.W.'))
+    }
+  ]
 };

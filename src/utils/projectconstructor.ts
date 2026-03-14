@@ -4,7 +4,13 @@ import { ProjectImageText } from '../types/projectContent/projectImageText';
 import { ProjectMetaData } from '../types/projectContent/projectMetaData';
 import { ProjectText } from '../types/projectContent/projectText';
 
-export const createTitleImage = (href: string, title: string, imageWidth: number, imageHeigth: number): ProjectImage => ({
+export const createTitleImage = (
+  href: string,
+  title: string,
+  imageWidth: number,
+  imageHeigth: number,
+  imageTextColor?: 'white-on-black' | 'black-on-white'
+): ProjectImage => ({
   type: ProjectContentType.Image,
   imageHref: href,
   imageText: title,
@@ -13,6 +19,7 @@ export const createTitleImage = (href: string, title: string, imageWidth: number
   imageTextAlignment: 'center',
   imageWidth,
   imageHeigth,
+  imageTextColor
 });
 
 export const createImage = (href: string, text?: string): ProjectImage => ({

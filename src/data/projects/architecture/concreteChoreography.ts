@@ -39,7 +39,7 @@ export const concreteChoreography: ProjectData = {
       maxColumnCount,
       [
         'utopian columns',
-        'From ancient civilizations to the present day, columns have served as elements of architecture particularly tied to the harmony, balance and proportion of architectural orders – so much so that they have come to be recognised as works of art in their own right. What could the contemporary design of a new column order enabled by emerging digital technologies be like?',
+        'From ancient civilizations to the present day, columns have served as elements of architecture particularly tied to the harmony, balance and proportion of architectural orders – so much so that they have come to be recognised as works of art in their own right. What could the contemporary design of a new column order enabled by emerging digital technologies be like?'
       ],
       'In collaboration with the Origen Festival in Riom, Switzerland the installation Concrete Choreography consists of nine, individually designed, 2.7m tall columns. Each column is concrete 3D printed at full height in 2.5 hours with the process developed at ETH Zürich.',
       'Students of the Master of Advanced Studies in Digital Fabrication and Architecture explore the unique possibilities of layered extrusion printing, demonstrating the potential of computational design and digital fabrication for future concrete construction.',
@@ -48,7 +48,9 @@ export const concreteChoreography: ProjectData = {
     ),
     {
       type: ProjectContentType.ImageGrid,
-      images: [image1, image2, image3, image4, image5, keyImage, overviewNight, overviewDay].map((image) => createImage(image, '©️ J.W.')),
-    },
-  ],
+      images: [image1, image2, image3, image4, image5, keyImage, overviewNight, overviewDay].map((image) =>
+        createImage(image, '© J.W.')
+      )
+    }
+  ]
 };

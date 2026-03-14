@@ -9,4 +9,5 @@ export type ProjectImage = {
   imageTextSize?: 'small' | 'medium' | 'large';
   imageTextPosition?: 'top' | 'bottom' | 'center';
   imageTextAlignment?: 'left' | 'center' | 'right';
+  imageTextColor?: 'white-on-black' | 'black-on-white';
 };

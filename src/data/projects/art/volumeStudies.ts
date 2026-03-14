@@ -61,23 +61,23 @@ export const volumeStudies: ProjectData = {
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,
-      images: [volumeStudies_1, volumeStudies_2, volumeStudies_3].map((i) => createImage(i, '©️ R.Huber'))
+      images: [volumeStudies_1, volumeStudies_2, volumeStudies_3].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [volumeStudies_10, volumeStudies_11].map((i) => createImage(i, '©️ R.Huber'))
+      images: [volumeStudies_10, volumeStudies_11].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [volumeStudies_5, volumeStudies_6, volumeStudies_7].map((i) => createImage(i, '©️ R.Huber'))
+      images: [volumeStudies_5, volumeStudies_6, volumeStudies_7].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [volumeStudies_12, volumeStudies_13].map((i) => createImage(i, '©️ R.Huber'))
+      images: [volumeStudies_12, volumeStudies_13].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [volumeStudies_14, volumeStudies_15].map((i) => createImage(i, '©️ R.Huber'))
+      images: [volumeStudies_14, volumeStudies_15].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
@@ -88,27 +88,27 @@ export const volumeStudies: ProjectData = {
         volumeStudies_d,
         volumeStudies_e,
         volumeStudies_f
-      ].map((i) => createImage(i, '©️ R.Huber'))
+      ].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [volumeStudies_g, volumeStudies_h, volumeStudies_i, volumeStudies_j, volumeStudies_k].map((i) =>
-        createImage(i, '©️ R.Huber')
+        createImage(i, '© R.Huber')
       )
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [volumeStudies_l, volumeStudies_m, volumeStudies_n].map((i) => createImage(i, '©️ R.Huber'))
+      images: [volumeStudies_l, volumeStudies_m, volumeStudies_n].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [volumeStudies_18, volumeStudies_19, volumeStudies_20, volumeStudies_21].map((i) =>
-        createImage(i, '©️ R.Huber')
+        createImage(i, '© R.Huber')
       )
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [volumeStudies_16, volumeStudies_17].map((i) => createImage(i, '©️ R.Huber'))
+      images: [volumeStudies_16, volumeStudies_17].map((i) => createImage(i, '© R.Huber'))
     }
   ]
 };

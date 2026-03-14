@@ -81,7 +81,7 @@ export const gradedGlass: ProjectData = {
       2,
       [
         'graded glass',
-        'Impact clay was a four-week design and build assignment investigating a novel fabrication process for highly viscous materials. The setup consists of a small-scale six-axis robotic arm manipulating an end-effector that allows to cut out projectiles of different sizes, position them, and press them into their respective shapes by linear pneumatic actuation. Through iterations of empiric testing, design simulation, and physical prototyping different typologies of the technique were explored.',
+        'Impact clay was a four-week design and build assignment investigating a novel fabrication process for highly viscous materials. The setup consists of a small-scale six-axis robotic arm manipulating an end-effector that allows to cut out projectiles of different sizes, position them, and press them into their respective shapes by linear pneumatic actuation. Through iterations of empiric testing, design simulation, and physical prototyping different typologies of the technique were explored.'
       ],
       'Colored glass in architecture has a long history, ranging from stained colored glass, to high performance glass with foil inlays and functional grading. The potential of glass to perform as a structural material and the need for sustainable construction materials has opened the door for rethinking the role of glass within architecture.',
       'However, commercial production methods of glass do not allow for color grading glass. Yet one artisanal production method - namely the fusing of glass - has the potential to be pushed past its traditional scope.',
@@ -92,7 +92,7 @@ export const gradedGlass: ProjectData = {
     ),
     {
       type: ProjectContentType.ImageGrid,
-      images: [glass0, glass1, glass2, glass3, glass4].map((i) => createImage(i, '©️J.W.')),
+      images: [glass0, glass1, glass2, glass3, glass4].map((i) => createImage(i, '©J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
@@ -139,8 +139,8 @@ export const gradedGlass: ProjectData = {
         glass45,
         glass46,
         glass47,
-        glass48,
-      ].map((i) => createImage(i, '©️J.W.')),
-    },
-  ],
+        glass48
+      ].map((i) => createImage(i, '©J.W.'))
+    }
+  ]
 };

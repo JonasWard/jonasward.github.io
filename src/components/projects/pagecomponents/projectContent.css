@@ -1,6 +1,6 @@
 .project-layout {
   margin: 0px auto;
-  max-width: min(1495px, 100vw);
+  max-width: min(var(--global-max-width), 100vw);
 }
 
 .project-content {
@@ -9,7 +9,10 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
-  padding: 30px 16px 30px 20px;
+  padding-top: 24px;
+  padding-bottom: 20px;
+  padding-left: var(--padding-tolerance);
+  padding-right: var(--padding-tolerance);
 }
 
 .fade-in {
@@ -62,8 +65,8 @@
 }
 
 .text-block h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.7rem;
+  font-weight: 600;
   margin: 0;
   padding: 0 0 20px 0;
 }
@@ -83,23 +86,35 @@
 }
 
 .text-block a {
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin: 0;
-  text-align: start;
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  padding: 10px 20px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.text-block a:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 .text-block p {
   font-size: 1.5rem;
   font-weight: 400;
   margin: 0;
-  margin-bottom: 6px;
+  margin-bottom: 20px;
   text-align: justify;
 }
 
 @media screen and (max-width: 750px) {
   .text-block a {
-    font-size: 1rem;
+    font-size: 0.65rem;
+    padding: 8px 16px;
   }
 
   .text-block p {
@@ -111,21 +126,36 @@
   }
 }
 
-.text-block.image {
-  max-height: 100svh;
-}
-
-.text-block.image img {
+.image-text-block {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
   width: 100%;
-  height: 100%;
+}
+
+.image-text-block.right {
+  flex-direction: row-reverse;
+}
+
+.image-text-block .project-image {
+  flex: 1;
+  min-width: 0;
+}
+
+.image-text-block .project-image img {
+  width: 100%;
   object-fit: cover;
-  overflow-x: hidden;
 }
 
-.text-block.image.left {
-  justify-content: flex-start;
+.image-text-block .text-block {
+  flex: 1;
+  min-width: 0;
 }
 
-.text-block.image.right {
-  justify-content: flex-end;
+@media screen and (max-width: 750px) {
+  .image-text-block,
+  .image-text-block.right {
+    flex-direction: column;
+  }
 }

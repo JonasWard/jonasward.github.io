@@ -31,7 +31,7 @@ export const mundoA: ProjectData = {
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,
-      images: [createImage(mundoA1, '©️ Ilse Liekens'), createImage(mundoA3, '©️ lucid'), createImage(mundoA2, '©️ lucid')],
-    },
-  ],
+      images: [createImage(mundoA1, '© Ilse Liekens'), createImage(mundoA3, '© lucid'), createImage(mundoA2, '© lucid')]
+    }
+  ]
 };

@@ -78,39 +78,39 @@ export const chocoladeChaud: ProjectData = {
       type: ProjectContentType.ExternalLink,
       href: 'https://jonasward.github.io/chocolade-chaud/',
       description: 'try it for yourself: ',
-      alternativeName: 'github pages',
+      alternativeName: 'github pages'
     },
     {
       type: ProjectContentType.List,
       description: 'I would like to thank for their help: ',
       content: [
         ['Pyry Takala', 'for some enganging conceptual discussions and chocolate casting sessions'],
-        ['Malcolm Ungers', 'for some very skilled chocolate casts and help with making modlds'],
-      ],
+        ['Malcolm Ungers', 'for some very skilled chocolate casts and help with making modlds']
+      ]
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [projectImage, freeStyle1, freeStyle2].map((i) => createImage(i, '©️ J.W.')),
+      images: [projectImage, freeStyle1, freeStyle2].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [result1, result2, result3, resulta, resultb].map((i) => createImage(i, '©️ J.W.')),
+      images: [result1, result2, result3, resulta, resultb].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [positive1, positive2, positive3, positive4].map((i) => createImage(i, '©️ J.W.')),
+      images: [positive1, positive2, positive3, positive4].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [negative1, negative2, negative3].map((i) => createImage(i, '©️ J.W.')),
+      images: [negative1, negative2, negative3].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [mosque1, mosque2, mosque3, mosque4, mosque5, mosque6].map((i) => createImage(i, '©️ J.W.')),
+      images: [mosque1, mosque2, mosque3, mosque4, mosque5, mosque6].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [pompidou1, pompidou2, pompidou3, pompidou4, pompidou5, pompidou6].map((i) => createImage(i, '©️ J.W.')),
-    },
-  ],
+      images: [pompidou1, pompidou2, pompidou3, pompidou4, pompidou5, pompidou6].map((i) => createImage(i, '© J.W.'))
+    }
+  ]
 };

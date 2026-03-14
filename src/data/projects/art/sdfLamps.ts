@@ -41,6 +41,7 @@ import sdfLamps_32 from './asssets/sdfLamps_32.jpg';
 import sdfLamps_33 from './asssets/sdfLamps_33.jpg';
 import sdfLamps_34 from './asssets/sdfLamps_34.jpg';
 import sdfLamps_35 from './asssets/sdfLamps_35.jpg';
+import { Keywords } from 'src/types/keywords/keywords';
 
 const id = '2024-06';
 
@@ -52,13 +53,14 @@ const metaData: ProjectMetaData = {
   description: 'Lamp Topologies with SDFs',
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
-  projectPartnerContext: ProjectPartnerContext.Solo
+  projectPartnerContext: ProjectPartnerContext.Solo,
+  keywords: [Keywords.DigitalFabrication, Keywords.Product]
 };
 
 export const sdfLamps: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(sdfLamps_Front, metaData.name, 3268, 6075),
+  projectImage: createTitleImage(sdfLamps_Front, metaData.name, 3268, 6075, 'black-on-white'),
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,
@@ -72,15 +74,15 @@ export const sdfLamps: ProjectData = {
         sdfLamps_34,
         sdfLamps_35,
         sdfLamps_1
-      ].map((i) => createImage(i, '©️ R.Huber'))
+      ].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [sdfLamps_16, sdfLamps_17, sdfLamps_18].map((i) => createImage(i, '©️ R.Huber'))
+      images: [sdfLamps_16, sdfLamps_17, sdfLamps_18].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [sdfLamps_14, sdfLamps_15].map((i) => createImage(i, '©️ R.Huber'))
+      images: [sdfLamps_14, sdfLamps_15].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
@@ -96,15 +98,15 @@ export const sdfLamps: ProjectData = {
         sdfLamps_2,
         sdfLamps_3,
         sdfLamps_27
-      ].map((i) => createImage(i, '©️ R.Huber'))
+      ].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [sdfLamps_5, sdfLamps_6, sdfLamps_7, sdfLamps_8].map((i) => createImage(i, '©️ R.Huber'))
+      images: [sdfLamps_5, sdfLamps_6, sdfLamps_7, sdfLamps_8].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [sdfLamps_9, sdfLamps_10, sdfLamps_11, sdfLamps_12, sdfLamps_13].map((i) => createImage(i, '©️ R.Huber'))
+      images: [sdfLamps_9, sdfLamps_10, sdfLamps_11, sdfLamps_12, sdfLamps_13].map((i) => createImage(i, '© R.Huber'))
     }
   ]
 };

@@ -68,19 +68,19 @@ export const chocoStudies: ProjectData = {
         chocoStudies_9,
         chocoStudies_10,
         chocoStudies_11
-      ].map((i) => createImage(i, '©️ R.Huber'))
+      ].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [chocoStudies_12, chocoStudies_13, chocoStudies_14].map((i) => createImage(i, '©️ R.Huber'))
+      images: [chocoStudies_12, chocoStudies_13, chocoStudies_14].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [chocoStudies_12, chocoStudies_13, chocoStudies_14].map((i) => createImage(i, '©️ R.Huber'))
+      images: [chocoStudies_12, chocoStudies_13, chocoStudies_14].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [chocoStudies_15, chocoStudies_16, chocoStudies_17].map((i) => createImage(i, '©️ R.Huber'))
+      images: [chocoStudies_15, chocoStudies_16, chocoStudies_17].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
@@ -92,12 +92,12 @@ export const chocoStudies: ProjectData = {
         chocoStudies_22,
         chocoStudies_23,
         chocoStudies_24
-      ].map((i) => createImage(i, '©️ R.Huber'))
+      ].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [chocoStudies_25, chocoStudies_26, chocoStudies_27, chocoStudies_28].map((i) =>
-        createImage(i, '©️ R.Huber')
+        createImage(i, '© R.Huber')
       )
     }
   ]

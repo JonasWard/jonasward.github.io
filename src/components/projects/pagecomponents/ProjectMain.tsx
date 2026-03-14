@@ -1,6 +1,7 @@
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectImageRenderer } from './ProjectImageRenderer';
 import { ProjectContentRenderer } from './ProjectContentRenderer';
+import { ProjectMetaBlock } from './ProjectMetaBlock';
 import { useEffect } from 'react';
 
 interface IProjectRendererProps {
@@ -15,6 +16,7 @@ export const ProjectRenderer: React.FC<IProjectRendererProps> = ({ project }) =>
   return (
     <div className='project-layout'>
       <ProjectImageRenderer content={project.projectImage} isMainImage />
+      <ProjectMetaBlock metaData={project.metaData} />
       <ProjectContentRenderer content={project.projectContent} />
     </div>
   );

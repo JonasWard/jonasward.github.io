@@ -9,9 +9,9 @@ interface IProjectImageTextRendererProps {
 
 export const ProjectImageTextRenderer: React.FC<IProjectImageTextRendererProps> = ({ content }) => {
   return (
-    <div className={`text-block image ${content.position ?? 'left'}`}>
-      <ProjectImageRenderer key='projectImage' content={content.image} />
-      <ProjectTextRenderer key='projectImageText' content={content.text} />
+    <div className={`image-text-block ${content.position ?? 'left'}`}>
+      <ProjectImageRenderer content={content.image} />
+      <ProjectTextRenderer content={content.text} />
     </div>
   );
 };

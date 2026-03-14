@@ -1,3 +1,4 @@
+import React from 'react';
 import { ProjectText } from '../../../types/projectContent/projectText';
 import './projectContent.css';
 
@@ -5,12 +6,12 @@ export const ProjectTextRenderer: React.FC<{ content: ProjectText }> = ({ conten
   <div className={`text-block columns-${content.maxColumnCount}`}>
     {content.content.map((content, index) =>
       Array.isArray(content) ? (
-        <>
-          <h2 key={`${index}-title`}>{content[0]}</h2>
-          <p key={`${index}-p`}>{content[1]}</p>
-        </>
+        <React.Fragment key={index}>
+          <h2>{content[0]}</h2>
+          <p>{content[1]}</p>
+        </React.Fragment>
       ) : (
-        <p key={`${index}`}>{content}</p>
+        <p key={index}>{content}</p>
       )
     )}
   </div>

@@ -52,7 +52,7 @@ export const theCityIsArt: ProjectData = {
       maxColumnCount,
       [
         'neural style transfers',
-        'The rise of Artificial Intelligence in recent years have posed a challenge to the architecture community. How will this novel technology impact our profession? This Workshop interrogates the rise of AI from two distinct directions: The implication for the discourse of the discipline and the technical know-how to make an impact as an architect in the emerging ecology of AI applications.',
+        'The rise of Artificial Intelligence in recent years have posed a challenge to the architecture community. How will this novel technology impact our profession? This Workshop interrogates the rise of AI from two distinct directions: The implication for the discourse of the discipline and the technical know-how to make an impact as an architect in the emerging ecology of AI applications.'
       ],
       'In this course the basic architectural building blocks are revisited through the eyes of the machine. Working with multiple trained GANs - generative adversarial neural networks - images and features of objects are deconstructed and fused into new compositions. Instead of sticking to only typical architecture, this method also allows us to significantly expand the traditional architectural canon. To this end I tried to blend my passion for urban design with my love for modern art.',
       'Besides the city-scapes generated, this exploration also led to an exploration on the relationship between topology, geometry and their ambiguous yet often underexplored relationship with color.'
@@ -77,8 +77,8 @@ export const theCityIsArt: ProjectData = {
         image17,
         image15,
         image18,
-        image13,
-      ].map((image) => createImage(image, '©️ J.W.')),
-    },
-  ],
+        image13
+      ].map((image) => createImage(image, '© J.W.'))
+    }
+  ]
 };

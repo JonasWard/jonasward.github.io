@@ -49,12 +49,12 @@ export const sdfAsMeaning: ProjectData = {
         sdfAsMeaning_10,
         sdfAsMeaning_11,
         sdfAsMeaning_12
-      ].map((i) => createImage(i, '©️ R.Huber'))
+      ].map((i) => createImage(i, '© R.Huber'))
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [sdfAsMeaning_1, sdfAsMeaning_2, sdfAsMeaning_3, sdfAsMeaning_4, sdfAsMeaning_5].map((i) =>
-        createImage(i, '©️ R.Huber')
+        createImage(i, '© R.Huber')
       )
     }
   ]

@@ -49,15 +49,15 @@ export const paraSlimShady: ProjectData = {
     ),
     {
       type: ProjectContentType.ImageGrid,
-      images: [projectImage, babylon3, babylon4].map((i) => createImage(i, '©️J.W.')),
+      images: [projectImage, babylon3, babylon4].map((i) => createImage(i, '©J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [julierTurm1, julierTurm2, julierTurm3, julierTurm4].map((i) => createImage(i, '©️J.W.')),
+      images: [julierTurm1, julierTurm2, julierTurm3, julierTurm4].map((i) => createImage(i, '©J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [references1, references2, references3, references4].map((i) => createImage(i, '©️J.W.')),
-    },
-  ],
+      images: [references1, references2, references3, references4].map((i) => createImage(i, '©J.W.'))
+    }
+  ]
 };
