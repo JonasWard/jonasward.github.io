@@ -1,5 +1,6 @@
 import { ProjectContent } from '../../../types/projectContent/projectContent';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { ProjectExternalLinkListRenderer } from './ProjectExternalLinkListRenderer';
 import { ProjectExternalLinkRenderer } from './ProjectExternalLinkRenderer';
 import { ProjectImageRenderer } from './ProjectImageRenderer';
 import { ProjectImagesRenderer } from './ProjectImagesRenderer';
@@ -9,7 +10,7 @@ import { ProjectTextRenderer } from './ProjectTextRenderer';
 
 export const ProjectContentRenderer: React.FC<{ content: ProjectContent[] }> = ({ content }) => {
   return (
-    <div className='project-content fade-in'>
+    <div className="project-content fade-in">
       {content.map((content, index) => {
         switch (content.type) {
           case ProjectContentType.Image:
@@ -23,6 +24,8 @@ export const ProjectContentRenderer: React.FC<{ content: ProjectContent[] }> = (
             return <ProjectImagesRenderer key={index} content={content} />;
           case ProjectContentType.ExternalLink:
             return <ProjectExternalLinkRenderer key={index} content={content} />;
+          case ProjectContentType.ExternalLinkList:
+            return <ProjectExternalLinkListRenderer key={index} links={content.links} />;
           case ProjectContentType.List:
             return <ProjectListRenderer key={index} content={content} />;
           default:

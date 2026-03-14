@@ -27,7 +27,7 @@ const metaData: ProjectMetaData = {
 export const urlSafeBitpacker: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage1, metaData.name, 1748, 1262, 'black-on-white'),
+  projectImage: createTitleImage(projectImage1, metaData.name, 1748, 1246, 'black-on-white'),
   projectContent: [
     createText(
       2,
@@ -39,14 +39,19 @@ export const urlSafeBitpacker: ProjectData = {
       'you can check out the source code on github or use the package with npm.'
     ),
     {
-      type: ProjectContentType.ExternalLink,
-      href: 'https://github.com/JonasWard/url-safe-bitpacking',
-      alternativeName: 'github rep'
-    },
-    {
-      type: ProjectContentType.ExternalLink,
-      href: 'https://www.npmjs.com/package/url-safe-bitpacking',
-      alternativeName: 'npm'
+      type: ProjectContentType.ExternalLinkList,
+      links: [
+        {
+          type: ProjectContentType.ExternalLink,
+          href: 'https://github.com/JonasWard/url-safe-bitpacking',
+          alternativeName: 'github rep'
+        },
+        {
+          type: ProjectContentType.ExternalLink,
+          href: 'https://www.npmjs.com/package/url-safe-bitpacking',
+          alternativeName: 'npm'
+        }
+      ]
     },
     createText(
       2,

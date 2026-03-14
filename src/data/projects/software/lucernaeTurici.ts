@@ -75,7 +75,7 @@ const metaData: ProjectMetaData = {
 export const lucernaeTurici: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 1988, 2560),
+  projectImage: createTitleImage(projectImage, metaData.name, 1988, 2560, 'black-on-white'),
   projectContent: [
     createText(1, [
       'Lamp Configurator',
@@ -84,7 +84,7 @@ export const lucernaeTurici: ProjectData = {
     {
       type: ProjectContentType.ExternalLink,
       href: 'https://jonasward.github.io/lucernae-turici/',
-      alternativeName: 'you can try out the configurator on the GitHub pages deployment!'
+      alternativeName: 'GitHub Pages Deployment'
     },
     {
       type: ProjectContentType.ImageGrid,

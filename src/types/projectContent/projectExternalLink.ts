@@ -6,3 +6,8 @@ export type ProjectExternalLink = {
   description?: string;
   alternativeName?: string;
 };
+
+export type ProjectExternalLinkList = {
+  type: ProjectContentType.ExternalLinkList;
+  links: ProjectExternalLink[];
+};
