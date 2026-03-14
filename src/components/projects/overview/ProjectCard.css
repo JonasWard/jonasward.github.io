@@ -143,49 +143,12 @@
   gap: 4px;
   justify-content: space-between;
   align-items: center;
-}
-/* 
-.Architecture {
-  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Architecture) var(--background_main_color), transparent var(--background_transparency));
-}
-
-.Urbanism {
-  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Urbanism) var(--background_main_color), transparent var(--background_transparency));
+  overflow: hidden;
+  max-height: 200px;
+  transition: max-height 0.4s ease;
 }
 
-.Design {
-  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Design) var(--background_main_color), transparent var(--background_transparency));
+.keywords-hidden {
+  max-height: 0;
+  transition: max-height 0.3s ease;
 }
-
-.Art {
-  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Art) var(--background_main_color), transparent var(--background_transparency));
-}
-
-.Software {
-  box-shadow: 10px 10px 0px 0 color-mix(in oklab, var(--Software) var(--background_main_color), transparent var(--background_transparency));
-}
-
-.Architecture:hover {
-  border-color: var(--Architecture);
-  box-shadow: 10px 10px 0 0 var(--Architecture);
-}
-
-.Urbanism:hover {
-  border-color: var(--Urbanism);
-  box-shadow: 10px 10px 0 0 var(--Urbanism);
-}
-
-.Design:hover {
-  border-color: var(--Design);
-  box-shadow: 10px 10px 0 0 var(--Design);
-}
-
-.Art:hover {
-  border-color: var(--Art);
-  box-shadow: 10px 10px 0 0 var(--Art);
-}
-
-.Software:hover {
-  border-color: var(--Software);
-  box-shadow: 10px 10px 0 0 var(--Software);
-} */

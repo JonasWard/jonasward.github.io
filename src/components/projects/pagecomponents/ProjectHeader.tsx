@@ -1,5 +1,6 @@
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import './projectheader.css';
+import logo from 'src/assets/jonasward_logo_elong.png';
 
 interface IProjectHeader {
   id: string;
@@ -7,10 +8,10 @@ interface IProjectHeader {
   keyImage: string;
 }
 
-export const ProjectHeader: React.FC<IProjectHeader> = ({ id, metaData, keyImage }) => {
+export const ProjectHeader: React.FC<IProjectHeader> = ({ id, metaData, keyImage = undefined }) => {
   return (
-    <div className='project-header'>
-      <img src={keyImage} alt='Red dot' />
+    <div className="project-header">
+      <img src={keyImage} alt={logo} />
       <h2>{metaData.name}</h2>
       <main>
         <p>{metaData.description}</p>

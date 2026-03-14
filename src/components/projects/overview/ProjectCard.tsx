@@ -11,6 +11,7 @@ import architecture from 'src/assets/hatches/architecture.svg?raw';
 import software from 'src/assets/hatches/software.svg?raw';
 import weaving from 'src/assets/hatches/weaving.svg?raw';
 import design from 'src/assets/hatches/design.svg?raw';
+import logo from '../../../assets/jonasward_logo_elong.png';
 
 const getBackgroundForProjectType = (projectType: ProjectCategory) => {
   switch (projectType) {
@@ -46,12 +47,15 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
       }`}
       onClick={navigateProject}
     >
-      <div style={{ backgroundImage: getBackgroundForProjectType(metaData.projectType) }} className='project-card foreground' />
-      <div className='project-card foreground' />
       <div
-        className='project-card background'
+        style={{ backgroundImage: getBackgroundForProjectType(metaData.projectType) }}
+        className="project-card foreground"
+      />
+      <div className="project-card foreground" />
+      <div
+        className="project-card background"
         style={{
-          backgroundImage: getBackgroundForProjectType(metaData.projectType),
+          backgroundImage: getBackgroundForProjectType(metaData.projectType)
         }}
       />
       <div>
@@ -59,10 +63,10 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
           style={{
             width: '100%',
             height: `${((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * 200}px`,
-            objectFit: 'cover',
+            objectFit: 'cover'
           }}
-          src={keyImage.imageHref}
-          alt='Red dot'
+          src={keyImage.imageHref || logo}
+          alt={metaData.name}
         />
         <h4>{metaData.id}</h4>
         <h2>{metaData.name}</h2>
@@ -77,14 +81,19 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
         >
           <span>keywords </span>
           <svg
-            style={{ width: 13, height: 13, transition: 'all 0.6s', transform: showKeywords ? 'scale(1, 1)' : 'scale(1, -1)' }}
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 12 12'
+            style={{
+              width: 13,
+              height: 13,
+              transition: 'all 0.6s',
+              transform: showKeywords ? 'rotate(180deg)' : 'rotate(0deg)'
+            }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 12 12"
           >
-            <path d='M2 9 L6 3 L10 9' stroke='black' strokeWidth='1.4' fill='none' strokeLinecap='round' />
+            <path d="M2 9 L6 3 L10 9" stroke="black" strokeWidth="1.4" fill="none" strokeLinecap="round" />
           </svg>
         </h3>
-        <div className='keywords'>
+        <div className={`keywords${showKeywords ? '' : ' keywords-hidden'}`}>
           {getProjectKeywords(metaData).map((attribute, index) => (
             <ProjectChip key={index} name={attribute} show={showKeywords} />
           ))}
