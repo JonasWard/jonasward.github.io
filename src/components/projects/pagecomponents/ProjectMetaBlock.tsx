@@ -13,7 +13,6 @@ export const ProjectMetaBlock: React.FC<IProjectMetaBlockProps> = ({ metaData })
 
   const goToFilter = (keyword: string) => {
     navigate(`${ProjectRoutes.Projects}?k=${encodeURIComponent(keyword)}`);
-    // overwrite the keyword filter
     useProjectStore.getState().setKeywordFilters([keyword]);
   };
 

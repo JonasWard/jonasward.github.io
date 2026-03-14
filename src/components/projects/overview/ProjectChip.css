@@ -1,25 +1,21 @@
 .project-chip {
-  transition: all 0.5s;
+  transition: all 0.3s;
   opacity: 0.85;
   box-shadow: none;
   font-weight: 600;
   border: 1px solid lightgray;
-  background-color: white;
   font-size: 11px;
   font-family: inherit;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   background: transparent;
-  color: inherit;
   cursor: pointer;
   min-height: unset;
+  text-transform: lowercase;
 }
 
 .project-chip.hidden {
   width: 0;
   height: 0;
-  color: white;
-  background-color: white;
   padding: 0 !important;
   opacity: 0;
 }
@@ -30,6 +26,5 @@
 }
 
 .project-chip:hover {
-  border: 1px solid black;
-  background-color: rgb(240, 240, 240);
+  filter: invert(99%);
 }

@@ -34,7 +34,7 @@ const metaData: ProjectMetaData = {
 export const haasHausConfigurator: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 1602, 1729),
+  projectImage: createTitleImage(projectImage, metaData.name, 1602, 1729, 'black-on-white'),
   projectContent: [
     createText(
       2,

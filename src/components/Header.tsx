@@ -6,7 +6,6 @@ import { ProjectRoutes } from '../types/navigation/projectroutes';
 
 const DropDownContent: React.FC = () => {
   const navigate = useNavigate();
-  const path = useLocation();
 
   const navigateAbout = (e: React.MouseEvent) => navigate(ProjectRoutes.About);
   const navigateProjects = (e: React.MouseEvent) => navigate(ProjectRoutes.Projects);
@@ -15,18 +14,21 @@ const DropDownContent: React.FC = () => {
   return (
     <>
       <button
-        className={path.pathname.includes(ProjectRoutes.AnyProject) ? 'button-active' : 'button'}
+        className={'button-main ' + (window.location.hash.includes(ProjectRoutes.AnyProject) ? 'button-active' : '')}
         onClick={navigateProjects}
       >
         Projects
       </button>
       <button
-        className={path.pathname.includes(ProjectRoutes.About) ? 'button-active' : 'button'}
+        className={'button-main ' + (window.location.hash.includes(ProjectRoutes.About) ? 'button-active' : '')}
         onClick={navigateAbout}
       >
         About
       </button>
-      <button className={path.pathname.includes(ProjectRoutes.CV) ? 'button-active' : 'button'} onClick={navigateCV}>
+      <button
+        className={'button-main ' + (window.location.hash.includes(ProjectRoutes.CV) ? 'button-active' : '')}
+        onClick={navigateCV}
+      >
         CV
       </button>
     </>

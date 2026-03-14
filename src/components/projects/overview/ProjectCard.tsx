@@ -48,17 +48,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
       }`}
       onClick={navigateProject}
     >
-      <div
-        style={{ backgroundImage: getBackgroundForProjectType(metaData.projectType) }}
-        className="project-card foreground"
-      />
       <div className="project-card foreground" />
-      <div
-        className="project-card background"
-        style={{
-          backgroundImage: getBackgroundForProjectType(metaData.projectType)
-        }}
-      />
       <div>
         <img
           style={{
@@ -69,35 +59,37 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
           src={keyImage.imageHref || logo}
           alt={metaData.name}
         />
-        <h4>{metaData.id}</h4>
-        <h2>{metaData.name}</h2>
-        <main>
-          <p>{metaData.description}</p>
-        </main>
-        <h3
-          onClick={(e: any) => {
-            e.stopPropagation();
-            setShowKeywords(!showKeywords);
-          }}
-        >
-          <span>keywords </span>
-          <svg
-            style={{
-              width: 13,
-              height: 13,
-              transition: 'all 0.6s',
-              transform: showKeywords ? 'rotate(0deg)' : 'rotate(180deg)'
+        <div className="project-card-content">
+          <h4>{metaData.id}</h4>
+          <h2>{metaData.name}</h2>
+          <main>
+            <p>{metaData.description}</p>
+          </main>
+          <h3
+            onClick={(e: any) => {
+              e.stopPropagation();
+              setShowKeywords(!showKeywords);
             }}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 12 12"
           >
-            <path d="M2 9 L6 3 L10 9" stroke="black" strokeWidth="1.4" fill="none" strokeLinecap="round" />
-          </svg>
-        </h3>
-        <div className={`keywords${showKeywords ? '' : ' keywords-hidden'}`}>
-          {getProjectKeywords(metaData).map((attribute) => (
-            <KeywordButton key={attribute} keyword={attribute} show={showKeywords} />
-          ))}
+            <span>keywords </span>
+            <svg
+              style={{
+                width: 10,
+                height: 10,
+                transition: 'all 0.6s',
+                transform: showKeywords ? 'rotate(0deg)' : 'rotate(180deg)'
+              }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 12 12"
+            >
+              <path d="M2 9 L6 3 L10 9" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+            </svg>
+          </h3>
+          <div className={`keywords${showKeywords ? '' : ' keywords-hidden'}`}>
+            {getProjectKeywords(metaData).map((attribute) => (
+              <KeywordButton key={attribute} keyword={attribute} show={showKeywords} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

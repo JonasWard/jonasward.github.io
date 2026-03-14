@@ -32,7 +32,7 @@
 }
 
 .text-block {
-  column-gap: 25px;
+  column-gap: 50px;
   width: 100%;
 }
 
@@ -108,7 +108,6 @@
   font-weight: 400;
   margin: 0;
   margin-bottom: 20px;
-  text-align: justify;
 }
 
 @media screen and (max-width: 750px) {

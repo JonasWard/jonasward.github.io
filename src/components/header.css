@@ -126,27 +126,22 @@ button {
 }
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-button.button {
+.button-main.button {
   filter: invert(0);
 }
 
-button.button-active {
-  font-weight: 900;
+.button-main.button-active {
+  font-weight: 500;
   font-family: 'Montserrat', sans-serif;
   filter: invert(18%) sepia(52%) saturate(4747%) hue-rotate(241deg) brightness(63%) contrast(127%);
 }
 
 /* Change the background color on mouse-over */
-button.button:hover {
+.button-main:hover {
   filter: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
 }
 
-button:hover {
+.button-main:hover {
   filter: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
 }
 
-/* Change the background color on mouse-over */
-button.button-active:hover {
-  opacity: 80%;
-  transition: 0.5s;
-}

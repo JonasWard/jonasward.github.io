@@ -11,9 +11,9 @@ const getInnerWidth = (): number => Math.min(1200 + 50, window?.visualViewport?.
 const mobileViewWidth = 570;
 const horizontalSpacing = 200;
 const gap = 25;
-const padding = 20;
+const padding = 0;
 const horizontalGridSpacing = horizontalSpacing + padding + gap;
-const rawCardWidth = 216;
+const rawCardWidth = 200;
 
 const PROJECT_POSITION_OFFSET_X = 'project-position-offset-x';
 const PROJECT_POSITION_OFFSET_Y = 'project-position-offset-y';
@@ -70,7 +70,7 @@ export const ProjectOverview: React.FC = () => {
   const [centerPosition, setCenterPosition] = useState<[number, number]>([0, window.innerHeight * 0.5]);
 
   const [positions, setPositions] = useState<ProjectData[][]>(getColumnLogic(projects));
-  const [marginLeft, setMarginLeft] = useState<string>('calc((100vw - 216px) * 0.5)');
+  const [marginLeft, setMarginLeft] = useState<string>('calc((100vw - 200px) * 0.5)');
   const [minWidth, setMinWidth] = useState<number>(0);
 
   const onScroll = () => {

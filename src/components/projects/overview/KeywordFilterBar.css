@@ -17,7 +17,7 @@
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   border: 1px solid #000;
   background-color: #000;
   color: #fff;
@@ -95,6 +95,7 @@
   transition: background-color 0.15s;
   min-height: unset;
   border-radius: 0;
+  text-transform: lowercase;
   width: 100%;
 }
 

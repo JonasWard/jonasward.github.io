@@ -29,7 +29,6 @@
   border: none;
   border-radius: 8px;
   font-family: montserrat;
-  text-align: justify;
   padding: 6px;
 }
 
@@ -39,7 +38,6 @@
   border-radius: 8px;
   padding: 6px;
   font-family: montserrat;
-  text-align: justify;
   max-width: 100%;
   min-width: 100%;
   gap: 10px;
