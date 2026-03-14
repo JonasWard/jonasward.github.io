@@ -12,6 +12,7 @@ import software from 'src/assets/hatches/software.svg?raw';
 import weaving from 'src/assets/hatches/weaving.svg?raw';
 import design from 'src/assets/hatches/design.svg?raw';
 import logo from '../../../assets/jonasward_logo_elong.png';
+import { KeywordButton } from './KeywordButton';
 
 const getBackgroundForProjectType = (projectType: ProjectCategory) => {
   switch (projectType) {
@@ -85,7 +86,7 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
               width: 13,
               height: 13,
               transition: 'all 0.6s',
-              transform: showKeywords ? 'rotate(180deg)' : 'rotate(0deg)'
+              transform: showKeywords ? 'rotate(0deg)' : 'rotate(180deg)'
             }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 12 12"
@@ -94,8 +95,8 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
           </svg>
         </h3>
         <div className={`keywords${showKeywords ? '' : ' keywords-hidden'}`}>
-          {getProjectKeywords(metaData).map((attribute, index) => (
-            <ProjectChip key={index} name={attribute} show={showKeywords} />
+          {getProjectKeywords(metaData).map((attribute) => (
+            <KeywordButton key={attribute} keyword={attribute} show={showKeywords} />
           ))}
         </div>
       </div>

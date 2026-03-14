@@ -152,7 +152,7 @@ code {
   display: flex;
   flex-direction: row;
   gap: 25px;
-  margin-top: 105px;
+  margin-top: 85px;
 }
 
 @media screen and (max-width: 570px) {
