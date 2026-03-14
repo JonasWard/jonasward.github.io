@@ -1,5 +1,4 @@
 .project-card {
-  transition: 0.6s;
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -17,11 +16,6 @@
   opacity: 0;
 }
 
-.project-card:hover {
-  background-color: #181818 !important;
-  color: #ffffff;
-  transform: scale(1.035);
-}
 
 .project-card button {
   background-color: #f0f0f0;
@@ -43,8 +37,18 @@
   filter: brightness(0.8) contrast(0.85) saturate(0.75) brightness(1.25);
 }
 
-.project-card:hover img {
-  filter: brightness(1) contrast(1) saturate(1) brightness(1);
+
+
+@media screen and (min-width: 570px) {
+  .project-card:hover {
+    background-color: #181818 !important;
+    color: #ffffff;
+    transform: scale(1.035);
+  }
+
+  .project-card:hover img {
+    filter: brightness(1) contrast(1) saturate(1) brightness(1);
+  }
 }
 
 @media screen and (max-width: 570px) {
@@ -59,7 +63,6 @@
   .project-card.in-focus {
     background-color: #181818 !important;
     color: #ffffff !important;
-    transform: scale(1.035);
   }
 
   .project-card.in-focus button {
