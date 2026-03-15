@@ -1,9 +1,9 @@
 :root {
-  --Design: rgb(172, 25, 25);
-  --Art: rgb(163, 0, 212);
-  --Architecture: rgb(55, 38, 242);
-  --Urbanism: rgb(24, 73, 113);
-  --Software: rgb(95, 138, 173);
+  --Design: rgb(190, 68, 52);
+  --Art: rgb(118, 52, 152);
+  --Architecture: rgb(48, 52, 168);
+  --Urbanism: rgb(28, 88, 118);
+  --Software: rgb(58, 108, 152);
   --global-max-width: 1200px;
   --padding-tolerance: min(16px, max(0px, calc(var(--global-max-width) - 100vw)));
   --header-content-width: min(100vw - 40px, var(--global-max-width));
