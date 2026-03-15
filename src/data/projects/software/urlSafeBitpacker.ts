@@ -32,7 +32,7 @@ export const urlSafeBitpacker: ProjectData = {
     createText(
       2,
       [
-        'Parametric Obejct Bit-Packing',
+        'Parametric Object Bit-Packing',
         'For many of my projects I have faced the problem of having a relatively simple, yet variable in definition parametric model. In the cloud based web, one would store those data models in a database. However this is quite a bit of additional overhead for simple configurators. In true web-3 (and GDPR compliancy) I aimed at storing the whole parametric model in a single string that could be stored in the url.'
       ],
       'The goal of this library is to offer a flexible, minimal and, variable object definition that can be stored in the browser URL. It relies heavily relies on the bitpacking of custom bitwidth numeric values. Because of that, the biggest trade-off for this library is legibility. Without the related object definition, it would be impossible to reconstruct the state. The big advantage though is the ability to store rather many variables in a very condensed URL, allowing to store all information in rather short urls which then can be used for qr code generation.',
