@@ -9,10 +9,7 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
-  padding-top: 24px;
-  padding-bottom: 20px;
-  padding-left: var(--padding-tolerance);
-  padding-right: var(--padding-tolerance);
+  padding: 24px var(--padding-tolerance) 20px;
 }
 
 .fade-in {

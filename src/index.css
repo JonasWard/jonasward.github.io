@@ -4,8 +4,10 @@
   --Architecture: rgb(48, 52, 168);
   --Urbanism: rgb(28, 88, 118);
   --Software: rgb(58, 108, 152);
+  --Lamps: rgb(240, 153, 2);
   --global-max-width: 1200px;
-  --padding-tolerance: min(16px, max(0px, calc(var(--global-max-width) - 100vw)));
+  --simple-padding: 16px;
+  --padding-tolerance: min(var(--simple-padding), max(0px, calc(var(--global-max-width) + var(--simple-padding) * 2 - 100vw)));
   --header-content-width: min(100vw - 40px, var(--global-max-width));
   --header-content-inset: max(20px, calc((100vw - var(--global-max-width)) * 0.5));
 }

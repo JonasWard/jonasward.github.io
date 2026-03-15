@@ -35,7 +35,7 @@ const metaData: ProjectMetaData = {
 export const holzvisionMax: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(holzvisionMaxFront, metaData.name, 1268, 1303),
+  projectImage: createTitleImage(holzvisionMaxFront, metaData.name, 1268, 1243),
   projectContent: [
     createText(2, [
       'Web application for keeping track of the status of all parts in the context of a Collaborative Timber Project',

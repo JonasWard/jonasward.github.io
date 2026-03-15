@@ -15,6 +15,7 @@
 .project-meta-block-left.Software    { border-left-color: var(--Software); }
 .project-meta-block-left.Art         { border-left-color: var(--Art); }
 .project-meta-block-left.Urbanism    { border-left-color: var(--Urbanism); }
+.project-meta-block-left.Lamps      { border-left-color: var(--Lamps); }
 
 .meta-item {
   display: flex;

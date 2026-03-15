@@ -45,18 +45,19 @@ export const PrimaryColorMap: Record<NamedColor, string> = {
   [ProjectCategory.Architecture]: 'red',
   [ProjectCategory.Art]: 'white',
   [ProjectCategory.Urbanism]: 'red',
+  [ProjectCategory.Lamps]: 'red',
   ...Object.fromEntries(
     missingAttributesPlasma.map((attributeName, index, array) => [
       attributeName,
-      getLightness(getColorFromUUIDPlasma(index / (array.length - 1))) < 0.5 ? 'white' : 'black',
+      getLightness(getColorFromUUIDPlasma(index / (array.length - 1))) < 0.5 ? 'white' : 'black'
     ])
   ),
   ...Object.fromEntries(
     missingAttributesViridis.map((attributeName, index, array) => [
       attributeName,
-      getLightness(getColorFromUUIDViridis(index / (array.length - 1))) < 0.5 ? 'white' : 'black',
+      getLightness(getColorFromUUIDViridis(index / (array.length - 1))) < 0.5 ? 'white' : 'black'
     ])
-  ),
+  )
 } as Record<NamedColor, string>;
 
 export const SecondaryColorMap: Record<NamedColor, string> = {
@@ -64,12 +65,13 @@ export const SecondaryColorMap: Record<NamedColor, string> = {
   [ProjectCategory.Architecture]: 'yellow',
   [ProjectCategory.Art]: 'blue',
   [ProjectCategory.Urbanism]: 'black',
+  [ProjectCategory.Lamps]: 'red',
   ...Object.fromEntries(
     missingAttributesPlasma.map((attributeName, index, array) => [
       attributeName,
       `rgb(${getColorFromUUIDPlasma(index / (array.length - 1))
         .map((v) => ((1 + v) % 1) * 255)
-        .join(',')})`,
+        .join(',')})`
     ])
   ),
   ...Object.fromEntries(
@@ -77,7 +79,7 @@ export const SecondaryColorMap: Record<NamedColor, string> = {
       attributeName,
       `rgb(${getColorFromUUIDViridis(index / (array.length - 1))
         .map((v) => ((1 + v) % 1) * 255)
-        .join(',')})`,
+        .join(',')})`
     ])
-  ),
+  )
 } as Record<NamedColor, string>;

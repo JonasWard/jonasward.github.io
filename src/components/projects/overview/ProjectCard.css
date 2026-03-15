@@ -14,6 +14,7 @@
 .project-card.Software    { --card-color: var(--Software);     background-color: color-mix(in srgb, var(--Software) 12%, #f0f0f0); }
 .project-card.Art         { --card-color: var(--Art);          background-color: color-mix(in srgb, var(--Art) 12%, #f0f0f0); }
 .project-card.Urbanism    { --card-color: var(--Urbanism);     background-color: color-mix(in srgb, var(--Urbanism) 12%, #f0f0f0); }
+.project-card.Lamps      { --card-color: var(--Lamps);         background-color: color-mix(in srgb, var(--Lamps) 12%, #f0f0f0); }
 
 .project-card button {
   background-color: transparent;
@@ -65,6 +66,7 @@
   .project-card.Software:hover    { background-color: var(--Software) !important; }
   .project-card.Art:hover         { background-color: var(--Art) !important; }
   .project-card.Urbanism:hover    { background-color: var(--Urbanism) !important; }
+  .project-card.Lamps:hover      { background-color: var(--Lamps) !important; }
 
   .project-card:hover .project-card-content::before {
     width: 20%;
@@ -94,6 +96,7 @@
   .project-card.Software.in-focus    { background-color: var(--Software) !important; }
   .project-card.Art.in-focus         { background-color: var(--Art) !important; }
   .project-card.Urbanism.in-focus    { background-color: var(--Urbanism) !important; }
+  .project-card.Lamps.in-focus      { background-color: var(--Lamps) !important; }
 
   .project-card.in-focus .project-card-content::before {
     width: 20%;

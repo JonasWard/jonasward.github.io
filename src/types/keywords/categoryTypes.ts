@@ -4,4 +4,5 @@ export enum ProjectCategory {
   Art = 'Art',
   Urbanism = 'Urbanism',
   Software = 'Software',
+  Lamps = 'Lamps'
 }
