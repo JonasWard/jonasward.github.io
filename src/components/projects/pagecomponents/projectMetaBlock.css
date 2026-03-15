@@ -2,10 +2,19 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
+
+.project-meta-block-left {
+  border-left: 4px solid transparent;
+}
+
+.project-meta-block-left.Design      { border-left-color: var(--Design); }
+.project-meta-block-left.Architecture { border-left-color: var(--Architecture); }
+.project-meta-block-left.Software    { border-left-color: var(--Software); }
+.project-meta-block-left.Art         { border-left-color: var(--Art); }
+.project-meta-block-left.Urbanism    { border-left-color: var(--Urbanism); }
 
 .meta-item {
   display: flex;
@@ -14,14 +23,6 @@
   padding: 12px 20px;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
   min-width: 100px;
-}
-
-.meta-item:first-child {
-  padding-left: var(--padding-tolerance);
-}
-
-.meta-item:last-child {
-  padding-right: var(--padding-tolerance);
 }
 
 .meta-item--keywords {
