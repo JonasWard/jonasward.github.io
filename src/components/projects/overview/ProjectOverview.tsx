@@ -6,14 +6,17 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { ProjectCategoryFilterType } from '../../../types/navigation/filterType';
 import { useProjectStore } from '../../../state/projectStore';
 
-const getInnerWidth = (): number => Math.min(1200 + 50, window?.visualViewport?.width ?? window.innerWidth);
-
 const mobileViewWidth = 570;
 const horizontalSpacing = 200;
-const gap = 25;
+const gap = 16;
 const padding = 0;
 const horizontalGridSpacing = horizontalSpacing + padding + gap;
 const rawCardWidth = 200;
+
+const maxCardColumns = 6;
+const totalCardWidth = horizontalGridSpacing * maxCardColumns + gap;
+
+const getInnerWidth = (): number => Math.min(totalCardWidth, window?.visualViewport?.width ?? window.innerWidth);
 
 const PROJECT_POSITION_OFFSET_X = 'project-position-offset-x';
 const PROJECT_POSITION_OFFSET_Y = 'project-position-offset-y';

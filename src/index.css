@@ -151,8 +151,8 @@ code {
   position: relative;
   display: flex;
   flex-direction: row;
-  gap: 25px;
-  margin-top: 85px;
+  gap: 16px;
+  margin-top: 90px;
 }
 
 @media screen and (max-width: 570px) {

@@ -1,4 +1,5 @@
 .project-card {
+  --card-color: transparent;
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -16,19 +17,44 @@
   opacity: 0;
 }
 
+/* Category tints + custom property for stripe */
+.project-card.Design      { --card-color: var(--Design);       background-color: color-mix(in srgb, var(--Design) 12%, #f0f0f0); }
+.project-card.Architecture { --card-color: var(--Architecture); background-color: color-mix(in srgb, var(--Architecture) 12%, #f0f0f0); }
+.project-card.Software    { --card-color: var(--Software);     background-color: color-mix(in srgb, var(--Software) 12%, #f0f0f0); }
+.project-card.Art         { --card-color: var(--Art);          background-color: color-mix(in srgb, var(--Art) 12%, #f0f0f0); }
+.project-card.Urbanism    { --card-color: var(--Urbanism);     background-color: color-mix(in srgb, var(--Urbanism) 12%, #f0f0f0); }
 
 .project-card button {
-  background-color: #f0f0f0;
+  background-color: transparent;
   color: #000000;
 }
 
 .project-card:hover button {
-  background-color: #181818 !important;
+  background-color: transparent !important;
   color: #ffffff;
 }
 
 .project-card-content {
+  position: relative;
   padding: 4px 8px;
+  overflow: hidden;
+}
+
+.project-card-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: var(--card-color);
+  transition: width 0.3s ease, background-color 0.3s ease;
+  z-index: 0;
+}
+
+.project-card-content > * {
+  position: relative;
+  z-index: 1;
 }
 
 .project-card img {
@@ -37,13 +63,21 @@
   filter: brightness(0.8) contrast(0.85) saturate(0.75) brightness(1.25);
 }
 
-
-
 @media screen and (min-width: 570px) {
   .project-card:hover {
-    background-color: #181818 !important;
     color: #ffffff;
     transform: scale(1.035);
+  }
+
+  .project-card.Design:hover      { background-color: var(--Design) !important; }
+  .project-card.Architecture:hover { background-color: var(--Architecture) !important; }
+  .project-card.Software:hover    { background-color: var(--Software) !important; }
+  .project-card.Art:hover         { background-color: var(--Art) !important; }
+  .project-card.Urbanism:hover    { background-color: var(--Urbanism) !important; }
+
+  .project-card:hover .project-card-content::before {
+    width: 20%;
+    background-color: var(--card-color);
   }
 
   .project-card:hover img {
@@ -61,12 +95,22 @@
   }
 
   .project-card.in-focus {
-    background-color: #181818 !important;
     color: #ffffff !important;
   }
 
+  .project-card.Design.in-focus      { background-color: var(--Design) !important; }
+  .project-card.Architecture.in-focus { background-color: var(--Architecture) !important; }
+  .project-card.Software.in-focus    { background-color: var(--Software) !important; }
+  .project-card.Art.in-focus         { background-color: var(--Art) !important; }
+  .project-card.Urbanism.in-focus    { background-color: var(--Urbanism) !important; }
+
+  .project-card.in-focus .project-card-content::before {
+    width: 20%;
+    background-color: var(--card-color);
+  }
+
   .project-card.in-focus button {
-    background-color: #181818 !important;
+    background-color: transparent !important;
     color: #ffffff !important;
   }
 }
