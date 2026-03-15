@@ -5,6 +5,7 @@ import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
+import { Keywords } from 'src/types/keywords/keywords';
 
 import chocoladeChaudD2P_1 from './asssets/chocoladeChaudD2P_1.jpg';
 import chocoladeChaudD2P_2 from './asssets/chocoladeChaudD2P_2.jpg';
@@ -34,7 +35,8 @@ const metaData: ProjectMetaData = {
   description: 'Using Chocolade Chaud to create xMas gifts',
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
-  projectPartnerContext: ProjectPartnerContext.Solo
+  projectPartnerContext: ProjectPartnerContext.Solo,
+  keywords: [Keywords.DigitalFabrication, Keywords.ThreeDPrinting, Keywords.Patterns]
 };
 
 export const chocoladeChaudD2P: ProjectData = {

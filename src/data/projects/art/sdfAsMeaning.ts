@@ -4,6 +4,8 @@ import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
+import { ProjectContentType } from 'src/types/projectContent/projectContentType';
+import { Keywords } from 'src/types/keywords/keywords';
 
 import sdfAsMeaning_front from './asssets/sdfAsMeaning_front.jpg';
 import sdfAsMeaning_1 from './asssets/sdfAsMeaning_1.jpg';
@@ -19,8 +21,6 @@ import sdfAsMeaning_10 from './asssets/sdfAsMeaning_10.jpg';
 import sdfAsMeaning_11 from './asssets/sdfAsMeaning_11.jpg';
 import sdfAsMeaning_12 from './asssets/sdfAsMeaning_12.jpg';
 
-import { ProjectContentType } from 'src/types/projectContent/projectContentType';
-
 const id = '2023-05';
 
 const metaData: ProjectMetaData = {
@@ -31,7 +31,8 @@ const metaData: ProjectMetaData = {
   description: 'Using text as data to feed SDF',
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
-  projectPartnerContext: ProjectPartnerContext.Solo
+  projectPartnerContext: ProjectPartnerContext.Solo,
+  keywords: [Keywords.ThreeDPrinting, Keywords.Patterns]
 };
 
 export const sdfAsMeaning: ProjectData = {

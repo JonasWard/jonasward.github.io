@@ -5,6 +5,7 @@ import projectImage from './assets/patternGenerator/patternTitle.jpg';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { createTitleImage } from '../../../utils/projectconstructor';
+import { Keywords } from 'src/types/keywords/keywords';
 
 const id = '2021-01';
 
@@ -17,6 +18,7 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
+  keywords: [Keywords.Patterns]
 };
 
 export const patternMachine: ProjectData = {

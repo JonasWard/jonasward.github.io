@@ -5,6 +5,8 @@ interface type {
   className?: string;
   content: ProjectImage;
   isMainImage?: boolean;
+  maxHeight?: number;
+  maxWidth?: number;
 }
 
 const getHeightForMainImage = (projectImage: ProjectImage, isMainImage: boolean): number | undefined => {
@@ -18,15 +20,22 @@ const getHeightForMainImage = (projectImage: ProjectImage, isMainImage: boolean)
   return Math.min(windowHeight, imageHeight);
 };
 
-export const ProjectImageRenderer: React.FC<type> = ({ content, isMainImage = false, className }) => {
+export const ProjectImageRenderer: React.FC<type> = ({
+  content,
+  isMainImage = false,
+  className,
+  maxHeight,
+  maxWidth
+}) => {
   return (
     <div
+      style={{ maxHeight, maxWidth }}
       className={`project-image ${isMainImage ? 'main-image' : ''} ${isMainImage ? 'fade-in' : ''} ${className ?? ''}`}
     >
       <img
         src={content.imageHref}
         alt={content.imageText ?? ''}
-        style={{ height: getHeightForMainImage(content, isMainImage) }}
+        style={{ height: maxHeight ?? getHeightForMainImage(content, isMainImage) }}
       />
       {content.imageText && (
         <div

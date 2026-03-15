@@ -152,6 +152,7 @@
 @media screen and (max-width: 750px) {
   .image-text-block,
   .image-text-block.right {
+    align-items: center;
     flex-direction: column;
   }
 }

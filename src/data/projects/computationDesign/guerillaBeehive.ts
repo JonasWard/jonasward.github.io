@@ -17,7 +17,7 @@ import image6 from './assets/guerilla-beehive/SectionA.jpg';
 import image7 from './assets/guerilla-beehive/SectionB.jpg';
 import image8 from './assets/guerilla-beehive/SectionC.jpg';
 
-const id = '2018-02';
+const id = '2018-06';
 
 const metaData: ProjectMetaData = {
   id,
@@ -28,8 +28,8 @@ const metaData: ProjectMetaData = {
   keyImage: keyImage,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Client,
-  keywords: [Keywords.Knitting, Keywords.Patterns],
-  projectPartners: ['Annemarie Maes'],
+  keywords: [Keywords.Patterns, Keywords.DigitalFabrication, Keywords.Ecology],
+  projectPartners: ['Annemarie Maes']
 };
 
 export const guerillaBeehive: ProjectData = {

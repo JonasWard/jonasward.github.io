@@ -31,8 +31,8 @@ const metaData: ProjectMetaData = {
   keyImage: keyImage,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.Knitting, Keywords.Patterns],
-  projectPartners: ['Nik Eftekar', 'Rahul Girish'],
+  keywords: [Keywords.Patterns, Keywords.DigitalFabrication],
+  projectPartners: ['Nik Eftekar', 'Rahul Girish']
 };
 
 export const impactClay: ProjectData = {

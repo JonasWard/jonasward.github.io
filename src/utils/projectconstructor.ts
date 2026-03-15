@@ -39,20 +39,24 @@ export const createTextImage = (
   description: string,
   title: string,
   imageText?: string,
-  position?: 'left' | 'right' | 'top' | 'bottom'
+  position?: 'left' | 'right' | 'top' | 'bottom',
+  maxImageHeight?: number,
+  maxImageWidth?: number
 ): ProjectImageText => ({
   type: ProjectContentType.ImageText,
   image: {
     type: ProjectContentType.Image,
     imageHref,
-    imageText,
+    imageText
   },
   text: {
     maxColumnCount: 1,
     type: ProjectContentType.Text,
-    content: [[title, description]],
+    content: [[title, description]]
   },
   position,
+  maxImageHeight,
+  maxImageWidth
 });
 
 export const getProjectKeywords = (metaData: ProjectMetaData) => [

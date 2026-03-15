@@ -5,6 +5,7 @@ import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
+import { Keywords } from 'src/types/keywords/keywords';
 
 import sdfVases_Front from './asssets/sdfVases_Front.jpg';
 import sdfVases_1 from './asssets/sdfVases_1.jpg';
@@ -34,7 +35,8 @@ const metaData: ProjectMetaData = {
   description: 'Vase Topologies with SDFs',
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
-  projectPartnerContext: ProjectPartnerContext.Solo
+  projectPartnerContext: ProjectPartnerContext.Solo,
+  keywords: [Keywords.ThreeDPrinting, Keywords.Patterns]
 };
 
 export const sdfVases: ProjectData = {

@@ -13,5 +13,8 @@ export enum Keywords {
   Timber = 'timber',
   Static = 'static',
   AI = 'ai',
-  LaserCutting = 'laser-cutting'
+  LaserCutting = 'laser-cutting',
+  Architecture = 'architecture',
+  Software = 'software',
+  Lamps = 'lamps'
 }

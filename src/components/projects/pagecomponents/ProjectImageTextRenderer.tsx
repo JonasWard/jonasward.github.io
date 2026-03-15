@@ -10,7 +10,11 @@ interface IProjectImageTextRendererProps {
 export const ProjectImageTextRenderer: React.FC<IProjectImageTextRendererProps> = ({ content }) => {
   return (
     <div className={`image-text-block ${content.position ?? 'left'}`}>
-      <ProjectImageRenderer content={content.image} />
+      <ProjectImageRenderer
+        content={content.image}
+        maxHeight={content.maxImageHeight}
+        maxWidth={content.maxImageWidth}
+      />
       <ProjectTextRenderer content={content.text} />
     </div>
   );

@@ -33,8 +33,8 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.ThreeDPrinting],
-  projectPartners: ['Malcolm Ungers'],
+  keywords: [Keywords.ThreeDPrinting, Keywords.Software, Keywords.Product, Keywords.Lamps],
+  projectPartners: ['Malcolm Ungers']
 };
 
 export const paraSlimShady: ProjectData = {

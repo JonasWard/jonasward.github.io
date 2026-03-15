@@ -68,8 +68,8 @@ const metaData: ProjectMetaData = {
   keyImage: glass5,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.DigitalFabrication],
-  projectPartners: ['Sophia Michopoulou', 'Rena Giesecke', 'Pietro Odaglia'],
+  keywords: [Keywords.DigitalFabrication, Keywords.ThreeDPrinting, Keywords.Patterns],
+  projectPartners: ['Sophia Michopoulou', 'Rena Giesecke', 'Pietro Odaglia']
 };
 
 export const gradedGlass: ProjectData = {

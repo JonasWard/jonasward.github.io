@@ -5,6 +5,7 @@ import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
+import { Keywords } from 'src/types/keywords/keywords';
 
 import sdfLamps_Front from './assets/sdfLamps_Front.jpg';
 import sdfLamps_1 from './assets/sdfLamps_1.jpg';
@@ -41,7 +42,6 @@ import sdfLamps_32 from './assets/sdfLamps_32.jpg';
 import sdfLamps_33 from './assets/sdfLamps_33.jpg';
 import sdfLamps_34 from './assets/sdfLamps_34.jpg';
 import sdfLamps_35 from './assets/sdfLamps_35.jpg';
-import { Keywords } from 'src/types/keywords/keywords';
 
 const id = '2024-06';
 
@@ -54,7 +54,7 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.DigitalFabrication, Keywords.Product]
+  keywords: [Keywords.DigitalFabrication, Keywords.Product, Keywords.ThreeDPrinting, Keywords.Patterns]
 };
 
 export const sdfLamps: ProjectData = {

@@ -5,6 +5,7 @@ import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
+import { Keywords } from 'src/types/keywords/keywords';
 
 import chocoStudies_1 from './asssets/chocoStudies_1.jpg';
 import chocoStudies_2 from './asssets/chocoStudies_2.jpg';
@@ -46,7 +47,8 @@ const metaData: ProjectMetaData = {
   description: 'Using SDF for Chocoforming',
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
-  projectPartnerContext: ProjectPartnerContext.Solo
+  projectPartnerContext: ProjectPartnerContext.Solo,
+  keywords: [Keywords.DigitalFabrication, Keywords.ThreeDPrinting, Keywords.Patterns]
 };
 
 export const chocoStudies: ProjectData = {

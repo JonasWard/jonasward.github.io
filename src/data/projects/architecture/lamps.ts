@@ -37,7 +37,7 @@ const metaData: ProjectMetaData = {
   keyImage: lampsBoekentoren,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.DigitalFabrication, Keywords.Product],
+  keywords: [Keywords.DigitalFabrication, Keywords.Product, Keywords.Patterns]
 };
 
 export const lamps: ProjectData = {

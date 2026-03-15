@@ -38,7 +38,7 @@ const metaData: ProjectMetaData = {
   keyImage: keyImage,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.AI],
+  keywords: [Keywords.AI, Keywords.Architecture, Keywords.Patterns]
 };
 
 const maxColumnCount = 2;

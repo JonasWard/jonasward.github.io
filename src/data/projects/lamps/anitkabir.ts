@@ -24,26 +24,23 @@ const metaData: ProjectMetaData = {
   keyImage: lampsAntikabir4,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.LaserCutting, Keywords.Product]
+  keywords: [Keywords.LaserCutting, Keywords.Product, Keywords.Architecture]
 };
 
 export const anitkabir: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(lampsAntikabir4, metaData.name, 2048, 2048),
+  projectImage: createTitleImage(lampsAntikabir4, metaData.name, 2048, 2048, 'black-on-white'),
   projectContent: [
     createTextImage(
       lampsAntikabirLogo,
       `Every country has it's architectural masterpieces but few realisations from the 20th century are as symbolic as the Anıtkabir. The final resting ground of one of the greatest modernisers of the Interbellum period: Mustafa Kemal Ataturk. It's as fascinating as it is ironic that this building is of near religious importance to the modern Turkish identity. Ataturk - famous for introducing a seculare and democratic alternative to the Ottoman Sultanate - couldn't have wished for a finer burial ground, overlooking the by him instated new capitol of Ankara.`,
-      'Anıtkabir'
+      'Anıtkabir',
+      undefined,
+      undefined,
+      undefined,
+      200
     ),
-    {
-      type: ProjectContentType.Text,
-      content: [
-        `Every country has it's architectural masterpieces but few realisations from the 20th century are as symbolic as the Anıtkabir. The final resting ground of one of the greatest modernisers of the Interbellum period: Mustafa Kemal Ataturk. It's as fascinating as it is ironic that this building is of near religious importance to the modern Turkish identity. Ataturk - famous for introducing a seculare and democratic alternative to the Ottoman Sultanate - couldn't have wished for a finer burial ground, overlooking the by him instated new capitol of Ankara.`
-      ],
-      maxColumnCount: 1
-    },
     {
       type: ProjectContentType.ImageGrid,
       images: [lampsAntikabir1, lampsAntikabir2, lampsAntikabir3, lampsAntikabir4].map((i) => createImage(i, '© J.W.'))

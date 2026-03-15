@@ -5,7 +5,7 @@ import { ProjectPartnerContext } from 'src/types/keywords/projectPartnerContext'
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { ProjectData } from 'src/types/projectContent/projectData';
 import { ProjectMetaData } from 'src/types/projectContent/projectMetaData';
-import { createTitleImage, createImage } from 'src/utils/projectconstructor';
+import { createTitleImage, createImage, createTextImage } from 'src/utils/projectconstructor';
 
 const id = '2018-01';
 
@@ -23,7 +23,7 @@ const metaData: ProjectMetaData = {
   keyImage: lampsBoekentoren,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.LaserCutting, Keywords.Product]
+  keywords: [Keywords.LaserCutting, Keywords.Product, Keywords.Architecture]
 };
 
 export const boekentoren: ProjectData = {
@@ -31,9 +31,20 @@ export const boekentoren: ProjectData = {
   metaData,
   projectImage: createTitleImage(lampsBoekentoren, metaData.name, 2048, 2048),
   projectContent: [
+    createTextImage(
+      lampsBoekentorenLogo,
+      `The Boekentoren has a very pronounced impact on the Ghentian skyline. Having lived nearly my whole live in Ghent, this masterpiece of the modern movement has had a profound impact on my appreciation for modern architecture. Even more so when I decided to study architecture at the University of Ghent and ended up spending most of my accademical career literally studying and working in the shadow of the Boekentoren.`,
+      'HENRY VAN DE VELDE © the Boekentoren',
+      undefined,
+      undefined,
+      undefined,
+      200
+    ),
     {
       type: ProjectContentType.ImageGrid,
-      images: [lampsBoekentorenLogo, lampsBoekentoren].map((i) => createImage(i, '© J.W.'))
+      images: [lampsBoekentorenInSitu, lampsBoekentoren, lampsBoekentorenvBoekentoren].map((i) =>
+        createImage(i, '© J.W.')
+      )
     }
   ]
 };

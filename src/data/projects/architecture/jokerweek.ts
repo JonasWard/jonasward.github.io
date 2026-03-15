@@ -16,6 +16,7 @@ import jokerweek6 from './assets/jokerweek/jokerweek-2015_17020376252_o.jpg';
 import jokerweek7 from './assets/jokerweek/jokerweek-2015_16399464974_o.jpg';
 import jokerweek8 from './assets/jokerweek/jokerweek-2015_16834288910_o.jpg';
 import jokerweek9 from './assets/jokerweek/jokerweek-2015_16836174319_o.jpg';
+import { Keywords } from 'src/types/keywords/keywords';
 
 const id = '2015-02';
 
@@ -28,6 +29,7 @@ const metaData: ProjectMetaData = {
   keyImage: keyImage,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Team,
+  keywords: [Keywords.Architecture]
 };
 
 const maxColumnCount = 2;

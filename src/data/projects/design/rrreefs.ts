@@ -38,8 +38,8 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.ThreeDPrinting, Keywords.Ecology],
-  projectPartners: ['Marie Griesmar'],
+  keywords: [Keywords.ThreeDPrinting, Keywords.Ecology, Keywords.Patterns],
+  projectPartners: ['Marie Griesmar']
 };
 
 export const coralBricks: ProjectData = {

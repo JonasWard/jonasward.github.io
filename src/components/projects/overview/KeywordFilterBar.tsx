@@ -5,7 +5,7 @@ import { allProjects } from '../../../data/projects/allProjects';
 import './KeywordFilterBar.css';
 
 const ALL_KEYWORDS = [
-  ...new Set(allProjects.flatMap((p) => getProjectKeywords(p.metaData).map((k) => String(k))))
+  ...new Set(allProjects.flatMap((p) => getProjectKeywords(p.metaData).map((k) => String(k).toLowerCase())))
 ].sort();
 
 export const KeywordFilterBar: React.FC = () => {
