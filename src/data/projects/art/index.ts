@@ -3,3 +3,4 @@ export * from './chocoStudies';
 export * from './sdfAsMeaning';
 export * from './sdfVases';
 export * from './volumeStudies';
+export * from './svgSDF';
