@@ -6,3 +6,4 @@ export * from './lucernaeTurici';
 export * from './paraSlimShady';
 export * from './staufferStatic';
 export * from './urlSafeBitpacker';
+export * from './ilumina';
