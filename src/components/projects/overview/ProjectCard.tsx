@@ -66,8 +66,8 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
             </svg>
           </h3>
           <div className={`keywords${showKeywords ? '' : ' keywords-hidden'}`}>
-            {getProjectKeywords(metaData).map((attribute) => (
-              <KeywordButton key={attribute} keyword={attribute} show={showKeywords} />
+            {getProjectKeywords(metaData).map((attribute, i) => (
+              <KeywordButton key={i} keyword={attribute} show={showKeywords} />
             ))}
           </div>
         </div>
