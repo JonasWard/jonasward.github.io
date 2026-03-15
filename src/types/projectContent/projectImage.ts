@@ -6,6 +6,8 @@ export type ProjectImage = {
   imageWidth?: number;
   imageHeigth?: number;
   imageText?: string;
+  maxImageHeight?: number;
+  maxImageWidth?: number;
   imageTextSize?: 'small' | 'medium' | 'large';
   imageTextPosition?: 'top' | 'bottom' | 'center';
   imageTextAlignment?: 'left' | 'center' | 'right';

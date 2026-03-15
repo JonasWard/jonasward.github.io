@@ -29,7 +29,7 @@ export const ProjectImageRenderer: React.FC<type> = ({
 }) => {
   return (
     <div
-      style={{ maxHeight, maxWidth }}
+      style={{ maxHeight: content.maxImageHeight ?? maxHeight, maxWidth: content.maxImageWidth ?? maxWidth }}
       className={`project-image ${isMainImage ? 'main-image' : ''} ${isMainImage ? 'fade-in' : ''} ${className ?? ''}`}
     >
       <img

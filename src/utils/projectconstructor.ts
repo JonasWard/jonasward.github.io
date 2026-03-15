@@ -9,7 +9,9 @@ export const createTitleImage = (
   title: string,
   imageWidth: number,
   imageHeigth: number,
-  imageTextColor?: 'white-on-black' | 'black-on-white'
+  imageTextColor?: 'white-on-black' | 'black-on-white',
+  maxImageHeight?: number,
+  maxImageWidth?: number
 ): ProjectImage => ({
   type: ProjectContentType.Image,
   imageHref: href,
@@ -19,13 +21,17 @@ export const createTitleImage = (
   imageTextAlignment: 'center',
   imageWidth,
   imageHeigth,
+  maxImageHeight,
+  maxImageWidth,
   imageTextColor
 });
 
-export const createImage = (href: string, text?: string): ProjectImage => ({
+export const createImage = (href: string, text?: string, maxImageHeight?: number, maxImageWidth?: number): ProjectImage => ({
   type: ProjectContentType.Image,
   imageHref: href,
   imageText: text,
+  maxImageHeight,
+  maxImageWidth
 });
 
 export const createText = (maxColumnCount: 1 | 2 | 3 = 1, ...texts: (string | [string, string])[]): ProjectText => ({
