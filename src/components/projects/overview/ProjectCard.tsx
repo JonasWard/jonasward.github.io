@@ -1,31 +1,12 @@
 import { ProjectMetaData } from 'src/types/projectContent/projectMetaData';
 import { useNavigate } from 'react-router-dom';
 import './ProjectCard.css';
-import { ProjectChip } from './ProjectChip';
 import { ProjectImage } from 'src/types/projectContent/projectImage';
 import { getProjectKeywords } from 'src/utils/projectconstructor';
 import { useRef, useState } from 'react';
-import { ProjectCategory } from 'src/types/keywords/categoryTypes';
 
-import architecture from 'src/assets/hatches/architecture.svg?raw';
-import software from 'src/assets/hatches/software.svg?raw';
-import weaving from 'src/assets/hatches/weaving.svg?raw';
-import design from 'src/assets/hatches/design.svg?raw';
 import logo from '../../../assets/jonasward_logo_elong.png';
 import { KeywordButton } from './KeywordButton';
-
-const getBackgroundForProjectType = (projectType: ProjectCategory) => {
-  switch (projectType) {
-    case ProjectCategory.Design:
-      return `url("data:image/svg+xml;utf8,${design.replaceAll('\n', '')}")`;
-    case ProjectCategory.Architecture:
-      return `url("data:image/svg+xml;utf8,${architecture.replaceAll('\n', '')}")`;
-    case ProjectCategory.Software:
-      return `url("data:image/svg+xml;utf8,${software.replaceAll('\n', '')}")`;
-    default:
-      return `url("data:image/svg+xml;utf8,${weaving.replaceAll('\n', '')}")`;
-  }
-};
 
 interface IProjectCard {
   index: number;
@@ -48,7 +29,6 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
       }`}
       onClick={navigateProject}
     >
-      <div className="project-card foreground" />
       <div>
         <img
           style={{
