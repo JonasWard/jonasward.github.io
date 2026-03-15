@@ -61,7 +61,12 @@ const Navigation: React.FC = () => {
 
 export const Header: React.FC<{ children?: React.ReactNode }> = ({ children = null }) => {
   const navigate = useNavigate();
-  const navigateHome = () => navigate(ProjectRoutes.Home);
+  const navigateHome = () =>
+    navigate(
+      window.location.hash.includes(ProjectRoutes.Projects)
+        ? (window.location.hash = ProjectRoutes.Home)
+        : ProjectRoutes.Projects
+    );
 
   return (
     <div className="header">
