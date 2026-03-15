@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   gap: 6px;
   padding: 0px var(--header-content-inset);
-  margin-bottom: 6px;
+  margin: 8px;
 }
 
 /* Scoped under .keyword-filter-inner to beat .header button specificity */
