@@ -23,7 +23,7 @@ import lamp_08 from './assets/ilumina/lamp_08.jpg';
 import lamp_09 from './assets/ilumina/lamp_09.jpg';
 import lamp_10 from './assets/ilumina/lamp_10.jpg';
 
-const id = '2025-03';
+const id = '2025-05';
 
 const metaData: ProjectMetaData = {
   id,
