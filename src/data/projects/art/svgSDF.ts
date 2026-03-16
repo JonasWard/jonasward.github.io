@@ -18,7 +18,7 @@ import swissRadial from './asssets/swissRadial.png';
 import zurich from './asssets/zurich.png';
 import belgium from './asssets/belgium.png';
 
-const id = '2025-03';
+const id = '2025-07';
 
 const metaData: ProjectMetaData = {
   id,
