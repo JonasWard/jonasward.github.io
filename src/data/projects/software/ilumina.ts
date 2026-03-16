@@ -28,7 +28,7 @@ const id = '2025-03';
 const metaData: ProjectMetaData = {
   id,
   webstring: 'ilumina',
-  name: 'Ilumina',
+  name: 'iLumina',
   projectType: ProjectCategory.Software,
   description: 'Browser based lamp configurator',
   keyImage: title,
@@ -45,7 +45,7 @@ export const ilumina: ProjectData = {
   projectContent: [
     createText(2, [
       'Tinder like Swipe-selecting lamp configurator',
-      'ILumina serves as a POC for an SDF based lamp configurator, where the pattern can be selected through a swipe-selecting interface.'
+      'iLumina serves as a POC for an SDF based lamp configurator, where the pattern can be selected through a swipe-selecting interface.'
     ]),
     {
       type: ProjectContentType.ExternalLink,
