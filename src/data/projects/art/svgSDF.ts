@@ -9,7 +9,6 @@ import { Keywords } from 'src/types/keywords/keywords';
 
 import denmarkDistance from './asssets/denmarkDistance.png';
 import denmarkPolar from './asssets/denmarkPolar.png';
-import eastFlanders from './asssets/east-flanders.png';
 import mountains from './asssets/mountains.png';
 import mountainsBis from './asssets/mountainsBis.png';
 import swissDistance from './asssets/swissDistance.png';
@@ -17,6 +16,11 @@ import swissPolar from './asssets/swissPolar.png';
 import swissRadial from './asssets/swissRadial.png';
 import zurich from './asssets/zurich.png';
 import belgium from './asssets/belgium.png';
+import shape from './asssets/shape.webp';
+import france from './asssets/france.webp';
+import eastFlandersDistance from './asssets/east-flanders-distance.webp';
+import eastFlandersHSV from './asssets/east-flanders-hsv.webp';
+import eastFlandersRedBlue from './asssets/east-flanders-red-blue.webp';
 
 const id = '2025-07';
 
@@ -26,7 +30,7 @@ const metaData: ProjectMetaData = {
   name: 'SVG SDF',
   projectType: ProjectCategory.Art,
   description: 'SVG SDFs',
-  keyImage: undefined,
+  keyImage: eastFlandersHSV,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
   keywords: [Keywords.Shaders, Keywords.Patterns]
@@ -35,7 +39,7 @@ const metaData: ProjectMetaData = {
 export const svgSDF: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(zurich, metaData.name, 938, 1010),
+  projectImage: createTitleImage(eastFlandersHSV, metaData.name, 2356, 2254),
   projectContent: [
     createText(2, [
       'SVG SDFs',
@@ -48,7 +52,7 @@ export const svgSDF: ProjectData = {
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [eastFlanders, belgium].map((i) => createImage(i, '© J.W.'))
+      images: [eastFlandersDistance, eastFlandersHSV, eastFlandersRedBlue, belgium].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
@@ -60,7 +64,7 @@ export const svgSDF: ProjectData = {
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [mountains, mountainsBis].map((i) => createImage(i, '© J.W.'))
+      images: [mountains, mountainsBis, shape, france].map((i) => createImage(i, '© J.W.'))
     }
   ]
 };
