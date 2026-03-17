@@ -11,3 +11,4 @@ export * from './circrete-tool';
 export * from './circrete-marketplace';
 export * from './slab-2-reuse';
 export * from './lucerna-lecto';
+export * from './glsl-ray-marching';
