@@ -4,8 +4,9 @@ import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import projectImage from './assets/patternGenerator/patternTitle.jpg';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
-import { createTitleImage } from '../../../utils/projectconstructor';
+import { createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from 'src/types/keywords/keywords';
+import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 
 const id = '2021-01';
 
@@ -25,5 +26,12 @@ export const patternMachine: ProjectData = {
   id,
   metaData,
   projectImage: createTitleImage(projectImage, 'Pattern Machine', 1928, 2876),
-  projectContent: [],
+  projectContent: [
+    createText(2, 'Frist iteration of the pattern generator'),
+    {
+      type: ProjectContentType.ExternalLink,
+      href: '#/project/glsl-ray-marching/',
+      alternativeName: 'Current Iteration'
+    }
+  ]
 };
