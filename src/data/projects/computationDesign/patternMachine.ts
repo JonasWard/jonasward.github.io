@@ -13,12 +13,12 @@ const metaData: ProjectMetaData = {
   id,
   webstring: 'pattern-machine',
   name: 'Pattern Machine',
-  projectType: ProjectCategory.Design,
+  projectType: ProjectCategory.Software,
   description: 'web-based pattern SDF based pattern generator for knitting',
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Patterns]
+  keywords: [Keywords.Patterns, Keywords.Shaders]
 };
 
 export const patternMachine: ProjectData = {

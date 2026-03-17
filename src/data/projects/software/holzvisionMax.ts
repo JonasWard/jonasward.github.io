@@ -25,7 +25,7 @@ const metaData: ProjectMetaData = {
   name: 'HolzvisionMax',
   projectType: ProjectCategory.Software,
   description: 'Timber Planning tool managing Parts and Transportation',
-  keyImage: holzvisionMaxFront,
+  keyImage: holzvisionMax_byType,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Keywords.Development, Keywords.Timber],
@@ -35,7 +35,7 @@ const metaData: ProjectMetaData = {
 export const holzvisionMax: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(holzvisionMaxFront, metaData.name, 1268, 1243),
+  projectImage: createTitleImage(holzvisionMax_byType, metaData.name, 1252, 1370, 'black-on-white'),
   projectContent: [
     createText(2, [
       'Web application for keeping track of the status of all parts in the context of a Collaborative Timber Project',
@@ -62,6 +62,7 @@ export const holzvisionMax: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
+        createImage(holzvisionMaxFront, 'Render by Type'),
         createImage(holzvisionMax_importExcel, 'Excel Import'),
         createImage(holzvisionMax_materialView, 'Material Renderer'),
         createImage(holzvisionMax_multiViews, 'Set / Hide attributes')

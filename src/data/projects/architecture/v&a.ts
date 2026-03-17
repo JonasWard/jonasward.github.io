@@ -42,6 +42,7 @@ import joint33 from './assets/v&a/Y-joint F 1.jpg';
 import joint34 from './assets/v&a/Y-joint F 2.jpg';
 import joint35 from './assets/v&a/Zollinger 1.jpg';
 import joint36 from './assets/v&a/Zollinger 2.jpg';
+import { Keywords } from 'src/types/keywords/keywords';
 
 const id = '2019-02';
 
@@ -54,6 +55,7 @@ const metaData: ProjectMetaData = {
   keyImage: keyImage,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Team,
+  keywords: [Keywords.Timber, Keywords.DigitalFabrication]
 };
 
 const maxColumnCount = 1;

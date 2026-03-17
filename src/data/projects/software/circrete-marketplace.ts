@@ -30,7 +30,7 @@ const metaData: ProjectMetaData = {
 export const circreteMarketplace: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(overviewElements, metaData.name, 3024, 2634),
+  projectImage: createTitleImage(overviewElements, metaData.name, 3024, 2634, 'black-on-white'),
   projectContent: [
     createText(
       2,

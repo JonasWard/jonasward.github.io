@@ -34,7 +34,7 @@ const metaData: ProjectMetaData = {
   keyImage: title,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.Timber],
+  keywords: [Keywords.Frontend, Keywords.Development, Keywords.ThreeDPrinting, Keywords.Lamps],
   projectPartners: ['Regula Huber']
 };
 
@@ -43,14 +43,33 @@ export const ilumina: ProjectData = {
   metaData,
   projectImage: createTitleImage(title, metaData.name, 1348, 1522),
   projectContent: [
-    createText(2, [
-      'Tinder like Swipe-selecting lamp configurator',
-      'iLumina serves as a POC for an SDF based lamp configurator, where the pattern can be selected through a swipe-selecting interface.'
-    ]),
+    createText(
+      2,
+      [
+        'Tinder like Swipe-selecting lamp configurator',
+        'iLumina serves as a POC for an SDF based lamp configurator, where the pattern can be selected through a swipe-selecting interface.'
+      ],
+      'The lamps shown in the pictures were made with Lucerna Lecto'
+    ),
     {
-      type: ProjectContentType.ExternalLink,
-      href: 'https://jonasward.github.io/ilumina/',
-      alternativeName: 'GitHub Pages Deployment'
+      type: ProjectContentType.ExternalLinkList,
+      links: [
+        {
+          type: ProjectContentType.ExternalLink,
+          href: 'https://jonasward.github.io/ilumina/',
+          alternativeName: 'GitHub Pages Deployment'
+        },
+        {
+          type: ProjectContentType.ExternalLink,
+          href: 'https://jonasward.github.io/lucerna-lecto/',
+          alternativeName: 'Lucerna Lecto Deployment'
+        },
+        {
+          type: ProjectContentType.ExternalLink,
+          href: '#/project/lucerna-lecto/',
+          alternativeName: 'About Lucerna Lecto'
+        }
+      ]
     },
     {
       type: ProjectContentType.ImageGrid,

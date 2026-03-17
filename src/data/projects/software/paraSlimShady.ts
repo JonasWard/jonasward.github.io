@@ -33,7 +33,7 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.ThreeDPrinting, Keywords.Software, Keywords.Product, Keywords.Lamps],
+  keywords: [Keywords.ThreeDPrinting, Keywords.Software, Keywords.Product, Keywords.Lamps, Keywords.Hackathon],
   projectPartners: ['Malcolm Ungers']
 };
 
