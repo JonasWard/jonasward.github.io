@@ -27,7 +27,7 @@ export const patternMachine: ProjectData = {
   metaData,
   projectImage: createTitleImage(projectImage, 'Pattern Machine', 1928, 2876),
   projectContent: [
-    createText(2, 'Frist iteration of the pattern generator'),
+    createText(2, 'First iteration of the pattern generator'),
     {
       type: ProjectContentType.ExternalLink,
       href: '#/project/glsl-ray-marching/',
