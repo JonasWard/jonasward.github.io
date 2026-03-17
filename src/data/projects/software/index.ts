@@ -9,3 +9,4 @@ export * from './urlSafeBitpacker';
 export * from './ilumina';
 export * from './circrete-tool';
 export * from './circrete-marketplace';
+export * from './slab-2-reuse';
