@@ -24,7 +24,14 @@ const metaData: ProjectMetaData = {
   keyImage: example,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.ThreeDPrinting, Keywords.Lamps, Keywords.Shaders]
+  keywords: [
+    Keywords.Frontend,
+    Keywords.Development,
+    Keywords.ThreeDPrinting,
+    Keywords.Lamps,
+    Keywords.Shaders,
+    Keywords.Patterns
+  ]
 };
 
 export const lucernaLecto: ProjectData = {
