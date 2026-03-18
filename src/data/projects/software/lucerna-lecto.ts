@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import example from './assets/lucerna-lecto/example.webp';
 import mandelbrot from './assets/lucerna-lecto/mandelbrot.webp';
@@ -26,11 +27,11 @@ const metaData: ProjectMetaData = {
   projectPartnerContext: ProjectPartnerContext.Solo,
   keywords: [
     Keywords.Frontend,
-    Keywords.Development,
     Keywords.ThreeDPrinting,
     Keywords.Lamps,
     Keywords.Shaders,
-    Keywords.Patterns
+    Keywords.Patterns,
+    Technologies.ReactThreeFiber
   ]
 };
 

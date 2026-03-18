@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from 'src/types/keywords/keywords';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import functions from './assets/state-to-function/functions.png';
 import help from './assets/state-to-function/help.png';
@@ -24,7 +25,7 @@ const metaData: ProjectMetaData = {
   keyImage: pdf,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Frontend, Keywords.Software]
+  keywords: [Keywords.Frontend, Keywords.Software, Technologies.Densing, Technologies.React]
 };
 
 export const stateToFunction: ProjectData = {

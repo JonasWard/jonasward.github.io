@@ -5,6 +5,8 @@ import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
+import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import projectImage from './assets/paraSlimShady/babylon_2.jpg';
 import babylon3 from './assets/paraSlimShady/babylon_3.jpg';
@@ -20,7 +22,6 @@ import references2 from './assets/paraSlimShady/references_2.png';
 import references3 from './assets/paraSlimShady/references_3.jpg';
 import references4 from './assets/paraSlimShady/references_4.jpg';
 
-import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
 const id = '2024-01';
 
@@ -33,7 +34,16 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.ThreeDPrinting, Keywords.Software, Keywords.Product, Keywords.Lamps, Keywords.Hackathon],
+  keywords: [
+    Keywords.ThreeDPrinting,
+    Keywords.Software,
+    Keywords.Product,
+    Keywords.Lamps,
+    Keywords.Hackathon,
+    Technologies.BabylonJS,
+    Technologies.Densing,
+    Technologies.React
+  ],
   projectPartners: ['Malcolm Ungers']
 };
 

@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import favorites from './assets/ilumina/favorites.webp';
 import landing from './assets/ilumina/landing.webp';
@@ -34,7 +35,7 @@ const metaData: ProjectMetaData = {
   keyImage: title,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.ThreeDPrinting, Keywords.Lamps],
+  keywords: [Keywords.Frontend, Keywords.ThreeDPrinting, Keywords.Lamps, Technologies.NextJS],
   projectPartners: ['Regula Huber']
 };
 

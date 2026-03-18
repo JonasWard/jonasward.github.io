@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import architectView from './assets/slab-2-reuse/architect-view.webp';
 import defaultViewer from './assets/slab-2-reuse/default-viewer.webp';
@@ -28,7 +29,7 @@ const metaData: ProjectMetaData = {
   keyImage: architectView,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.Ecology, Keywords.Reuse, Keywords.Hackathon],
+  keywords: [Keywords.Frontend, Keywords.Ecology, Keywords.Reuse, Keywords.Hackathon, Technologies.React],
   projectPartners: ['Janin Brandt', 'Pablo Nygaard']
 };
 

@@ -6,6 +6,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import denmarkDistance from './asssets/denmarkDistance.png';
 import denmarkPolar from './asssets/denmarkPolar.png';
@@ -33,7 +34,7 @@ const metaData: ProjectMetaData = {
   keyImage: eastFlandersHSV,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Shaders, Keywords.Patterns]
+  keywords: [Keywords.Shaders, Keywords.Patterns, Technologies.ReactThreeFiber, Technologies.SVG]
 };
 
 export const svgSDF: ProjectData = {

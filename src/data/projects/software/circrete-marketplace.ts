@@ -24,7 +24,7 @@ const metaData: ProjectMetaData = {
   keyImage: overviewElements,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.Ecology, Keywords.Reuse]
+  keywords: [Keywords.Frontend, Keywords.Ecology, Keywords.Reuse]
 };
 
 export const circreteMarketplace: ProjectData = {

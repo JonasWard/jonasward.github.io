@@ -26,4 +26,9 @@ export enum Technologies {
   Illustrator = 'Illustrator',
   QGis = 'QGis',
   DotNet = '.Net',
+  SVG = 'SVG',
+  ReactThreeFiber = 'React Three Fiber',
+  NextJS = 'Next JS',
+  Convex = 'Convex',
+  Densing = 'Densing'
 }

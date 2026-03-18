@@ -6,6 +6,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import eduard from './asssets/a-merry-fx-mesh/eduard.webp';
 import julie from './asssets/a-merry-fx-mesh/julie.webp';
@@ -31,13 +32,20 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Shaders, Keywords.Patterns]
+  keywords: [
+    Keywords.Shaders,
+    Keywords.Patterns,
+    Keywords.Software,
+    Keywords.Frontend,
+    Technologies.ReactThreeFiber,
+    Technologies.GLSL
+  ]
 };
 
 export const aMerryFXMesh: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(pol, metaData.name, 1441, 1367, 'black-on-white'),
+  projectImage: createTitleImage(pol, metaData.name, 1441, 1367),
   projectContent: [
     createText(
       2,

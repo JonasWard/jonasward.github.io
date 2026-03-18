@@ -33,7 +33,7 @@ const metaData: ProjectMetaData = {
   keyImage: discrete6,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.Shaders, Keywords.Patterns]
+  keywords: [Keywords.Frontend, Keywords.Shaders, Keywords.Patterns]
 };
 
 export const glslRayMarching: ProjectData = {

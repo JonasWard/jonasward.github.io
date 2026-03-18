@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import view from './assets/circrete-tool/3d-view.webp';
 import components from './assets/circrete-tool/components.webp';
@@ -23,7 +24,7 @@ const metaData: ProjectMetaData = {
   keyImage: view,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.Ecology, Keywords.Reuse],
+  keywords: [Keywords.Frontend, Keywords.Ecology, Keywords.Reuse, Technologies.ReactThreeFiber],
   projectPartners: ['Janin Brandt']
 };
 

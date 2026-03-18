@@ -15,6 +15,7 @@ import plateBuckling from './assets/stauffer-static/plateBuckling.png';
 import resources from './assets/stauffer-static/resources.png';
 import results from './assets/stauffer-static/results.png';
 import tenants from './assets/stauffer-static/tenants.png';
+import { Technologies } from 'src/types/keywords/technologies';
 
 const id = '2023-02';
 
@@ -27,8 +28,8 @@ const metaData: ProjectMetaData = {
   keyImage,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.Timber],
-  projectPartners: ['Hanno Stehling', 'Jingchen Chen'],
+  keywords: [Keywords.Frontend, Keywords.Timber, Technologies.React, Technologies.SVG],
+  projectPartners: ['Hanno Stehling', 'Jingchen Chen']
 };
 
 export const staufferStatic: ProjectData = {

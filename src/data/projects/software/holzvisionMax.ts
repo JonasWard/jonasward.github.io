@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import holzvisionMaxFront from './assets/holzvisionMax/holzvisionMax_front.png';
 import holzvisionMax_opening from './assets/holzvisionMax/holzvisionMax_opening.png';
@@ -28,7 +29,7 @@ const metaData: ProjectMetaData = {
   keyImage: holzvisionMax_byType,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.Frontend, Keywords.Development, Keywords.Timber],
+  keywords: [Keywords.Frontend, Technologies.DotNet, Technologies.BabylonJS, Keywords.Timber],
   projectPartners: []
 };
 

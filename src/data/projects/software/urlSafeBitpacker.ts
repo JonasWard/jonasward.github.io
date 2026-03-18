@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import projectImage1 from './assets/urlSafeBitpacker/bitpacker.png';
 import projectImage2 from './assets/urlSafeBitpacker/lerp.png';
@@ -21,7 +22,7 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Frontend, Keywords.Development],
+  keywords: [Keywords.Frontend, Technologies.Densing]
 };
 
 export const urlSafeBitpacker: ProjectData = {
