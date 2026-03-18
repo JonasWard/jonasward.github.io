@@ -6,6 +6,7 @@ import { createImage, createTitleImage } from '../../../utils/projectconstructor
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import sdfVases_Front from './asssets/sdfVases_Front.jpg';
 import sdfVases_1 from './asssets/sdfVases_1.jpg';
@@ -36,7 +37,7 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.ThreeDPrinting, Keywords.Patterns]
+  keywords: [Keywords.ThreeDPrinting, Keywords.Patterns, Technologies.Grasshopper, Technologies.Rhino]
 };
 
 export const sdfVases: ProjectData = {

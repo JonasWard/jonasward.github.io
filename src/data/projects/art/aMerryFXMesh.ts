@@ -38,7 +38,8 @@ const metaData: ProjectMetaData = {
     Keywords.Software,
     Keywords.Frontend,
     Technologies.ReactThreeFiber,
-    Technologies.GLSL
+    Technologies.GLSL,
+    Technologies.Densing
   ]
 };
 

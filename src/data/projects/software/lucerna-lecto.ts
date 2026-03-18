@@ -31,7 +31,9 @@ const metaData: ProjectMetaData = {
     Keywords.Lamps,
     Keywords.Shaders,
     Keywords.Patterns,
-    Technologies.ReactThreeFiber
+    Technologies.ReactThreeFiber,
+    Technologies.GLSL,
+    Technologies.Densing
   ]
 };
 

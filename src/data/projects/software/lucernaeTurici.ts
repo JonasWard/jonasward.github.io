@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import projectImage from './assets/lucernae-turici/lucernae-turici.jpg';
 import lamp1 from './assets/lucernae-turici/lamp_1.jpg';
@@ -68,7 +69,14 @@ const metaData: ProjectMetaData = {
   keyImage: undefined,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.ThreeDPrinting, Keywords.Product, Keywords.Lamps, Keywords.ThreeDPrinting],
+  keywords: [
+    Keywords.ThreeDPrinting,
+    Keywords.Product,
+    Keywords.Lamps,
+    Keywords.ThreeDPrinting,
+    Technologies.BabylonJS,
+    Technologies.Densing
+  ],
   projectPartners: []
 };
 

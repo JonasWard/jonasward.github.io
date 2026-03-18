@@ -6,6 +6,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
+import { Technologies } from 'src/types/keywords/technologies';
 
 import smooth1 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT3wqmuiOeoSiAM9wAjASAUikAi-AJQOg_8zM.webp';
 import smooth2 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT3wqmuiOeoSiAM9wAjAUAIjgAi-AJQOg_8zM.webp';
@@ -33,7 +34,15 @@ const metaData: ProjectMetaData = {
   keyImage: discrete6,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Frontend, Keywords.Shaders, Keywords.Patterns]
+  keywords: [
+    Keywords.Frontend,
+    Keywords.Shaders,
+    Keywords.Patterns,
+    Technologies.GLSL,
+    Technologies.Densing,
+    Technologies.React,
+    Technologies.ReactThreeFiber
+  ]
 };
 
 export const glslRayMarching: ProjectData = {
