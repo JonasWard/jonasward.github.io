@@ -25,7 +25,8 @@ const metaData: ProjectMetaData = {
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Keywords.Ecology, Keywords.Reuse, Technologies.ReactThreeFiber],
-  projectPartners: ['Janin Brandt']
+  projectPartners: ['Janin Brandt'],
+  client: 'circrete'
 };
 
 export const circreteTool: ProjectData = {

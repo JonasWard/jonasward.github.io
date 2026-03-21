@@ -1,10 +1,10 @@
 export type Info = {
   name: string;
   firstName: string;
-  placeOfBirth: string;
+  placeOfBirth?: string;
   citizenship: string;
   titles: string;
-  dateOfBirth: string;
+  dateOfBirth?: string;
   telephone: string;
   email: string;
   website: [string, string];
@@ -21,26 +21,35 @@ export type Education = {
   description: string;
 }[];
 
-export type Experience = {
+export type ExperienceContent = {
   company: string;
   position: string;
   role: string;
   date: string;
   location: string;
-  projects: { [key: string]: string | [string, string] };
-}[];
+  projects: List;
+};
 
-export type List = { [key: string]: string | [string, string] } | string[];
+export type Experience = ExperienceContent[];
+
+export type SkillContent = {
+  header: string;
+  subSkills: List;
+};
+
+export type ListContent = string | string[];
+export type List = { [key: string]: ListContent };
 export type NestedList = { [key: string]: List };
 
-export type Skills = { [key: string]: { [key: string]: List | NestedList } };
+export type Skills = SkillContent[];
 
 export type CVData = {
+  cvName: string;
   tagline: string[];
   info: Info;
   education: Education;
   experience: Experience;
   skills: Skills;
-  extraCurricular: { [key: string]: string | [string, string] };
+  extraCurricular: List;
   pipeline?: { [key: string]: string };
 };

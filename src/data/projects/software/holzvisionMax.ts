@@ -30,7 +30,8 @@ const metaData: ProjectMetaData = {
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Technologies.DotNet, Technologies.BabylonJS, Keywords.Timber],
-  projectPartners: []
+  projectPartners: ['Hanno Stehling', 'Jingchen Chen'],
+  client: 'Design-to-Production'
 };
 
 export const holzvisionMax: ProjectData = {

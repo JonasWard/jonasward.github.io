@@ -1,9 +1,12 @@
 import { CVData } from 'src/types/cv/cvType';
 
 export const CVContent: CVData = {
+  cvName: 'CV-max',
   tagline: [
-    'Web developer — making the world a greener place.',
-    '5 years of full-stack, 10 years creative problem-solving.'
+    'Front-End Engineer',
+    '5+ years shipping TypeScript & Python products from prototype to production.',
+    '4x hackathon prize-winner.',
+    'AEC-tech & sustainability across CH, DE, BE, DK.'
   ],
   info: {
     name: 'Van den Bulcke',
@@ -176,24 +179,22 @@ export const CVContent: CVData = {
       }
     },
     {
-      company: 'Circrete',
+      company: 'circrete',
       position: 'Tech Lead',
       role: 'FullStack Developer',
       date: '2025 - now',
       location: 'Copenhagen, Denmarkt (Remote)',
       projects: {
-        'Circretes Digital Toolchain':
-          'Circrete is a Copenhagen based Start-up focusing on re-use of concrete elements. My role is developing the technical toolchain, from testing to populating data.'
+        'circretes Digital Toolchain':
+          'circrete is a Copenhagen based Start-up focusing on re-use of concrete elements. My role is developing the technical toolchain, from testing to populating data.'
       }
     }
   ],
-  skills: {
-    soft: {
-      languages: ['Dutch - C2', 'English - C1', 'German - B2', 'French - B2']
-    },
-    digital: {
-      'web dev': {
-        languages: ['.ts', '.js', 'python', 'wasm (C#, rust)', 'java'],
+  skills: [
+    {
+      header: 'web dev',
+      subSkills: {
+        ['programming languages']: ['.ts', '.js', 'python', 'wasm (C#, rust)', 'java'],
         dev: ['bun', 'npm', 'yarn', 'conda', 'docker', 'vite', 'turbo'],
         backend: ['bun', 'Elysia', 'express', 'springboot', 'flask', 'django'],
         'CI/CD': ['azure pipeline', 'gitlab', 'bitbucket'],
@@ -204,8 +205,11 @@ export const CVContent: CVData = {
         webGL: ['glsl', 'threejs', 'babylonjs', 'pixi.js', 'svg'],
         styling: ['css', 'sass', 'tailwind', 'scss', 'MUI', 'antd', 'bootstrap'],
         other: ['leaflet', 'IFCjs', 'axios']
-      },
-      '.py': {
+      }
+    },
+    {
+      header: '.py',
+      subSkills: {
         ml: ['numpy', 'pandas', 'scipy', 'matplotlib', 'openCV', 'sklearn', 'tensorflow', 'pytorch'],
         geography: ['GDAL', 'GeoPython', 'GeoPandas', 'shapely', 'qgis scripting'],
         geometry: [
@@ -217,12 +221,19 @@ export const CVContent: CVData = {
           'cgal (bindings)',
           'processing'
         ]
-      },
-      '#c': ['Unity, Rhino/Grasshopper, mono, WPF'],
-      java: ['spring boot, JTS, gradle, openCV, AWT, processing'],
-      rust: ['wasm, wgpu, leptos'],
-      other: ['go, julia, GCode, UR-script'],
-      software: {
+      }
+    },
+    {
+      header: 'other',
+      subSkills: {
+        '#c': ['Unity', 'Rhino/Grasshopper', 'mono', 'WPF'],
+        rust: ['wasm', 'wgpu', 'leptos'],
+        other: ['go', 'julia', 'GCode', 'UR-script']
+      }
+    },
+    {
+      header: 'software',
+      subSkills: {
         'code-editors': ['VSCode', 'JetBrains', 'VisualStudio', 'Jupyter / Colab'],
         'development-tools': ['git', 'bash', 'MongoDB compass', 'docker', 'github', 'gitlab'],
         markup: [
@@ -248,24 +259,33 @@ export const CVContent: CVData = {
         ]
       }
     },
-    physical: {
-      'digital fabrication': [
-        'CNC Milling',
-        'Laser Cutting',
-        '3D Printing',
-        'robotic path planning',
-        'digital kniting'
-      ],
-      '3d-printing': ['FDM', 'sand', 'binder-jet', 'glass (fusing)', 'clay', 'concrete', 'chocolate', 'sugar'],
-      ceramics: ['slip casting', 'turning table', 'glazing'],
-      modelbuilding: [
-        'laser cutting - paper, wood, PMMA',
-        '3d printing - pla, abs, petg',
-        'cnc milling - wood, EPS',
-        'ceramics'
-      ]
+    {
+      header: 'physical',
+      subSkills: {
+        'digital fabrication': [
+          'CNC Milling',
+          'Laser Cutting',
+          '3D Printing',
+          'robotic path planning',
+          'digital kniting'
+        ],
+        '3d-printing': ['FDM', 'sand', 'binder-jet', 'glass (fusing)', 'clay', 'concrete', 'chocolate', 'sugar'],
+        ceramics: ['slip casting', 'turning table', 'glazing'],
+        modelbuilding: [
+          'laser cutting - paper, wood, PMMA',
+          '3d printing - pla, abs, petg',
+          'cnc milling - wood, EPS',
+          'ceramics'
+        ]
+      }
+    },
+    {
+      header: 'soft',
+      subSkills: {
+        languages: ['Dutch C2', 'English C2', 'German C1', 'French B2']
+      }
     }
-  },
+  ],
   extraCurricular: {
     'Green Tech Hackathon - Zürich 2025': 'Grid Carbon Intensity Load Balancing for cron jobs',
     'AEC Hackathon - Copenhagen 2025': [

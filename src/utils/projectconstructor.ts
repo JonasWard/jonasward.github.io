@@ -65,10 +65,11 @@ export const createTextImage = (
   maxImageWidth
 });
 
-export const getProjectKeywords = (metaData: ProjectMetaData) => [
+export const getProjectKeywords = (metaData: ProjectMetaData): string[] => [
   metaData.projectType,
   metaData.projectContext,
   metaData.projectPartnerContext,
+  ...(metaData.client ? [metaData.client] : []),
   ...(metaData.projectPartners ? metaData.projectPartners : []),
-  ...(metaData.keywords ? metaData.keywords : []),
+  ...(metaData.keywords ? metaData.keywords : [])
 ];

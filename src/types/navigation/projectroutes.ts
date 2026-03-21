@@ -5,6 +5,8 @@ export enum ProjectRoutes {
   Main = '/main',
   About = '/about',
   CV = '/cv',
+  CVLonger = '/cv-longer',
+  CVMax = '/cv-max',
   Projects = '/projects',
   Project = '/project/:id',
   AnyProject = '/project',

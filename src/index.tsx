@@ -12,6 +12,9 @@ import { HeaderWrapper } from './components/HeaderWrapper';
 import { ProjectRoutes } from './types/navigation/projectroutes';
 import { MotivationLetterGenerator } from './components/motivationLetter/MotivationLetterGenerator';
 import { KeywordFilterBar } from './components/projects/overview/KeywordFilterBar';
+import { CVContent } from './components/cv/content/cvContentMax';
+import { CVContent as CVContentCompact } from './components/cv/content/cvContentCompact';
+import { CVContent as CVContentMax } from './components/cv/content/cvContentMax';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -23,7 +26,9 @@ root.render(
           <Route path={ProjectRoutes.Portfolio} element={<HeaderWrapper content={<Missing />} />} />
           <Route path={ProjectRoutes.Landing} element={<HeaderWrapper content={<Missing />} />} />
           <Route path={ProjectRoutes.Main} element={<Landing />} />
-          <Route path={ProjectRoutes.CV} element={<HeaderWrapper content={<CV />} />} />
+          <Route path={ProjectRoutes.CV} element={<HeaderWrapper content={<CV data={CVContentCompact} />} />} />
+          <Route path={ProjectRoutes.CVLonger} element={<HeaderWrapper content={<CV data={CVContent} />} />} />
+          <Route path={ProjectRoutes.CVMax} element={<HeaderWrapper content={<CV data={CVContentMax} />} />} />
           <Route path={ProjectRoutes.About} element={<HeaderWrapper content={<About />} />} />
           <Route
             path={ProjectRoutes.Projects}

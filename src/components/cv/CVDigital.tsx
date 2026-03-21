@@ -7,8 +7,9 @@ import profileImage from 'src/assets/pictures/profilePicture-crop.jpg';
 import logo from 'src/assets/jonasward_logo_elong.png';
 import './cv-digital.css';
 import { ExtraCurricularRenderer } from './ExtraCurricularRenderer';
+import { REACT_PDF_STYLES } from './style';
 
-export const CVHTML: React.FC<{ data: CVData }> = ({ data }) => (
+export const CVHTML: React.FC<{ data: CVData; customTitle?: string }> = ({ data, customTitle }) => (
   <div>
     <div id="header">
       <div id="left" className="header-grid">
@@ -17,9 +18,11 @@ export const CVHTML: React.FC<{ data: CVData }> = ({ data }) => (
         </div>
         <div className="header-grid div-2">
           <img style={{ width: '100%', height: '75%' }} alt="red-dot" src={logo} />
-          <div style={{ textAlign: 'justify', fontSize: 14, fontWeight: 600 }}>
-            <PDFDivText isPdf={false} content={data.tagline[0]} id={'1'} />
-            <PDFDivText isPdf={false} content={data.tagline[1]} id={'2'} />
+          <div>
+            <PDFDivText style={REACT_PDF_STYLES.tagTitle} isPdf={false} content={customTitle ?? data.tagline[0]} />
+            {data.tagline.slice(1).map((tagline, i) => (
+              <PDFDivText isPdf={false} content={tagline} key={i} />
+            ))}
           </div>
         </div>
       </div>
@@ -29,7 +32,7 @@ export const CVHTML: React.FC<{ data: CVData }> = ({ data }) => (
       <EducationRenderer education={data.education} isPdf={false} />
       <SkillsRenderer skills={data.skills} isPdf={false} />
       <div>
-        <ExperienceRenderer experience={data.experience} isPdf={false} />
+        <ExperienceRenderer experiences={data.experience} isPdf={false} />
         <div style={{ height: '20px', width: '100%' }} />
         <ExtraCurricularRenderer data={data.extraCurricular} isPdf={false} />
       </div>

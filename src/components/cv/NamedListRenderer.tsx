@@ -1,5 +1,5 @@
 import { List } from '../../types/cv/cvType';
-import { styles } from './CVDocument';
+import { REACT_PDF_STYLES } from './style';
 import { PDFDivText } from './InfoRenderer';
 
 export const NamedListRenderer: React.FC<{ data: List; isPdf: boolean; suppress?: number[] }> = ({
@@ -16,11 +16,11 @@ export const NamedListRenderer: React.FC<{ data: List; isPdf: boolean; suppress?
 
       return (
         <div key={title}>
-          <div key={'title'} style={styles.secondaryItem}>
-            <PDFDivText href={link} isPdf={isPdf} content={`${title}`} id={'title'} />
+          <div key={'title'} style={REACT_PDF_STYLES.secondaryItem}>
+            <PDFDivText href={link} isPdf={isPdf} content={`${title}`} />
           </div>
-          <div key={'content'} style={styles.regularItem}>
-            <PDFDivText isPdf={isPdf} content={`${actualContent}`} id={'data'} />
+          <div key={'content'} style={REACT_PDF_STYLES.regularItem}>
+            <PDFDivText isPdf={isPdf} content={`${actualContent}`} />
           </div>
         </div>
       );

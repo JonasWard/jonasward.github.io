@@ -1,24 +1,20 @@
 import { Education } from '../../types/cv/cvType';
-import { styles } from './CVDocument';
+import { REACT_PDF_STYLES } from './style';
 import { PDFDivText } from './InfoRenderer';
 import { TitleRenderer } from './TitleRenderer';
 import { DividingSpace } from './DividingSpace';
 
 export const EducationRenderer: React.FC<{ education: Education; isPdf: boolean }> = ({ education, isPdf }) => (
-  <div id={'education'} style={styles.blockRight}>
+  <div id={'education'} style={REACT_PDF_STYLES.blockLeft}>
     <TitleRenderer title={'Education'} isPdf={isPdf} />
     {Object.entries(education).map(([title, data]) => (
       <div id={title}>
-        <div id={'name'} style={styles.section}>
-          <div id={'1'} style={styles.primaryItem}>
-            <PDFDivText isPdf={isPdf} content={`${data.name} `} id={data.name} />
-          </div>
-          <div id={'2'} style={styles.secondaryItem}>
-            <PDFDivText isPdf={isPdf} content={`- ${data.place}`} id={data.name} />
-          </div>
+        <div id={'name'} style={{ ...REACT_PDF_STYLES.section, textAlign: 'left' }}>
+          <PDFDivText style={REACT_PDF_STYLES.primaryItem} isPdf={isPdf} content={`${data.name} `} />
+          <PDFDivText style={REACT_PDF_STYLES.secondaryItem} isPdf={isPdf} content={`- ${data.place}`} />
         </div>
-        <div style={styles.regularItem}>
-          <PDFDivText isPdf={isPdf} content={`${data.date} - ${data.description}`} id={data.name} />
+        <div style={REACT_PDF_STYLES.regularItem}>
+          <PDFDivText isPdf={isPdf} content={`${data.date} - ${data.description}`} />
         </div>
         <DividingSpace />
       </div>

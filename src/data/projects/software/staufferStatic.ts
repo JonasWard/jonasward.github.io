@@ -29,7 +29,8 @@ const metaData: ProjectMetaData = {
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Keywords.Timber, Technologies.React, Technologies.SVG],
-  projectPartners: ['Hanno Stehling', 'Jingchen Chen']
+  projectPartners: ['Hanno Stehling', 'Jingchen Chen'],
+  client: 'Design-to-Production'
 };
 
 export const staufferStatic: ProjectData = {

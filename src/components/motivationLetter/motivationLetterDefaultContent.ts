@@ -19,5 +19,5 @@ export const MotivationLetterDefaultLocalStorageContent: MotivationLetterLocalSt
   [MotivationLetterKeys.defaultKey]: MotivationLetterDefaultContent
 };
 
-export const getFilenameString = (content: 'CV' | 'Motivation_Letter') =>
+export const getFilenameString = (content: string) =>
   `Van_den_Bulcke_Jonas${content}-${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}.pdf`;

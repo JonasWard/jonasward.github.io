@@ -28,7 +28,8 @@ const metaData: ProjectMetaData = {
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Keywords.Timber],
-  projectPartners: []
+  projectPartners: [],
+  client: 'Design-to-Production'
 };
 
 export const haasHausConfigurator: ProjectData = {

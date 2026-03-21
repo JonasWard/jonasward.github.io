@@ -49,6 +49,14 @@ export const ProjectMetaBlock: React.FC<IProjectMetaBlockProps> = ({ metaData })
             </div>
           </div>
         )}
+        {metaData.client && (
+          <div className="meta-item">
+            <span className="meta-label">client</span>
+            <button className="meta-value meta-value--link" onClick={() => goToFilter(metaData.client!)}>
+              {metaData.client}
+            </button>
+          </div>
+        )}
         {metaData.keywords && metaData.keywords.length > 0 && (
           <div className="meta-item meta-item--keywords">
             <span className="meta-label">keywords</span>
