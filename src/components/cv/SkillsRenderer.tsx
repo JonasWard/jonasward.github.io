@@ -15,16 +15,12 @@ const SkillContentRenderer: React.FC<{ header: string; subSkills: List; isPdf: b
   <View wrap={false}>
     <PDFDivText style={REACT_PDF_STYLES.primaryItem} isPdf={isPdf} content={`${header} `} />
     {Object.entries(subSkills).map(([parentSkill, skills]) => (
-      <>
+      <View key={parentSkill} style={REACT_PDF_STYLES.skillSubTitle}>
         <PDFDivText style={REACT_PDF_STYLES.secondaryItemLeft} isPdf={isPdf} content={`${parentSkill}`} />
-        <ListContentComponent
-          style={{ ...REACT_PDF_STYLES.regularItem, textAlign: 'right' }}
-          content={skills}
-          isPdf={isPdf}
-        />
-      </>
+        <ListContentComponent style={REACT_PDF_STYLES.skillsInsetLeft} content={skills} isPdf={isPdf} />
+      </View>
     ))}
-    {endLine ? <SimpleDividingLine paddingTop={25} /> : null}
+    {endLine ? <SimpleDividingLine paddingTop={12} /> : null}
   </View>
 );
 

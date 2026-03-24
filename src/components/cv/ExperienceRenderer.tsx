@@ -20,7 +20,11 @@ const ExperienceContentRenderer: React.FC<{ content: ExperienceContent; isPdf: b
         content={` - ${content.location} - ${content.date}`}
       />
     </div>
-    <PDFDivText isPdf={isPdf} content={`${content.position} - ${content.role}`} />
+    <PDFDivText
+      style={{ ...REACT_PDF_STYLES.regularItemBold, marginTop: 4, marginBottom: 1 }}
+      isPdf={isPdf}
+      content={`${content.position} - ${content.role}`}
+    />
     <NamedListRenderer data={content.projects} isPdf={isPdf} />
     {endLine ? <SimpleDividingLine /> : null}
   </View>

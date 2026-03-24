@@ -33,31 +33,49 @@ export const REACT_PDF_STYLES = StyleSheet.create({
   primaryItem: {
     padding: 0,
     fontSize: 14,
-    fontWeight: 200
+    fontWeight: 400
   },
   primaryItemLeft: {
     padding: 0,
     fontSize: 14,
-    fontWeight: 200,
+    fontWeight: 400,
     textAlign: 'right'
   },
   secondaryItem: {
     marginTop: '3.5px',
     padding: 0,
     fontSize: 9.5,
-    fontWeight: 200
+    fontWeight: 400
   },
   secondaryItemLeft: {
     marginTop: '3.5px',
     padding: 0,
     fontSize: 9.5,
-    fontWeight: 200,
+    fontWeight: 400,
     textAlign: 'right'
   },
   regularItem: {
     margin: 0,
     padding: 0,
     fontSize: 9,
+    fontWeight: 200,
+    textAlign: 'left',
+    color: '#333333'
+  },
+  regularItemBold: {
+    margin: 0,
+    padding: 0,
+    fontSize: 9,
+    fontWeight: 400,
+    textAlign: 'left',
+    color: '#000000'
+  },
+  regularItemItalic: {
+    margin: 0,
+    padding: 0,
+    fontSize: 9,
+    fontWeight: 200,
+    fontStyle: 'italic',
     textAlign: 'left'
   },
   mainItemTitle: {
@@ -75,8 +93,8 @@ export const REACT_PDF_STYLES = StyleSheet.create({
     textAlign: 'right'
   },
   skillSubTitle: {
-    marginTop: 5,
-    marginBottom: 2
+    marginTop: 3,
+    marginBottom: 1
   },
   skillsInset: {
     padding: '7px 0px 7px 0px',

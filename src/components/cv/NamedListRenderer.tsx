@@ -16,12 +16,8 @@ export const NamedListRenderer: React.FC<{ data: List; isPdf: boolean; suppress?
 
       return (
         <div key={title}>
-          <div key={'title'} style={REACT_PDF_STYLES.secondaryItem}>
-            <PDFDivText href={link} isPdf={isPdf} content={`${title}`} />
-          </div>
-          <div key={'content'} style={REACT_PDF_STYLES.regularItem}>
-            <PDFDivText isPdf={isPdf} content={`${actualContent}`} />
-          </div>
+          <PDFDivText style={REACT_PDF_STYLES.secondaryItem} href={link} isPdf={isPdf} content={`${title}`} />
+          <PDFDivText style={REACT_PDF_STYLES.regularItem} isPdf={isPdf} content={`${actualContent}`} />
         </div>
       );
     })}

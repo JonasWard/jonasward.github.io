@@ -3,7 +3,7 @@ import { EducationRenderer } from './EducationRenderer';
 import { ExperienceRenderer } from './ExperienceRenderer';
 import { InfoRenderer, PDFDivText } from './InfoRenderer';
 import { SkillsRenderer } from './SkillsRenderer';
-import profileImage from 'src/assets/pictures/profilePicture-crop.jpg';
+import profileImage from 'src/assets/pictures/jonas-icon.jpg';
 import logo from 'src/assets/jonasward_logo_elong.png';
 import './cv-digital.css';
 import { ExtraCurricularRenderer } from './ExtraCurricularRenderer';

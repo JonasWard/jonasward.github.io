@@ -100,7 +100,7 @@ export const CVContent: CVData = {
       projects: {
         'Holzvision Max': [
           'https://holzvisionmax.ch/',
-          "Sole engineer on MES platform for Switzerland's national timber showcase ESAF 2025 — live at holzvisionmax.ch."
+          "Sole engineer on MES platform for Switzerland's national timber showcase ESAF 2025"
         ],
         'Rewe co-co': [
           'https://www.red-dot.org/de/rewe-group',
@@ -138,7 +138,8 @@ export const CVContent: CVData = {
     {
       header: 'programming languages',
       subSkills: {
-        primary: ['TypeScript / JS (5+ yrs)', 'Python (4+ yrs)', 'C# (3+ yrs)']
+        primary: ['TypeScript / JS (5+ yrs)', 'Python (4+ yrs)'],
+        secondary: ['C# (3+ yrs)', 'wasm (C#, rust)', 'java']
       }
     },
     {
@@ -167,7 +168,7 @@ export const CVContent: CVData = {
     {
       header: 'design',
       subSkills: {
-        tools: ['Figma', 'Rhino / Grasshopper', 'Blender', 'InDesign', 'QGIS']
+        tools: ['Figma', 'Rhino / Grasshopper', 'Blender', 'InDesign']
       }
     }
   ],

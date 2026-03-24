@@ -1,7 +1,7 @@
 import { Page, Document, Font, Image, Text, View } from '@react-pdf/renderer';
 import { CVData } from '../../types/cv/cvType';
 import logo from 'src/assets/jonasward_logo_elong.png';
-import profileImage from 'src/assets/pictures/profilePicture-crop.jpg';
+import profileImage from 'src/assets/pictures/jonas-icon.jpg';
 import extraLight from 'src/assets/fonts/Montserrat-ExtraLight.ttf';
 import regular from 'src/assets/fonts/Montserrat-Regular.ttf';
 import extraBold from 'src/assets/fonts/Montserrat-ExtraBold.ttf';
@@ -55,7 +55,7 @@ export const CVDocument: React.FC<{ data: CVData; customTitle?: string }> = ({ d
             marginBottom: -30
           }}
         >
-          <Image style={{ width: 114, height: 114, borderRadius: 57 }} src={profileImage} />
+          <Image style={{ width: 170, height: 170, borderRadius: 85, marginBottom: -50 }} src={profileImage} />
           <Image style={{ width: 388, height: 80 }} src={logo} />
         </div>
       </div>
