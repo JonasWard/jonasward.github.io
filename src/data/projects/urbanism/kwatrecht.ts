@@ -46,7 +46,7 @@ const metaData: ProjectMetaData = {
   webstring: 'kwatrecht',
   name: 'Kwatrecht Under Pressure',
   projectType: ProjectCategory.Urbanism,
-  description: 'First experiments for an online chocolate bar configurator',
+  description: 'Urban development analysis of Kwatrecht',
   keyImage: RISK,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Team,
@@ -60,8 +60,8 @@ const metaData: ProjectMetaData = {
     'Dominique Girolami',
     'Sarah Nys',
     'Els Vernimmen',
-    'Jan Verstraete',
-  ],
+    'Jan Verstraete'
+  ]
 };
 
 export const kwatrecht: ProjectData = {

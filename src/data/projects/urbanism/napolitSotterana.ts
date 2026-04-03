@@ -22,12 +22,12 @@ const metaData: ProjectMetaData = {
   webstring: 'napoli-pianoterra',
   name: 'Napoli Pianoterra',
   projectType: ProjectCategory.Urbanism,
-  description: 'First experiments for an online chocolate bar configurator',
+  description: 'Urban Fabric of Napoli',
   keyImage: mapIleDansLesIlos,
   projectContext: ProjectContext.Academic,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Workshop, Technologies.QGis, Technologies.Photoshop, Technologies.AutoCAD],
-  projectPartners: ['Dirk De Meyer', 'David Schmitz'],
+  projectPartners: ['Dirk De Meyer', 'David Schmitz']
 };
 
 export const napoliSotterana: ProjectData = {
