@@ -30,7 +30,7 @@ const metaData: ProjectMetaData = {
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Keywords.Ecology, Keywords.Reuse, Keywords.Hackathon, Technologies.React],
-  projectPartners: ['Janin Brandt', 'Pablo Nygaard'],
+  projectPartners: ['Janin Brandt', 'Pablo Mayrgundter', 'Diyan Rashevski', 'Simeon Nanev'],
   client: 'circrete'
 };
 
