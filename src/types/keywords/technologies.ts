@@ -30,5 +30,6 @@ export enum Technologies {
   ReactThreeFiber = 'React Three Fiber',
   NextJS = 'Next JS',
   Convex = 'Convex',
-  Densing = 'Densing'
+  Densing = 'Densing',
+  AI = 'AI'
 }
