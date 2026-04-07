@@ -19,7 +19,7 @@ import slides from './assets/repurposed/slides.webp';
 import tableView from './assets/repurposed/table-view.png';
 import repurposedIcon from './assets/repurposed/repurposed.svg';
 
-const id = '2026-01';
+const id = '2026-02';
 
 const metaData: ProjectMetaData = {
   id,

@@ -14,3 +14,4 @@ export * from './lucerna-lecto';
 export * from './glsl-ray-marching';
 export * from './state-to-function';
 export * from './repurposed';
+export * from './densing';
