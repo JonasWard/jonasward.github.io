@@ -9,7 +9,7 @@ import { ProjectContentType } from '../../../types/projectContent/projectContent
 import { Technologies } from 'src/types/keywords/technologies';
 
 import customSchema from './assets/densing/custom-scheme.webp';
-import densingIcon from './assets/densing/densing.svg';
+import densingPaddingAndRounding from './assets/densing/densing-padding-and-rounding.svg';
 import landing from './assets/densing/landing.webp';
 import simpleBeam from './assets/densing/simple-beam.webp';
 import withNesting from './assets/densing/with-nesting.webp';
@@ -22,7 +22,6 @@ const metaData: ProjectMetaData = {
   name: 'Densing',
   projectType: ProjectCategory.Software,
   description: 'Library for numeric level (de)compacting of objects based on a schema',
-  keyImage: densingIcon,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
   keywords: [Keywords.Frontend, Technologies.TypeScript, Technologies.Densing]
@@ -31,7 +30,7 @@ const metaData: ProjectMetaData = {
 export const densing: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(densingIcon, metaData.name, 1400, 1400),
+  projectImage: createTitleImage(densingPaddingAndRounding, metaData.name, 1400, 1400),
   projectContent: [
     createText(
       2,

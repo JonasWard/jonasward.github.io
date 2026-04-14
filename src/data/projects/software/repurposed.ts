@@ -17,7 +17,7 @@ import landing from './assets/repurposed/landing.png';
 import marketplaceOverview from './assets/repurposed/marketplace-overview.webp';
 import slides from './assets/repurposed/slides.webp';
 import tableView from './assets/repurposed/table-view.png';
-import repurposedIcon from './assets/repurposed/repurposed.svg';
+import repurposedMorePadding from './assets/repurposed/repurposed-more-padding.svg';
 
 const id = '2026-02';
 
@@ -27,7 +27,7 @@ const metaData: ProjectMetaData = {
   name: 'Repurposed',
   projectType: ProjectCategory.Software,
   description: 'POC Marketplace for reuse Marketplaces',
-  keyImage: repurposedIcon,
+  keyImage: repurposedMorePadding,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [
@@ -45,7 +45,7 @@ const metaData: ProjectMetaData = {
 export const repurposed: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(repurposedIcon, metaData.name, 1400, 1400),
+  projectImage: createTitleImage(repurposedMorePadding, metaData.name, 1400, 1400),
   projectContent: [
     createText(
       2,

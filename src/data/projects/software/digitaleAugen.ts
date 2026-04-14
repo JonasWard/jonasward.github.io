@@ -77,7 +77,8 @@ const metaData: ProjectMetaData = {
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Technologies.Rhino, Technologies.DotNet, Keywords.Patterns, Keywords.Software],
-  projectPartners: ['Alessandro Mac-Nelly', 'Julian Pelludat', 'Oliver Fritz', 'Stephan Peyer', 'Rogier Leegwater']
+  projectPartners: ['Alessandro Mac-Nelly', 'Julian Pelludat', 'Oliver Fritz', 'Stephan Peyer', 'Rogier Leegwater'],
+  client: 'UGD'
 };
 
 export const digitaleAugen: ProjectData = {
