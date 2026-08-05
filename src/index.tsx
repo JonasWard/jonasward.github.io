@@ -15,6 +15,11 @@ import { KeywordFilterBar } from './components/projects/overview/KeywordFilterBa
 import { CVContent } from './components/cv/content/cvContentMax';
 import { CVContent as CVContentCompact } from './components/cv/content/cvContentCompact';
 import { CVContent as CVContentMax } from './components/cv/content/cvContentMax';
+import { CVContent as CVContentProductDesigner } from './components/cv/content/cvContentProductDesigner';
+import cvLongerQrCode from 'src/assets/cv-longer.png';
+import cvMaxQrCode from 'src/assets/cv-max.png';
+import cvProductDesignerQrCode from 'src/assets/cv-product-designer.png';
+import cvCompactQrCode from 'src/assets/cv.png';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -26,9 +31,40 @@ root.render(
           <Route path={ProjectRoutes.Portfolio} element={<HeaderWrapper content={<Missing />} />} />
           <Route path={ProjectRoutes.Landing} element={<HeaderWrapper content={<Missing />} />} />
           <Route path={ProjectRoutes.Main} element={<Landing />} />
-          <Route path={ProjectRoutes.CV} element={<HeaderWrapper content={<CV data={CVContentCompact} />} />} />
-          <Route path={ProjectRoutes.CVLonger} element={<HeaderWrapper content={<CV data={CVContent} />} />} />
-          <Route path={ProjectRoutes.CVMax} element={<HeaderWrapper content={<CV data={CVContentMax} />} />} />
+          <Route
+            path={ProjectRoutes.CV}
+            element={
+              <HeaderWrapper
+                content={<CV data={CVContentCompact} route={ProjectRoutes.CV} qrCode={cvCompactQrCode} />}
+              />
+            }
+          />
+          <Route
+            path={ProjectRoutes.CVProductDesigner}
+            element={
+              <HeaderWrapper
+                content={
+                  <CV
+                    data={CVContentProductDesigner}
+                    route={ProjectRoutes.CVProductDesigner}
+                    qrCode={cvProductDesignerQrCode}
+                  />
+                }
+              />
+            }
+          />
+          <Route
+            path={ProjectRoutes.CVLonger}
+            element={
+              <HeaderWrapper content={<CV data={CVContent} route={ProjectRoutes.CVLonger} qrCode={cvLongerQrCode} />} />
+            }
+          />
+          <Route
+            path={ProjectRoutes.CVMax}
+            element={
+              <HeaderWrapper content={<CV data={CVContentMax} route={ProjectRoutes.CVMax} qrCode={cvMaxQrCode} />} />
+            }
+          />
           <Route path={ProjectRoutes.About} element={<HeaderWrapper content={<About />} />} />
           <Route
             path={ProjectRoutes.Projects}

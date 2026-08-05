@@ -12,7 +12,6 @@ import { EducationRenderer } from './EducationRenderer';
 import { SkillsRenderer } from './SkillsRenderer';
 import { InfoRenderer, PDFDivText } from './InfoRenderer';
 import { ExtraCurricularRenderer } from './ExtraCurricularRenderer';
-import qrCode from 'src/assets/jonasward-cv-qr.png';
 import { REACT_PDF_STYLES } from './style';
 
 Font.register({
@@ -39,7 +38,12 @@ const getCreatedOnContent = () => {
 };
 
 // Create Document Component
-export const CVDocument: React.FC<{ data: CVData; customTitle?: string }> = ({ data, customTitle }) => (
+export const CVDocument: React.FC<{ data: CVData; customTitle?: string; route: string; qrCode: string }> = ({
+  data,
+  customTitle,
+  route,
+  qrCode
+}) => (
   <Document title={getTitle()}>
     <Page dpi={90} size="A4" style={REACT_PDF_STYLES.page}>
       <div id={'header'} style={REACT_PDF_STYLES.section}>
@@ -108,14 +112,14 @@ export const CVDocument: React.FC<{ data: CVData; customTitle?: string }> = ({ d
             pageNumber === totalPages && (
               <>
                 {getCreatedOnContent()}
-                <a style={{ textDecoration: 'underline' }} href="https://jonasward.ch/#cv">
-                  jonasward.ch/#cv
+                <a style={{ textDecoration: 'underline' }} href={`https://jonasward.ch/#${route}`}>
+                  jonasward.ch/#{route}
                 </a>
               </>
             )
           }
         />
-        <Image src={qrCode} style={{ width: 30, height: 30 }} />
+        <Image src={qrCode} style={{ width: 36, height: 36 }} />
       </View>
     </Page>
   </Document>

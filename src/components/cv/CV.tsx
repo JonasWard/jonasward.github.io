@@ -6,7 +6,7 @@ import printer from 'src/assets/icons/printer.svg';
 import { getFilenameString } from '../motivationLetter/motivationLetterDefaultContent';
 import { CVData } from 'src/types/cv/cvType';
 
-export const CV: React.FC<{ data: CVData }> = (props) => (
+export const CV: React.FC<{ data: CVData; route: string; qrCode: string }> = (props) => (
   <div className="cv-content">
     <PDFDownloadLink fileName={getFilenameString(props.data.cvName)} document={<CVDocument {...props} />}>
       <div className="cv-download-link">
