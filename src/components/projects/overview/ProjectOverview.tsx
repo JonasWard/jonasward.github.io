@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
@@ -43,6 +43,8 @@ export const ProjectOverview: React.FC = () => {
   const keywordFilters = useProjectStore((s) => s.keywordFilters);
   const projects = useProjectStore((s) => s.activeProjects);
 
+  const hasHydratedKeywords = useRef(false);
+
   // Sync category filter from path param
   useEffect(() => {
     useProjectStore
@@ -50,25 +52,27 @@ export const ProjectOverview: React.FC = () => {
       .setFilter(isProjectCategoryFilterType(filter) ? (filter as ProjectCategoryFilterType) : 'All');
   }, [filter]);
 
-  // Seed keyword filters from URL on first load
+  // Hydrate keyword filters from URL once, then keep the URL in sync.
+  // Skip syncing on the hydrate pass so an empty store doesn't wipe ?k= before seed applies.
   useEffect(() => {
-    const k = searchParams.get('k');
-    const initial = k ? k.split(',').filter(Boolean) : [];
-    if (initial.length > 0) useProjectStore.getState().setKeywordFilters(initial);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!hasHydratedKeywords.current) {
+      hasHydratedKeywords.current = true;
+      const k = searchParams.get('k');
+      const initial = k ? k.split(',').filter(Boolean) : [];
+      if (initial.length > 0) useProjectStore.getState().setKeywordFilters(initial);
+      return;
+    }
 
-  // Keep URL in sync with keyword filter state
-  useEffect(() => {
     setSearchParams(
       (prev) => {
-        if (keywordFilters.length > 0) prev.set('k', keywordFilters.join(','));
-        else prev.delete('k');
-        return prev;
+        const next = new URLSearchParams(prev);
+        if (keywordFilters.length > 0) next.set('k', keywordFilters.join(','));
+        else next.delete('k');
+        return next.toString() === prev.toString() ? prev : next;
       },
       { replace: true }
     );
-  }, [keywordFilters, setSearchParams]);
+  }, [keywordFilters, searchParams, setSearchParams]);
 
   const [centerPosition, setCenterPosition] = useState<[number, number]>([0, window.innerHeight * 0.5]);
 
