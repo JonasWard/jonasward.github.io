@@ -3,7 +3,7 @@ import { CVData } from 'src/types/cv/cvType';
 export const CVContent: CVData = {
   cvName: 'CV-compact',
   tagline: [
-    'Front-End Engineer',
+    'Full-Stack Engineer',
     '5+ years shipping TypeScript & Python products from prototype to production.',
     '4x hackathon prize-winner.',
     'AEC-tech & sustainability across CH, DE, BE, DK.'

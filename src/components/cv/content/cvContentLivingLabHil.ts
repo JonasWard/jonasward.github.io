@@ -4,8 +4,8 @@ export const CVContent: CVData = {
   cvName: 'CV-living-lab-hil',
   tagline: [
     'Computational Designer',
-    'Architect bridging computational design, BIM workflows and software for circular construction.',
-    'Rhino/Grasshopper, Python and interdisciplinary digital planning across research and practice.'
+    'Architect bridging computational design, BIM and software for circular construction.',
+    'Rhino/Grasshopper, Python and digital planning across research and practice.'
   ],
   info: {
     name: 'Van den Bulcke',
