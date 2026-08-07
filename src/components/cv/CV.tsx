@@ -10,7 +10,7 @@ export const CV: React.FC<{ data: CVData; route: string; qrCode: string }> = (pr
   <div className="cv-content">
     <PDFDownloadLink fileName={getFilenameString(props.data.cvName)} document={<CVDocument {...props} />}>
       <div className="cv-download-link">
-        <img src={printer} alt="red-dot" />
+        <img src={printer} />
         <span>Download</span>
       </div>
     </PDFDownloadLink>
