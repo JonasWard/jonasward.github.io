@@ -98,6 +98,10 @@ export const CVContent: CVData = {
       date: 'April 2022 - now',
       location: 'Zürich, Switzerland',
       projects: {
+        'AEC Hackathon - Copenhagen 2026': [
+          'https://jonasward.ch/#/project/repurposed',
+          'Prize: Best Solves a Big Problem — reuse platform with partial AI integration.'
+        ],
         'Holzvision Max': [
           'https://holzvisionmax.ch/',
           "Sole engineer on MES platform for Switzerland's national timber showcase ESAF 2025"

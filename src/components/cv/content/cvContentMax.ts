@@ -287,6 +287,10 @@ export const CVContent: CVData = {
     }
   ],
   extraCurricular: {
+    'AEC Hackathon - Copenhagen 2026': [
+      'https://jonasward.ch/#/project/repurposed',
+      'Prize: Best Solves a Big Problem — reuse platform with partial AI integration.'
+    ],
     'Green Tech Hackathon - Zürich 2025': 'Grid Carbon Intensity Load Balancing for cron jobs',
     'AEC Hackathon - Copenhagen 2025': [
       'https://janinloui.github.io/Slab2Reuse/',
