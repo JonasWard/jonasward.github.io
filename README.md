@@ -1,6 +1,6 @@
 ## Hi There! Welcome to the Read Me of my portfolio page!
 
-I am Jonas - Front End Developer, designer, architect - based in Zürich CH.
+I am Jonas - Developer, designer, architect - based in Zürich CH.
 
 you can view my portfolio at: [jonasward.ch](https://jonasward.ch)
 
