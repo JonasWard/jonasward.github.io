@@ -98,10 +98,6 @@ export const CVContent: CVData = {
       date: 'April 2022 - now',
       location: 'Zürich, Switzerland',
       projects: {
-        'AEC Hackathon - Copenhagen 2026': [
-          'https://jonasward.ch/#/project/repurposed',
-          'Prize: Best Solves a Big Problem — reuse platform with partial AI integration.'
-        ],
         'Holzvision Max': [
           'https://holzvisionmax.ch/',
           "Sole engineer on MES platform for Switzerland's national timber showcase ESAF 2025"
@@ -177,6 +173,10 @@ export const CVContent: CVData = {
     }
   ],
   extraCurricular: {
+    'AEC Hackathon - Copenhagen 2026': [
+      'https://jonasward.ch/#/project/repurposed',
+      'Prize: Best Solves a Big Problem — reuse platform with partial AI integration.'
+    ],
     'Green Tech Hackathon - Zürich 2025':
       'Built grid carbon intensity load balancer for scheduled jobs (cron / serverless).',
     'AEC Hackathon - Copenhagen 2025': [
