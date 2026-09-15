@@ -168,7 +168,9 @@ float paper(vec2 p, float grainAngle) {
 // what a tile carries, fixed by its seed for as long as the tile exists
 struct Look {
   float family;   // 0 rings, 1 frames, 2 stripes
-  float anchored; // 1: the pattern's centre moves with the cell, 0: it stays fixed to the lattice
+  float anchored; // 1: the pattern's centre sits on the slab's centre, 2: on one of its corners,
+                  // both moving with the cell; 0: it stays fixed to the lattice
+  float corner;   // which corner, 0..3, when anchored to one
   float k;        // pitch of the folds (sign: which way the first fold goes)
   float period;   // distance from one ridge to the next, css px
   float phase;    // where along the period the centre sits
@@ -187,11 +189,15 @@ Look lookFrom(float seed) {
   Look L;
   float f = hashSeeded(seed, 21.0);
   L.family = f < 0.4 ? 0.0 : (f < 0.65 ? 1.0 : 2.0);
-  // frames sit on the slab's centre less often than rings do
-  L.anchored = step(L.family == 1.0 ? 0.75 : 0.5, hashSeeded(seed, 22.0));
+  // where the pattern sits: mostly on the lattice, sometimes on the slab's centre
+  // (frames less often than rings) and sometimes on one of its corners
+  float place = hashSeeded(seed, 22.0);
+  float centreFrom = L.family == 1.0 ? 0.55 : 0.4;
+  L.anchored = place < centreFrom ? 0.0 : (place < centreFrom + 0.2 ? 1.0 : 2.0);
+  L.corner = floor(hashSeeded(seed, 34.0) * 4.0);
   L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.8, 1.5, hashSeeded(seed, 24.0));
   // periods spread evenly in the log so small and large ones are equally common
-  float periodMax = (L.family == 1.0 && L.anchored > 0.5) ? PERIOD_MAX_CENTRED_FRAME : PERIOD_MAX;
+  float periodMax = (L.family == 1.0 && L.anchored == 1.0) ? PERIOD_MAX_CENTRED_FRAME : PERIOD_MAX;
   L.period = PERIOD_MIN * pow(periodMax / PERIOD_MIN, hashSeeded(seed, 30.0));
   L.phase = hashSeeded(seed, 31.0);
   L.capTop = mix(0.2, 1.0, hashSeeded(seed, 32.0));
@@ -275,6 +281,13 @@ float motif(vec2 q, vec2 c, Look L, vec3 l, float aa) {
   return lit;
 }
 
+// where the pattern is centred on a slab of `sizePx`, in slab px
+vec2 patternCentre(Tile T, vec2 sizePx, Look L) {
+  if (L.anchored == 1.0) return 0.5 * sizePx;
+  if (L.anchored == 2.0) return vec2(mod(L.corner, 2.0), floor(L.corner * 0.5)) * sizePx;
+  return (T.id + 0.5 - T.lo) * uTileSize;
+}
+
 // ---------------------------------------------------------------- heightfield
 
 // height of the pattern above its slab, css px: the triangle wave behind the folds
@@ -296,7 +309,7 @@ float terrain(vec2 uv, float t) {
   vec2 sizePx = T.size * uTileSize;
   vec2 q = (uv - T.lo) / T.size * sizePx;
   Look L = lookFrom(tileSeed(T));
-  vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
+  vec2 c = patternCentre(T, sizePx, L);
   return slabHeight(T) * HEIGHT + shapeHeight(q, c, L);
 }
 
@@ -363,7 +376,7 @@ void main(void) {
   // the shape: its family and tilts are fixed by the seed; it sits either on the
   // slab's centre or on the lattice point the slab belongs to
   Look L = lookFrom(seed);
-  vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
+  vec2 c = patternCentre(T, sizePx, L);
   float light = motif(q, c, L, LIGHT, aa);
 
   // this slab's tone, one of the precomputed palette
