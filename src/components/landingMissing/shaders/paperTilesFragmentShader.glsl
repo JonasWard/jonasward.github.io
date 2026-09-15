@@ -157,6 +157,7 @@ struct Look {
   float anchored; // 1: the shape moves with the cell, 0: it stays fixed to the lattice
   float k;        // pitch of the emboss (sign: outline raised or sunken)
   float cut;      // width of the flank outside the shape, as a fraction of its size
+  float cutIn;    // depth of the slope inside the shape before it flattens, or a huge value for never
   vec2 tBase;     // tilt of the sheet itself
   vec2 tShape;    // tilt of the first facet of a crease
   float diag;     // which diagonal a crease follows
@@ -173,7 +174,9 @@ Look lookFrom(float seed) {
   L.family = f < 0.4 ? 0.0 : (f < 0.65 ? 1.0 : 2.0);
   L.anchored = step(0.5, hashSeeded(seed, 22.0));
   L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.8, 1.5, hashSeeded(seed, 24.0));
-  L.cut = mix(0.3, 0.6, hashSeeded(seed, 30.0));
+  L.cut = mix(0.6, 1.2, hashSeeded(seed, 30.0));
+  // now and then the inside flattens before reaching the centre
+  L.cutIn = hashSeeded(seed, 31.0) < 0.35 ? mix(0.3, 0.7, hashSeeded(seed, 32.0)) : 1e5;
   L.tBase = 0.35 * tiltFrom(hashSeeded(seed, 25.0), hashSeeded(seed, 26.0));
   L.tShape = tiltFrom(hashSeeded(seed, 27.0), hashSeeded(seed, 28.0));
   L.diag = step(0.5, hashSeeded(seed, 29.0));
@@ -201,11 +204,11 @@ float blendSdf(float inside, float outside, float d, float aa) {
   return mix(inside, outside, smoothstep(-aa, aa, d));
 }
 
-// the emboss at signed distance d from an outline: full pitch everywhere inside the
-// shape and across the outer flank of width c, flat beyond it, with a pixel of
-// smoothing at the cutoff
-float bevel(float d, float c, float aa) {
-  return 1.0 - smoothstep(c - aa, c + aa, d);
+// the emboss at signed distance d from an outline: full pitch across the outer flank
+// of width c and inside the shape down to depth cIn, flat beyond either, with a pixel
+// of smoothing at the cutoffs
+float bevel(float d, float c, float cIn, float aa) {
+  return (1.0 - smoothstep(c - aa, c + aa, d)) * smoothstep(-cIn - aa, -cIn + aa, d);
 }
 
 // faint line along a crease; m is the sheet's short side
@@ -224,7 +227,7 @@ float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
     float r = L.anchored > 0.5 ? 0.4 * m : 0.5 * unit;
     float dC = length(d) - r;
     vec2 dir = sign(dC) * normalize(d + 1e-4);
-    vec2 tilt = L.tBase + L.k * bevel(dC, L.cut * r, aa) * dir;
+    vec2 tilt = L.tBase + L.k * bevel(dC, L.cut * r, L.cutIn * r, aa) * dir;
     return litFlat(tilt, l);
   }
   if (L.family < 1.5) {
@@ -234,7 +237,7 @@ float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
     vec2 e = abs(d) - halfSize;
     float dR = max(e.x, e.y);
     float sz = min(halfSize.x, halfSize.y);
-    float slope = L.k * bevel(dR, L.cut * sz, aa) * sign(dR);
+    float slope = L.k * bevel(dR, L.cut * sz, L.cutIn * sz, aa) * sign(dR);
     vec2 tiltX = L.tBase + slope * vec2(sign(d.x), 0.0);
     vec2 tiltY = L.tBase + slope * vec2(0.0, sign(d.y));
     return blendSdf(litFlat(tiltY, l), litFlat(tiltX, l), e.x - e.y, aa);
@@ -273,7 +276,7 @@ void main(void) {
   float light = motif(q, sizePx, c, uTileSize, L, LIGHT, 0.75);
 
   vec3 tone = mix(vec3(0.76, 0.80, 0.75), vec3(0.56, 0.63, 0.59), hashSeeded(seed, 6.0));
-  vec3 col = tone * (0.3 + 0.95 * light);
+  vec3 col = tone * (0.45 + 0.75 * light);
   col *= 1.0 + 0.11 * paper.fibre + 0.07 * paper.cloud + 0.04 * paper.grain;
 
   // every sheet sits at its own height: the neighbours on the lit side cast onto this one
