@@ -1,7 +1,7 @@
 #version 300 es
 precision highp float;
 
-// Embossed cement tiles on an animated asymmetric tiling.
+// Embossed paper tiles on an animated asymmetric tiling.
 //
 // The tiling follows gelami's "Straight Flagstone Tiles"
 // (https://www.shadertoy.com/view/7tKGRc), itself derived from fizzer's
@@ -20,19 +20,18 @@ precision highp float;
 // every ridge and valley. The centre either moves with the cell or stays fixed to
 // the
 // lattice so the pattern slides under the drifting edges. All of it is also a heightfield:
-// slabs sit at different heights above the joints and the shapes stand out of
+// slabs sit at different heights and the shapes stand out of
 // them, and every pixel marches towards the light across that heightfield, so
 // slabs and shapes cast soft shadows onto anything lower, including their own
-// slab and the neighbours across the joint. Each slab is faced with paper
+// slab and the neighbours. Each slab is faced with paper
 // whose fibres are anchored to the slab's centre with a per-slab offset, so
-// they travel with it; the joints between slabs are cement.
+// they travel with it. Slabs abut directly; only tone and shadow mark the edges.
 
 uniform vec2 uResolution;  // canvas size, device px
 uniform float uTime;       // seconds
 uniform float uTileSize;   // average tile edge, device px
 uniform float uPixelRatio; // device px per css px
 uniform vec3 uPalette[32];    // slab tones, precomputed around a neutral colour
-uniform vec3 uJointColor;     // tone of the cement joints
 
 out vec4 fragColor;
 
@@ -45,13 +44,10 @@ const float SPAN_MAX = 0.8;
 const float SPAN_RATE = 0.2;           // radians per second of the edge oscillation
 const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 
-const float GAP = 0.55;         // half of the seam between slabs, css px
-const float FRAY = 1.0;         // how far the fibres pull the slab's edge, css px
 const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for penumbrae
 const float PERIOD_MIN = 20.0;  // spacing of the pattern's folds, css px
 const float PERIOD_MAX = 384.0;
 const float PERIOD_MAX_CENTRED_FRAME = 60.0; // frames sitting on the slab's centre keep their folds tight
-const float SLAB = 3.0;         // lowest slab top above the joint, css px
 const float HEIGHT = 7.0;       // tallest slab above the lowest, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
@@ -136,7 +132,7 @@ float tileSeed(Tile T) {
   return hash12(T.id + 0.5);
 }
 
-// ---------------------------------------------------------------- paper and cement
+// ---------------------------------------------------------------- paper
 
 // value noise stretched along a direction: long thin fibres
 float fibres(vec2 p, float angle, float len, float thick) {
@@ -156,15 +152,6 @@ float paper(vec2 p, float grainAngle) {
   float cloud = vnoise(p / 90.0) - 0.5;
   float grain = vnoise(p * 0.7) - 0.5;
   return 0.16 * fibre + 0.1 * cloud + 0.05 * grain;
-}
-
-// lightness of the cement at p (css px): fine grain, speckle, cloudy mottling and pores
-float cement(vec2 p) {
-  float grain = vnoise(p * 0.6) - 0.5;
-  float speckle = vnoise(p / 2.5) - 0.5;
-  float mottle = (vnoise(p / 38.0) - 0.5) + 0.6 * (vnoise(p / 120.0 + 7.3) - 0.5);
-  float pores = smoothstep(0.8, 0.93, vnoise(p / 3.5 + 41.0));
-  return 0.04 * grain + 0.06 * speckle + 0.1 * mottle - 0.06 * pores;
 }
 
 // ---------------------------------------------------------------- look
@@ -206,12 +193,6 @@ Look lookFrom(float seed) {
 }
 
 // ---------------------------------------------------------------- sdf shading
-
-// signed distance to a box of half size b
-float sdBox(vec2 p, vec2 b) {
-  vec2 q = abs(p) - b;
-  return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0);
-}
 
 float lit(vec3 n, vec3 l) {
   return max(dot(n, l), 0.0);
@@ -299,17 +280,14 @@ float slabHeight(Tile T) {
   return hashSeeded(tileSeed(T), 14.0);
 }
 
-// height of the wall at world position uv, css px; the joints are at zero
+// height of the wall at world position uv, css px
 float terrain(vec2 uv, float t) {
   Tile T = tileAt(uv, t);
-  float cssPx = uPixelRatio;
   vec2 sizePx = T.size * uTileSize;
   vec2 q = (uv - T.lo) / T.size * sizePx;
-  vec2 halfSlab = 0.5 * sizePx - GAP * cssPx;
-  if (sdBox(q - 0.5 * sizePx, halfSlab) > 0.0) return 0.0;
   Look L = lookFrom(tileSeed(T));
   vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
-  return SLAB + slabHeight(T) * HEIGHT + shapeHeight(q, c, L);
+  return slabHeight(T) * HEIGHT + shapeHeight(q, c, L);
 }
 
 // height of the wall s css px from uv towards the light
@@ -367,12 +345,9 @@ void main(void) {
   vec2 q = (uv - T.lo) / T.size * sizePx; // position on the slab, device px
   float aa = 0.75;
 
-  // the slab: a rectangle with a thin seam around it, its edge frayed by the fibres
+  // this slab's paper, anchored to its centre, offset per slab, cut at its own angle
   vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
   float grainAngle = (hashSeeded(seed, 12.0) - 0.5) * 0.6;
-  vec2 fray = (vec2(fibres(texPx + 5.3, 2.6 + grainAngle, 34.0, 4.5), fibres(texPx + 31.7, 1.9 + grainAngle, 28.0, 4.0)) - 0.5) * FRAY * cssPx;
-  vec2 halfSlab = 0.5 * sizePx - GAP * cssPx;
-  float dSlab = sdBox(q + fray - 0.5 * sizePx, halfSlab);
 
   // the shape: its family and tilts are fixed by the seed; it sits either on the
   // slab's centre or on the lattice point the slab belongs to
@@ -383,16 +358,11 @@ void main(void) {
   // this slab's tone, one of the precomputed palette
   vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
 
-  // paper anchored to the slab's centre, offset per slab, cut at its own angle
   vec3 col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
 
   // shadows from everything taller towards the light
   float shadow = shadowAt(uv, terrain(uv, t), t);
   col *= 0.75 + 0.25 * shadow;
-
-  // the seam between slabs: white, with a faint cement grain fixed to the lattice, unshaded
-  vec3 joint = vec3(0.96) * (1.0 + 0.5 * cement(uv * uTileSize / cssPx));
-  col = mix(col, joint, smoothstep(-aa, aa, dSlab));
 
 
   vec2 v = gl_FragCoord.xy / uResolution - 0.5;
