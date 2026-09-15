@@ -12,7 +12,7 @@ precision highp float;
 // size while each keeps its id, and with it its shape, its height and its
 // tone.
 //
-// Each tile is a cast slab with rounded corners and a rounded edge, carrying
+// Each tile is a paper-faced slab with rounded corners and a rounded edge, carrying
 // one of three simple shapes: a circle, a rectangle or a diagonal crease.
 // Circle and rectangle are embossed from the signed distance to their outline
 // (the circle's radius, or the square distance to the rectangle so its facets
@@ -20,8 +20,9 @@ precision highp float;
 // shape, creasing at the outline, and keeps that pitch across an outer flank
 // until a cutoff. The shapes either move with the cell or stay fixed to the
 // lattice so the drifting edges clip them. Slabs sit at different heights and
-// cast soft shadows onto their lower neighbours. The cement grain is anchored
-// to each slab's centre with a per-slab offset, so it travels with it.
+// cast soft shadows onto their lower neighbours. Each slab is faced with paper
+// whose fibres are anchored to the slab's centre with a per-slab offset, so
+// they travel with it; the joints between slabs are cement.
 
 uniform vec2 uResolution;  // canvas size, device px
 uniform float uTime;       // seconds
@@ -125,7 +126,27 @@ float tileSeed(Tile T) {
   return hash12(T.id + 0.5);
 }
 
-// ---------------------------------------------------------------- cement
+// ---------------------------------------------------------------- paper and cement
+
+// value noise stretched along a direction: long thin fibres
+float fibres(vec2 p, float angle, float len, float thick) {
+  float c = cos(angle);
+  float s = sin(angle);
+  vec2 r = vec2(c * p.x - s * p.y, s * p.x + c * p.y);
+  return vnoise(vec2(r.x / len, r.y / thick));
+}
+
+// lightness of the paper at p (css px): fibres cut at grainAngle, cloudy formation, grain
+float paper(vec2 p, float grainAngle) {
+  float f1 = fibres(p, 0.4 + grainAngle, 16.0, 1.3);
+  float f2 = fibres(p + 31.7, 1.9 + grainAngle, 22.0, 1.6);
+  float f3 = fibres(p + 77.1, -1.0 + grainAngle, 12.0, 1.1);
+  float f4 = fibres(p + 5.3, 2.6 + grainAngle, 30.0, 2.2);
+  float fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
+  float cloud = vnoise(p / 90.0) - 0.5;
+  float grain = hash12(p * 1.7) - 0.5;
+  return 0.11 * fibre + 0.07 * cloud + 0.04 * grain;
+}
 
 // lightness of the cement at p (css px): fine grain, speckle, cloudy mottling and pores
 float cement(vec2 p) {
@@ -288,9 +309,9 @@ void main(void) {
   vec3 deviation = vec3(hashSeeded(seed, 6.0), hashSeeded(seed, 7.0), hashSeeded(seed, 8.0)) * 2.0 - 1.0;
   vec3 tone = uNeutralColor + uToneVariation * deviation;
 
-  // cement grain anchored to the slab's centre, offset per slab
+  // paper anchored to the slab's centre, offset per slab, cut at its own angle
   vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
-  vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + cement(texPx));
+  vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, (hashSeeded(seed, 12.0) - 0.5) * 0.6));
 
   // shadows: taller neighbours towards the light cast onto this slab
   float h = slabHeight(T) * HEIGHT;
@@ -307,8 +328,8 @@ void main(void) {
   }
   col *= 1.0 - 0.4 * shadow;
 
-  // the joint between slabs, dark and slightly lighter cement
-  vec3 joint = uNeutralColor * 0.5 * (1.0 + cement(texPx * 0.7));
+  // the joint between slabs: dark cement, fixed to the lattice
+  vec3 joint = uNeutralColor * 0.5 * (1.0 + cement(uv * uTileSize / cssPx));
   col = mix(col, joint, smoothstep(-aa, aa, dSlab));
 
   vec2 v = gl_FragCoord.xy / uResolution - 0.5;
