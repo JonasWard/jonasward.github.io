@@ -52,9 +52,11 @@ const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for
 const float SLAB = 5.0;         // lowest slab top above the joint, css px
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
 const float RELIEF = 6.0;       // height of a circle or rectangle at unit pitch, css px
-const float RIDGE = 6.0;        // height of the raised side of a diagonal crease, css px
+const float RIDGE = 5.0;        // height of the raised facet of a diagonal crease, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
-const int SHADOW_STEPS = 14;
+const float SHADOW_FINE = 10.0;  // the first stretch of the march is sampled every css px ...
+const int SHADOW_FINE_STEPS = 10;
+const int SHADOW_STEPS = 18;     // ... the rest ever more coarsely up to the reach
 
 // ---------------------------------------------------------------- hashing
 
@@ -254,9 +256,9 @@ float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
     // is a cone or a dish and the outside a flank that ends at the cutoff
     float r = L.anchored > 0.5 ? 0.4 * m : 0.5 * unit;
     float dC = length(d) - r;
-    vec2 dir = sign(dC) * normalize(d + 1e-4);
-    vec2 tilt = L.tBase + L.k * bevel(dC, L.cut * r, L.cutIn * r, aa) * dir;
-    return litFlat(tilt, l);
+    vec2 tilt = L.k * bevel(dC, L.cut * r, L.cutIn * r, aa) * normalize(d + 1e-4);
+    // the slope points away from the outline on both sides; blend across the crease
+    return blendSdf(litFlat(L.tBase - tilt, l), litFlat(L.tBase + tilt, l), dC, aa);
   }
   if (L.family < 1.5) {
     // rectangle: the same along the square distance, so the inside is a hip roof or
@@ -265,10 +267,13 @@ float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
     vec2 e = abs(d) - halfSize;
     float dR = max(e.x, e.y);
     float sz = min(halfSize.x, halfSize.y);
-    float slope = L.k * bevel(dR, L.cut * sz, L.cutIn * sz, aa) * sign(dR);
-    vec2 tiltX = L.tBase + slope * vec2(sign(d.x), 0.0);
-    vec2 tiltY = L.tBase + slope * vec2(0.0, sign(d.y));
-    return blendSdf(litFlat(tiltY, l), litFlat(tiltX, l), e.x - e.y, aa);
+    float slope = L.k * bevel(dR, L.cut * sz, L.cutIn * sz, aa);
+    vec2 tiltX = slope * vec2(sign(d.x), 0.0);
+    vec2 tiltY = slope * vec2(0.0, sign(d.y));
+    // facets meet at the mitres, and the slope flips across the crease at the outline
+    float inside = blendSdf(litFlat(L.tBase - tiltY, l), litFlat(L.tBase - tiltX, l), e.x - e.y, aa);
+    float outside = blendSdf(litFlat(L.tBase + tiltY, l), litFlat(L.tBase + tiltX, l), e.x - e.y, aa);
+    return blendSdf(inside, outside, dR, aa);
   }
   // diagonal crease: two facets folding away from each other
   vec2 a = L.diag > 0.5 ? vec2(0.0) : vec2(size.x, 0.0);
@@ -300,11 +305,10 @@ float shapeHeight(vec2 q, vec2 size, vec2 c, float unit, Look L) {
     float dc = clamp(dS, -L.cutIn * sz, cut);
     return L.k * RELIEF * (cut - abs(dc)) / cut;
   }
-  // a wedge: one facet rises towards the crease and steps down onto the other
+  // a step: one facet sits RIDGE above the other, meeting at the crease
   vec2 a = L.diag > 0.5 ? vec2(0.0) : vec2(size.x, 0.0);
   vec2 b = L.diag > 0.5 ? size : vec2(0.0, size.y);
-  float dL = sdLine(q, a, b) * sign(L.k);
-  return dL > 0.0 ? RIDGE * clamp(1.0 - dL / (0.5 * m), 0.0, 1.0) : 0.0;
+  return sdLine(q, a, b) * sign(L.k) > 0.0 ? RIDGE : 0.0;
 }
 
 float slabHeight(Tile T) {
@@ -343,8 +347,9 @@ float shadowAt(vec2 uv, float h0, float t) {
   float angle = 1.0;
   float sPrev = 0.0;
   for (int i = 1; i <= SHADOW_STEPS; i++) {
-    float f = float(i) / float(SHADOW_STEPS);
-    float s = SHADOW_REACH * f * sqrt(f);
+    float f = float(i - SHADOW_FINE_STEPS) / float(SHADOW_STEPS - SHADOW_FINE_STEPS);
+    float s = i <= SHADOW_FINE_STEPS ? float(i) * SHADOW_FINE / float(SHADOW_FINE_STEPS)
+                                     : SHADOW_FINE + (SHADOW_REACH - SHADOW_FINE) * f * sqrt(f);
     float clearance = clearanceAt(uv, h0, s, dir, rise, t);
     if (clearance < 0.0) {
       float lo = sPrev;
