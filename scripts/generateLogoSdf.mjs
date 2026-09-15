@@ -15,6 +15,7 @@ const { chromium } = createRequire(import.meta.url)('playwright');
 
 const WIDTH = 1024;
 const SPREAD = 48;
+const SUPERSAMPLE = 4; // the outline is rasterised and measured at this multiple, then averaged down
 const svgPath = resolve('src/assets/icons/jonasward_logo_ww.svg');
 const outPath = resolve('src/assets/icons/jonasward_logo_sdf.png');
 
@@ -25,11 +26,14 @@ const browser = await chromium.launch({
 });
 const page = await browser.newPage();
 const dataUrl = await page.evaluate(
-  async ({ svg, width, spread }) => {
+  async ({ svg, width: outWidth, spread: outSpread, supersample }) => {
     const img = new Image();
     img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
     await img.decode();
-    const height = Math.round((width * img.naturalHeight) / img.naturalWidth);
+    const outHeight = Math.round((outWidth * img.naturalHeight) / img.naturalWidth);
+    const width = outWidth * supersample;
+    const height = outHeight * supersample;
+    const spread = outSpread * supersample;
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -88,19 +92,34 @@ const dataUrl = await page.evaluate(
     const toInside = edt2d(inside); // distance from outside points to the logo
     const toOutside = edt2d(outsideMask); // distance from inside points to the edge
 
-    const out = ctx.createImageData(width, height);
-    for (let i = 0; i < inside.length; i++) {
-      const dist = inside[i] ? -Math.sqrt(toOutside[i]) : Math.sqrt(toInside[i]);
-      const v = Math.round(Math.min(Math.max(0.5 + dist / (2 * spread), 0), 1) * 255);
-      out.data[i * 4] = v;
-      out.data[i * 4 + 1] = v;
-      out.data[i * 4 + 2] = v;
-      out.data[i * 4 + 3] = 255;
+    // average the supersampled distances down to the output texel grid
+    const outCanvas = document.createElement('canvas');
+    outCanvas.width = outWidth;
+    outCanvas.height = outHeight;
+    const outCtx = outCanvas.getContext('2d');
+    const out = outCtx.createImageData(outWidth, outHeight);
+    for (let oy = 0; oy < outHeight; oy++) {
+      for (let ox = 0; ox < outWidth; ox++) {
+        let sum = 0;
+        for (let sy = 0; sy < supersample; sy++) {
+          for (let sx = 0; sx < supersample; sx++) {
+            const i = (oy * supersample + sy) * width + ox * supersample + sx;
+            sum += inside[i] ? -Math.sqrt(toOutside[i]) : Math.sqrt(toInside[i]);
+          }
+        }
+        const dist = sum / (supersample * supersample);
+        const v = Math.round(Math.min(Math.max(0.5 + dist / (2 * spread), 0), 1) * 255);
+        const o = (oy * outWidth + ox) * 4;
+        out.data[o] = v;
+        out.data[o + 1] = v;
+        out.data[o + 2] = v;
+        out.data[o + 3] = 255;
+      }
     }
-    ctx.putImageData(out, 0, 0);
-    return canvas.toDataURL('image/png');
+    outCtx.putImageData(out, 0, 0);
+    return outCanvas.toDataURL('image/png');
   },
-  { svg, width: WIDTH, spread: SPREAD }
+  { svg, width: WIDTH, spread: SPREAD, supersample: SUPERSAMPLE }
 );
 await browser.close();
 writeFileSync(outPath, Buffer.from(dataUrl.split(',')[1], 'base64'));
