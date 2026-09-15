@@ -45,7 +45,8 @@ const float SPAN_MAX = 0.8;
 const float SPAN_RATE = 0.2;           // radians per second of the edge oscillation
 const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 
-const float GAP = 0.9;          // half of the seam between slabs, css px
+const float GAP = 0.55;         // half of the seam between slabs, css px
+const float FRAY = 1.3;         // how far the fibres pull the slab's edge, css px
 const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for penumbrae
 const float PERIOD_MIN = 28.0;  // spacing of the pattern's folds, css px
 const float PERIOD_MAX = 64.0;
@@ -349,9 +350,12 @@ void main(void) {
   vec2 q = (uv - T.lo) / T.size * sizePx; // position on the slab, device px
   float aa = 0.75;
 
-  // the slab: a sharp rectangle with a thin seam around it
+  // the slab: a rectangle with a thin seam around it, its edge frayed by the fibres
+  vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
+  float grainAngle = (hashSeeded(seed, 12.0) - 0.5) * 0.6;
+  vec2 fray = (vec2(fibres(texPx + 5.3, 2.6 + grainAngle, 26.0, 2.4), fibres(texPx + 31.7, 1.9 + grainAngle, 20.0, 2.0)) - 0.5) * FRAY * cssPx;
   vec2 halfSlab = 0.5 * sizePx - GAP * cssPx;
-  float dSlab = sdBox(q - 0.5 * sizePx, halfSlab);
+  float dSlab = sdBox(q + fray - 0.5 * sizePx, halfSlab);
 
   // the shape: its family and tilts are fixed by the seed; it sits either on the
   // slab's centre or on the lattice point the slab belongs to
@@ -363,11 +367,10 @@ void main(void) {
   vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
 
   // paper anchored to the slab's centre, offset per slab, cut at its own angle
-  vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
-  vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, (hashSeeded(seed, 12.0) - 0.5) * 0.6));
+  vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, grainAngle));
 
   // the seam between slabs: dark cement, fixed to the lattice
-  vec3 joint = uJointColor * 0.7 * (1.0 + cement(uv * uTileSize / cssPx));
+  vec3 joint = uJointColor * 0.9 * (1.0 + cement(uv * uTileSize / cssPx));
   col = mix(col, joint, smoothstep(-aa, aa, dSlab));
 
   // shadows from everything taller towards the light, on slabs and joints alike
