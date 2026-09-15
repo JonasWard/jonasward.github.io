@@ -49,6 +49,7 @@ const float PERIOD_MIN = 20.0;  // spacing of the pattern's folds, css px
 const float PERIOD_MAX = 384.0;
 const float PERIOD_MAX_CENTRED_FRAME = 60.0; // frames sitting on the slab's centre keep their folds tight
 const float HEIGHT = 7.0;       // tallest slab above the lowest, css px
+const float FRAY = 0.9;         // how far the edges between slabs wander, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
 const float SHADOW_FINE = 10.0;  // the first stretch of the march is sampled every css px ...
@@ -140,6 +141,14 @@ float fibres(vec2 p, float angle, float len, float thick) {
   float s = sin(angle);
   vec2 r = vec2(c * p.x - s * p.y, s * p.x + c * p.y);
   return vnoise(vec2(r.x / len, r.y / thick));
+}
+
+// a small displacement of the tiling itself, fixed to the lattice, so the edges between
+// slabs run slightly jagged; uv in tile units, result in tile units
+vec2 frayAt(vec2 uv) {
+  vec2 p = uv * uTileSize / uPixelRatio;
+  vec2 d = vec2(fibres(p + 5.3, 2.6, 30.0, 4.0), fibres(p + 31.7, 1.9, 24.0, 3.5)) - 0.5;
+  return d * FRAY * uPixelRatio / uTileSize;
 }
 
 // lightness of the paper at p (css px): fibres cut at grainAngle, cloudy formation, grain
@@ -282,6 +291,7 @@ float slabHeight(Tile T) {
 
 // height of the wall at world position uv, css px
 float terrain(vec2 uv, float t) {
+  uv += frayAt(uv);
   Tile T = tileAt(uv, t);
   vec2 sizePx = T.size * uTileSize;
   vec2 q = (uv - T.lo) / T.size * sizePx;
@@ -337,7 +347,8 @@ float shadowAt(vec2 uv, float h0, float t) {
 void main(void) {
   float t = uTime;
   float cssPx = uPixelRatio; // one css px in device px
-  vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution) / uTileSize + SCROLL * t;
+  vec2 uvWorld = (gl_FragCoord.xy - 0.5 * uResolution) / uTileSize + SCROLL * t;
+  vec2 uv = uvWorld + frayAt(uvWorld);
 
   Tile T = tileAt(uv, t);
   float seed = tileSeed(T);
@@ -361,7 +372,7 @@ void main(void) {
   vec3 col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
 
   // shadows from everything taller towards the light
-  float shadow = shadowAt(uv, terrain(uv, t), t);
+  float shadow = shadowAt(uvWorld, terrain(uvWorld, t), t);
   col *= 0.75 + 0.25 * shadow;
 
 
