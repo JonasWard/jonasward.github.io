@@ -12,12 +12,16 @@ precision highp float;
 // size while each keeps its id, and with it its family of motif, its folds
 // and its own sheet of paper.
 //
-// Each tile is one sheet carrying one of three simple shapes: a circle (a
-// curled disc), a rectangle (a second sheet laid on top) or a diagonal crease.
-// Circles and rectangles either move with the cell or stay fixed to the
-// lattice so the drifting edges clip them. Everything is lit from one fixed
-// light so the shapes read as relief. The paper fibres are anchored to the
-// sheet's centre with a per-sheet offset, so they travel with it.
+// Each tile is one sheet carrying one of three simple shapes: a circle, a
+// rectangle or a diagonal crease. Circle and rectangle are embossed along
+// their outline: the sheet slopes across a band around the shape's edge,
+// driven by the signed distance to it (the circle's radius, or the square
+// distance to the rectangle so its band has mitred corners), and is flat
+// again beyond a cutoff distance on either side. The shapes either move with
+// the cell or stay fixed to the lattice so the drifting edges clip them.
+// Everything is lit from one fixed light so the relief reads. The paper
+// fibres are anchored to the sheet's centre with a per-sheet offset, so they
+// travel with it.
 
 uniform vec2 uResolution;  // canvas size, device px
 uniform float uTime;       // seconds
@@ -149,9 +153,10 @@ Paper paperAt(vec2 p, float grainAngle) {
 struct Look {
   float family;   // 0 circle, 1 rectangle, 2 diagonal
   float anchored; // 1: the shape moves with the cell, 0: it stays fixed to the lattice
-  float k;        // tilt of the curled disc (sign: curling up or down)
+  float k;        // steepness of the embossed edge (sign: shape raised or sunken)
+  float cut;      // cutoff distance of the emboss, as a fraction of the shape's size
   vec2 tBase;     // tilt of the sheet itself
-  vec2 tShape;    // tilt of the raised rectangle, or of the first facet of a crease
+  vec2 tShape;    // tilt of the first facet of a crease
   float diag;     // which diagonal a crease follows
 };
 
@@ -165,7 +170,8 @@ Look lookFrom(float seed) {
   float f = hashSeeded(seed, 21.0);
   L.family = f < 0.4 ? 0.0 : (f < 0.65 ? 1.0 : 2.0);
   L.anchored = step(0.5, hashSeeded(seed, 22.0));
-  L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.55, 1.2, hashSeeded(seed, 24.0));
+  L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.4, 0.9, hashSeeded(seed, 24.0));
+  L.cut = mix(0.25, 0.5, hashSeeded(seed, 30.0));
   L.tBase = 0.35 * tiltFrom(hashSeeded(seed, 25.0), hashSeeded(seed, 26.0));
   L.tShape = tiltFrom(hashSeeded(seed, 27.0), hashSeeded(seed, 28.0));
   L.diag = step(0.5, hashSeeded(seed, 29.0));
@@ -180,11 +186,6 @@ float sdLine(vec2 p, vec2 a, vec2 b) {
   return (d.x * (p.y - a.y) - d.y * (p.x - a.x)) / length(d);
 }
 
-float sdBox(vec2 p, vec2 b) {
-  vec2 d = abs(p) - b;
-  return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
-}
-
 float lit(vec3 n, vec3 l) {
   return max(dot(n, l), 0.0);
 }
@@ -194,20 +195,15 @@ float litFlat(vec2 t, vec3 l) {
   return lit(normalize(vec3(t, 1.0)), l);
 }
 
-// curled disc with its centre at the origin of d: the normal turns around the centre
-float litCone(vec2 d, float k, vec3 l) {
-  float a = atan(d.y, d.x);
-  return lit(normalize(vec3(k * cos(a), k * sin(a), 1.0)), l);
-}
-
 float blendSdf(float inside, float outside, float d, float aa) {
   return mix(inside, outside, smoothstep(-aa, aa, d));
 }
 
-// darkening of the sheet next to a raised shape, strongest away from the light
-float contactShadow(float d, vec2 dir, float r, vec3 l) {
-  float away = 0.5 - 0.5 * dot(normalize(dir + 1e-4), normalize(l.xy));
-  return 1.0 - (0.3 + 0.4 * away) * exp(-max(d, 0.0) / (0.05 * r + 1.0));
+// slope of the emboss at signed distance d from the shape's outline: a smooth step
+// spanning the cutoff distance c on both sides, flat beyond it
+float bevel(float d, float c) {
+  float u = clamp(0.5 + 0.5 * d / c, 0.0, 1.0);
+  return 6.0 * u * (1.0 - u);
 }
 
 // faint line along a crease; m is the sheet's short side
@@ -219,19 +215,24 @@ float crease(float d, float m) {
 // unit is the nominal cell size in px, which fixed shapes are measured in
 float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
   float m = min(size.x, size.y);
-  float base = litFlat(L.tBase, l);
   vec2 d = q - c;
   if (L.family < 0.5) {
-    // circle: a curled disc
+    // circle: embossed along its radius, the slope pointing outwards
     float r = L.anchored > 0.5 ? 0.4 * m : 0.5 * unit;
     float dC = length(d) - r;
-    return blendSdf(litCone(d, L.k, l), base * contactShadow(dC, d, r, l), dC, aa);
+    vec2 tilt = L.tBase + L.k * bevel(dC, L.cut * r) * normalize(d + 1e-4);
+    return litFlat(tilt, l);
   }
   if (L.family < 1.5) {
-    // rectangle: a second sheet laid on top
+    // rectangle: embossed along the square distance to it, so the band is
+    // four flat facets meeting at mitred corners
     vec2 halfSize = L.anchored > 0.5 ? 0.28 * size : vec2(0.3 * unit);
-    float dR = sdBox(d, halfSize);
-    return blendSdf(litFlat(L.tShape, l), base * contactShadow(dR, d, min(halfSize.x, halfSize.y), l), dR, aa);
+    vec2 e = abs(d) - halfSize;
+    float dR = max(e.x, e.y);
+    float slope = L.k * bevel(dR, L.cut * min(halfSize.x, halfSize.y));
+    vec2 tiltX = L.tBase + slope * vec2(sign(d.x), 0.0);
+    vec2 tiltY = L.tBase + slope * vec2(0.0, sign(d.y));
+    return blendSdf(litFlat(tiltY, l), litFlat(tiltX, l), e.x - e.y, aa);
   }
   // diagonal crease: two facets folding away from each other
   vec2 a = L.diag > 0.5 ? vec2(0.0) : vec2(size.x, 0.0);
