@@ -13,12 +13,13 @@ precision highp float;
 // and its own sheet of paper.
 //
 // Each tile is one sheet carrying one of three simple shapes: a circle, a
-// rectangle or a diagonal crease. Circle and rectangle are embossed along
-// their outline: the sheet slopes across a band around the shape's edge,
-// driven by the signed distance to it (the circle's radius, or the square
-// distance to the rectangle so its band has mitred corners), and is flat
-// again beyond a cutoff distance on either side. The shapes either move with
-// the cell or stay fixed to the lattice so the drifting edges clip them.
+// rectangle or a diagonal crease. Circle and rectangle are embossed as a ring
+// or a frame: the signed distance to the shape (the circle's radius, or the
+// square distance to the rectangle so the frame has mitred corners) is folded
+// with abs(d) - thickness, and the sheet slopes at a constant pitch across a
+// band around that outline, flat again beyond a cutoff on either side. The
+// shapes either move with the cell or stay fixed to the lattice so the
+// drifting edges clip them.
 // Everything is lit from one fixed light so the relief reads. The paper
 // fibres are anchored to the sheet's centre with a per-sheet offset, so they
 // travel with it.
@@ -153,8 +154,9 @@ Paper paperAt(vec2 p, float grainAngle) {
 struct Look {
   float family;   // 0 circle, 1 rectangle, 2 diagonal
   float anchored; // 1: the shape moves with the cell, 0: it stays fixed to the lattice
-  float k;        // steepness of the embossed edge (sign: shape raised or sunken)
-  float cut;      // cutoff distance of the emboss, as a fraction of the shape's size
+  float k;        // pitch of the embossed flanks (sign: ring raised or sunken)
+  float thick;    // half width of the ring or frame, as a fraction of the shape's size
+  float cut;      // width of each flank, as a fraction of the shape's size
   vec2 tBase;     // tilt of the sheet itself
   vec2 tShape;    // tilt of the first facet of a crease
   float diag;     // which diagonal a crease follows
@@ -170,8 +172,9 @@ Look lookFrom(float seed) {
   float f = hashSeeded(seed, 21.0);
   L.family = f < 0.4 ? 0.0 : (f < 0.65 ? 1.0 : 2.0);
   L.anchored = step(0.5, hashSeeded(seed, 22.0));
-  L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.4, 0.9, hashSeeded(seed, 24.0));
-  L.cut = mix(0.25, 0.5, hashSeeded(seed, 30.0));
+  L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.8, 1.5, hashSeeded(seed, 24.0));
+  L.thick = mix(0.14, 0.3, hashSeeded(seed, 31.0));
+  L.cut = L.thick * mix(0.4, 1.0, hashSeeded(seed, 30.0));
   L.tBase = 0.35 * tiltFrom(hashSeeded(seed, 25.0), hashSeeded(seed, 26.0));
   L.tShape = tiltFrom(hashSeeded(seed, 27.0), hashSeeded(seed, 28.0));
   L.diag = step(0.5, hashSeeded(seed, 29.0));
@@ -199,11 +202,10 @@ float blendSdf(float inside, float outside, float d, float aa) {
   return mix(inside, outside, smoothstep(-aa, aa, d));
 }
 
-// slope of the emboss at signed distance d from the shape's outline: a smooth step
-// spanning the cutoff distance c on both sides, flat beyond it
-float bevel(float d, float c) {
-  float u = clamp(0.5 + 0.5 * d / c, 0.0, 1.0);
-  return 6.0 * u * (1.0 - u);
+// the emboss at signed distance d from an outline: full pitch across the flank of
+// width c on both sides, flat beyond it, with a pixel of smoothing at the cutoff
+float bevel(float d, float c, float aa) {
+  return 1.0 - smoothstep(c - aa, c + aa, abs(d));
 }
 
 // faint line along a crease; m is the sheet's short side
@@ -217,19 +219,23 @@ float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
   float m = min(size.x, size.y);
   vec2 d = q - c;
   if (L.family < 0.5) {
-    // circle: embossed along its radius, the slope pointing outwards
+    // circle: a ring around the main radius, its flanks sloping away from the ring
     float r = L.anchored > 0.5 ? 0.4 * m : 0.5 * unit;
     float dC = length(d) - r;
-    vec2 tilt = L.tBase + L.k * bevel(dC, L.cut * r) * normalize(d + 1e-4);
+    float dRing = abs(dC) - L.thick * r;
+    vec2 dir = sign(dC) * normalize(d + 1e-4);
+    vec2 tilt = L.tBase + L.k * bevel(dRing, L.cut * r, aa) * dir;
     return litFlat(tilt, l);
   }
   if (L.family < 1.5) {
-    // rectangle: embossed along the square distance to it, so the band is
-    // four flat facets meeting at mitred corners
+    // rectangle: a frame around it along the square distance, so the flanks are
+    // flat facets meeting at mitred corners
     vec2 halfSize = L.anchored > 0.5 ? 0.28 * size : vec2(0.3 * unit);
     vec2 e = abs(d) - halfSize;
     float dR = max(e.x, e.y);
-    float slope = L.k * bevel(dR, L.cut * min(halfSize.x, halfSize.y));
+    float sz = min(halfSize.x, halfSize.y);
+    float dFrame = abs(dR) - L.thick * sz;
+    float slope = L.k * bevel(dFrame, L.cut * sz, aa) * sign(dR);
     vec2 tiltX = L.tBase + slope * vec2(sign(d.x), 0.0);
     vec2 tiltY = L.tBase + slope * vec2(0.0, sign(d.y));
     return blendSdf(litFlat(tiltY, l), litFlat(tiltX, l), e.x - e.y, aa);
