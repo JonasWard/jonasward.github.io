@@ -153,7 +153,7 @@ float paper(vec2 p, float grainAngle) {
   float fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
   float cloud = vnoise(p / 90.0) - 0.5;
   float grain = hash12(p * 1.7) - 0.5;
-  return 0.08 * fibre + 0.07 * cloud + 0.025 * grain;
+  return 0.16 * fibre + 0.1 * cloud + 0.04 * grain;
 }
 
 // lightness of the cement at p (css px): fine grain, speckle, cloudy mottling and pores
