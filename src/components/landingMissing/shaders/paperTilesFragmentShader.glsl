@@ -1,7 +1,7 @@
 #version 300 es
 precision highp float;
 
-// Folded-paper tiles on an animated asymmetric tiling.
+// Embossed cement tiles on an animated asymmetric tiling.
 //
 // The tiling follows gelami's "Straight Flagstone Tiles"
 // (https://www.shadertoy.com/view/7tKGRc), itself derived from fizzer's
@@ -9,26 +9,30 @@ precision highp float;
 // "Asymmetric Blocks" (https://www.shadertoy.com/view/Ws3GRs): every lattice
 // cell owns one tile, and the tile's edges sit at random spans inside the
 // neighbouring cells. Animating those spans makes the tiles slide and change
-// size while each keeps its id, and with it its family of motif, its folds
-// and its own sheet of paper.
+// size while each keeps its id, and with it its shape, its height and its
+// tone.
 //
-// Each tile is one sheet carrying one of three simple shapes: a circle, a
-// rectangle or a diagonal crease. Circle and rectangle are embossed from the
-// signed distance to their outline (the circle's radius, or the square
-// distance to the rectangle so its facets meet at mitred corners): the sheet
-// slopes at a constant pitch everywhere inside the shape, creasing at the
-// outline, and keeps that pitch across an outer flank until a cutoff, beyond
-// which it is flat. So a circle is a cone or a dish, a rectangle a hip roof
-// or its dent. The shapes either move with the cell or stay fixed to the
-// lattice so the drifting edges clip them.
-// Everything is lit from one fixed light so the relief reads. The paper
-// fibres are anchored to the sheet's centre with a per-sheet offset, so they
-// travel with it.
+// Each tile is a paper-faced slab with rounded corners and a rounded edge, carrying
+// one of three simple shapes: a circle, a rectangle or a diagonal crease.
+// Circle and rectangle are embossed from the signed distance to their outline
+// (the circle's radius, or the square distance to the rectangle so its facets
+// meet at mitred corners): the surface slopes at a constant pitch inside the
+// shape, creasing at the outline, and keeps that pitch across an outer flank
+// until a cutoff. The shapes either move with the cell or stay fixed to the
+// lattice so the drifting edges clip them. All of it is also a heightfield:
+// slabs sit at different heights above the joints and the shapes stand out of
+// them, and every pixel marches towards the light across that heightfield, so
+// slabs and shapes cast soft shadows onto anything lower, including their own
+// slab and the neighbours across the joint. Each slab is faced with paper
+// whose fibres are anchored to the slab's centre with a per-slab offset, so
+// they travel with it; the joints between slabs are cement.
 
 uniform vec2 uResolution;  // canvas size, device px
 uniform float uTime;       // seconds
 uniform float uTileSize;   // average tile edge, device px
 uniform float uPixelRatio; // device px per css px
+uniform vec3 uPalette[32];    // slab tones, precomputed around a neutral colour
+uniform vec3 uJointColor;     // tone of the cement joints
 
 out vec4 fragColor;
 
@@ -40,6 +44,16 @@ const float SPAN_MIN = 0.2;            // where a tile edge can sit inside a cel
 const float SPAN_MAX = 0.8;
 const float SPAN_RATE = 0.2;           // radians per second of the edge oscillation
 const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
+
+const float GAP = 1.5;          // half of the joint between slabs, css px
+const float CORNER = 9.0;       // corner radius of a slab, css px
+const float EDGE = 5.0;         // width of the rounded edge, css px
+const float SLAB = 5.0;         // lowest slab top above the joint, css px
+const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
+const float RELIEF = 6.0;       // height of a circle or rectangle at unit pitch, css px
+const float RIDGE = 6.0;        // height of the raised side of a diagonal crease, css px
+const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
+const int SHADOW_STEPS = 14;
 
 // ---------------------------------------------------------------- hashing
 
@@ -118,14 +132,7 @@ float tileSeed(Tile T) {
   return hash12(T.id + 0.5);
 }
 
-// ---------------------------------------------------------------- paper
-
-struct Paper {
-  float fibre; // long thin fibres
-  float cloud; // cloudy formation of the sheet
-  float grain;
-  vec2 disp;   // how far the fibres pull a point, css px
-};
+// ---------------------------------------------------------------- paper and cement
 
 // value noise stretched along a direction: long thin fibres
 float fibres(vec2 p, float angle, float len, float thick) {
@@ -135,18 +142,25 @@ float fibres(vec2 p, float angle, float len, float thick) {
   return vnoise(vec2(r.x / len, r.y / thick));
 }
 
-// p in css px, so the paper looks the same on every screen
-Paper paperAt(vec2 p, float grainAngle) {
+// lightness of the paper at p (css px): fibres cut at grainAngle, cloudy formation, grain
+float paper(vec2 p, float grainAngle) {
   float f1 = fibres(p, 0.4 + grainAngle, 16.0, 1.3);
   float f2 = fibres(p + 31.7, 1.9 + grainAngle, 22.0, 1.6);
   float f3 = fibres(p + 77.1, -1.0 + grainAngle, 12.0, 1.1);
   float f4 = fibres(p + 5.3, 2.6 + grainAngle, 30.0, 2.2);
-  Paper P;
-  P.fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
-  P.cloud = vnoise(p / 90.0) - 0.5;
-  P.grain = hash12(p * 1.7) - 0.5;
-  P.disp = (vec2(f4, f2) - 0.5) * 1.1;
-  return P;
+  float fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
+  float cloud = vnoise(p / 90.0) - 0.5;
+  float grain = hash12(p * 1.7) - 0.5;
+  return 0.11 * fibre + 0.07 * cloud + 0.04 * grain;
+}
+
+// lightness of the cement at p (css px): fine grain, speckle, cloudy mottling and pores
+float cement(vec2 p) {
+  float grain = hash12(p * 1.7) - 0.5;
+  float speckle = vnoise(p / 2.5) - 0.5;
+  float mottle = (vnoise(p / 38.0) - 0.5) + 0.6 * (vnoise(p / 120.0 + 7.3) - 0.5);
+  float pores = smoothstep(0.8, 0.93, vnoise(p / 3.5 + 41.0));
+  return 0.04 * grain + 0.06 * speckle + 0.1 * mottle - 0.06 * pores;
 }
 
 // ---------------------------------------------------------------- look
@@ -189,6 +203,19 @@ Look lookFrom(float seed) {
 float sdLine(vec2 p, vec2 a, vec2 b) {
   vec2 d = b - a;
   return (d.x * (p.y - a.y) - d.y * (p.x - a.x)) / length(d);
+}
+
+// signed distance to a box of half size b with rounded corners of radius r
+float sdRoundBox(vec2 p, vec2 b, float r) {
+  vec2 q = abs(p) - b + r;
+  return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
+}
+
+// direction away from the nearest edge of that box
+vec2 roundBoxDir(vec2 p, vec2 b, float r) {
+  vec2 q = abs(p) - b + r;
+  vec2 dir = max(q.x, q.y) > 0.0 ? normalize(max(q, 1e-4)) : (q.x > q.y ? vec2(1.0, 0.0) : vec2(0.0, 1.0));
+  return dir * sign(p + 1e-4);
 }
 
 float lit(vec3 n, vec3 l) {
@@ -250,53 +277,115 @@ float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
   return blendSdf(litFlat(tOther, l), litFlat(L.tShape, l), dL, aa) * crease(dL, m);
 }
 
+// ---------------------------------------------------------------- heightfield
+
+// height of the shape above its slab, css px (the profile behind the emboss)
+float shapeHeight(vec2 q, vec2 size, vec2 c, float unit, Look L) {
+  float m = min(size.x, size.y);
+  vec2 d = q - c;
+  if (L.family < 2.0) {
+    float dS;
+    float sz;
+    if (L.family < 0.5) {
+      sz = L.anchored > 0.5 ? 0.4 * m : 0.5 * unit;
+      dS = length(d) - sz;
+    } else {
+      vec2 halfSize = L.anchored > 0.5 ? 0.28 * size : vec2(0.3 * unit);
+      vec2 e = abs(d) - halfSize;
+      dS = max(e.x, e.y);
+      sz = min(halfSize.x, halfSize.y);
+    }
+    float cut = L.cut * sz;
+    float dc = clamp(dS, -L.cutIn * sz, cut);
+    return L.k * RELIEF * (cut - abs(dc)) / cut;
+  }
+  // a wedge: one facet rises towards the crease and steps down onto the other
+  vec2 a = L.diag > 0.5 ? vec2(0.0) : vec2(size.x, 0.0);
+  vec2 b = L.diag > 0.5 ? size : vec2(0.0, size.y);
+  float dL = sdLine(q, a, b) * sign(L.k);
+  return dL > 0.0 ? RIDGE * clamp(1.0 - dL / (0.5 * m), 0.0, 1.0) : 0.0;
+}
+
+float slabHeight(Tile T) {
+  return hashSeeded(tileSeed(T), 14.0);
+}
+
+// height of the wall at world position uv, css px; the joints are at zero
+float terrain(vec2 uv, float t) {
+  Tile T = tileAt(uv, t);
+  float cssPx = uPixelRatio;
+  vec2 sizePx = T.size * uTileSize;
+  vec2 q = (uv - T.lo) / T.size * sizePx;
+  vec2 halfSlab = 0.5 * sizePx - GAP * cssPx;
+  float dSlab = sdRoundBox(q - 0.5 * sizePx, halfSlab, CORNER * cssPx);
+  if (dSlab > 0.0) return 0.0;
+  float edge = clamp(-dSlab / (EDGE * cssPx), 0.0, 1.0);
+  float drop = EDGE * (sqrt(1.0 - (1.0 - edge) * (1.0 - edge)) - 1.0);
+  Look L = lookFrom(tileSeed(T));
+  vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
+  return SLAB + slabHeight(T) * HEIGHT + drop + shapeHeight(q, sizePx, c, uTileSize, L);
+}
+
+// soft shadow: march from height h0 at uv towards the light and see what rises above the ray
+float shadowAt(vec2 uv, float h0, float t) {
+  vec2 dir = normalize(LIGHT.xy);
+  float rise = LIGHT.z / length(LIGHT.xy); // how much the ray climbs per css px travelled
+  float shade = 1.0;
+  for (int i = 1; i <= SHADOW_STEPS; i++) {
+    float f = float(i) / float(SHADOW_STEPS);
+    float s = SHADOW_REACH * f * sqrt(f);
+    vec2 sp = uv + dir * s * uPixelRatio / uTileSize;
+    float clearance = h0 + s * rise + 0.4 - terrain(sp, t);
+    shade = min(shade, clamp(6.0 * clearance / s, 0.0, 1.0));
+  }
+  return shade;
+}
+
 // ---------------------------------------------------------------- main
 
 void main(void) {
   float t = uTime;
-  float px = uTileSize / 160.0; // size-relative pixel, keeps seams and shadows proportional
+  float cssPx = uPixelRatio; // one css px in device px
   vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution) / uTileSize + SCROLL * t;
 
   Tile T = tileAt(uv, t);
   float seed = tileSeed(T);
   vec2 sizePx = T.size * uTileSize;
-  vec2 puv = (uv - T.lo) / T.size;
+  vec2 q = (uv - T.lo) / T.size * sizePx; // position on the slab, device px
+  float aa = 0.75;
 
-  // this sheet's paper: fibres anchored to its centre, offset per sheet, cut at its own angle
-  vec2 texPx = (puv - 0.5) * sizePx / uPixelRatio + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
-  Paper paper = paperAt(texPx, (hashSeeded(seed, 12.0) - 0.5) * 0.6);
-
-  // position on the sheet in px, pulled slightly along the fibres so edges fray
-  vec2 q = puv * sizePx + paper.disp * uPixelRatio;
+  // the slab: straight edges, rounded corners, a joint around it
+  vec2 halfSlab = 0.5 * sizePx - GAP * cssPx;
+  float dSlab = sdRoundBox(q - 0.5 * sizePx, halfSlab, CORNER * cssPx);
+  vec2 edgeDir = roundBoxDir(q - 0.5 * sizePx, halfSlab, CORNER * cssPx);
 
   // the shape: its family and tilts are fixed by the seed; it sits either on the
-  // sheet's centre or on the lattice point the sheet belongs to
+  // slab's centre or on the lattice point the slab belongs to
   Look L = lookFrom(seed);
   vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
-  float light = motif(q, sizePx, c, uTileSize, L, LIGHT, 0.75);
+  float light = motif(q, sizePx, c, uTileSize, L, LIGHT, aa);
 
-  vec3 tone = mix(vec3(0.76, 0.80, 0.75), vec3(0.56, 0.63, 0.59), hashSeeded(seed, 6.0));
-  vec3 col = tone * (0.45 + 0.75 * light);
-  col *= 1.0 + 0.11 * paper.fibre + 0.07 * paper.cloud + 0.04 * paper.grain;
+  // the rounded edge: a quarter circle profile that takes over near the outline
+  float edge = clamp(-dSlab / (EDGE * cssPx), 0.0, 1.0);
+  float edgeSlope = tan(min((1.0 - edge) * 1.5707963, 1.25));
+  float edgeLight = litFlat(edgeDir * edgeSlope, LIGHT);
+  light = mix(edgeLight, light, smoothstep(0.0, 1.0, edge));
 
-  // every sheet sits at its own height: the neighbours on the lit side cast onto this one
-  float h = hashSeeded(seed, 14.0);
-  float shade = 1.0;
-  if (q.x < 40.0 * px) {
-    Tile L = tileAt(vec2(T.lo.x - 0.002, uv.y), t);
-    float drop = max(hashSeeded(tileSeed(L), 14.0) - h, 0.0);
-    shade -= (0.15 + 0.4 * drop) * exp(-max(q.x, 0.0) / ((1.5 + 10.0 * drop) * px));
-  }
-  if (sizePx.y - q.y < 40.0 * px) {
-    Tile U = tileAt(vec2(uv.x, T.lo.y + T.size.y + 0.002), t);
-    float drop = max(hashSeeded(tileSeed(U), 14.0) - h, 0.0);
-    shade -= (0.15 + 0.4 * drop) * exp(-max(sizePx.y - q.y, 0.0) / ((1.5 + 10.0 * drop) * px));
-  }
+  // this slab's tone, one of the precomputed palette
+  vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
 
-  // the gap between sheets
-  float dEdge = min(min(q.x, sizePx.x - q.x), min(q.y, sizePx.y - q.y));
-  shade *= 1.0 - 0.35 * exp(-max(dEdge, 0.0) / (1.2 * px));
-  col *= max(shade, 0.0);
+  // paper anchored to the slab's centre, offset per slab, cut at its own angle
+  vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
+  vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, (hashSeeded(seed, 12.0) - 0.5) * 0.6));
+
+  // the joint between slabs: dark cement, fixed to the lattice
+  vec3 joint = uJointColor * (1.0 + cement(uv * uTileSize / cssPx));
+  col = mix(col, joint, smoothstep(-aa, aa, dSlab));
+
+  // shadows from everything taller towards the light, on slabs and joints alike
+  float shadow = shadowAt(uv, terrain(uv, t), t);
+  col *= 0.5 + 0.5 * shadow;
+
 
   vec2 v = gl_FragCoord.xy / uResolution - 0.5;
   col *= 1.0 - 0.25 * dot(v, v);
