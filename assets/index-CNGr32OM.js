@@ -84,14 +84,14 @@ precision highp float;
 // size while each keeps its id, and with it its shape, its height and its
 // tone.
 //
-// Each tile is a paper-faced slab with rounded corners and a rounded edge, carrying
-// one of three simple shapes: a circle, a rectangle or a diagonal crease.
-// Circle and rectangle are embossed from the signed distance to their outline
-// (the circle's radius, or the square distance to the rectangle so its facets
-// meet at mitred corners): the surface slopes at a constant pitch inside the
-// shape, creasing at the outline, and keeps that pitch across an outer flank
-// until a cutoff. The shapes either move with the cell or stay fixed to the
-// lattice so the drifting edges clip them. All of it is also a heightfield:
+// Each tile is a paper-faced slab with rounded corners and a rounded edge, covered
+// edge to edge by one of three patterns: concentric rings around a centre, nested
+// frames around it (square distance, so the corners are mitred) or stripes at 45
+// degrees. Each pattern is the signed distance to its shape taken modulo a period,
+// and the surface folds into a triangle wave along that distance, creasing at
+// every ridge and valley. The centre either moves with the cell or stays fixed to
+// the
+// lattice so the pattern slides under the drifting edges. All of it is also a heightfield:
 // slabs sit at different heights above the joints and the shapes stand out of
 // them, and every pixel marches towards the light across that heightfield, so
 // slabs and shapes cast soft shadows onto anything lower, including their own
@@ -119,13 +119,17 @@ const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 
 const float GAP = 1.5;          // half of the joint between slabs, css px
 const float CORNER = 9.0;       // corner radius of a slab, css px
-const float EDGE = 5.0;         // width of the rounded edge, css px
+const float EDGE = 7.0;         // width of the rounded edge, css px
+const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for penumbrae
+const float PERIOD_MIN = 28.0;  // spacing of the pattern's folds, css px
+const float PERIOD_MAX = 64.0;
 const float SLAB = 5.0;         // lowest slab top above the joint, css px
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
-const float RELIEF = 6.0;       // height of a circle or rectangle at unit pitch, css px
-const float RIDGE = 6.0;        // height of the raised side of a diagonal crease, css px
+const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
-const int SHADOW_STEPS = 14;
+const float SHADOW_FINE = 10.0;  // the first stretch of the march is sampled every css px ...
+const int SHADOW_FINE_STEPS = 10;
+const int SHADOW_STEPS = 18;     // ... the rest ever more coarsely up to the reach
 
 // ---------------------------------------------------------------- hashing
 
@@ -144,7 +148,7 @@ float hashSeeded(float seed, float salt) {
 float vnoise(vec2 p) {
   vec2 i = floor(p);
   vec2 f = fract(p);
-  f = f * f * (3.0 - 2.0 * f);
+  f = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
   float a = hash12(i);
   float b = hash12(i + vec2(1.0, 0.0));
   float c = hash12(i + vec2(0.0, 1.0));
@@ -216,19 +220,19 @@ float fibres(vec2 p, float angle, float len, float thick) {
 
 // lightness of the paper at p (css px): fibres cut at grainAngle, cloudy formation, grain
 float paper(vec2 p, float grainAngle) {
-  float f1 = fibres(p, 0.4 + grainAngle, 16.0, 1.3);
-  float f2 = fibres(p + 31.7, 1.9 + grainAngle, 22.0, 1.6);
-  float f3 = fibres(p + 77.1, -1.0 + grainAngle, 12.0, 1.1);
-  float f4 = fibres(p + 5.3, 2.6 + grainAngle, 30.0, 2.2);
+  float f1 = fibres(p, 0.4 + grainAngle, 14.0, 1.8);
+  float f2 = fibres(p + 31.7, 1.9 + grainAngle, 20.0, 2.0);
+  float f3 = fibres(p + 77.1, -1.0 + grainAngle, 11.0, 1.7);
+  float f4 = fibres(p + 5.3, 2.6 + grainAngle, 26.0, 2.4);
   float fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
   float cloud = vnoise(p / 90.0) - 0.5;
   float grain = hash12(p * 1.7) - 0.5;
-  return 0.11 * fibre + 0.07 * cloud + 0.04 * grain;
+  return 0.08 * fibre + 0.07 * cloud + 0.025 * grain;
 }
 
 // lightness of the cement at p (css px): fine grain, speckle, cloudy mottling and pores
 float cement(vec2 p) {
-  float grain = hash12(p * 1.7) - 0.5;
+  float grain = vnoise(p * 0.6) - 0.5;
   float speckle = vnoise(p / 2.5) - 0.5;
   float mottle = (vnoise(p / 38.0) - 0.5) + 0.6 * (vnoise(p / 120.0 + 7.3) - 0.5);
   float pores = smoothstep(0.8, 0.93, vnoise(p / 3.5 + 41.0));
@@ -239,14 +243,13 @@ float cement(vec2 p) {
 
 // what a tile carries, fixed by its seed for as long as the tile exists
 struct Look {
-  float family;   // 0 circle, 1 rectangle, 2 diagonal
-  float anchored; // 1: the shape moves with the cell, 0: it stays fixed to the lattice
-  float k;        // pitch of the emboss (sign: outline raised or sunken)
-  float cut;      // width of the flank outside the shape, as a fraction of its size
-  float cutIn;    // depth of the slope inside the shape before it flattens, or a huge value for never
+  float family;   // 0 rings, 1 frames, 2 stripes
+  float anchored; // 1: the pattern's centre moves with the cell, 0: it stays fixed to the lattice
+  float k;        // pitch of the folds (sign: which way the first fold goes)
+  float period;   // distance from one ridge to the next, css px
+  float phase;    // where along the period the centre sits
+  float diag;     // which of the two 45 degree directions the stripes follow
   vec2 tBase;     // tilt of the sheet itself
-  vec2 tShape;    // tilt of the first facet of a crease
-  float diag;     // which diagonal a crease follows
 };
 
 vec2 tiltFrom(float h1, float h2) {
@@ -260,22 +263,14 @@ Look lookFrom(float seed) {
   L.family = f < 0.4 ? 0.0 : (f < 0.65 ? 1.0 : 2.0);
   L.anchored = step(0.5, hashSeeded(seed, 22.0));
   L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.8, 1.5, hashSeeded(seed, 24.0));
-  L.cut = mix(0.6, 1.2, hashSeeded(seed, 30.0));
-  // now and then the inside flattens before reaching the centre
-  L.cutIn = hashSeeded(seed, 31.0) < 0.35 ? mix(0.3, 0.7, hashSeeded(seed, 32.0)) : 1e5;
-  L.tBase = 0.35 * tiltFrom(hashSeeded(seed, 25.0), hashSeeded(seed, 26.0));
-  L.tShape = tiltFrom(hashSeeded(seed, 27.0), hashSeeded(seed, 28.0));
+  L.period = mix(PERIOD_MIN, PERIOD_MAX, hashSeeded(seed, 30.0));
+  L.phase = hashSeeded(seed, 31.0);
   L.diag = step(0.5, hashSeeded(seed, 29.0));
+  L.tBase = 0.35 * tiltFrom(hashSeeded(seed, 25.0), hashSeeded(seed, 26.0));
   return L;
 }
 
 // ---------------------------------------------------------------- sdf shading
-
-// signed distance to the line through a and b, positive on the left of a -> b
-float sdLine(vec2 p, vec2 a, vec2 b) {
-  vec2 d = b - a;
-  return (d.x * (p.y - a.y) - d.y * (p.x - a.x)) / length(d);
-}
 
 // signed distance to a box of half size b with rounded corners of radius r
 float sdRoundBox(vec2 p, vec2 b, float r) {
@@ -303,79 +298,64 @@ float blendSdf(float inside, float outside, float d, float aa) {
   return mix(inside, outside, smoothstep(-aa, aa, d));
 }
 
-// the emboss at signed distance d from an outline: full pitch across the outer flank
-// of width c and inside the shape down to depth cIn, flat beyond either, with a pixel
-// of smoothing at the cutoffs
-float bevel(float d, float c, float cIn, float aa) {
-  return (1.0 - smoothstep(c - aa, c + aa, d)) * smoothstep(-cIn - aa, -cIn + aa, d);
-}
+// the pattern's distance and the direction it grows in, for local position q on a
+// sheet of \`size\` px with the pattern centred on c
+struct Field {
+  float d;   // signed distance, px
+  vec2 dir;  // unit direction of increasing d
+  float mitre; // for frames: the x facet takes over from the y facet where this passes zero
+};
 
-// faint line along a crease; m is the sheet's short side
-float crease(float d, float m) {
-  return 1.0 - 0.08 * exp(-abs(d) / (0.012 * m));
-}
-
-// diffuse light on a sheet of \`size\` px at local position q, with the shape centred on c;
-// unit is the nominal cell size in px, which fixed shapes are measured in
-float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
-  float m = min(size.x, size.y);
+Field fieldAt(vec2 q, vec2 c, Look L) {
+  Field F;
   vec2 d = q - c;
   if (L.family < 0.5) {
-    // circle: the sheet slopes away from the outline on both sides, so the inside
-    // is a cone or a dish and the outside a flank that ends at the cutoff
-    float r = L.anchored > 0.5 ? 0.4 * m : 0.5 * unit;
-    float dC = length(d) - r;
-    vec2 dir = sign(dC) * normalize(d + 1e-4);
-    vec2 tilt = L.tBase + L.k * bevel(dC, L.cut * r, L.cutIn * r, aa) * dir;
-    return litFlat(tilt, l);
+    F.d = length(d);
+    F.dir = normalize(d + 1e-4);
+    F.mitre = 0.0;
+  } else if (L.family < 1.5) {
+    vec2 a = abs(d);
+    F.d = max(a.x, a.y);
+    F.dir = vec2(sign(d.x), 0.0);
+    F.mitre = a.x - a.y;
+  } else {
+    vec2 along = L.diag > 0.5 ? vec2(0.7071, 0.7071) : vec2(0.7071, -0.7071);
+    F.d = dot(d, along);
+    F.dir = along;
+    F.mitre = 0.0;
   }
-  if (L.family < 1.5) {
-    // rectangle: the same along the square distance, so the inside is a hip roof or
-    // its dent and the outer flank is four flat facets meeting at mitred corners
-    vec2 halfSize = L.anchored > 0.5 ? 0.28 * size : vec2(0.3 * unit);
-    vec2 e = abs(d) - halfSize;
-    float dR = max(e.x, e.y);
-    float sz = min(halfSize.x, halfSize.y);
-    float slope = L.k * bevel(dR, L.cut * sz, L.cutIn * sz, aa) * sign(dR);
-    vec2 tiltX = L.tBase + slope * vec2(sign(d.x), 0.0);
-    vec2 tiltY = L.tBase + slope * vec2(0.0, sign(d.y));
-    return blendSdf(litFlat(tiltY, l), litFlat(tiltX, l), e.x - e.y, aa);
+  return F;
+}
+
+// slope of the triangle wave along the pattern's distance: +1 rising, -1 falling,
+// blended across ridge and valley so neither aliases
+float fold(float d, float period, float aa) {
+  float w = mod(d, period) - 0.5 * period;
+  return (2.0 * smoothstep(-aa, aa, w) - 1.0) * (1.0 - smoothstep(0.5 * period - aa, 0.5 * period, abs(w)));
+}
+
+// diffuse light on the sheet at local position q with the pattern centred on c
+float motif(vec2 q, vec2 c, Look L, vec3 l, float aa) {
+  Field F = fieldAt(q, c, L);
+  float period = L.period * uPixelRatio;
+  float slope = L.k * fold(F.d + L.phase * period, period, aa);
+  float lit = litFlat(L.tBase + slope * F.dir, l);
+  if (L.family < 1.5 && L.family >= 0.5) {
+    // frames: the y facets, blended with the x facets at the mitres
+    float litY = litFlat(L.tBase + slope * vec2(0.0, sign(q.y - c.y)), l);
+    lit = blendSdf(litY, lit, F.mitre, aa);
   }
-  // diagonal crease: two facets folding away from each other
-  vec2 a = L.diag > 0.5 ? vec2(0.0) : vec2(size.x, 0.0);
-  vec2 b = L.diag > 0.5 ? size : vec2(0.0, size.y);
-  float dL = sdLine(q, a, b);
-  vec2 tOther = L.tBase - 0.9 * L.tShape;
-  return blendSdf(litFlat(tOther, l), litFlat(L.tShape, l), dL, aa) * crease(dL, m);
+  return lit;
 }
 
 // ---------------------------------------------------------------- heightfield
 
-// height of the shape above its slab, css px (the profile behind the emboss)
-float shapeHeight(vec2 q, vec2 size, vec2 c, float unit, Look L) {
-  float m = min(size.x, size.y);
-  vec2 d = q - c;
-  if (L.family < 2.0) {
-    float dS;
-    float sz;
-    if (L.family < 0.5) {
-      sz = L.anchored > 0.5 ? 0.4 * m : 0.5 * unit;
-      dS = length(d) - sz;
-    } else {
-      vec2 halfSize = L.anchored > 0.5 ? 0.28 * size : vec2(0.3 * unit);
-      vec2 e = abs(d) - halfSize;
-      dS = max(e.x, e.y);
-      sz = min(halfSize.x, halfSize.y);
-    }
-    float cut = L.cut * sz;
-    float dc = clamp(dS, -L.cutIn * sz, cut);
-    return L.k * RELIEF * (cut - abs(dc)) / cut;
-  }
-  // a wedge: one facet rises towards the crease and steps down onto the other
-  vec2 a = L.diag > 0.5 ? vec2(0.0) : vec2(size.x, 0.0);
-  vec2 b = L.diag > 0.5 ? size : vec2(0.0, size.y);
-  float dL = sdLine(q, a, b) * sign(L.k);
-  return dL > 0.0 ? RIDGE * clamp(1.0 - dL / (0.5 * m), 0.0, 1.0) : 0.0;
+// height of the pattern above its slab, css px: the triangle wave behind the folds
+float shapeHeight(vec2 q, vec2 c, Look L) {
+  Field F = fieldAt(q, c, L);
+  float period = L.period * uPixelRatio;
+  float w = mod(F.d + L.phase * period, period) - 0.5 * period;
+  return sign(L.k) * RELIEF * (1.0 - 2.0 * abs(w) / period);
 }
 
 float slabHeight(Tile T) {
@@ -395,22 +375,49 @@ float terrain(vec2 uv, float t) {
   float drop = EDGE * (sqrt(1.0 - (1.0 - edge) * (1.0 - edge)) - 1.0);
   Look L = lookFrom(tileSeed(T));
   vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
-  return SLAB + slabHeight(T) * HEIGHT + drop + shapeHeight(q, sizePx, c, uTileSize, L);
+  return SLAB + slabHeight(T) * HEIGHT + drop + shapeHeight(q, c, L);
 }
 
-// soft shadow: march from height h0 at uv towards the light and see what rises above the ray
+// height of the wall s css px from uv towards the light
+float terrainAlong(vec2 uv, float s, vec2 dir, float t) {
+  return terrain(uv + dir * s * uPixelRatio / uTileSize, t);
+}
+
+// soft shadow: march from height h0 at uv towards the light and keep the smallest
+// angular clearance (clearance over distance) of the wall above the ray. Wherever the
+// wall steps up between two samples, bisect to the step's edge and measure there, so the
+// clearance is a continuous function of the pixel rather than of where samples fall. The
+// light's apparent size then turns the angle into a penumbra
 float shadowAt(vec2 uv, float h0, float t) {
   vec2 dir = normalize(LIGHT.xy);
   float rise = LIGHT.z / length(LIGHT.xy); // how much the ray climbs per css px travelled
-  float shade = 1.0;
+  float bias = 0.4;
+  float angle = 1.0;
+  float sPrev = 0.0;
+  float hPrev = h0;
   for (int i = 1; i <= SHADOW_STEPS; i++) {
-    float f = float(i) / float(SHADOW_STEPS);
-    float s = SHADOW_REACH * f * sqrt(f);
-    vec2 sp = uv + dir * s * uPixelRatio / uTileSize;
-    float clearance = h0 + s * rise + 0.4 - terrain(sp, t);
-    shade = min(shade, clamp(6.0 * clearance / s, 0.0, 1.0));
+    float f = float(i - SHADOW_FINE_STEPS) / float(SHADOW_STEPS - SHADOW_FINE_STEPS);
+    float s = i <= SHADOW_FINE_STEPS ? float(i) * SHADOW_FINE / float(SHADOW_FINE_STEPS)
+                                     : SHADOW_FINE + (SHADOW_REACH - SHADOW_FINE) * f * sqrt(f);
+    float h = terrainAlong(uv, s, dir, t);
+    if (h - hPrev > 0.75) {
+      // a step up: find its edge and see how far the wall behind it rises above the ray there
+      float lo = sPrev;
+      float hi = s;
+      float threshold = 0.5 * (h + hPrev);
+      for (int j = 0; j < 5; j++) {
+        float mid = 0.5 * (lo + hi);
+        if (terrainAlong(uv, mid, dir, t) > threshold) hi = mid; else lo = mid;
+      }
+      angle = min(angle, (h0 + hi * rise + bias - h) / max(hi, 0.5));
+    }
+    float clearance = h0 + s * rise + bias - h;
+    angle = min(angle, clearance / s);
+    if (angle < -LIGHT_SIZE) break;
+    sPrev = s;
+    hPrev = h;
   }
-  return shade;
+  return smoothstep(-LIGHT_SIZE, LIGHT_SIZE, angle);
 }
 
 // ---------------------------------------------------------------- main
@@ -435,13 +442,15 @@ void main(void) {
   // slab's centre or on the lattice point the slab belongs to
   Look L = lookFrom(seed);
   vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
-  float light = motif(q, sizePx, c, uTileSize, L, LIGHT, aa);
+  float light = motif(q, c, L, LIGHT, aa);
 
-  // the rounded edge: a quarter circle profile that takes over near the outline
+  // the rounded edge: the slope of the quarter circle profile, steepest at the outline
   float edge = clamp(-dSlab / (EDGE * cssPx), 0.0, 1.0);
-  float edgeSlope = tan(min((1.0 - edge) * 1.5707963, 1.25));
+  float edgeSlope = (1.0 - edge) / sqrt(max(1.0 - (1.0 - edge) * (1.0 - edge), 0.06));
   float edgeLight = litFlat(edgeDir * edgeSlope, LIGHT);
   light = mix(edgeLight, light, smoothstep(0.0, 1.0, edge));
+  // and the deeper the edge curves down, the less sky it sees
+  light *= 1.0 - 0.25 * (1.0 - edge) * (1.0 - edge);
 
   // this slab's tone, one of the precomputed palette
   vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
@@ -451,7 +460,7 @@ void main(void) {
   vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, (hashSeeded(seed, 12.0) - 0.5) * 0.6));
 
   // the joint between slabs: dark cement, fixed to the lattice
-  vec3 joint = uJointColor * (1.0 + cement(uv * uTileSize / cssPx));
+  vec3 joint = uJointColor * 0.8 * (1.0 + cement(uv * uTileSize / cssPx));
   col = mix(col, joint, smoothstep(-aa, aa, dSlab));
 
   // shadows from everything taller towards the light, on slabs and joints alike
