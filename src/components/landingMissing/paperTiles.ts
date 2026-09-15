@@ -1,8 +1,17 @@
 import vsSource from './shaders/paperTilesVertexShader.glsl?raw';
 import fsSource from './shaders/paperTilesFragmentShader.glsl?raw';
 
-// Renders the folded-paper tiling full screen. Everything, including the paper
-// fibres of each sheet, is computed per tile in one pass.
+// Renders the cement tiling full screen in one pass.
+
+export type PaperTilesOptions = {
+  /** tone every slab varies around, rgb in 0..1 */
+  neutralColor?: [number, number, number];
+  /** largest deviation of a slab's tone from the neutral colour, per channel, 0..1 */
+  toneVariation?: number;
+};
+
+const DEFAULT_NEUTRAL_COLOR: [number, number, number] = [0.66, 0.71, 0.67];
+const DEFAULT_TONE_VARIATION = 0.03;
 
 const MAX_PIXEL_RATIO = 1.5;
 const TILE_CSS_PX_MIN = 84;
@@ -45,7 +54,10 @@ const createProgram = (gl: WebGL2RenderingContext) => {
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 /** Starts rendering the paper tiles into the canvas. Returns a function that stops it and frees the GL resources. */
-export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
+export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOptions = {}): (() => void) => {
+  const neutralColor = options.neutralColor ?? DEFAULT_NEUTRAL_COLOR;
+  const toneVariation = options.toneVariation ?? DEFAULT_TONE_VARIATION;
+
   const gl = canvas.getContext('webgl2', {
     alpha: false,
     antialias: false,
@@ -68,7 +80,9 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     resolution: gl.getUniformLocation(program, 'uResolution'),
     time: gl.getUniformLocation(program, 'uTime'),
     tileSize: gl.getUniformLocation(program, 'uTileSize'),
-    pixelRatio: gl.getUniformLocation(program, 'uPixelRatio')
+    pixelRatio: gl.getUniformLocation(program, 'uPixelRatio'),
+    neutralColor: gl.getUniformLocation(program, 'uNeutralColor'),
+    toneVariation: gl.getUniformLocation(program, 'uToneVariation')
   };
 
   // full screen quad on attribute location 0
@@ -119,6 +133,8 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     gl.uniform1f(uniforms.time, currentTime());
     gl.uniform1f(uniforms.tileSize, tileSize);
     gl.uniform1f(uniforms.pixelRatio, pixelRatio);
+    gl.uniform3f(uniforms.neutralColor, neutralColor[0], neutralColor[1], neutralColor[2]);
+    gl.uniform1f(uniforms.toneVariation, toneVariation);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
     if (!reducedMotion) frame = requestAnimationFrame(render);
