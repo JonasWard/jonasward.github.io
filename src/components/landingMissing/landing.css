@@ -1,3 +1,22 @@
+/* the landing fills the whole viewport, including the strip under a collapsing mobile toolbar */
+.landing-page {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100lvh;
+  overflow: hidden;
+  background: #9daaa3;
+  cursor: pointer;
+}
+
+.landing-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* the logo sits on the paper wall like ink printed onto it */
 .landing-logo {
   position: absolute;

@@ -45,7 +45,7 @@ const buildPalette = (options: PaperTilesOptions) => {
     const rgb = hsvToRgb((h + th * dh + 360) % 360, clamp(s + ts * ds, 0, 1), clamp(v + tv * dv, 0, 1));
     palette.set(rgb, i * 3);
   }
-  return { palette, joint: hsvToRgb(h, s * 0.8, v * 0.5) };
+  return palette;
 };
 
 const MAX_PIXEL_RATIO = 1.5;
@@ -88,7 +88,7 @@ const createProgram = (gl: WebGL2RenderingContext) => {
 
 /** Starts rendering the paper tiles into the canvas. Returns a function that stops it and frees the GL resources. */
 export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOptions = {}): (() => void) => {
-  const { palette, joint } = buildPalette(options);
+  const palette = buildPalette(options);
 
   const gl = canvas.getContext('webgl2', {
     alpha: false,
@@ -113,8 +113,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
     time: gl.getUniformLocation(program, 'uTime'),
     tileSize: gl.getUniformLocation(program, 'uTileSize'),
     pixelRatio: gl.getUniformLocation(program, 'uPixelRatio'),
-    palette: gl.getUniformLocation(program, 'uPalette'),
-    jointColor: gl.getUniformLocation(program, 'uJointColor')
+    palette: gl.getUniformLocation(program, 'uPalette')
   };
 
   // full screen quad on attribute location 0
@@ -166,7 +165,6 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
     gl.uniform1f(uniforms.tileSize, tileSize);
     gl.uniform1f(uniforms.pixelRatio, pixelRatio);
     gl.uniform3fv(uniforms.palette, palette);
-    gl.uniform3f(uniforms.jointColor, joint[0], joint[1], joint[2]);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
     if (!reducedMotion) frame = requestAnimationFrame(render);
