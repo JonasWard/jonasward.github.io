@@ -72,7 +72,7 @@ float hashSeeded(float seed, float salt) {
 float vnoise(vec2 p) {
   vec2 i = floor(p);
   vec2 f = fract(p);
-  f = f * f * (3.0 - 2.0 * f);
+  f = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
   float a = hash12(i);
   float b = hash12(i + vec2(1.0, 0.0));
   float c = hash12(i + vec2(0.0, 1.0));
@@ -144,19 +144,19 @@ float fibres(vec2 p, float angle, float len, float thick) {
 
 // lightness of the paper at p (css px): fibres cut at grainAngle, cloudy formation, grain
 float paper(vec2 p, float grainAngle) {
-  float f1 = fibres(p, 0.4 + grainAngle, 16.0, 1.3);
-  float f2 = fibres(p + 31.7, 1.9 + grainAngle, 22.0, 1.6);
-  float f3 = fibres(p + 77.1, -1.0 + grainAngle, 12.0, 1.1);
-  float f4 = fibres(p + 5.3, 2.6 + grainAngle, 30.0, 2.2);
+  float f1 = fibres(p, 0.4 + grainAngle, 22.0, 2.6);
+  float f2 = fibres(p + 31.7, 1.9 + grainAngle, 30.0, 3.2);
+  float f3 = fibres(p + 77.1, -1.0 + grainAngle, 18.0, 2.4);
+  float f4 = fibres(p + 5.3, 2.6 + grainAngle, 40.0, 4.0);
   float fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
   float cloud = vnoise(p / 90.0) - 0.5;
-  float grain = hash12(p * 1.7) - 0.5;
-  return 0.11 * fibre + 0.07 * cloud + 0.04 * grain;
+  float grain = vnoise(p * 0.6) - 0.5;
+  return 0.09 * fibre + 0.07 * cloud + 0.03 * grain;
 }
 
 // lightness of the cement at p (css px): fine grain, speckle, cloudy mottling and pores
 float cement(vec2 p) {
-  float grain = hash12(p * 1.7) - 0.5;
+  float grain = vnoise(p * 0.6) - 0.5;
   float speckle = vnoise(p / 2.5) - 0.5;
   float mottle = (vnoise(p / 38.0) - 0.5) + 0.6 * (vnoise(p / 120.0 + 7.3) - 0.5);
   float pores = smoothstep(0.8, 0.93, vnoise(p / 3.5 + 41.0));
@@ -326,17 +326,38 @@ float terrain(vec2 uv, float t) {
   return SLAB + slabHeight(T) * HEIGHT + drop + shapeHeight(q, sizePx, c, uTileSize, L);
 }
 
-// soft shadow: march from height h0 at uv towards the light and see what rises above the ray
+// how far the light ray from height h0 at uv clears the wall, s css px towards the light
+float clearanceAt(vec2 uv, float h0, float s, vec2 dir, float rise, float t) {
+  vec2 sp = uv + dir * s * uPixelRatio / uTileSize;
+  return h0 + s * rise + 0.4 - terrain(sp, t);
+}
+
+// soft shadow: march from height h0 at uv towards the light; where the ray first dips
+// below the wall, bisect to the exact crossing so the shadow's edge does not snap to
+// the march's sample points, and take the occluder's rise over the ray as the penumbra
 float shadowAt(vec2 uv, float h0, float t) {
   vec2 dir = normalize(LIGHT.xy);
   float rise = LIGHT.z / length(LIGHT.xy); // how much the ray climbs per css px travelled
   float shade = 1.0;
+  float sPrev = 0.0;
   for (int i = 1; i <= SHADOW_STEPS; i++) {
     float f = float(i) / float(SHADOW_STEPS);
     float s = SHADOW_REACH * f * sqrt(f);
-    vec2 sp = uv + dir * s * uPixelRatio / uTileSize;
-    float clearance = h0 + s * rise + 0.4 - terrain(sp, t);
+    float clearance = clearanceAt(uv, h0, s, dir, rise, t);
+    if (clearance < 0.0) {
+      float lo = sPrev;
+      float hi = s;
+      for (int j = 0; j < 4; j++) {
+        float mid = 0.5 * (lo + hi);
+        if (clearanceAt(uv, h0, mid, dir, rise, t) < 0.0) hi = mid; else lo = mid;
+      }
+      // the occluder pokes -clearance above the ray at distance hi: the closer and the
+      // taller, the darker; softened over the light's apparent size
+      shade = min(shade, clamp(1.0 - 8.0 * (-clearance) / max(hi, 1.0), 0.0, 1.0));
+      break;
+    }
     shade = min(shade, clamp(6.0 * clearance / s, 0.0, 1.0));
+    sPrev = s;
   }
   return shade;
 }
