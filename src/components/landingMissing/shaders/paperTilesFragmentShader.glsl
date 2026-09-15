@@ -46,13 +46,13 @@ const float SPAN_RATE = 0.2;           // radians per second of the edge oscilla
 const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 
 const float GAP = 0.55;         // half of the seam between slabs, css px
-const float FRAY = 1.3;         // how far the fibres pull the slab's edge, css px
+const float FRAY = 1.0;         // how far the fibres pull the slab's edge, css px
 const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for penumbrae
 const float PERIOD_MIN = 20.0;  // spacing of the pattern's folds, css px
 const float PERIOD_MAX = 384.0;
 const float PERIOD_MAX_CENTRED_FRAME = 60.0; // frames sitting on the slab's centre keep their folds tight
-const float SLAB = 5.0;         // lowest slab top above the joint, css px
-const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
+const float SLAB = 3.0;         // lowest slab top above the joint, css px
+const float HEIGHT = 7.0;       // tallest slab above the lowest, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
 const float SHADOW_FINE = 10.0;  // the first stretch of the march is sampled every css px ...
@@ -154,8 +154,8 @@ float paper(vec2 p, float grainAngle) {
   float f4 = fibres(p + 5.3, 2.6 + grainAngle, 26.0, 2.4);
   float fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
   float cloud = vnoise(p / 90.0) - 0.5;
-  float grain = hash12(p * 1.7) - 0.5;
-  return 0.16 * fibre + 0.1 * cloud + 0.04 * grain;
+  float grain = vnoise(p * 0.7) - 0.5;
+  return 0.16 * fibre + 0.1 * cloud + 0.05 * grain;
 }
 
 // lightness of the cement at p (css px): fine grain, speckle, cloudy mottling and pores
@@ -370,7 +370,7 @@ void main(void) {
   // the slab: a rectangle with a thin seam around it, its edge frayed by the fibres
   vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
   float grainAngle = (hashSeeded(seed, 12.0) - 0.5) * 0.6;
-  vec2 fray = (vec2(fibres(texPx + 5.3, 2.6 + grainAngle, 26.0, 2.4), fibres(texPx + 31.7, 1.9 + grainAngle, 20.0, 2.0)) - 0.5) * FRAY * cssPx;
+  vec2 fray = (vec2(fibres(texPx + 5.3, 2.6 + grainAngle, 34.0, 4.5), fibres(texPx + 31.7, 1.9 + grainAngle, 28.0, 4.0)) - 0.5) * FRAY * cssPx;
   vec2 halfSlab = 0.5 * sizePx - GAP * cssPx;
   float dSlab = sdBox(q + fray - 0.5 * sizePx, halfSlab);
 
@@ -386,13 +386,13 @@ void main(void) {
   // paper anchored to the slab's centre, offset per slab, cut at its own angle
   vec3 col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
 
-  // the seam between slabs: white, with a faint cement grain fixed to the lattice
-  vec3 joint = vec3(0.96) * (1.0 + 0.5 * cement(uv * uTileSize / cssPx));
-  col = mix(col, joint, smoothstep(-aa, aa, dSlab));
-
-  // shadows from everything taller towards the light, on slabs and joints alike
+  // shadows from everything taller towards the light
   float shadow = shadowAt(uv, terrain(uv, t), t);
   col *= 0.75 + 0.25 * shadow;
+
+  // the seam between slabs: white, with a faint cement grain fixed to the lattice, unshaded
+  vec3 joint = vec3(0.96) * (1.0 + 0.5 * cement(uv * uTileSize / cssPx));
+  col = mix(col, joint, smoothstep(-aa, aa, dSlab));
 
 
   vec2 v = gl_FragCoord.xy / uResolution - 0.5;
