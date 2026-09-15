@@ -16,27 +16,3 @@
   height: 100%;
   display: block;
 }
-
-/* the logo sits on the paper wall like ink printed onto it */
-.landing-logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 80vw;
-  cursor: pointer;
-  opacity: 0.8;
-  mix-blend-mode: multiply;
-  transition: opacity 0.5s;
-}
-
-.landing-logo:hover {
-  opacity: 1;
-}
-
-.landing-logo img {
-  display: block;
-  width: 894.5px;
-  max-width: 100%;
-  height: auto;
-}

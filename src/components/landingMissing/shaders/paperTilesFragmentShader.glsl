@@ -32,6 +32,9 @@ uniform float uTime;       // seconds
 uniform float uTileSize;   // average tile edge, device px
 uniform float uPixelRatio; // device px per css px
 uniform vec3 uPalette[32];    // slab tones, precomputed around a neutral colour
+uniform sampler2D uLogo;      // signed distance field of the logo, 0.5 on the outline
+uniform vec4 uLogoRect;       // centre x, centre y, width, height of the logo on screen, device px
+uniform float uLogoSpread;    // distance the field spans on each side of the outline, device px
 
 out vec4 fragColor;
 
@@ -49,6 +52,7 @@ const float PERIOD_MIN = 20.0;  // spacing of the pattern's folds, css px
 const float PERIOD_MAX = 384.0;
 const float PERIOD_MAX_CENTRED_FRAME = 60.0; // frames sitting on the slab's centre keep their folds tight
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
+const float LOGO_HEIGHT = 16.0; // the logo slab above the lowest slab, css px
 const float FRAY = 0.8;         // how far the edges between slabs wander, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
@@ -288,6 +292,16 @@ vec2 patternCentre(Tile T, vec2 sizePx, Look L) {
   return (T.id + 0.5 - T.lo) * uTileSize;
 }
 
+// ---------------------------------------------------------------- logo
+
+// signed distance to the logo's outline at a screen position, device px, negative inside
+float logoDistance(vec2 fragPx) {
+  vec2 uv = (fragPx - uLogoRect.xy) / uLogoRect.zw;
+  uv = vec2(uv.x + 0.5, 0.5 - uv.y);
+  if (any(lessThan(uv, vec2(0.0))) || any(greaterThan(uv, vec2(1.0)))) return uLogoSpread;
+  return (texture(uLogo, uv).r * 2.0 - 1.0) * uLogoSpread;
+}
+
 // ---------------------------------------------------------------- heightfield
 
 // height of the pattern above its slab, css px: the triangle wave behind the folds
@@ -302,8 +316,10 @@ float slabHeight(Tile T) {
   return hashSeeded(tileSeed(T), 14.0);
 }
 
-// height of the wall at world position uv, css px
+// height of the wall at world position uv, css px; the logo is a slab cut over the tiles
 float terrain(vec2 uv, float t) {
+  vec2 fragPx = (uv - SCROLL * t) * uTileSize + 0.5 * uResolution;
+  if (logoDistance(fragPx) < 0.0) return LOGO_HEIGHT;
   uv += frayAt(uv);
   Tile T = tileAt(uv, t);
   vec2 sizePx = T.size * uTileSize;
@@ -383,6 +399,11 @@ void main(void) {
   vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
 
   vec3 col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
+
+  // the logo: a dark sheet of the same paper laid over the wall, cut by its distance field
+  float dLogo = logoDistance(gl_FragCoord.xy);
+  vec3 logoCol = uPalette[0] * 0.42 * (1.0 + paper(gl_FragCoord.xy / cssPx, 0.3));
+  col = mix(logoCol, col, smoothstep(-aa, aa, dLogo));
 
   // shadows from everything taller towards the light
   float shadow = shadowAt(uvWorld, terrain(uvWorld, t), t);

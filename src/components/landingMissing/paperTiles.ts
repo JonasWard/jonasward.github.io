@@ -1,5 +1,6 @@
 import vsSource from './shaders/paperTilesVertexShader.glsl?raw';
 import fsSource from './shaders/paperTilesFragmentShader.glsl?raw';
+import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png';
 
 // Renders the cement tiling full screen in one pass.
 
@@ -19,6 +20,9 @@ const DEFAULT_HUE_DELTA = 20;
 const DEFAULT_SATURATION_DELTA = 0.04;
 const DEFAULT_VALUE_DELTA = 0.12;
 const PALETTE_SIZE = 32;
+const LOGO_SDF_SPREAD = 48; // px of the distance field texture on each side of the outline
+const LOGO_CSS_WIDTH_MAX = 894.5;
+const LOGO_VIEWPORT_FRACTION = 0.8;
 
 const hsvToRgb = (h: number, s: number, v: number): [number, number, number] => {
   const f = (n: number) => {
@@ -113,8 +117,22 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
     time: gl.getUniformLocation(program, 'uTime'),
     tileSize: gl.getUniformLocation(program, 'uTileSize'),
     pixelRatio: gl.getUniformLocation(program, 'uPixelRatio'),
-    palette: gl.getUniformLocation(program, 'uPalette')
+    palette: gl.getUniformLocation(program, 'uPalette'),
+    logo: gl.getUniformLocation(program, 'uLogo'),
+    logoRect: gl.getUniformLocation(program, 'uLogoRect'),
+    logoSpread: gl.getUniformLocation(program, 'uLogoSpread')
   };
+
+  // the logo's distance field; a single "far outside" texel until the image arrives
+  const logoTexture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, logoTexture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, 1, 1, 0, gl.LUMINANCE, gl.UNSIGNED_BYTE, new Uint8Array([255]));
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  let logoAspect = 1024 / 264;
+  let logoTextureWidth = 1;
 
   // full screen quad on attribute location 0
   const quad = gl.createVertexArray();
@@ -153,6 +171,17 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
   let frame = 0;
   let stopped = false;
 
+  const logoImage = new Image();
+  logoImage.onload = () => {
+    if (stopped) return;
+    logoAspect = logoImage.naturalWidth / logoImage.naturalHeight;
+    logoTextureWidth = logoImage.naturalWidth;
+    gl.bindTexture(gl.TEXTURE_2D, logoTexture);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, gl.LUMINANCE, gl.UNSIGNED_BYTE, logoImage);
+    if (reducedMotion) frame = requestAnimationFrame(render);
+  };
+  logoImage.src = logoSdfUrl;
+
   const render = () => {
     if (stopped) return;
     if (needsResize) resize();
@@ -165,6 +194,12 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
     gl.uniform1f(uniforms.tileSize, tileSize);
     gl.uniform1f(uniforms.pixelRatio, pixelRatio);
     gl.uniform3fv(uniforms.palette, palette);
+    const logoWidth = Math.min(LOGO_CSS_WIDTH_MAX, (LOGO_VIEWPORT_FRACTION * width) / pixelRatio) * pixelRatio;
+    gl.uniform4f(uniforms.logoRect, 0.5 * width, 0.5 * height, logoWidth, logoWidth / logoAspect);
+    gl.uniform1f(uniforms.logoSpread, (LOGO_SDF_SPREAD * logoWidth) / logoTextureWidth);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, logoTexture);
+    gl.uniform1i(uniforms.logo, 0);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
     if (!reducedMotion) frame = requestAnimationFrame(render);
@@ -184,5 +219,6 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
     gl.deleteBuffer(quadBuffer);
     gl.deleteVertexArray(quad);
     gl.deleteProgram(program);
+    gl.deleteTexture(logoTexture);
   };
 };
