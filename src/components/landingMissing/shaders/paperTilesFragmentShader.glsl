@@ -371,10 +371,10 @@ void main(void) {
   vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
 
   // paper anchored to the slab's centre, offset per slab, cut at its own angle
-  vec3 col = tone * (0.72 + 0.42 * light) * (1.0 + paper(texPx, grainAngle));
+  vec3 col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
 
-  // the seam between slabs: dark cement, fixed to the lattice
-  vec3 joint = uJointColor * 0.9 * (1.0 + cement(uv * uTileSize / cssPx));
+  // the seam between slabs: white, with a faint cement grain fixed to the lattice
+  vec3 joint = vec3(0.96) * (1.0 + 0.5 * cement(uv * uTileSize / cssPx));
   col = mix(col, joint, smoothstep(-aa, aa, dSlab));
 
   // shadows from everything taller towards the light, on slabs and joints alike

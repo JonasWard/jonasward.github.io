@@ -14,9 +14,9 @@ export type PaperTilesOptions = {
   valueDelta?: number;
 };
 
-const DEFAULT_NEUTRAL_COLOR: [number, number, number] = [132, 0.08, 0.71];
-const DEFAULT_HUE_DELTA = 6;
-const DEFAULT_SATURATION_DELTA = 0.08;
+const DEFAULT_NEUTRAL_COLOR: [number, number, number] = [152, 0.08, 0.66];
+const DEFAULT_HUE_DELTA = 4;
+const DEFAULT_SATURATION_DELTA = 0.04;
 const DEFAULT_VALUE_DELTA = 0.12;
 const PALETTE_SIZE = 32;
 
