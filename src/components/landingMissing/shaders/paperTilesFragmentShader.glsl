@@ -55,10 +55,10 @@ const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
 const float LOGO_DEPTH = 10.0;  // how far the logo is cut below the lowest slab, css px
 const float FRAY = 0.8;         // how far the edges between slabs wander, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
-const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
+const float SHADOW_REACH = 16.0; // how far a shadow can fall, css px
 const float SHADOW_FINE = 7.0;  // the first stretch of the march is sampled every css px ...
-const int SHADOW_FINE_STEPS = 3;
-const int SHADOW_STEPS = 3;     // ... the rest ever more coarsely up to the reach
+const int SHADOW_FINE_STEPS = 2;
+const int SHADOW_STEPS = 2;     // ... the rest ever more coarsely up to the reach
 
 // ---------------------------------------------------------------- hashing
 
