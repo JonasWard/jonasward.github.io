@@ -371,7 +371,7 @@ void main(void) {
   vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
 
   // paper anchored to the slab's centre, offset per slab, cut at its own angle
-  vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, grainAngle));
+  vec3 col = tone * (0.62 + 0.55 * light) * (1.0 + paper(texPx, grainAngle));
 
   // the seam between slabs: dark cement, fixed to the lattice
   vec3 joint = uJointColor * 0.9 * (1.0 + cement(uv * uTileSize / cssPx));
