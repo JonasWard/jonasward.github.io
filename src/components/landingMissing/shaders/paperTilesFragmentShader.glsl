@@ -379,7 +379,7 @@ void main(void) {
 
   // shadows from everything taller towards the light, on slabs and joints alike
   float shadow = shadowAt(uv, terrain(uv, t), t);
-  col *= 0.5 + 0.5 * shadow;
+  col *= 0.7 + 0.3 * shadow;
 
 
   vec2 v = gl_FragCoord.xy / uResolution - 0.5;
