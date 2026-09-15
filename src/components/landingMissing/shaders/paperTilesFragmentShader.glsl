@@ -48,9 +48,9 @@ const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 const float GAP = 0.55;         // half of the seam between slabs, css px
 const float FRAY = 1.3;         // how far the fibres pull the slab's edge, css px
 const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for penumbrae
-const float PERIOD_MIN = 14.0;  // spacing of the pattern's folds, css px
-const float PERIOD_MAX = 256.0;
-const float PERIOD_MAX_CENTRED_FRAME = 42.0; // frames sitting on the slab's centre keep their folds tight
+const float PERIOD_MIN = 20.0;  // spacing of the pattern's folds, css px
+const float PERIOD_MAX = 384.0;
+const float PERIOD_MAX_CENTRED_FRAME = 60.0; // frames sitting on the slab's centre keep their folds tight
 const float SLAB = 5.0;         // lowest slab top above the joint, css px
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
@@ -176,6 +176,8 @@ struct Look {
   float k;        // pitch of the folds (sign: which way the first fold goes)
   float period;   // distance from one ridge to the next, css px
   float phase;    // where along the period the centre sits
+  float capTop;   // the fold wave is clipped flat above this level (1 = never) ...
+  float capBottom; // ... and below minus this level
   float diag;     // which of the two 45 degree directions the stripes follow
   vec2 tBase;     // tilt of the sheet itself
 };
@@ -196,6 +198,8 @@ Look lookFrom(float seed) {
   float periodMax = (L.family == 1.0 && L.anchored > 0.5) ? PERIOD_MAX_CENTRED_FRAME : PERIOD_MAX;
   L.period = PERIOD_MIN * pow(periodMax / PERIOD_MIN, hashSeeded(seed, 30.0));
   L.phase = hashSeeded(seed, 31.0);
+  L.capTop = mix(0.2, 1.0, hashSeeded(seed, 32.0));
+  L.capBottom = mix(0.2, 1.0, hashSeeded(seed, 33.0));
   L.diag = step(0.5, hashSeeded(seed, 29.0));
   L.tBase = 0.35 * tiltFrom(hashSeeded(seed, 25.0), hashSeeded(seed, 26.0));
   return L;
@@ -251,18 +255,27 @@ Field fieldAt(vec2 q, vec2 c, Look L) {
   return F;
 }
 
-// slope of the triangle wave along the pattern's distance: +1 rising, -1 falling,
-// blended across ridge and valley so neither aliases
-float fold(float d, float period, float aa) {
+// the triangle wave along the pattern's distance, -1 at the valleys, +1 at the ridges
+float wave(float d, float period) {
+  return 1.0 - 2.0 * abs(mod(d, period) - 0.5 * period) / period;
+}
+
+// slope of that wave: +1 rising, -1 falling, blended across ridge and valley so neither
+// aliases, and zero where the slab clips the wave flat above capTop or below -capBottom
+float fold(float d, float period, float sgn, float capTop, float capBottom, float aa) {
   float w = mod(d, period) - 0.5 * period;
-  return (2.0 * smoothstep(-aa, aa, w) - 1.0) * (1.0 - smoothstep(0.5 * period - aa, 0.5 * period, abs(w)));
+  float slope = (2.0 * smoothstep(-aa, aa, w) - 1.0) * (1.0 - smoothstep(0.5 * period - aa, 0.5 * period, abs(w)));
+  float h = sgn * wave(d, period);
+  float aaH = 2.0 * aa / period;
+  float open = smoothstep(capTop + aaH, capTop - aaH, h) * smoothstep(-capBottom - aaH, -capBottom + aaH, h);
+  return slope * open;
 }
 
 // diffuse light on the sheet at local position q with the pattern centred on c
 float motif(vec2 q, vec2 c, Look L, vec3 l, float aa) {
   Field F = fieldAt(q, c, L);
   float period = L.period * uPixelRatio;
-  float slope = L.k * fold(F.d + L.phase * period, period, aa);
+  float slope = L.k * fold(F.d + L.phase * period, period, sign(L.k), L.capTop, L.capBottom, aa);
   float lit = litFlat(L.tBase + slope * F.dir, l);
   if (L.family < 1.5 && L.family >= 0.5) {
     // frames: the y facets, blended with the x facets at the mitres
@@ -278,8 +291,8 @@ float motif(vec2 q, vec2 c, Look L, vec3 l, float aa) {
 float shapeHeight(vec2 q, vec2 c, Look L) {
   Field F = fieldAt(q, c, L);
   float period = L.period * uPixelRatio;
-  float w = mod(F.d + L.phase * period, period) - 0.5 * period;
-  return sign(L.k) * RELIEF * (1.0 - 2.0 * abs(w) / period);
+  float h = sign(L.k) * wave(F.d + L.phase * period, period);
+  return RELIEF * clamp(h, -L.capBottom, L.capTop);
 }
 
 float slabHeight(Tile T) {
@@ -379,7 +392,7 @@ void main(void) {
 
   // shadows from everything taller towards the light, on slabs and joints alike
   float shadow = shadowAt(uv, terrain(uv, t), t);
-  col *= 0.9 + 0.1 * shadow;
+  col *= 0.75 + 0.25 * shadow;
 
 
   vec2 v = gl_FragCoord.xy / uResolution - 0.5;
