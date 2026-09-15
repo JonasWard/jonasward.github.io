@@ -47,7 +47,8 @@ const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 
 const float GAP = 1.5;          // half of the joint between slabs, css px
 const float CORNER = 9.0;       // corner radius of a slab, css px
-const float EDGE = 5.0;         // width of the rounded edge, css px
+const float EDGE = 7.0;         // width of the rounded edge, css px
+const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for penumbrae
 const float SLAB = 5.0;         // lowest slab top above the joint, css px
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
 const float RELIEF = 6.0;       // height of a circle or rectangle at unit pitch, css px
@@ -144,14 +145,14 @@ float fibres(vec2 p, float angle, float len, float thick) {
 
 // lightness of the paper at p (css px): fibres cut at grainAngle, cloudy formation, grain
 float paper(vec2 p, float grainAngle) {
-  float f1 = fibres(p, 0.4 + grainAngle, 22.0, 2.6);
-  float f2 = fibres(p + 31.7, 1.9 + grainAngle, 30.0, 3.2);
-  float f3 = fibres(p + 77.1, -1.0 + grainAngle, 18.0, 2.4);
-  float f4 = fibres(p + 5.3, 2.6 + grainAngle, 40.0, 4.0);
+  float f1 = fibres(p, 0.4 + grainAngle, 14.0, 1.8);
+  float f2 = fibres(p + 31.7, 1.9 + grainAngle, 20.0, 2.0);
+  float f3 = fibres(p + 77.1, -1.0 + grainAngle, 11.0, 1.7);
+  float f4 = fibres(p + 5.3, 2.6 + grainAngle, 26.0, 2.4);
   float fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
   float cloud = vnoise(p / 90.0) - 0.5;
-  float grain = vnoise(p * 0.6) - 0.5;
-  return 0.09 * fibre + 0.07 * cloud + 0.03 * grain;
+  float grain = hash12(p * 1.7) - 0.5;
+  return 0.08 * fibre + 0.07 * cloud + 0.025 * grain;
 }
 
 // lightness of the cement at p (css px): fine grain, speckle, cloudy mottling and pores
@@ -332,13 +333,14 @@ float clearanceAt(vec2 uv, float h0, float s, vec2 dir, float rise, float t) {
   return h0 + s * rise + 0.4 - terrain(sp, t);
 }
 
-// soft shadow: march from height h0 at uv towards the light; where the ray first dips
-// below the wall, bisect to the exact crossing so the shadow's edge does not snap to
-// the march's sample points, and take the occluder's rise over the ray as the penumbra
+// soft shadow: march from height h0 at uv towards the light and keep the smallest
+// angular clearance (clearance over distance). Where the ray first dips below the wall,
+// bisect to the exact crossing so that angle stays continuous from pixel to pixel; the
+// light's apparent size then turns the angle into a penumbra
 float shadowAt(vec2 uv, float h0, float t) {
   vec2 dir = normalize(LIGHT.xy);
   float rise = LIGHT.z / length(LIGHT.xy); // how much the ray climbs per css px travelled
-  float shade = 1.0;
+  float angle = 1.0;
   float sPrev = 0.0;
   for (int i = 1; i <= SHADOW_STEPS; i++) {
     float f = float(i) / float(SHADOW_STEPS);
@@ -351,15 +353,14 @@ float shadowAt(vec2 uv, float h0, float t) {
         float mid = 0.5 * (lo + hi);
         if (clearanceAt(uv, h0, mid, dir, rise, t) < 0.0) hi = mid; else lo = mid;
       }
-      // the occluder pokes -clearance above the ray at distance hi: the closer and the
-      // taller, the darker; softened over the light's apparent size
-      shade = min(shade, clamp(1.0 - 8.0 * (-clearance) / max(hi, 1.0), 0.0, 1.0));
+      // the occluder's top just past the crossing, seen from the shaded point
+      angle = min(angle, clearanceAt(uv, h0, hi + 0.5, dir, rise, t) / max(hi, 0.5));
       break;
     }
-    shade = min(shade, clamp(6.0 * clearance / s, 0.0, 1.0));
+    angle = min(angle, clearance / s);
     sPrev = s;
   }
-  return shade;
+  return smoothstep(-LIGHT_SIZE, LIGHT_SIZE, angle);
 }
 
 // ---------------------------------------------------------------- main
@@ -386,11 +387,13 @@ void main(void) {
   vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
   float light = motif(q, sizePx, c, uTileSize, L, LIGHT, aa);
 
-  // the rounded edge: a quarter circle profile that takes over near the outline
+  // the rounded edge: the slope of the quarter circle profile, steepest at the outline
   float edge = clamp(-dSlab / (EDGE * cssPx), 0.0, 1.0);
-  float edgeSlope = tan(min((1.0 - edge) * 1.5707963, 1.25));
+  float edgeSlope = (1.0 - edge) / sqrt(max(1.0 - (1.0 - edge) * (1.0 - edge), 0.06));
   float edgeLight = litFlat(edgeDir * edgeSlope, LIGHT);
   light = mix(edgeLight, light, smoothstep(0.0, 1.0, edge));
+  // and the deeper the edge curves down, the less sky it sees
+  light *= 1.0 - 0.25 * (1.0 - edge) * (1.0 - edge);
 
   // this slab's tone, one of the precomputed palette
   vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
@@ -400,7 +403,7 @@ void main(void) {
   vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, (hashSeeded(seed, 12.0) - 0.5) * 0.6));
 
   // the joint between slabs: dark cement, fixed to the lattice
-  vec3 joint = uJointColor * (1.0 + cement(uv * uTileSize / cssPx));
+  vec3 joint = uJointColor * 0.8 * (1.0 + cement(uv * uTileSize / cssPx));
   col = mix(col, joint, smoothstep(-aa, aa, dSlab));
 
   // shadows from everything taller towards the light, on slabs and joints alike
