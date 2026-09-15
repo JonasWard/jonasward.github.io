@@ -48,8 +48,8 @@ const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for
 const float PERIOD_MIN = 20.0;  // spacing of the pattern's folds, css px
 const float PERIOD_MAX = 384.0;
 const float PERIOD_MAX_CENTRED_FRAME = 60.0; // frames sitting on the slab's centre keep their folds tight
-const float HEIGHT = 7.0;       // tallest slab above the lowest, css px
-const float FRAY = 0.9;         // how far the edges between slabs wander, css px
+const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
+const float FRAY = 0.8;         // how far the edges between slabs wander, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
 const float SHADOW_FINE = 10.0;  // the first stretch of the march is sampled every css px ...
@@ -147,7 +147,7 @@ float fibres(vec2 p, float angle, float len, float thick) {
 // slabs run slightly jagged; uv in tile units, result in tile units
 vec2 frayAt(vec2 uv) {
   vec2 p = uv * uTileSize / uPixelRatio;
-  vec2 d = vec2(fibres(p + 5.3, 2.6, 30.0, 4.0), fibres(p + 31.7, 1.9, 24.0, 3.5)) - 0.5;
+  vec2 d = vec2(fibres(p + 5.3, 2.6, 60.0, 9.0), fibres(p + 31.7, 1.9, 48.0, 8.0)) - 0.5;
   return d * FRAY * uPixelRatio / uTileSize;
 }
 
@@ -373,7 +373,7 @@ void main(void) {
 
   // shadows from everything taller towards the light
   float shadow = shadowAt(uvWorld, terrain(uvWorld, t), t);
-  col *= 0.75 + 0.25 * shadow;
+  col *= 0.65 + 0.35 * shadow;
 
 
   vec2 v = gl_FragCoord.xy / uResolution - 0.5;
