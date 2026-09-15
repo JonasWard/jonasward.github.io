@@ -19,8 +19,11 @@ precision highp float;
 // meet at mitred corners): the surface slopes at a constant pitch inside the
 // shape, creasing at the outline, and keeps that pitch across an outer flank
 // until a cutoff. The shapes either move with the cell or stay fixed to the
-// lattice so the drifting edges clip them. Slabs sit at different heights and
-// cast soft shadows onto their lower neighbours. Each slab is faced with paper
+// lattice so the drifting edges clip them. All of it is also a heightfield:
+// slabs sit at different heights above the joints and the shapes stand out of
+// them, and every pixel marches towards the light across that heightfield, so
+// slabs and shapes cast soft shadows onto anything lower, including their own
+// slab and the neighbours across the joint. Each slab is faced with paper
 // whose fibres are anchored to the slab's centre with a per-slab offset, so
 // they travel with it; the joints between slabs are cement.
 
@@ -45,9 +48,12 @@ const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 const float GAP = 1.5;          // half of the joint between slabs, css px
 const float CORNER = 9.0;       // corner radius of a slab, css px
 const float EDGE = 5.0;         // width of the rounded edge, css px
+const float SLAB = 5.0;         // lowest slab top above the joint, css px
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
-const float SHADOW_REACH = 28.0; // how far a shadow can fall, css px
-const int SHADOW_STEPS = 6;
+const float RELIEF = 6.0;       // height of a circle or rectangle at unit pitch, css px
+const float RIDGE = 3.0;        // height of a diagonal crease, css px
+const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
+const int SHADOW_STEPS = 14;
 
 // ---------------------------------------------------------------- hashing
 
@@ -271,11 +277,69 @@ float motif(vec2 q, vec2 size, vec2 c, float unit, Look L, vec3 l, float aa) {
   return blendSdf(litFlat(tOther, l), litFlat(L.tShape, l), dL, aa) * crease(dL, m);
 }
 
-// ---------------------------------------------------------------- main
+// ---------------------------------------------------------------- heightfield
+
+// height of the shape above its slab, css px (the profile behind the emboss)
+float shapeHeight(vec2 q, vec2 size, vec2 c, float unit, Look L) {
+  float m = min(size.x, size.y);
+  vec2 d = q - c;
+  if (L.family < 2.0) {
+    float dS;
+    float sz;
+    if (L.family < 0.5) {
+      sz = L.anchored > 0.5 ? 0.4 * m : 0.5 * unit;
+      dS = length(d) - sz;
+    } else {
+      vec2 halfSize = L.anchored > 0.5 ? 0.28 * size : vec2(0.3 * unit);
+      vec2 e = abs(d) - halfSize;
+      dS = max(e.x, e.y);
+      sz = min(halfSize.x, halfSize.y);
+    }
+    float cut = L.cut * sz;
+    float dc = clamp(dS, -L.cutIn * sz, cut);
+    return L.k * RELIEF * (cut - abs(dc)) / cut;
+  }
+  vec2 a = L.diag > 0.5 ? vec2(0.0) : vec2(size.x, 0.0);
+  vec2 b = L.diag > 0.5 ? size : vec2(0.0, size.y);
+  return sign(L.k) * RIDGE * max(0.0, 1.0 - abs(sdLine(q, a, b)) / (0.5 * m));
+}
 
 float slabHeight(Tile T) {
   return hashSeeded(tileSeed(T), 14.0);
 }
+
+// height of the wall at world position uv, css px; the joints are at zero
+float terrain(vec2 uv, float t) {
+  Tile T = tileAt(uv, t);
+  float cssPx = uPixelRatio;
+  vec2 sizePx = T.size * uTileSize;
+  vec2 q = (uv - T.lo) / T.size * sizePx;
+  vec2 halfSlab = 0.5 * sizePx - GAP * cssPx;
+  float dSlab = sdRoundBox(q - 0.5 * sizePx, halfSlab, CORNER * cssPx);
+  if (dSlab > 0.0) return 0.0;
+  float edge = clamp(-dSlab / (EDGE * cssPx), 0.0, 1.0);
+  float drop = EDGE * (sqrt(1.0 - (1.0 - edge) * (1.0 - edge)) - 1.0);
+  Look L = lookFrom(tileSeed(T));
+  vec2 c = L.anchored > 0.5 ? 0.5 * sizePx : (T.id + 0.5 - T.lo) * uTileSize;
+  return SLAB + slabHeight(T) * HEIGHT + drop + shapeHeight(q, sizePx, c, uTileSize, L);
+}
+
+// soft shadow: march from height h0 at uv towards the light and see what rises above the ray
+float shadowAt(vec2 uv, float h0, float t) {
+  vec2 dir = normalize(LIGHT.xy);
+  float rise = LIGHT.z / length(LIGHT.xy); // how much the ray climbs per css px travelled
+  float shade = 1.0;
+  for (int i = 1; i <= SHADOW_STEPS; i++) {
+    float f = float(i) / float(SHADOW_STEPS);
+    float s = SHADOW_REACH * f * sqrt(f);
+    vec2 sp = uv + dir * s * uPixelRatio / uTileSize;
+    float clearance = h0 + s * rise + 0.4 - terrain(sp, t);
+    shade = min(shade, clamp(6.0 * clearance / s, 0.0, 1.0));
+  }
+  return shade;
+}
+
+// ---------------------------------------------------------------- main
 
 void main(void) {
   float t = uTime;
@@ -313,24 +377,14 @@ void main(void) {
   vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
   vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, (hashSeeded(seed, 12.0) - 0.5) * 0.6));
 
-  // shadows: taller neighbours towards the light cast onto this slab
-  float h = slabHeight(T) * HEIGHT;
-  vec2 towardsLight = normalize(LIGHT.xy);
-  float shadow = 0.0;
-  for (int i = 1; i <= SHADOW_STEPS; i++) {
-    float dist = SHADOW_REACH * float(i) / float(SHADOW_STEPS);
-    vec2 sp = uv + towardsLight * dist * cssPx / uTileSize;
-    Tile S = tileAt(sp, t);
-    if (S.id == T.id) continue;
-    float rise = slabHeight(S) * HEIGHT - h;
-    // a slab `rise` px taller shades the ground up to about 1.5 x rise away, softly
-    shadow = max(shadow, smoothstep(0.0, 6.0, rise * 1.5 - dist) * (1.0 - float(i - 1) / float(SHADOW_STEPS)));
-  }
-  col *= 1.0 - 0.4 * shadow;
-
   // the joint between slabs: dark cement, fixed to the lattice
   vec3 joint = uNeutralColor * 0.5 * (1.0 + cement(uv * uTileSize / cssPx));
   col = mix(col, joint, smoothstep(-aa, aa, dSlab));
+
+  // shadows from everything taller towards the light, on slabs and joints alike
+  float shadow = shadowAt(uv, terrain(uv, t), t);
+  col *= 0.5 + 0.5 * shadow;
+
 
   vec2 v = gl_FragCoord.xy / uResolution - 0.5;
   col *= 1.0 - 0.25 * dot(v, v);
