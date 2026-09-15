@@ -52,7 +52,7 @@ const float PERIOD_MIN = 20.0;  // spacing of the pattern's folds, css px
 const float PERIOD_MAX = 384.0;
 const float PERIOD_MAX_CENTRED_FRAME = 60.0; // frames sitting on the slab's centre keep their folds tight
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
-const float LOGO_HEIGHT = 16.0; // the logo slab above the lowest slab, css px
+const float LOGO_DEPTH = 10.0;  // how far the logo is cut below the lowest slab, css px
 const float FRAY = 0.8;         // how far the edges between slabs wander, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
@@ -316,10 +316,10 @@ float slabHeight(Tile T) {
   return hashSeeded(tileSeed(T), 14.0);
 }
 
-// height of the wall at world position uv, css px; the logo is a slab cut over the tiles
+// height of the wall at world position uv, css px; the logo is cut out of the tiles
 float terrain(vec2 uv, float t) {
   vec2 fragPx = (uv - SCROLL * t) * uTileSize + 0.5 * uResolution;
-  if (logoDistance(fragPx) < 0.0) return LOGO_HEIGHT;
+  if (logoDistance(fragPx) < 0.0) return -LOGO_DEPTH;
   uv += frayAt(uv);
   Tile T = tileAt(uv, t);
   vec2 sizePx = T.size * uTileSize;
@@ -400,10 +400,11 @@ void main(void) {
 
   vec3 col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
 
-  // the logo: a dark sheet of the same paper laid over the wall, cut by its distance field
+  // the logo: cut out of the wall down to a plain paper floor; the tiles around it
+  // cast their shadows into the letters
   float dLogo = logoDistance(gl_FragCoord.xy);
-  vec3 logoCol = uPalette[0] * 0.42 * (1.0 + paper(gl_FragCoord.xy / cssPx, 0.3));
-  col = mix(logoCol, col, smoothstep(-aa, aa, dLogo));
+  vec3 floorCol = uPalette[0] * 0.72 * (1.0 + paper(gl_FragCoord.xy / cssPx, 0.3));
+  col = mix(floorCol, col, smoothstep(-aa, aa, dLogo));
 
   // shadows from everything taller towards the light
   float shadow = shadowAt(uvWorld, terrain(uvWorld, t), t);
