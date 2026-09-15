@@ -48,8 +48,9 @@ const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 const float GAP = 0.55;         // half of the seam between slabs, css px
 const float FRAY = 1.3;         // how far the fibres pull the slab's edge, css px
 const float LIGHT_SIZE = 0.14;  // apparent radius of the light, as a slope, for penumbrae
-const float PERIOD_MIN = 28.0;  // spacing of the pattern's folds, css px
-const float PERIOD_MAX = 64.0;
+const float PERIOD_MIN = 14.0;  // spacing of the pattern's folds, css px
+const float PERIOD_MAX = 256.0;
+const float PERIOD_MAX_CENTRED_FRAME = 42.0; // frames sitting on the slab's centre keep their folds tight
 const float SLAB = 5.0;         // lowest slab top above the joint, css px
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
@@ -188,9 +189,12 @@ Look lookFrom(float seed) {
   Look L;
   float f = hashSeeded(seed, 21.0);
   L.family = f < 0.4 ? 0.0 : (f < 0.65 ? 1.0 : 2.0);
-  L.anchored = step(0.5, hashSeeded(seed, 22.0));
+  // frames sit on the slab's centre less often than rings do
+  L.anchored = step(L.family == 1.0 ? 0.75 : 0.5, hashSeeded(seed, 22.0));
   L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.8, 1.5, hashSeeded(seed, 24.0));
-  L.period = mix(PERIOD_MIN, PERIOD_MAX, hashSeeded(seed, 30.0));
+  // periods spread evenly in the log so small and large ones are equally common
+  float periodMax = (L.family == 1.0 && L.anchored > 0.5) ? PERIOD_MAX_CENTRED_FRAME : PERIOD_MAX;
+  L.period = PERIOD_MIN * pow(periodMax / PERIOD_MIN, hashSeeded(seed, 30.0));
   L.phase = hashSeeded(seed, 31.0);
   L.diag = step(0.5, hashSeeded(seed, 29.0));
   L.tBase = 0.35 * tiltFrom(hashSeeded(seed, 25.0), hashSeeded(seed, 26.0));
