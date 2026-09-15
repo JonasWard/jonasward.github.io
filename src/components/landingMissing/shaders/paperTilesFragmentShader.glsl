@@ -331,39 +331,44 @@ float terrain(vec2 uv, float t) {
   return SLAB + slabHeight(T) * HEIGHT + drop + shapeHeight(q, sizePx, c, uTileSize, L);
 }
 
-// how far the light ray from height h0 at uv clears the wall, s css px towards the light
-float clearanceAt(vec2 uv, float h0, float s, vec2 dir, float rise, float t) {
-  vec2 sp = uv + dir * s * uPixelRatio / uTileSize;
-  return h0 + s * rise + 0.4 - terrain(sp, t);
+// height of the wall s css px from uv towards the light
+float terrainAlong(vec2 uv, float s, vec2 dir, float t) {
+  return terrain(uv + dir * s * uPixelRatio / uTileSize, t);
 }
 
 // soft shadow: march from height h0 at uv towards the light and keep the smallest
-// angular clearance (clearance over distance). Where the ray first dips below the wall,
-// bisect to the exact crossing so that angle stays continuous from pixel to pixel; the
+// angular clearance (clearance over distance) of the wall above the ray. Wherever the
+// wall steps up between two samples, bisect to the step's edge and measure there, so the
+// clearance is a continuous function of the pixel rather than of where samples fall. The
 // light's apparent size then turns the angle into a penumbra
 float shadowAt(vec2 uv, float h0, float t) {
   vec2 dir = normalize(LIGHT.xy);
   float rise = LIGHT.z / length(LIGHT.xy); // how much the ray climbs per css px travelled
+  float bias = 0.4;
   float angle = 1.0;
   float sPrev = 0.0;
+  float hPrev = h0;
   for (int i = 1; i <= SHADOW_STEPS; i++) {
     float f = float(i - SHADOW_FINE_STEPS) / float(SHADOW_STEPS - SHADOW_FINE_STEPS);
     float s = i <= SHADOW_FINE_STEPS ? float(i) * SHADOW_FINE / float(SHADOW_FINE_STEPS)
                                      : SHADOW_FINE + (SHADOW_REACH - SHADOW_FINE) * f * sqrt(f);
-    float clearance = clearanceAt(uv, h0, s, dir, rise, t);
-    if (clearance < 0.0) {
+    float h = terrainAlong(uv, s, dir, t);
+    if (h - hPrev > 0.75) {
+      // a step up: find its edge and see how far the wall behind it rises above the ray there
       float lo = sPrev;
       float hi = s;
-      for (int j = 0; j < 4; j++) {
+      float threshold = 0.5 * (h + hPrev);
+      for (int j = 0; j < 5; j++) {
         float mid = 0.5 * (lo + hi);
-        if (clearanceAt(uv, h0, mid, dir, rise, t) < 0.0) hi = mid; else lo = mid;
+        if (terrainAlong(uv, mid, dir, t) > threshold) hi = mid; else lo = mid;
       }
-      // the occluder's top just past the crossing, seen from the shaded point
-      angle = min(angle, clearanceAt(uv, h0, hi + 0.5, dir, rise, t) / max(hi, 0.5));
-      break;
+      angle = min(angle, (h0 + hi * rise + bias - h) / max(hi, 0.5));
     }
+    float clearance = h0 + s * rise + bias - h;
     angle = min(angle, clearance / s);
+    if (angle < -LIGHT_SIZE) break;
     sPrev = s;
+    hPrev = h;
   }
   return smoothstep(-LIGHT_SIZE, LIGHT_SIZE, angle);
 }
