@@ -31,8 +31,8 @@ uniform vec2 uResolution;  // canvas size, device px
 uniform float uTime;       // seconds
 uniform float uTileSize;   // average tile edge, device px
 uniform float uPixelRatio; // device px per css px
-uniform vec3 uNeutralColor;   // tone every slab varies around
-uniform float uToneVariation; // largest deviation of a slab's tone, per channel
+uniform vec3 uPalette[32];    // slab tones, precomputed around a neutral colour
+uniform vec3 uJointColor;     // tone of the cement joints
 
 out vec4 fragColor;
 
@@ -51,7 +51,7 @@ const float EDGE = 5.0;         // width of the rounded edge, css px
 const float SLAB = 5.0;         // lowest slab top above the joint, css px
 const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
 const float RELIEF = 6.0;       // height of a circle or rectangle at unit pitch, css px
-const float RIDGE = 3.0;        // height of a diagonal crease, css px
+const float RIDGE = 6.0;        // height of the raised side of a diagonal crease, css px
 const float SHADOW_REACH = 44.0; // how far a shadow can fall, css px
 const int SHADOW_STEPS = 14;
 
@@ -299,9 +299,11 @@ float shapeHeight(vec2 q, vec2 size, vec2 c, float unit, Look L) {
     float dc = clamp(dS, -L.cutIn * sz, cut);
     return L.k * RELIEF * (cut - abs(dc)) / cut;
   }
+  // a wedge: one facet rises towards the crease and steps down onto the other
   vec2 a = L.diag > 0.5 ? vec2(0.0) : vec2(size.x, 0.0);
   vec2 b = L.diag > 0.5 ? size : vec2(0.0, size.y);
-  return sign(L.k) * RIDGE * max(0.0, 1.0 - abs(sdLine(q, a, b)) / (0.5 * m));
+  float dL = sdLine(q, a, b) * sign(L.k);
+  return dL > 0.0 ? RIDGE * clamp(1.0 - dL / (0.5 * m), 0.0, 1.0) : 0.0;
 }
 
 float slabHeight(Tile T) {
@@ -369,16 +371,15 @@ void main(void) {
   float edgeLight = litFlat(edgeDir * edgeSlope, LIGHT);
   light = mix(edgeLight, light, smoothstep(0.0, 1.0, edge));
 
-  // this slab's tone, a random deviation from the neutral colour
-  vec3 deviation = vec3(hashSeeded(seed, 6.0), hashSeeded(seed, 7.0), hashSeeded(seed, 8.0)) * 2.0 - 1.0;
-  vec3 tone = uNeutralColor + uToneVariation * deviation;
+  // this slab's tone, one of the precomputed palette
+  vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
 
   // paper anchored to the slab's centre, offset per slab, cut at its own angle
   vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
   vec3 col = tone * (0.45 + 0.75 * light) * (1.0 + paper(texPx, (hashSeeded(seed, 12.0) - 0.5) * 0.6));
 
   // the joint between slabs: dark cement, fixed to the lattice
-  vec3 joint = uNeutralColor * 0.5 * (1.0 + cement(uv * uTileSize / cssPx));
+  vec3 joint = uJointColor * (1.0 + cement(uv * uTileSize / cssPx));
   col = mix(col, joint, smoothstep(-aa, aa, dSlab));
 
   // shadows from everything taller towards the light, on slabs and joints alike
