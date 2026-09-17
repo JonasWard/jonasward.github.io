@@ -79,8 +79,9 @@ const createProgram = (gl: WebGL2RenderingContext) => {
 };
 
 /** Starts rendering the paper tiles into the canvas. Returns a function that stops it and frees the GL resources. */
-export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOptions = {}): (() => void) => {
-  const palette = buildPalette(options);
+export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
+  const palette = buildPalette();
+  document.body.style.background = `rgb(${palette[0] * 255}, ${palette[1] * 255}, ${palette[2] * 255})`;
 
   const gl = canvas.getContext('webgl2', {
     alpha: false,

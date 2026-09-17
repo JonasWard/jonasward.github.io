@@ -16,15 +16,14 @@ const Landing = () => {
     if (!canvas) return;
     const stop = startPaperTiles(canvas);
     const previousBackground = document.body.style.background;
-    document.body.style.background = '#9daaa3';
     return () => {
       stop();
-      document.body.style.background = previousBackground;
+      document.body.style.background = 'white';
     };
   }, []);
 
   return (
-    <div className="landing-page" onClick={goToProjects}>
+    <div className="landing-page" id="landing-page" onClick={goToProjects}>
       <canvas className="landing-canvas" ref={canvasRef} aria-label="jonas ward" />
     </div>
   );
