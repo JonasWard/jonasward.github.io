@@ -2,19 +2,6 @@ import vsSource from './shaders/paperTilesVertexShader.glsl?raw';
 import fsSource from './shaders/paperTilesFragmentShader.glsl?raw';
 import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png'; // inlined as a data url, see vite.config.ts
 
-// Renders the cement tiling full screen in one pass.
-
-export type PaperTilesOptions = {
-  /** tone every slab varies around: hue in degrees, saturation and value in 0..1 */
-  neutralColor?: [number, number, number];
-  /** largest deviation of a slab's hue from the neutral one, degrees */
-  hueDelta?: number;
-  /** largest deviation of a slab's saturation, 0..1 */
-  saturationDelta?: number;
-  /** largest deviation of a slab's value, 0..1 */
-  valueDelta?: number;
-};
-
 const DEFAULT_NEUTRAL_COLOR: [number, number, number] = [Math.floor(Math.random() * 360), 0.08, 0.66];
 const DEFAULT_HUE_DELTA = 20;
 const DEFAULT_SATURATION_DELTA = 0.04;
@@ -35,11 +22,11 @@ const hsvToRgb = (h: number, s: number, v: number): [number, number, number] => 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 /** the slab tones: evenly spread deviations from the neutral colour, shuffled so neighbours in the array differ */
-const buildPalette = (options: PaperTilesOptions) => {
-  const [h, s, v] = options.neutralColor ?? DEFAULT_NEUTRAL_COLOR;
-  const dh = options.hueDelta ?? DEFAULT_HUE_DELTA;
-  const ds = options.saturationDelta ?? DEFAULT_SATURATION_DELTA;
-  const dv = options.valueDelta ?? DEFAULT_VALUE_DELTA;
+const buildPalette = () => {
+  const [h, s, v] = DEFAULT_NEUTRAL_COLOR;
+  const dh = DEFAULT_HUE_DELTA;
+  const ds = DEFAULT_SATURATION_DELTA;
+  const dv = DEFAULT_VALUE_DELTA;
   const palette = new Float32Array(PALETTE_SIZE * 3);
   for (let i = 0; i < PALETTE_SIZE; i++) {
     // three low-discrepancy sequences so hue, saturation and value vary independently
@@ -49,6 +36,7 @@ const buildPalette = (options: PaperTilesOptions) => {
     const rgb = hsvToRgb((h + th * dh + 360) % 360, clamp(s + ts * ds, 0, 1), clamp(v + tv * dv, 0, 1));
     palette.set(rgb, i * 3);
   }
+
   return palette;
 };
 
@@ -91,8 +79,9 @@ const createProgram = (gl: WebGL2RenderingContext) => {
 };
 
 /** Starts rendering the paper tiles into the canvas. Returns a function that stops it and frees the GL resources. */
-export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOptions = {}): (() => void) => {
-  const palette = buildPalette(options);
+export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
+  const palette = buildPalette();
+  document.body.style.background = `rgb(${palette[0] * 255}, ${palette[1] * 255}, ${palette[2] * 255})`;
 
   const gl = canvas.getContext('webgl2', {
     alpha: false,
@@ -145,15 +134,21 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
 
   let width = 0;
   let height = 0;
+  let cssWidth = 0;
+  let cssHeight = 0;
   let pixelRatio = 1;
   let tileSize = TILE_CSS_PX_MIN;
-  let needsResize = true;
 
-  const resize = () => {
-    needsResize = false;
-    pixelRatio = clamp(window.devicePixelRatio || 1, 1, MAX_PIXEL_RATIO);
-    const cssWidth = canvas.clientWidth || window.innerWidth;
-    const cssHeight = canvas.clientHeight || window.innerHeight;
+  // keeps the drawing buffer in step with the canvas' css box, which mobile browsers can
+  // change after the first frame without a window resize; cheap when nothing changed
+  const fit = () => {
+    const nextPixelRatio = clamp(window.devicePixelRatio || 1, 1, MAX_PIXEL_RATIO);
+    const nextCssWidth = canvas.clientWidth || window.innerWidth;
+    const nextCssHeight = canvas.clientHeight || window.innerHeight;
+    if (nextCssWidth === cssWidth && nextCssHeight === cssHeight && nextPixelRatio === pixelRatio) return;
+    cssWidth = nextCssWidth;
+    cssHeight = nextCssHeight;
+    pixelRatio = nextPixelRatio;
     tileSize =
       clamp(Math.max(cssWidth, cssHeight) / TILES_ACROSS_LONG_EDGE, TILE_CSS_PX_MIN, TILE_CSS_PX_MAX) * pixelRatio;
     width = Math.max(1, Math.round(cssWidth * pixelRatio));
@@ -195,7 +190,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
 
   const render = () => {
     if (stopped) return;
-    if (needsResize) resize();
+    fit();
 
     gl.viewport(0, 0, width, height);
     gl.useProgram(program);
@@ -217,16 +212,18 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
   };
 
   const onResize = () => {
-    needsResize = true;
-    if (reducedMotion) frame = requestAnimationFrame(render);
+    if (reducedMotion && logoReady) frame = requestAnimationFrame(render);
   };
   window.addEventListener('resize', onResize);
+  const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(onResize);
+  observer?.observe(canvas);
 
   return () => {
     stopped = true;
     window.clearTimeout(startFallback);
     cancelAnimationFrame(frame);
     window.removeEventListener('resize', onResize);
+    observer?.disconnect();
     gl.deleteBuffer(quadBuffer);
     gl.deleteVertexArray(quad);
     gl.deleteProgram(program);
