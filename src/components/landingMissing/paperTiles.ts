@@ -134,15 +134,21 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
 
   let width = 0;
   let height = 0;
+  let cssWidth = 0;
+  let cssHeight = 0;
   let pixelRatio = 1;
   let tileSize = TILE_CSS_PX_MIN;
-  let needsResize = true;
 
-  const resize = () => {
-    needsResize = false;
-    pixelRatio = clamp(window.devicePixelRatio || 1, 1, MAX_PIXEL_RATIO);
-    const cssWidth = canvas.clientWidth || window.innerWidth;
-    const cssHeight = canvas.clientHeight || window.innerHeight;
+  // keeps the drawing buffer in step with the canvas' css box, which mobile browsers can
+  // change after the first frame without a window resize; cheap when nothing changed
+  const fit = () => {
+    const nextPixelRatio = clamp(window.devicePixelRatio || 1, 1, MAX_PIXEL_RATIO);
+    const nextCssWidth = canvas.clientWidth || window.innerWidth;
+    const nextCssHeight = canvas.clientHeight || window.innerHeight;
+    if (nextCssWidth === cssWidth && nextCssHeight === cssHeight && nextPixelRatio === pixelRatio) return;
+    cssWidth = nextCssWidth;
+    cssHeight = nextCssHeight;
+    pixelRatio = nextPixelRatio;
     tileSize =
       clamp(Math.max(cssWidth, cssHeight) / TILES_ACROSS_LONG_EDGE, TILE_CSS_PX_MIN, TILE_CSS_PX_MAX) * pixelRatio;
     width = Math.max(1, Math.round(cssWidth * pixelRatio));
@@ -184,7 +190,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
 
   const render = () => {
     if (stopped) return;
-    if (needsResize) resize();
+    fit();
 
     gl.viewport(0, 0, width, height);
     gl.useProgram(program);
@@ -206,16 +212,18 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   };
 
   const onResize = () => {
-    needsResize = true;
-    if (reducedMotion) frame = requestAnimationFrame(render);
+    if (reducedMotion && logoReady) frame = requestAnimationFrame(render);
   };
   window.addEventListener('resize', onResize);
+  const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(onResize);
+  observer?.observe(canvas);
 
   return () => {
     stopped = true;
     window.clearTimeout(startFallback);
     cancelAnimationFrame(frame);
     window.removeEventListener('resize', onResize);
+    observer?.disconnect();
     gl.deleteBuffer(quadBuffer);
     gl.deleteVertexArray(quad);
     gl.deleteProgram(program);
