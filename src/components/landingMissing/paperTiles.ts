@@ -2,19 +2,6 @@ import vsSource from './shaders/paperTilesVertexShader.glsl?raw';
 import fsSource from './shaders/paperTilesFragmentShader.glsl?raw';
 import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png'; // inlined as a data url, see vite.config.ts
 
-// Renders the cement tiling full screen in one pass.
-
-export type PaperTilesOptions = {
-  /** tone every slab varies around: hue in degrees, saturation and value in 0..1 */
-  neutralColor?: [number, number, number];
-  /** largest deviation of a slab's hue from the neutral one, degrees */
-  hueDelta?: number;
-  /** largest deviation of a slab's saturation, 0..1 */
-  saturationDelta?: number;
-  /** largest deviation of a slab's value, 0..1 */
-  valueDelta?: number;
-};
-
 const DEFAULT_NEUTRAL_COLOR: [number, number, number] = [Math.floor(Math.random() * 360), 0.08, 0.66];
 const DEFAULT_HUE_DELTA = 20;
 const DEFAULT_SATURATION_DELTA = 0.04;
@@ -35,11 +22,11 @@ const hsvToRgb = (h: number, s: number, v: number): [number, number, number] => 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
 
 /** the slab tones: evenly spread deviations from the neutral colour, shuffled so neighbours in the array differ */
-const buildPalette = (options: PaperTilesOptions) => {
-  const [h, s, v] = options.neutralColor ?? DEFAULT_NEUTRAL_COLOR;
-  const dh = options.hueDelta ?? DEFAULT_HUE_DELTA;
-  const ds = options.saturationDelta ?? DEFAULT_SATURATION_DELTA;
-  const dv = options.valueDelta ?? DEFAULT_VALUE_DELTA;
+const buildPalette = () => {
+  const [h, s, v] = DEFAULT_NEUTRAL_COLOR;
+  const dh = DEFAULT_HUE_DELTA;
+  const ds = DEFAULT_SATURATION_DELTA;
+  const dv = DEFAULT_VALUE_DELTA;
   const palette = new Float32Array(PALETTE_SIZE * 3);
   for (let i = 0; i < PALETTE_SIZE; i++) {
     // three low-discrepancy sequences so hue, saturation and value vary independently
@@ -49,6 +36,7 @@ const buildPalette = (options: PaperTilesOptions) => {
     const rgb = hsvToRgb((h + th * dh + 360) % 360, clamp(s + ts * ds, 0, 1), clamp(v + tv * dv, 0, 1));
     palette.set(rgb, i * 3);
   }
+
   return palette;
 };
 
