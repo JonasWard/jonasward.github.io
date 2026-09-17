@@ -14,7 +14,13 @@ const Landing = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    return startPaperTiles(canvas);
+    const stop = startPaperTiles(canvas);
+    const previousBackground = document.body.style.background;
+    document.body.style.background = '#9daaa3';
+    return () => {
+      stop();
+      document.body.style.background = previousBackground;
+    };
   }, []);
 
   return (

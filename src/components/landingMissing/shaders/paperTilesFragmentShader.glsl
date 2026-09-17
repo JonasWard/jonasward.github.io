@@ -147,12 +147,27 @@ float fibres(vec2 p, float angle, float len, float thick) {
   return vnoise(vec2(r.x / len, r.y / thick));
 }
 
-// a small displacement of the tiling itself, fixed to the lattice, so the edges between
-// slabs run slightly jagged; uv in tile units, result in tile units
+// 1d value noise, quintic
+float vnoise1(float x) {
+  float i = floor(x);
+  float f = fract(x);
+  f = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+  return mix(hash12(vec2(i, 0.37)), hash12(vec2(i + 1.0, 0.37)), f);
+}
+
+// a small displacement of the tiling itself so the edges between slabs run slightly
+// jagged. Vertical edges only ever move sideways and horizontal edges only up or down, so
+// the wobble depends only on the position along the edge (plus the lattice column or row
+// the edge belongs to) and travels with the edge instead of rippling as it slides.
+// uv in tile units, result in tile units
 vec2 frayAt(vec2 uv) {
-  vec2 p = uv * uTileSize / uPixelRatio;
-  vec2 d = vec2(fibres(p + 5.3, 2.6, 60.0, 9.0), fibres(p + 31.7, 1.9, 48.0, 8.0)) - 0.5;
-  return d * FRAY * uPixelRatio / uTileSize;
+  vec2 cell = floor(uv);
+  vec2 alongPx = uv * uTileSize / uPixelRatio; // css px
+  float sy = alongPx.y / 14.0 + hash12(cell.xx + 3.1) * 100.0;
+  float sx = alongPx.x / 14.0 + hash12(cell.yy + 7.9) * 100.0;
+  float dx = 0.65 * vnoise1(sy) + 0.35 * vnoise1(sy * 2.7 + 11.0) - 0.5;
+  float dy = 0.65 * vnoise1(sx) + 0.35 * vnoise1(sx * 2.7 + 23.0) - 0.5;
+  return vec2(dx, dy) * FRAY * uPixelRatio / uTileSize;
 }
 
 // lightness of the paper at p (css px): fibres cut at grainAngle, cloudy formation, grain
