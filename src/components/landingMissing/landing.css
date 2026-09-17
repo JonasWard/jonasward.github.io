@@ -1,9 +1,9 @@
-/* the landing fills the whole viewport, including the strip under a collapsing mobile toolbar */
+/* the landing fills the layout viewport, which follows a collapsing mobile toolbar; the
+   body behind it is painted in the wall's tone (set by the Landing component) so any strip
+   the browser reveals before a resize lands is not white */
 .landing-page {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100lvh;
   overflow: hidden;
   background: #9daaa3;
   cursor: pointer;

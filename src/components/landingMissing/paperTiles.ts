@@ -1,6 +1,6 @@
 import vsSource from './shaders/paperTilesVertexShader.glsl?raw';
 import fsSource from './shaders/paperTilesFragmentShader.glsl?raw';
-import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png';
+import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png'; // inlined as a data url, see vite.config.ts
 
 // Renders the cement tiling full screen in one pass.
 
@@ -171,6 +171,14 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
   let frame = 0;
   let stopped = false;
 
+  // the field is inlined in the bundle, so it decodes at once; the first frame waits for it
+  // (with a fallback so a decode failure still shows the wall)
+  let logoReady = false;
+  const start = () => {
+    if (stopped || logoReady) return;
+    logoReady = true;
+    frame = requestAnimationFrame(render);
+  };
   const logoImage = new Image();
   logoImage.onload = () => {
     if (stopped) return;
@@ -178,9 +186,12 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
     logoTextureWidth = logoImage.naturalWidth;
     gl.bindTexture(gl.TEXTURE_2D, logoTexture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, gl.LUMINANCE, gl.UNSIGNED_BYTE, logoImage);
-    if (reducedMotion) frame = requestAnimationFrame(render);
+    if (reducedMotion && logoReady) frame = requestAnimationFrame(render);
+    start();
   };
+  logoImage.onerror = start;
   logoImage.src = logoSdfUrl;
+  const startFallback = window.setTimeout(start, 1500);
 
   const render = () => {
     if (stopped) return;
@@ -210,10 +221,10 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, options: PaperTilesOp
     if (reducedMotion) frame = requestAnimationFrame(render);
   };
   window.addEventListener('resize', onResize);
-  frame = requestAnimationFrame(render);
 
   return () => {
     stopped = true;
+    window.clearTimeout(startFallback);
     cancelAnimationFrame(frame);
     window.removeEventListener('resize', onResize);
     gl.deleteBuffer(quadBuffer);

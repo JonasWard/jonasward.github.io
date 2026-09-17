@@ -8,7 +8,10 @@ export default defineConfig({
     port: 3111
   },
   build: {
-    outDir: './build'
+    outDir: './build',
+    // the landing page's logo distance field is small and needed for the first frame,
+    // so it ships inside the bundle instead of as a separate request
+    assetsInlineLimit: (filePath) => (filePath.endsWith('jonasward_logo_sdf.png') ? true : undefined)
   },
   base: '/',
   resolve: {
