@@ -163,8 +163,8 @@ float vnoise1(float x) {
 vec2 frayAt(vec2 uv) {
   vec2 cell = floor(uv);
   vec2 alongPx = uv * uTileSize / uPixelRatio; // css px
-  float sy = alongPx.y / 14.0 + hash12(cell.xx + 3.1) * 100.0;
-  float sx = alongPx.x / 14.0 + hash12(cell.yy + 7.9) * 100.0;
+  float sy = alongPx.y + hash12(cell.xx + 3.1) * 100.0;
+  float sx = alongPx.x + hash12(cell.yy + 7.9) * 100.0;
   float dx = 0.65 * vnoise1(sy) + 0.35 * vnoise1(sy * 2.7 + 11.0) - 0.5;
   float dy = 0.65 * vnoise1(sx) + 0.35 * vnoise1(sx * 2.7 + 23.0) - 0.5;
   return vec2(dx, dy) * FRAY * uPixelRatio / uTileSize;
