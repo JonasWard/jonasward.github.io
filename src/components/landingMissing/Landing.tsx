@@ -18,7 +18,9 @@ const Landing = () => {
     const previousBackground = document.body.style.background;
     return () => {
       stop();
-      document.body.style.background = 'white';
+      // back to whatever it was, rather than to a hardcoded white: an inline
+      // background on body outranks every stylesheet for the rest of the session
+      document.body.style.background = previousBackground;
     };
   }, []);
 

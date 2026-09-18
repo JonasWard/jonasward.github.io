@@ -7,6 +7,5 @@ export const ConcatenatedUnNamedListRenderer: React.FC<{ data: List; isPdf: bool
     content={Object.values(data)
       .map((value) => value)
       .join(', ')}
-    id={'ConcatenatedUnNamedListRenderer'}
   />
 );

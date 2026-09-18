@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export const KeywordButton: React.FC<{ keyword: string; show: boolean }> = ({ keyword, show }) => {
   const navigate = useNavigate();
 
-  const goToFilter = (e: Event) => {
+  const goToFilter = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (window.location.hash.includes(ProjectRoutes.Projects)) {
       if (!useProjectStore.getState().keywordFilters.includes(keyword))
