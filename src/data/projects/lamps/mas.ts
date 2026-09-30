@@ -7,9 +7,9 @@ import { ProjectData } from 'src/types/projectContent/projectData';
 import { ProjectMetaData } from 'src/types/projectContent/projectMetaData';
 import { createTitleImage, createImage, createTextImage } from 'src/utils/projectconstructor';
 
-import lampsMASLogo from './assets/MAS Logo.png';
-import lampsMAS1 from './assets/mas800.jpg';
-import lampsMAS2 from './assets/mas2.jpg';
+import lampsMASLogo from './assets/MAS Logo.png?responsive';
+import lampsMAS1 from './assets/mas800.jpg?responsive';
+import lampsMAS2 from './assets/mas2.jpg?responsive';
 
 const id = '2018-03';
 
@@ -28,7 +28,7 @@ const metaData: ProjectMetaData = {
 export const mas: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(lampsMAS2, metaData.name, 2048, 2048),
+  projectImage: createTitleImage(lampsMAS2, metaData.name),
   projectContent: [
     createTextImage(
       lampsMASLogo,

@@ -6,10 +6,10 @@ import { createImage, createTitleImage } from '../../../utils/projectconstructor
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import mundoA1 from './assets/mundo-A/ilse_liekens-mundo_A.jpg';
-import mundoA2 from './assets/mundo-A/lucid-mundo_A-interieur_2.jpg';
-import mundoA3 from './assets/mundo-A/lucid-mundo_A-interieur.jpg';
-import projectImage from './assets/mundo-A/lucid-mundo_A.jpg';
+import mundoA1 from './assets/mundo-A/ilse_liekens-mundo_A.jpg?responsive';
+import mundoA2 from './assets/mundo-A/lucid-mundo_A-interieur_2.jpg?responsive';
+import mundoA3 from './assets/mundo-A/lucid-mundo_A-interieur.jpg?responsive';
+import projectImage from './assets/mundo-A/lucid-mundo_A.jpg?responsive';
 
 const id = '2016-02';
 
@@ -27,7 +27,7 @@ const metaData: ProjectMetaData = {
 export const mundoA: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 1400, 1034),
+  projectImage: createTitleImage(projectImage, metaData.name),
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,

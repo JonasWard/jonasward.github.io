@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v1
@@ -20,6 +20,14 @@ jobs:
 
       - name: Install dependencies
         run: bun install
+
+      # vite-imagetools caches every generated image variant here, restoring it saves re-encoding them all on each deploy
+      - name: Cache generated images
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/imagetools
+          key: imagetools-${{ hashFiles('src/data/projects/**', 'vite.config.mts') }}
+          restore-keys: imagetools-
 
       - name: Build project
         run: bun run build

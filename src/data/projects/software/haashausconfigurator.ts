@@ -7,14 +7,14 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import screenshot1 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_1.png';
-import screenshot2 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_2.png';
-import screenshot3 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_3.png';
-import screenshot4 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_4.png';
-import screenshot5 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_5.png';
-import projectImage from './assets/haas-haus-configurator/haasCover.png';
-import image1 from './assets/haas-haus-configurator/overview.png';
-import image2 from './assets/haas-haus-configurator/searsCatalogue.jpg';
+import screenshot1 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_1.png?responsive';
+import screenshot2 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_2.png?responsive';
+import screenshot3 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_3.png?responsive';
+import screenshot4 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_4.png?responsive';
+import screenshot5 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_5.png?responsive';
+import projectImage from './assets/haas-haus-configurator/haasCover.png?responsive';
+import image1 from './assets/haas-haus-configurator/overview.png?responsive';
+import image2 from './assets/haas-haus-configurator/searsCatalogue.jpg?responsive';
 
 const id = '2022-02';
 
@@ -35,7 +35,7 @@ const metaData: ProjectMetaData = {
 export const haasHausConfigurator: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 1602, 1729, 'black-on-white'),
+  projectImage: createTitleImage(projectImage, metaData.name, 'black-on-white'),
   projectContent: [
     createText(
       2,

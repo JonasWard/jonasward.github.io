@@ -3,7 +3,7 @@
 .header {
   display: flex;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat Variable', sans-serif;
   justify-content: space-between;
   position: fixed;
   top: 0;
@@ -62,7 +62,7 @@
 /* Style the header links */
 .header button {
   font-weight: 500;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat Variable', sans-serif;
   float: left;
   color: black;
   text-align: center;
@@ -132,7 +132,7 @@ button {
 
 .button-main.button-active {
   font-weight: 500;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat Variable', sans-serif;
   filter: invert(18%) sepia(52%) saturate(4747%) hue-rotate(241deg) brightness(63%) contrast(127%);
 }
 

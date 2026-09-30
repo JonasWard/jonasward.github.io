@@ -6,25 +6,25 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/the-city-is-art/theCityIsArt.jpg';
-import image1 from './assets/the-city-is-art/4K_VSL_a_b.jpg';
-import image2 from './assets/the-city-is-art/campi2muqarnas_shah.jpg';
-import image3 from './assets/the-city-is-art/Carla2klee.jpg';
-import image4 from './assets/the-city-is-art/Carla2klimt.jpg';
-import image5 from './assets/the-city-is-art/dante2victoria.jpg';
-import image6 from './assets/the-city-is-art/konstanz2pollock_34.jpg';
-import image7 from './assets/the-city-is-art/konstanz2victoria.jpg';
-import image8 from './assets/the-city-is-art/lodz2ishtar_gate.jpg';
-import image9 from './assets/the-city-is-art/san_michele2muqarnas_shah.jpg';
-import image10 from './assets/the-city-is-art/stripes2lodz.jpg';
-import image11 from './assets/the-city-is-art/stripes2lodz2dogma_kgdvs_1.jpg';
-import image12 from './assets/the-city-is-art/stripes2lodz2victoria-2.jpg';
-import image13 from './assets/the-city-is-art/VSL-2d3d-9.jpg';
-import image14 from './assets/the-city-is-art/VSL-2d3d-15.jpg';
-import image15 from './assets/the-city-is-art/VSL-3d-8.jpg';
-import image16 from './assets/the-city-is-art/VSL-3d-9.jpg';
-import image17 from './assets/the-city-is-art/VSL-3d-10.jpg';
-import image18 from './assets/the-city-is-art/VSL-3d-11.jpg';
+import keyImage from './assets/the-city-is-art/theCityIsArt.jpg?responsive';
+import image1 from './assets/the-city-is-art/4K_VSL_a_b.jpg?responsive';
+import image2 from './assets/the-city-is-art/campi2muqarnas_shah.jpg?responsive';
+import image3 from './assets/the-city-is-art/Carla2klee.jpg?responsive';
+import image4 from './assets/the-city-is-art/Carla2klimt.jpg?responsive';
+import image5 from './assets/the-city-is-art/dante2victoria.jpg?responsive';
+import image6 from './assets/the-city-is-art/konstanz2pollock_34.jpg?responsive';
+import image7 from './assets/the-city-is-art/konstanz2victoria.jpg?responsive';
+import image8 from './assets/the-city-is-art/lodz2ishtar_gate.jpg?responsive';
+import image9 from './assets/the-city-is-art/san_michele2muqarnas_shah.jpg?responsive';
+import image10 from './assets/the-city-is-art/stripes2lodz.jpg?responsive';
+import image11 from './assets/the-city-is-art/stripes2lodz2dogma_kgdvs_1.jpg?responsive';
+import image12 from './assets/the-city-is-art/stripes2lodz2victoria-2.jpg?responsive';
+import image13 from './assets/the-city-is-art/VSL-2d3d-9.jpg?responsive';
+import image14 from './assets/the-city-is-art/VSL-2d3d-15.jpg?responsive';
+import image15 from './assets/the-city-is-art/VSL-3d-8.jpg?responsive';
+import image16 from './assets/the-city-is-art/VSL-3d-9.jpg?responsive';
+import image17 from './assets/the-city-is-art/VSL-3d-10.jpg?responsive';
+import image18 from './assets/the-city-is-art/VSL-3d-11.jpg?responsive';
 import { Keywords } from '../../../types/keywords/keywords';
 
 const id = '2020-01';
@@ -46,7 +46,7 @@ const maxColumnCount = 2;
 export const theCityIsArt: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(keyImage, metaData.name, 1970, 2183),
+  projectImage: createTitleImage(keyImage, metaData.name),
   projectContent: [
     createText(
       maxColumnCount,

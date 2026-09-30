@@ -1,3 +1,1 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow:
+in 157-feature-Deggendorf Kroiss.json, in 7.a alignment, junction-16 and junction-23 should get moved by the alignment changing for 73348:0 and 63102:0

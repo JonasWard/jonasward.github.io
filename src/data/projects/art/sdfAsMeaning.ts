@@ -7,19 +7,19 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
 
-import sdfAsMeaning_front from './asssets/sdfAsMeaning_front.jpg';
-import sdfAsMeaning_1 from './asssets/sdfAsMeaning_1.jpg';
-import sdfAsMeaning_2 from './asssets/sdfAsMeaning_2.jpg';
-import sdfAsMeaning_3 from './asssets/sdfAsMeaning_3.jpg';
-import sdfAsMeaning_4 from './asssets/sdfAsMeaning_4.jpg';
-import sdfAsMeaning_5 from './asssets/sdfAsMeaning_5.jpg';
-import sdfAsMeaning_6 from './asssets/sdfAsMeaning_6.jpg';
-import sdfAsMeaning_7 from './asssets/sdfAsMeaning_7.jpg';
-import sdfAsMeaning_8 from './asssets/sdfAsMeaning_8.jpg';
-import sdfAsMeaning_9 from './asssets/sdfAsMeaning_9.jpg';
-import sdfAsMeaning_10 from './asssets/sdfAsMeaning_10.jpg';
-import sdfAsMeaning_11 from './asssets/sdfAsMeaning_11.jpg';
-import sdfAsMeaning_12 from './asssets/sdfAsMeaning_12.jpg';
+import sdfAsMeaning_front from './asssets/sdfAsMeaning_front.jpg?responsive';
+import sdfAsMeaning_1 from './asssets/sdfAsMeaning_1.jpg?responsive';
+import sdfAsMeaning_2 from './asssets/sdfAsMeaning_2.jpg?responsive';
+import sdfAsMeaning_3 from './asssets/sdfAsMeaning_3.jpg?responsive';
+import sdfAsMeaning_4 from './asssets/sdfAsMeaning_4.jpg?responsive';
+import sdfAsMeaning_5 from './asssets/sdfAsMeaning_5.jpg?responsive';
+import sdfAsMeaning_6 from './asssets/sdfAsMeaning_6.jpg?responsive';
+import sdfAsMeaning_7 from './asssets/sdfAsMeaning_7.jpg?responsive';
+import sdfAsMeaning_8 from './asssets/sdfAsMeaning_8.jpg?responsive';
+import sdfAsMeaning_9 from './asssets/sdfAsMeaning_9.jpg?responsive';
+import sdfAsMeaning_10 from './asssets/sdfAsMeaning_10.jpg?responsive';
+import sdfAsMeaning_11 from './asssets/sdfAsMeaning_11.jpg?responsive';
+import sdfAsMeaning_12 from './asssets/sdfAsMeaning_12.jpg?responsive';
 
 const id = '2023-05';
 
@@ -38,7 +38,7 @@ const metaData: ProjectMetaData = {
 export const sdfAsMeaning: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(sdfAsMeaning_front, metaData.name, 3775, 3066),
+  projectImage: createTitleImage(sdfAsMeaning_front, metaData.name),
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,

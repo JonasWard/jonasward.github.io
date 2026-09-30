@@ -6,21 +6,21 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import frituurOrtho1 from './assets/frituur-futurist/frituurOrtho1.png';
-import frituurOrtho2 from './assets/frituur-futurist/frituurOrtho2.png';
-import frituurOrtho3 from './assets/frituur-futurist/frituurOrtho3.png';
-import frituurOrtho4 from './assets/frituur-futurist/frituurOrtho4.png';
-import frituurOrtho5 from './assets/frituur-futurist/frituurOrtho5.png';
-import frituurRender from './assets/frituur-futurist/frituurRender.jpg';
-import futuristBelgie from './assets/frituur-futurist/futuristBelgie.png';
-import futuristCharlesDemeer from './assets/frituur-futurist/futuristCharlesDemeer.png';
-import futuristEeuwfeestlaan from './assets/frituur-futurist/futuristEeuwfeestlaan.png';
-import futuristExpo58 from './assets/frituur-futurist/futuristExpo58.png';
-import futuristLakenstraat from './assets/frituur-futurist/futuristLakenstraat.png';
-import futuristLogo from './assets/frituur-futurist/futuristLogo.png';
-import futuristReferences from './assets/frituur-futurist/futuristReferences.jpg';
-import futuristTitle from './assets/frituur-futurist/futuristTitle.png';
-import frituurReferences from './assets/frituur-futurist/frituurReferences.jpg';
+import frituurOrtho1 from './assets/frituur-futurist/frituurOrtho1.png?responsive';
+import frituurOrtho2 from './assets/frituur-futurist/frituurOrtho2.png?responsive';
+import frituurOrtho3 from './assets/frituur-futurist/frituurOrtho3.png?responsive';
+import frituurOrtho4 from './assets/frituur-futurist/frituurOrtho4.png?responsive';
+import frituurOrtho5 from './assets/frituur-futurist/frituurOrtho5.png?responsive';
+import frituurRender from './assets/frituur-futurist/frituurRender.jpg?responsive';
+import futuristBelgie from './assets/frituur-futurist/futuristBelgie.png?responsive';
+import futuristCharlesDemeer from './assets/frituur-futurist/futuristCharlesDemeer.png?responsive';
+import futuristEeuwfeestlaan from './assets/frituur-futurist/futuristEeuwfeestlaan.png?responsive';
+import futuristExpo58 from './assets/frituur-futurist/futuristExpo58.png?responsive';
+import futuristLakenstraat from './assets/frituur-futurist/futuristLakenstraat.png?responsive';
+import futuristLogo from './assets/frituur-futurist/futuristLogo.png?responsive';
+import futuristReferences from './assets/frituur-futurist/futuristReferences.jpg?responsive';
+import futuristTitle from './assets/frituur-futurist/futuristTitle.png?responsive';
+import frituurReferences from './assets/frituur-futurist/frituurReferences.jpg?responsive';
 
 const id = '2017-02';
 
@@ -41,7 +41,7 @@ const maxColumnCount = 1;
 export const frituurFuturist: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(futuristTitle, metaData.name, 1350, 1362, 'black-on-white'),
+  projectImage: createTitleImage(futuristTitle, metaData.name, 'black-on-white'),
   projectContent: [
     createText(maxColumnCount, [
       'frituur futurist',

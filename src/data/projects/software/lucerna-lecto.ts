@@ -8,11 +8,11 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import example from './assets/lucerna-lecto/example.webp';
-import mandelbrot from './assets/lucerna-lecto/mandelbrot.webp';
-import patternA from './assets/lucerna-lecto/pattern-a.webp';
-import patternB from './assets/lucerna-lecto/pattern-b.webp';
-import patternC from './assets/lucerna-lecto/pattern-c.webp';
+import example from './assets/lucerna-lecto/example.webp?responsive';
+import mandelbrot from './assets/lucerna-lecto/mandelbrot.webp?responsive';
+import patternA from './assets/lucerna-lecto/pattern-a.webp?responsive';
+import patternB from './assets/lucerna-lecto/pattern-b.webp?responsive';
+import patternC from './assets/lucerna-lecto/pattern-c.webp?responsive';
 
 const id = '2025-03';
 
@@ -40,7 +40,7 @@ const metaData: ProjectMetaData = {
 export const lucernaLecto: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(example, metaData.name, 1348, 1522),
+  projectImage: createTitleImage(example, metaData.name),
   projectContent: [
     createText(
       2,

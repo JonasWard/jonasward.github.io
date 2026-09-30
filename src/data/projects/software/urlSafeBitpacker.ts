@@ -8,8 +8,8 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import projectImage1 from './assets/urlSafeBitpacker/bitpacker.png';
-import projectImage2 from './assets/urlSafeBitpacker/lerp.png';
+import projectImage1 from './assets/urlSafeBitpacker/bitpacker.png?responsive';
+import projectImage2 from './assets/urlSafeBitpacker/lerp.png?responsive';
 
 const id = '2024-04';
 
@@ -28,7 +28,7 @@ const metaData: ProjectMetaData = {
 export const urlSafeBitpacker: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage1, metaData.name, 1748, 1246, 'black-on-white'),
+  projectImage: createTitleImage(projectImage1, metaData.name, 'black-on-white'),
   projectContent: [
     createText(
       2,

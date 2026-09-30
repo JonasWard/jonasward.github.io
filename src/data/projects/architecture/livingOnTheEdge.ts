@@ -6,51 +6,51 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 
-import permeke from './assets/living-on-the-edge/Constant_Permeke.webp';
-import tuymans from './assets/living-on-the-edge/tuymans.webp';
-import leonAugustin from './assets/living-on-the-edge/Léon_Augustin-Lhermitte.webp';
-import projectImage from './assets/living-on-the-edge/SiteModel.jpg';
-import brueghelKinderen from './assets/living-on-the-edge/children-s-games-1560.webp';
+import permeke from './assets/living-on-the-edge/Constant_Permeke.webp?responsive';
+import tuymans from './assets/living-on-the-edge/tuymans.webp?responsive';
+import leonAugustin from './assets/living-on-the-edge/Léon_Augustin-Lhermitte.webp?responsive';
+import projectImage from './assets/living-on-the-edge/SiteModel.jpg?responsive';
+import brueghelKinderen from './assets/living-on-the-edge/children-s-games-1560.webp?responsive';
 
-import schema from './assets/living-on-the-edge/Schema.webp';
-import evolutie from './assets/living-on-the-edge/Evolutie.webp';
-import nywf from './assets/living-on-the-edge/NYWF-9-64-Belgium.webp';
-import print83 from './assets/living-on-the-edge/Print_83.webp';
+import schema from './assets/living-on-the-edge/Schema.webp?responsive';
+import evolutie from './assets/living-on-the-edge/Evolutie.webp?responsive';
+import nywf from './assets/living-on-the-edge/NYWF-9-64-Belgium.webp?responsive';
+import print83 from './assets/living-on-the-edge/Print_83.webp?responsive';
 
-import nolliNu from './assets/living-on-the-edge/NolliNu.webp';
-import brueghelTriumph from './assets/living-on-the-edge/Pieter_Brueghel_The_Triumph_of_Death.webp';
-import jacobIsaakszVanRuisdael from './assets/living-on-the-edge/Jacob_Isaaksz_van_Ruisdael.webp';
-import alterNordfriedhofMuenchen from './assets/living-on-the-edge/Alter_Nordfriedhof_Muenchen-1.webp';
+import nolliNu from './assets/living-on-the-edge/NolliNu.webp?responsive';
+import brueghelTriumph from './assets/living-on-the-edge/Pieter_Brueghel_The_Triumph_of_Death.webp?responsive';
+import jacobIsaakszVanRuisdael from './assets/living-on-the-edge/Jacob_Isaaksz_van_Ruisdael.webp?responsive';
+import alterNordfriedhofMuenchen from './assets/living-on-the-edge/Alter_Nordfriedhof_Muenchen-1.webp?responsive';
 
-import compositieBeeldAxisRas from './assets/living-on-the-edge/CompositieBeeldAxisRas.webp';
+import compositieBeeldAxisRas from './assets/living-on-the-edge/CompositieBeeldAxisRas.webp?responsive';
 
-import graven from './assets/living-on-the-edge/Graven.webp';
-import conceptSectionFinal from './assets/living-on-the-edge/ConceptSectionFinal.webp';
-import sectionsWhole from './assets/living-on-the-edge/SectionsWhole.webp';
+import graven from './assets/living-on-the-edge/Graven.webp?responsive';
+import conceptSectionFinal from './assets/living-on-the-edge/ConceptSectionFinal.webp?responsive';
+import sectionsWhole from './assets/living-on-the-edge/SectionsWhole.webp?responsive';
 
-import conceptD from './assets/living-on-the-edge/CocneptD.webp';
-import conceptA from './assets/living-on-the-edge/ConcepA.webp';
-import conceptB from './assets/living-on-the-edge/ConceptB.webp';
-import conceptC from './assets/living-on-the-edge/ConceptC.webp';
-import conceptE from './assets/living-on-the-edge/ConceptE.webp';
+import conceptD from './assets/living-on-the-edge/CocneptD.webp?responsive';
+import conceptA from './assets/living-on-the-edge/ConcepA.webp?responsive';
+import conceptB from './assets/living-on-the-edge/ConceptB.webp?responsive';
+import conceptC from './assets/living-on-the-edge/ConceptC.webp?responsive';
+import conceptE from './assets/living-on-the-edge/ConceptE.webp?responsive';
 
-import currentSchemeTotal from './assets/living-on-the-edge/CurrentSchemeTotal.webp';
-import nolliOntwerp from './assets/living-on-the-edge/NolliOntwerp300.webp';
+import currentSchemeTotal from './assets/living-on-the-edge/CurrentSchemeTotal.webp?responsive';
+import nolliOntwerp from './assets/living-on-the-edge/NolliOntwerp300.webp?responsive';
 
-import presA from './assets/living-on-the-edge/pres_a.webp';
-import presB from './assets/living-on-the-edge/pres_b.webp';
-import presC from './assets/living-on-the-edge/pres_c.webp';
-import presD from './assets/living-on-the-edge/pres_d.webp';
-import presE from './assets/living-on-the-edge/pres_e.webp';
-import presF from './assets/living-on-the-edge/pres_f.webp';
-import presG from './assets/living-on-the-edge/pres_g.webp';
-import presH from './assets/living-on-the-edge/pres_h.webp';
-import presI from './assets/living-on-the-edge/pres_i.webp';
-import presJ from './assets/living-on-the-edge/pres_j.webp';
-import presK from './assets/living-on-the-edge/pres_k.webp';
-import presL from './assets/living-on-the-edge/pres_l.webp';
-import presM from './assets/living-on-the-edge/pres_m.webp';
-import presN from './assets/living-on-the-edge/pres_n.webp';
+import presA from './assets/living-on-the-edge/pres_a.webp?responsive';
+import presB from './assets/living-on-the-edge/pres_b.webp?responsive';
+import presC from './assets/living-on-the-edge/pres_c.webp?responsive';
+import presD from './assets/living-on-the-edge/pres_d.webp?responsive';
+import presE from './assets/living-on-the-edge/pres_e.webp?responsive';
+import presF from './assets/living-on-the-edge/pres_f.webp?responsive';
+import presG from './assets/living-on-the-edge/pres_g.webp?responsive';
+import presH from './assets/living-on-the-edge/pres_h.webp?responsive';
+import presI from './assets/living-on-the-edge/pres_i.webp?responsive';
+import presJ from './assets/living-on-the-edge/pres_j.webp?responsive';
+import presK from './assets/living-on-the-edge/pres_k.webp?responsive';
+import presL from './assets/living-on-the-edge/pres_l.webp?responsive';
+import presM from './assets/living-on-the-edge/pres_m.webp?responsive';
+import presN from './assets/living-on-the-edge/pres_n.webp?responsive';
 
 const id = '2017-01';
 
@@ -68,7 +68,7 @@ const metaData: ProjectMetaData = {
 export const livingOnTheEdge: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 2943, 3890),
+  projectImage: createTitleImage(projectImage, metaData.name),
   projectContent: [
     createText(
       2,

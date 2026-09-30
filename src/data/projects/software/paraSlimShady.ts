@@ -8,19 +8,19 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import projectImage from './assets/paraSlimShady/babylon_2.jpg';
-import babylon3 from './assets/paraSlimShady/babylon_3.jpg';
-import babylon4 from './assets/paraSlimShady/babylon_4.jpg';
+import projectImage from './assets/paraSlimShady/babylon_2.jpg?responsive';
+import babylon3 from './assets/paraSlimShady/babylon_3.jpg?responsive';
+import babylon4 from './assets/paraSlimShady/babylon_4.jpg?responsive';
 
-import julierTurm1 from './assets/paraSlimShady/julierTurm_1.jpg';
-import julierTurm2 from './assets/paraSlimShady/julierTurm_2.jpg';
-import julierTurm3 from './assets/paraSlimShady/julierTurm_3.jpg';
-import julierTurm4 from './assets/paraSlimShady/julierTurm_4.jpg';
+import julierTurm1 from './assets/paraSlimShady/julierTurm_1.jpg?responsive';
+import julierTurm2 from './assets/paraSlimShady/julierTurm_2.jpg?responsive';
+import julierTurm3 from './assets/paraSlimShady/julierTurm_3.jpg?responsive';
+import julierTurm4 from './assets/paraSlimShady/julierTurm_4.jpg?responsive';
 
-import references1 from './assets/paraSlimShady/references_1.jpg';
-import references2 from './assets/paraSlimShady/references_2.png';
-import references3 from './assets/paraSlimShady/references_3.jpg';
-import references4 from './assets/paraSlimShady/references_4.jpg';
+import references1 from './assets/paraSlimShady/references_1.jpg?responsive';
+import references2 from './assets/paraSlimShady/references_2.png?responsive';
+import references3 from './assets/paraSlimShady/references_3.jpg?responsive';
+import references4 from './assets/paraSlimShady/references_4.jpg?responsive';
 
 
 const id = '2024-01';
@@ -50,7 +50,7 @@ const metaData: ProjectMetaData = {
 export const paraSlimShady: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 2048, 1273),
+  projectImage: createTitleImage(projectImage, metaData.name),
   projectContent: [
     createText(
       2,

@@ -7,18 +7,18 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import image1 from './assets/impact-clay/BaseBulgeRange.jpg';
-import image2 from './assets/impact-clay/Bulging.jpg';
-import image3 from './assets/impact-clay/ComplicatedDots.jpg';
-import image4 from './assets/impact-clay/DotDistance.jpg';
-import image5 from './assets/impact-clay/Dragon.jpg';
-import image6 from './assets/impact-clay/ImpactClay_BaselineTests.jpg';
-import image7 from './assets/impact-clay/Pressing.jpg';
-import keyImage from './assets/impact-clay/Ray.jpg';
-import image9 from './assets/impact-clay/SetUp.jpg';
-import image10 from './assets/impact-clay/SetUp2.jpg';
-import image11 from './assets/impact-clay/Stacking.jpg';
-import image12 from './assets/impact-clay/Tiles.png';
+import image1 from './assets/impact-clay/BaseBulgeRange.jpg?responsive';
+import image2 from './assets/impact-clay/Bulging.jpg?responsive';
+import image3 from './assets/impact-clay/ComplicatedDots.jpg?responsive';
+import image4 from './assets/impact-clay/DotDistance.jpg?responsive';
+import image5 from './assets/impact-clay/Dragon.jpg?responsive';
+import image6 from './assets/impact-clay/ImpactClay_BaselineTests.jpg?responsive';
+import image7 from './assets/impact-clay/Pressing.jpg?responsive';
+import keyImage from './assets/impact-clay/Ray.jpg?responsive';
+import image9 from './assets/impact-clay/SetUp.jpg?responsive';
+import image10 from './assets/impact-clay/SetUp2.jpg?responsive';
+import image11 from './assets/impact-clay/Stacking.jpg?responsive';
+import image12 from './assets/impact-clay/Tiles.png?responsive';
 
 const id = '2018-03';
 
@@ -38,7 +38,7 @@ const metaData: ProjectMetaData = {
 export const impactClay: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(keyImage, metaData.name, 2048, 2048),
+  projectImage: createTitleImage(keyImage, metaData.name),
   projectContent: [
     createText(
       2,

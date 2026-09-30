@@ -7,35 +7,35 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
 
-import chocoStudies_1 from './asssets/chocoStudies_1.jpg';
-import chocoStudies_2 from './asssets/chocoStudies_2.jpg';
-import chocoStudies_3 from './asssets/chocoStudies_3.jpg';
-import chocoStudies_4 from './asssets/chocoStudies_4.jpg';
-import chocoStudies_5 from './asssets/chocoStudies_5.jpg';
-import chocoStudies_6 from './asssets/chocoStudies_6.jpg';
-import chocoStudies_7 from './asssets/chocoStudies_7.jpg';
-import chocoStudies_8 from './asssets/chocoStudies_8.jpg';
-import chocoStudies_9 from './asssets/chocoStudies_9.jpg';
-import chocoStudies_10 from './asssets/chocoStudies_10.jpg';
-import chocoStudies_11 from './asssets/chocoStudies_11.jpg';
-import chocoStudies_12 from './asssets/chocoStudies_12.jpg';
-import chocoStudies_13 from './asssets/chocoStudies_13.jpg';
-import chocoStudies_14 from './asssets/chocoStudies_14.jpg';
-import chocoStudies_15 from './asssets/chocoStudies_15.jpg';
-import chocoStudies_16 from './asssets/chocoStudies_16.jpg';
-import chocoStudies_17 from './asssets/chocoStudies_17.jpg';
-import chocoStudies_18 from './asssets/chocoStudies_18.jpg';
-import chocoStudies_19 from './asssets/chocoStudies_19.jpg';
-import chocoStudies_20 from './asssets/chocoStudies_20.jpg';
-import chocoStudies_21 from './asssets/chocoStudies_21.jpg';
-import chocoStudies_22 from './asssets/chocoStudies_22.jpg';
-import chocoStudies_23 from './asssets/chocoStudies_23.jpg';
-import chocoStudies_24 from './asssets/chocoStudies_24.jpg';
-import chocoStudies_25 from './asssets/chocoStudies_25.jpg';
-import chocoStudies_26 from './asssets/chocoStudies_26.jpg';
-import chocoStudies_27 from './asssets/chocoStudies_27.jpg';
-import chocoStudies_28 from './asssets/chocoStudies_28.jpg';
-import chocoStudies_Front from './asssets/chocoStudies_Front.jpg';
+import chocoStudies_1 from './asssets/chocoStudies_1.jpg?responsive';
+import chocoStudies_2 from './asssets/chocoStudies_2.jpg?responsive';
+import chocoStudies_3 from './asssets/chocoStudies_3.jpg?responsive';
+import chocoStudies_4 from './asssets/chocoStudies_4.jpg?responsive';
+import chocoStudies_5 from './asssets/chocoStudies_5.jpg?responsive';
+import chocoStudies_6 from './asssets/chocoStudies_6.jpg?responsive';
+import chocoStudies_7 from './asssets/chocoStudies_7.jpg?responsive';
+import chocoStudies_8 from './asssets/chocoStudies_8.jpg?responsive';
+import chocoStudies_9 from './asssets/chocoStudies_9.jpg?responsive';
+import chocoStudies_10 from './asssets/chocoStudies_10.jpg?responsive';
+import chocoStudies_11 from './asssets/chocoStudies_11.jpg?responsive';
+import chocoStudies_12 from './asssets/chocoStudies_12.jpg?responsive';
+import chocoStudies_13 from './asssets/chocoStudies_13.jpg?responsive';
+import chocoStudies_14 from './asssets/chocoStudies_14.jpg?responsive';
+import chocoStudies_15 from './asssets/chocoStudies_15.jpg?responsive';
+import chocoStudies_16 from './asssets/chocoStudies_16.jpg?responsive';
+import chocoStudies_17 from './asssets/chocoStudies_17.jpg?responsive';
+import chocoStudies_18 from './asssets/chocoStudies_18.jpg?responsive';
+import chocoStudies_19 from './asssets/chocoStudies_19.jpg?responsive';
+import chocoStudies_20 from './asssets/chocoStudies_20.jpg?responsive';
+import chocoStudies_21 from './asssets/chocoStudies_21.jpg?responsive';
+import chocoStudies_22 from './asssets/chocoStudies_22.jpg?responsive';
+import chocoStudies_23 from './asssets/chocoStudies_23.jpg?responsive';
+import chocoStudies_24 from './asssets/chocoStudies_24.jpg?responsive';
+import chocoStudies_25 from './asssets/chocoStudies_25.jpg?responsive';
+import chocoStudies_26 from './asssets/chocoStudies_26.jpg?responsive';
+import chocoStudies_27 from './asssets/chocoStudies_27.jpg?responsive';
+import chocoStudies_28 from './asssets/chocoStudies_28.jpg?responsive';
+import chocoStudies_Front from './asssets/chocoStudies_Front.jpg?responsive';
 
 const id = '2023-06';
 
@@ -54,7 +54,7 @@ const metaData: ProjectMetaData = {
 export const chocoStudies: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(chocoStudies_Front, metaData.name, 2981, 5117),
+  projectImage: createTitleImage(chocoStudies_Front, metaData.name),
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,

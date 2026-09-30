@@ -6,14 +6,14 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import image1 from './assets/concrete-choreography/makingDetails.jpg';
-import image2 from './assets/concrete-choreography/inAction_2.png';
-import image3 from './assets/concrete-choreography/inAction_1.png';
-import image4 from './assets/concrete-choreography/fabrication-setup-1.jpg';
-import image5 from './assets/concrete-choreography/edit02_260A3586.jpg';
-import keyImage from './assets/concrete-choreography/columnView.jpg';
-import overviewNight from './assets/concrete-choreography/byNight.jpg';
-import overviewDay from './assets/concrete-choreography/byDay.jpg';
+import image1 from './assets/concrete-choreography/makingDetails.jpg?responsive';
+import image2 from './assets/concrete-choreography/inAction_2.png?responsive';
+import image3 from './assets/concrete-choreography/inAction_1.png?responsive';
+import image4 from './assets/concrete-choreography/fabrication-setup-1.jpg?responsive';
+import image5 from './assets/concrete-choreography/edit02_260A3586.jpg?responsive';
+import keyImage from './assets/concrete-choreography/columnView.jpg?responsive';
+import overviewNight from './assets/concrete-choreography/byNight.jpg?responsive';
+import overviewDay from './assets/concrete-choreography/byDay.jpg?responsive';
 
 const id = '2019-03';
 
@@ -33,7 +33,7 @@ const maxColumnCount = 2;
 export const concreteChoreography: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(keyImage, metaData.name, 1280, 1707),
+  projectImage: createTitleImage(keyImage, metaData.name),
   projectContent: [
     createText(
       maxColumnCount,

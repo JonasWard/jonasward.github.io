@@ -5,17 +5,19 @@ import { ProjectImage } from 'src/types/projectContent/projectImage';
 import { getProjectKeywords } from 'src/utils/projectconstructor';
 import { useRef, useState } from 'react';
 
-import logo from '../../../assets/jonasward_logo_elong.png';
 import { KeywordButton } from './KeywordButton';
+import { ResponsiveImg } from '../pagecomponents/ResponsiveImg';
+
+const cardWidth = 200;
 
 interface IProjectCard {
   index: number;
   metaData: ProjectMetaData;
   keyImage: ProjectImage;
-  currentCenterPosition: [number, number];
+  currentScrollX: number;
 }
 
-export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, currentCenterPosition }) => {
+export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, currentScrollX }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const navigateProject = () => navigate(`/project/${metaData.webstring}`);
@@ -25,19 +27,20 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
     <div
       ref={cardRef}
       className={`project-card fade-in ${metaData.projectType} ${
-        cardRef.current && (Math.abs(currentCenterPosition[0] - cardRef.current!.offsetLeft) < 115 ? 'in-focus' : '')
+        cardRef.current && (Math.abs(currentScrollX - cardRef.current!.offsetLeft) < 115 ? 'in-focus' : '')
       }`}
       onClick={navigateProject}
     >
       <div>
-        <img
+        <ResponsiveImg
+          picture={keyImage.picture}
+          sizes={`${cardWidth}px`}
+          alt={metaData.name}
           style={{
             width: '100%',
-            height: `${((keyImage.imageHeigth as number) / (keyImage.imageWidth as number)) * 200}px`,
+            height: (keyImage.picture.img.h / keyImage.picture.img.w) * cardWidth,
             objectFit: 'cover'
           }}
-          src={keyImage.imageHref || logo}
-          alt={metaData.name}
         />
         <div className="project-card-content">
           <h4>{metaData.id}</h4>

@@ -7,8 +7,8 @@ import { ProjectData } from 'src/types/projectContent/projectData';
 import { ProjectMetaData } from 'src/types/projectContent/projectMetaData';
 import { createTitleImage, createImage, createTextImage } from 'src/utils/projectconstructor';
 
-import lampsQuadrato from './assets/quadrato.jpg';
-import lampsQuadratoLogo from './assets/quadratoLogo.png';
+import lampsQuadrato from './assets/quadrato.jpg?responsive';
+import lampsQuadratoLogo from './assets/quadratoLogo.png?responsive';
 
 const id = '2018-04';
 
@@ -27,7 +27,7 @@ const metaData: ProjectMetaData = {
 export const quadrato: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(lampsQuadrato, metaData.name, 2048, 2048),
+  projectImage: createTitleImage(lampsQuadrato, metaData.name),
   projectContent: [
     createTextImage(
       lampsQuadratoLogo,

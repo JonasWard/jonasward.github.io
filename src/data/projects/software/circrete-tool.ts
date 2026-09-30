@@ -8,10 +8,10 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import view from './assets/circrete-tool/3d-view.webp';
-import components from './assets/circrete-tool/components.webp';
-import geometry from './assets/circrete-tool/geometry.webp';
-import overview from './assets/circrete-tool/overview.webp';
+import view from './assets/circrete-tool/3d-view.webp?responsive';
+import components from './assets/circrete-tool/components.webp?responsive';
+import geometry from './assets/circrete-tool/geometry.webp?responsive';
+import overview from './assets/circrete-tool/overview.webp?responsive';
 
 const id = '2025-04';
 
@@ -32,7 +32,7 @@ const metaData: ProjectMetaData = {
 export const circreteTool: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(view, metaData.name, 1761, 1375),
+  projectImage: createTitleImage(view, metaData.name),
   projectContent: [
     createText(2, ['POC Assesment Tool', 'Static webpage, with convex backend, written in typescript.']),
     {

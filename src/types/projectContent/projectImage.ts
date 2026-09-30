@@ -1,10 +1,12 @@
+import type { Picture } from 'vite-imagetools';
 import { ProjectContentType } from './projectContentType';
+
+// output of an `import img from './x.jpg?responsive'` (see vite.config.mts)
+export type ResponsivePicture = Picture;
 
 export type ProjectImage = {
   type: ProjectContentType.Image;
-  imageHref: string;
-  imageWidth?: number;
-  imageHeigth?: number;
+  picture: ResponsivePicture;
   imageText?: string;
   maxImageHeight?: number;
   maxImageWidth?: number;

@@ -7,9 +7,9 @@ import { ProjectData } from 'src/types/projectContent/projectData';
 import { ProjectMetaData } from 'src/types/projectContent/projectMetaData';
 import { createTitleImage, createImage, createTextImage } from 'src/utils/projectconstructor';
 
-import lampsFrituurLogo from './assets/Futurist Logo.png';
-import lampsFrituurMultiple from './assets/frituurMultiple.jpg';
-import lampsFrituurSingle from './assets/frituurSingle.jpg';
+import lampsFrituurLogo from './assets/Futurist Logo.png?responsive';
+import lampsFrituurMultiple from './assets/frituurMultiple.jpg?responsive';
+import lampsFrituurSingle from './assets/frituurSingle.jpg?responsive';
 
 const id = '2018-05';
 
@@ -28,7 +28,7 @@ const metaData: ProjectMetaData = {
 export const frituristLamp: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(lampsFrituurSingle, metaData.name, 1508, 2048),
+  projectImage: createTitleImage(lampsFrituurSingle, metaData.name),
   projectContent: [
     createTextImage(
       lampsFrituurLogo,

@@ -7,14 +7,14 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/stauffer-static/keyImage.png';
-import buckling from './assets/stauffer-static/buckling.png';
-import calculations from './assets/stauffer-static/calculations.png';
-import indeterminateBeam from './assets/stauffer-static/indeterminateBeam.png';
-import plateBuckling from './assets/stauffer-static/plateBuckling.png';
-import resources from './assets/stauffer-static/resources.png';
-import results from './assets/stauffer-static/results.png';
-import tenants from './assets/stauffer-static/tenants.png';
+import keyImage from './assets/stauffer-static/keyImage.png?responsive';
+import buckling from './assets/stauffer-static/buckling.png?responsive';
+import calculations from './assets/stauffer-static/calculations.png?responsive';
+import indeterminateBeam from './assets/stauffer-static/indeterminateBeam.png?responsive';
+import plateBuckling from './assets/stauffer-static/plateBuckling.png?responsive';
+import resources from './assets/stauffer-static/resources.png?responsive';
+import results from './assets/stauffer-static/results.png?responsive';
+import tenants from './assets/stauffer-static/tenants.png?responsive';
 import { Technologies } from 'src/types/keywords/technologies';
 
 const id = '2023-02';
@@ -36,7 +36,7 @@ const metaData: ProjectMetaData = {
 export const staufferStatic: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(keyImage, metaData.name, 1205, 1195),
+  projectImage: createTitleImage(keyImage, metaData.name),
   projectContent: [
     createText(
       2,

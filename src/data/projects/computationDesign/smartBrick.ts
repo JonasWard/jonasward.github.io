@@ -7,16 +7,16 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import projectImage from './assets/smart-bricks/topViewTiles.jpg';
-import image1 from './assets/smart-bricks/concept.0.B.StackedTiles.2.jpg';
-import image2 from './assets/smart-bricks/concept.0.G.Tesseleation-Interlocking.jpg';
-import image3 from './assets/smart-bricks/DetailStack.jpg';
-import image4 from './assets/smart-bricks/PackedvsUnpacked.jpg';
-import image5 from './assets/smart-bricks/PlacingDetail.jpg';
-import image6 from './assets/smart-bricks/Plane.jpg';
-import image7 from './assets/smart-bricks/ReactionDiffusion.png';
-import image8 from './assets/smart-bricks/Screen Shot 2018-10-26 at 14.34.34.jpg';
-import image9 from './assets/smart-bricks/SideDetail.jpg';
+import projectImage from './assets/smart-bricks/topViewTiles.jpg?responsive';
+import image1 from './assets/smart-bricks/concept.0.B.StackedTiles.2.jpg?responsive';
+import image2 from './assets/smart-bricks/concept.0.G.Tesseleation-Interlocking.jpg?responsive';
+import image3 from './assets/smart-bricks/DetailStack.jpg?responsive';
+import image4 from './assets/smart-bricks/PackedvsUnpacked.jpg?responsive';
+import image5 from './assets/smart-bricks/PlacingDetail.jpg?responsive';
+import image6 from './assets/smart-bricks/Plane.jpg?responsive';
+import image7 from './assets/smart-bricks/ReactionDiffusion.png?responsive';
+import image8 from './assets/smart-bricks/Screen Shot 2018-10-26 at 14.34.34.jpg?responsive';
+import image9 from './assets/smart-bricks/SideDetail.jpg?responsive';
 
 const id = '2019-01';
 
@@ -36,7 +36,7 @@ const metaData: ProjectMetaData = {
 export const smartBrick: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 2048, 2036),
+  projectImage: createTitleImage(projectImage, metaData.name),
   projectContent: [
     createText(1, [
       'packed produced tiles',

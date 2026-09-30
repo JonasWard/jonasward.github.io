@@ -8,20 +8,20 @@ import { ProjectContentType } from 'src/types/projectContent/projectContentType'
 import { Keywords } from 'src/types/keywords/keywords';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import denmarkDistance from './asssets/denmarkDistance.png';
-import denmarkPolar from './asssets/denmarkPolar.png';
-import mountains from './asssets/mountains.png';
-import mountainsBis from './asssets/mountainsBis.png';
-import swissDistance from './asssets/swissDistance.png';
-import swissPolar from './asssets/swissPolar.png';
-import swissRadial from './asssets/swissRadial.png';
-import zurich from './asssets/zurich.png';
-import belgium from './asssets/belgium.png';
-import shape from './asssets/shape.webp';
-import france from './asssets/france.webp';
-import eastFlandersDistance from './asssets/east-flanders-distance.webp';
-import eastFlandersHSV from './asssets/east-flanders-hsv.webp';
-import eastFlandersRedBlue from './asssets/east-flanders-red-blue.webp';
+import denmarkDistance from './asssets/denmarkDistance.png?responsive';
+import denmarkPolar from './asssets/denmarkPolar.png?responsive';
+import mountains from './asssets/mountains.png?responsive';
+import mountainsBis from './asssets/mountainsBis.png?responsive';
+import swissDistance from './asssets/swissDistance.png?responsive';
+import swissPolar from './asssets/swissPolar.png?responsive';
+import swissRadial from './asssets/swissRadial.png?responsive';
+import zurich from './asssets/zurich.png?responsive';
+import belgium from './asssets/belgium.png?responsive';
+import shape from './asssets/shape.webp?responsive';
+import france from './asssets/france.webp?responsive';
+import eastFlandersDistance from './asssets/east-flanders-distance.webp?responsive';
+import eastFlandersHSV from './asssets/east-flanders-hsv.webp?responsive';
+import eastFlandersRedBlue from './asssets/east-flanders-red-blue.webp?responsive';
 
 const id = '2025-07';
 
@@ -40,7 +40,7 @@ const metaData: ProjectMetaData = {
 export const svgSDF: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(eastFlandersHSV, metaData.name, 2356, 2254),
+  projectImage: createTitleImage(eastFlandersHSV, metaData.name),
   projectContent: [
     createText(2, [
       'SVG SDFs',

@@ -9,10 +9,10 @@ import { createTitleImage, createImage, createTextImage } from 'src/utils/projec
 
 const id = '2018-01';
 
-import lampsBoekentorenLogo from './assets/boekentorenLogo.png';
-import lampsBoekentorenInSitu from './assets/boekentorenInSitu.jpg';
-import lampsBoekentoren from './assets/boekentorenSolo.jpg';
-import lampsBoekentorenvBoekentoren from './assets/boekentorenVsBoekentoren.jpg';
+import lampsBoekentorenLogo from './assets/boekentorenLogo.png?responsive';
+import lampsBoekentorenInSitu from './assets/boekentorenInSitu.jpg?responsive';
+import lampsBoekentoren from './assets/boekentorenSolo.jpg?responsive';
+import lampsBoekentorenvBoekentoren from './assets/boekentorenVsBoekentoren.jpg?responsive';
 
 const metaData: ProjectMetaData = {
   id,
@@ -29,7 +29,7 @@ const metaData: ProjectMetaData = {
 export const boekentoren: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(lampsBoekentoren, metaData.name, 2048, 2048),
+  projectImage: createTitleImage(lampsBoekentoren, metaData.name),
   projectContent: [
     createTextImage(
       lampsBoekentorenLogo,

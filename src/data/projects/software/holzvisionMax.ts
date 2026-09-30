@@ -8,15 +8,15 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import holzvisionMaxFront from './assets/holzvisionMax/holzvisionMax_front.png';
-import holzvisionMax_opening from './assets/holzvisionMax/holzvisionMax_opening.png';
-import holzvisionMax_byType from './assets/holzvisionMax/holzvisionMax_byType.png';
-import holzvisionMax_filters from './assets/holzvisionMax/holzvisionMax_filters.png';
-import holzvisionMax_gantt from './assets/holzvisionMax/holzvisionMax_gantt.png';
-import holzvisionMax_graph from './assets/holzvisionMax/holzvisionMax_graph.png';
-import holzvisionMax_importExcel from './assets/holzvisionMax/holzvisionMax_importExcel.png';
-import holzvisionMax_materialView from './assets/holzvisionMax/holzvisionMax_materialView.png';
-import holzvisionMax_multiViews from './assets/holzvisionMax/holzvisionMax_multiViews.png';
+import holzvisionMaxFront from './assets/holzvisionMax/holzvisionMax_front.png?responsive';
+import holzvisionMax_opening from './assets/holzvisionMax/holzvisionMax_opening.png?responsive';
+import holzvisionMax_byType from './assets/holzvisionMax/holzvisionMax_byType.png?responsive';
+import holzvisionMax_filters from './assets/holzvisionMax/holzvisionMax_filters.png?responsive';
+import holzvisionMax_gantt from './assets/holzvisionMax/holzvisionMax_gantt.png?responsive';
+import holzvisionMax_graph from './assets/holzvisionMax/holzvisionMax_graph.png?responsive';
+import holzvisionMax_importExcel from './assets/holzvisionMax/holzvisionMax_importExcel.png?responsive';
+import holzvisionMax_materialView from './assets/holzvisionMax/holzvisionMax_materialView.png?responsive';
+import holzvisionMax_multiViews from './assets/holzvisionMax/holzvisionMax_multiViews.png?responsive';
 
 const id = '2025-01';
 
@@ -37,7 +37,7 @@ const metaData: ProjectMetaData = {
 export const holzvisionMax: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(holzvisionMax_byType, metaData.name, 1252, 1370, 'black-on-white'),
+  projectImage: createTitleImage(holzvisionMax_byType, metaData.name, 'black-on-white'),
   projectContent: [
     createText(2, [
       'Web application for keeping track of the status of all parts in the context of a Collaborative Timber Project',

@@ -7,37 +7,37 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import projectImage from './assets/chocoladeChaud/chocoladeChaud.jpg';
-import freeStyle1 from './assets/chocoladeChaud/freestyle_1.jpg';
-import freeStyle2 from './assets/chocoladeChaud/freestyle_2.jpg';
+import projectImage from './assets/chocoladeChaud/chocoladeChaud.jpg?responsive';
+import freeStyle1 from './assets/chocoladeChaud/freestyle_1.jpg?responsive';
+import freeStyle2 from './assets/chocoladeChaud/freestyle_2.jpg?responsive';
 
-import result1 from './assets/chocoladeChaud/results_1.jpg';
-import result2 from './assets/chocoladeChaud/results_2.jpg';
-import result3 from './assets/chocoladeChaud/results_3.jpg';
-import resulta from './assets/chocoladeChaud/results_a.jpg';
-import resultb from './assets/chocoladeChaud/results_b.jpg';
+import result1 from './assets/chocoladeChaud/results_1.jpg?responsive';
+import result2 from './assets/chocoladeChaud/results_2.jpg?responsive';
+import result3 from './assets/chocoladeChaud/results_3.jpg?responsive';
+import resulta from './assets/chocoladeChaud/results_a.jpg?responsive';
+import resultb from './assets/chocoladeChaud/results_b.jpg?responsive';
 
-import positive1 from './assets/chocoladeChaud/molds_1.jpg';
-import positive2 from './assets/chocoladeChaud/molds_2.jpg';
-import positive3 from './assets/chocoladeChaud/molds_3.jpg';
-import positive4 from './assets/chocoladeChaud/molds_4.jpg';
-import negative1 from './assets/chocoladeChaud/negative_1.jpg';
-import negative2 from './assets/chocoladeChaud/negative_2.jpg';
-import negative3 from './assets/chocoladeChaud/negative_3.jpg';
+import positive1 from './assets/chocoladeChaud/molds_1.jpg?responsive';
+import positive2 from './assets/chocoladeChaud/molds_2.jpg?responsive';
+import positive3 from './assets/chocoladeChaud/molds_3.jpg?responsive';
+import positive4 from './assets/chocoladeChaud/molds_4.jpg?responsive';
+import negative1 from './assets/chocoladeChaud/negative_1.jpg?responsive';
+import negative2 from './assets/chocoladeChaud/negative_2.jpg?responsive';
+import negative3 from './assets/chocoladeChaud/negative_3.jpg?responsive';
 
-import mosque1 from './assets/chocoladeChaud/mosque_1.jpg';
-import mosque2 from './assets/chocoladeChaud/mosque_2.jpg';
-import mosque3 from './assets/chocoladeChaud/mosque_3.jpg';
-import mosque4 from './assets/chocoladeChaud/mosque_4.jpg';
-import mosque5 from './assets/chocoladeChaud/mosque_5.jpg';
-import mosque6 from './assets/chocoladeChaud/mosque_6.jpg';
+import mosque1 from './assets/chocoladeChaud/mosque_1.jpg?responsive';
+import mosque2 from './assets/chocoladeChaud/mosque_2.jpg?responsive';
+import mosque3 from './assets/chocoladeChaud/mosque_3.jpg?responsive';
+import mosque4 from './assets/chocoladeChaud/mosque_4.jpg?responsive';
+import mosque5 from './assets/chocoladeChaud/mosque_5.jpg?responsive';
+import mosque6 from './assets/chocoladeChaud/mosque_6.jpg?responsive';
 
-import pompidou1 from './assets/chocoladeChaud/pompidou_1.jpg';
-import pompidou2 from './assets/chocoladeChaud/pompidou_2.jpg';
-import pompidou3 from './assets/chocoladeChaud/pompidou_3.jpg';
-import pompidou4 from './assets/chocoladeChaud/pompidou_4.jpg';
-import pompidou5 from './assets/chocoladeChaud/pompidou_5.jpg';
-import pompidou6 from './assets/chocoladeChaud/pompidou_6.jpg';
+import pompidou1 from './assets/chocoladeChaud/pompidou_1.jpg?responsive';
+import pompidou2 from './assets/chocoladeChaud/pompidou_2.jpg?responsive';
+import pompidou3 from './assets/chocoladeChaud/pompidou_3.jpg?responsive';
+import pompidou4 from './assets/chocoladeChaud/pompidou_4.jpg?responsive';
+import pompidou5 from './assets/chocoladeChaud/pompidou_5.jpg?responsive';
+import pompidou6 from './assets/chocoladeChaud/pompidou_6.jpg?responsive';
 import { Technologies } from '../../../types/keywords/technologies';
 
 const id = '2023-04';
@@ -66,7 +66,7 @@ const metaData: ProjectMetaData = {
 export const chocoladeChaud: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 1373, 1888),
+  projectImage: createTitleImage(projectImage, metaData.name),
   projectContent: [
     createText(
       1,

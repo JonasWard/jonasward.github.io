@@ -7,15 +7,15 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/guerilla-beehive/keyImage.jpg';
-import image1 from './assets/guerilla-beehive/BeesDetail.png';
-import image2 from './assets/guerilla-beehive/Conceptueel - 1.png';
-import image3 from './assets/guerilla-beehive/DetailBXL.jpg';
-import image4 from './assets/guerilla-beehive/DetailHAMBURG.jpg';
-import image5 from './assets/guerilla-beehive/Production.jpg';
-import image6 from './assets/guerilla-beehive/SectionA.jpg';
-import image7 from './assets/guerilla-beehive/SectionB.jpg';
-import image8 from './assets/guerilla-beehive/SectionC.jpg';
+import keyImage from './assets/guerilla-beehive/keyImage.jpg?responsive';
+import image1 from './assets/guerilla-beehive/BeesDetail.png?responsive';
+import image2 from './assets/guerilla-beehive/Conceptueel - 1.png?responsive';
+import image3 from './assets/guerilla-beehive/DetailBXL.jpg?responsive';
+import image4 from './assets/guerilla-beehive/DetailHAMBURG.jpg?responsive';
+import image5 from './assets/guerilla-beehive/Production.jpg?responsive';
+import image6 from './assets/guerilla-beehive/SectionA.jpg?responsive';
+import image7 from './assets/guerilla-beehive/SectionB.jpg?responsive';
+import image8 from './assets/guerilla-beehive/SectionC.jpg?responsive';
 
 const id = '2018-06';
 
@@ -35,7 +35,7 @@ const metaData: ProjectMetaData = {
 export const guerillaBeehive: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(keyImage, metaData.name, 1821, 2119),
+  projectImage: createTitleImage(keyImage, metaData.name),
   projectContent: [
     createText(
       2,

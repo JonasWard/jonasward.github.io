@@ -9,11 +9,11 @@ import { createTitleImage, createImage, createTextImage } from 'src/utils/projec
 
 const id = '2018-02';
 
-import lampsAntikabirLogo from './assets/antikabirLogo.png';
-import lampsAntikabir1 from './assets/Voor.jpg';
-import lampsAntikabir2 from './assets/Zij.jpg';
-import lampsAntikabir3 from './assets/Perspectief 2.jpg';
-import lampsAntikabir4 from './assets/Perspectief.jpg';
+import lampsAntikabirLogo from './assets/antikabirLogo.png?responsive';
+import lampsAntikabir1 from './assets/Voor.jpg?responsive';
+import lampsAntikabir2 from './assets/Zij.jpg?responsive';
+import lampsAntikabir3 from './assets/Perspectief 2.jpg?responsive';
+import lampsAntikabir4 from './assets/Perspectief.jpg?responsive';
 
 const metaData: ProjectMetaData = {
   id,
@@ -30,7 +30,7 @@ const metaData: ProjectMetaData = {
 export const anitkabir: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(lampsAntikabir4, metaData.name, 2048, 2048, 'black-on-white'),
+  projectImage: createTitleImage(lampsAntikabir4, metaData.name, 'black-on-white'),
   projectContent: [
     createTextImage(
       lampsAntikabirLogo,

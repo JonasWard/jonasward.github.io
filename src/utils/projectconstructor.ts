@@ -1,34 +1,38 @@
 import { ProjectContentType } from '../types/projectContent/projectContentType';
-import { ProjectImage } from '../types/projectContent/projectImage';
+import { ProjectImage, ResponsivePicture } from '../types/projectContent/projectImage';
 import { ProjectImageText } from '../types/projectContent/projectImageText';
 import { ProjectMetaData } from '../types/projectContent/projectMetaData';
 import { ProjectText } from '../types/projectContent/projectText';
 
+// vector images don't need resized variants, only their aspect ratio to reserve space while loading
+export const svgPicture = (src: string, w: number, h: number): ResponsivePicture => ({ sources: {}, img: { src, w, h } });
+
 export const createTitleImage = (
-  href: string,
+  picture: ResponsivePicture,
   title: string,
-  imageWidth: number,
-  imageHeigth: number,
   imageTextColor?: 'white-on-black' | 'black-on-white',
   maxImageHeight?: number,
   maxImageWidth?: number
 ): ProjectImage => ({
   type: ProjectContentType.Image,
-  imageHref: href,
+  picture,
   imageText: title,
   imageTextSize: 'large',
   imageTextPosition: 'center',
   imageTextAlignment: 'center',
-  imageWidth,
-  imageHeigth,
   maxImageHeight,
   maxImageWidth,
   imageTextColor
 });
 
-export const createImage = (href: string, text?: string, maxImageHeight?: number, maxImageWidth?: number): ProjectImage => ({
+export const createImage = (
+  picture: ResponsivePicture,
+  text?: string,
+  maxImageHeight?: number,
+  maxImageWidth?: number
+): ProjectImage => ({
   type: ProjectContentType.Image,
-  imageHref: href,
+  picture,
   imageText: text,
   maxImageHeight,
   maxImageWidth
@@ -41,7 +45,7 @@ export const createText = (maxColumnCount: 1 | 2 | 3 = 1, ...texts: (string | [s
 });
 
 export const createTextImage = (
-  imageHref: string,
+  picture: ResponsivePicture,
   description: string,
   title: string,
   imageText?: string,
@@ -52,7 +56,7 @@ export const createTextImage = (
   type: ProjectContentType.ImageText,
   image: {
     type: ProjectContentType.Image,
-    imageHref,
+    picture,
     imageText
   },
   text: {

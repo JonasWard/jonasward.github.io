@@ -1,3 +1,4 @@
+import type { ResponsivePicture } from './projectImage';
 import { ProjectCategory } from '../keywords/categoryTypes';
 import { Client } from '../keywords/client';
 import { Keywords } from '../keywords/keywords';
@@ -11,7 +12,7 @@ export type ProjectMetaData = {
   name: string;
   projectType: ProjectCategory;
   description: string;
-  keyImage?: string;
+  keyImage?: ResponsivePicture;
   keywords?: (Keywords | ProjectCategory | Technologies)[];
   client?: Client;
   projectContext: ProjectContext;

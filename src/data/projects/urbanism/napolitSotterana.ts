@@ -8,12 +8,12 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { Technologies } from '../../../types/keywords/technologies';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import imageCortile from './assets/napoliSotterana/imageCortile.jpg';
-import imageDecumani from './assets/napoliSotterana/imageDecumani.jpg';
-import imageMonastery from './assets/napoliSotterana/imageMonastery.jpg';
-import mapDucaDiNoja from './assets/napoliSotterana/mapDucaDiNoja.jpg';
-import mapIleDansLesIlos from './assets/napoliSotterana/mapIleDansLesIlos.jpg';
-import mapIntervention from './assets/napoliSotterana/mapIntervention.jpg';
+import imageCortile from './assets/napoliSotterana/imageCortile.jpg?responsive';
+import imageDecumani from './assets/napoliSotterana/imageDecumani.jpg?responsive';
+import imageMonastery from './assets/napoliSotterana/imageMonastery.jpg?responsive';
+import mapDucaDiNoja from './assets/napoliSotterana/mapDucaDiNoja.jpg?responsive';
+import mapIleDansLesIlos from './assets/napoliSotterana/mapIleDansLesIlos.jpg?responsive';
+import mapIntervention from './assets/napoliSotterana/mapIntervention.jpg?responsive';
 
 const id = '2014-02';
 
@@ -33,7 +33,7 @@ const metaData: ProjectMetaData = {
 export const napoliSotterana: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(mapIleDansLesIlos, metaData.name, 1484, 2048),
+  projectImage: createTitleImage(mapIleDansLesIlos, metaData.name),
   projectContent: [
     createText(2, [
       'palimpsestuous napels',

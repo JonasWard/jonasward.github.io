@@ -8,15 +8,15 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import architectView from './assets/slab-2-reuse/architect-view.webp';
-import defaultViewer from './assets/slab-2-reuse/default-viewer.webp';
-import engineerView from './assets/slab-2-reuse/engineer-view.webp';
-import landing from './assets/slab-2-reuse/landing.webp';
-import presentation1 from './assets/slab-2-reuse/presentation-1.webp';
-import presentation2 from './assets/slab-2-reuse/presentation-2.webp';
-import presentation3 from './assets/slab-2-reuse/presentation-3.webp';
-import selector from './assets/slab-2-reuse/selector.webp';
-import table from './assets/slab-2-reuse/table.webp';
+import architectView from './assets/slab-2-reuse/architect-view.webp?responsive';
+import defaultViewer from './assets/slab-2-reuse/default-viewer.webp?responsive';
+import engineerView from './assets/slab-2-reuse/engineer-view.webp?responsive';
+import landing from './assets/slab-2-reuse/landing.webp?responsive';
+import presentation1 from './assets/slab-2-reuse/presentation-1.webp?responsive';
+import presentation2 from './assets/slab-2-reuse/presentation-2.webp?responsive';
+import presentation3 from './assets/slab-2-reuse/presentation-3.webp?responsive';
+import selector from './assets/slab-2-reuse/selector.webp?responsive';
+import table from './assets/slab-2-reuse/table.webp?responsive';
 
 const id = '2025-02';
 
@@ -37,7 +37,7 @@ const metaData: ProjectMetaData = {
 export const slab2Reuse: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(architectView, metaData.name, 1811, 1396, 'black-on-white'),
+  projectImage: createTitleImage(architectView, metaData.name, 'black-on-white'),
   projectContent: [
     createText(2, ['POC Assesment Tool', 'Static webpage with boilerplate data.']),
     {

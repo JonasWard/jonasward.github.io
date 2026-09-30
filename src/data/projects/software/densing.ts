@@ -3,16 +3,16 @@ import { ProjectContext } from '../../../types/keywords/projectContext';
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
-import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
+import { createImage, createText, createTitleImage, svgPicture } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import customSchema from './assets/densing/custom-scheme.webp';
+import customSchema from './assets/densing/custom-scheme.webp?responsive';
 import densingPaddingAndRounding from './assets/densing/densing-padding-and-rounding.svg';
-import landing from './assets/densing/landing.webp';
-import simpleBeam from './assets/densing/simple-beam.webp';
-import withNesting from './assets/densing/with-nesting.webp';
+import landing from './assets/densing/landing.webp?responsive';
+import simpleBeam from './assets/densing/simple-beam.webp?responsive';
+import withNesting from './assets/densing/with-nesting.webp?responsive';
 
 const id = '2026-01';
 
@@ -30,7 +30,7 @@ const metaData: ProjectMetaData = {
 export const densing: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(densingPaddingAndRounding, metaData.name, 1400, 1400),
+  projectImage: createTitleImage(svgPicture(densingPaddingAndRounding, 1400, 1400), metaData.name),
   projectContent: [
     createText(
       2,

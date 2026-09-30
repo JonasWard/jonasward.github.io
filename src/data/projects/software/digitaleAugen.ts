@@ -8,62 +8,62 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from '../../../types/keywords/technologies';
 
-import siteHoveringHeighlighting from './assets/digitaleAugen/siteHoveringHeighlighting.jpg';
-import abstractionImage1 from './assets/digitaleAugen/abstractionImage-1.jpg';
-import abstractionImage2 from './assets/digitaleAugen/abstractionImage-2.jpg';
-import abstractionImage3 from './assets/digitaleAugen/abstractionImage-3.jpg';
-import expressionism1 from './assets/digitaleAugen/expressionism-1.jpg';
-import expressionism2 from './assets/digitaleAugen/expressionism-2.jpg';
-import expressionism3 from './assets/digitaleAugen/expressionism-3.jpg';
-import expressionism4 from './assets/digitaleAugen/expressionism-4.jpg';
-import mondriaan0 from './assets/digitaleAugen/mondriaan-0.jpg';
-import mondriaan1 from './assets/digitaleAugen/mondriaan-1.jpg';
-import mondriaan2 from './assets/digitaleAugen/mondriaan-2.jpg';
-import mondriaan3 from './assets/digitaleAugen/mondriaan-3.jpg';
-import onlySource from './assets/digitaleAugen/onlySource.jpg';
-import onlySource1 from './assets/digitaleAugen/onlySource-1.jpg';
-import onlySource2 from './assets/digitaleAugen/onlySource-2.jpg';
-import onlySource3 from './assets/digitaleAugen/onlySource-3.jpg';
-import onlySource4 from './assets/digitaleAugen/onlySource-4.jpg';
-import onlySource5 from './assets/digitaleAugen/onlySource-5.jpg';
-import onlySource6 from './assets/digitaleAugen/onlySource-6.jpg';
-import onlySource7 from './assets/digitaleAugen/onlySource-7.jpg';
-import onlySource8 from './assets/digitaleAugen/onlySource-8.jpg';
-import onlySource9 from './assets/digitaleAugen/onlySource-9.jpg';
-import onlySource10 from './assets/digitaleAugen/onlySource-10.jpg';
-import onlySource11 from './assets/digitaleAugen/onlySource-11.jpg';
-import onlySource12 from './assets/digitaleAugen/onlySource-12.jpg';
-import onlySource13 from './assets/digitaleAugen/onlySource-13.jpg';
-import onlySource14 from './assets/digitaleAugen/onlySource-14.jpg';
-import onlySource15 from './assets/digitaleAugen/onlySource-15.jpg';
-import onlySource16 from './assets/digitaleAugen/onlySource-16.jpg';
-import onlySource17 from './assets/digitaleAugen/onlySource-17.jpg';
-import rebuildAnalysis1 from './assets/digitaleAugen/rebuildAnalysis-1.jpg';
-import rebuildAnalysis2 from './assets/digitaleAugen/rebuildAnalysis-2.jpg';
-import shillerAnalysis1 from './assets/digitaleAugen/shillerAnalysis-1.jpg';
-import shillerAnalysis2 from './assets/digitaleAugen/shillerAnalysis-2.jpg';
-import shillerAnalysis3 from './assets/digitaleAugen/shillerAnalysis-3.jpg';
-import shillerAnalysis4 from './assets/digitaleAugen/shillerAnalysis-4.jpg';
-import shillerAnalysis5 from './assets/digitaleAugen/shillerAnalysis-5.jpg';
-import shillerAnalysis6 from './assets/digitaleAugen/shillerAnalysis-6.jpg';
-import shillerAnalysis7 from './assets/digitaleAugen/shillerAnalysis-7.jpg';
-import shillerAnalysis8 from './assets/digitaleAugen/shillerAnalysis-8.jpg';
-import shillerAnalysis9 from './assets/digitaleAugen/shillerAnalysis-9.jpg';
-import shillerAnalysis10 from './assets/digitaleAugen/shillerAnalysis-10.jpg';
-import shillerAnalysis11 from './assets/digitaleAugen/shillerAnalysis-11.jpg';
-import shillerAnalysis12 from './assets/digitaleAugen/shillerAnalysis-12.jpg';
-import shillerAnalysis13 from './assets/digitaleAugen/shillerAnalysis-13.jpg';
-import shillerAnalysis14 from './assets/digitaleAugen/shillerAnalysis-14.jpg';
-import shillerAnalysis15 from './assets/digitaleAugen/shillerAnalysis-15.jpg';
-import shillerAnalysis16 from './assets/digitaleAugen/shillerAnalysis-16.jpg';
-import shillerAnalysis17 from './assets/digitaleAugen/shillerAnalysis-17.jpg';
-import shillerAnalysis18 from './assets/digitaleAugen/shillerAnalysis-18.jpg';
-import shillerSource from './assets/digitaleAugen/shillerSource.jpg';
-import shopAnalysis0 from './assets/digitaleAugen/shopAnalysis-0.jpg';
-import shopAnalysis1 from './assets/digitaleAugen/shopAnalysis-1.jpg';
-import shopAnalysis2 from './assets/digitaleAugen/shopAnalysis-2.jpg';
-import shopAnalysis3 from './assets/digitaleAugen/shopAnalysis-3.jpg';
-import shopAnalysis4 from './assets/digitaleAugen/shopAnalysis-4.jpg';
+import siteHoveringHeighlighting from './assets/digitaleAugen/siteHoveringHeighlighting.jpg?responsive';
+import abstractionImage1 from './assets/digitaleAugen/abstractionImage-1.jpg?responsive';
+import abstractionImage2 from './assets/digitaleAugen/abstractionImage-2.jpg?responsive';
+import abstractionImage3 from './assets/digitaleAugen/abstractionImage-3.jpg?responsive';
+import expressionism1 from './assets/digitaleAugen/expressionism-1.jpg?responsive';
+import expressionism2 from './assets/digitaleAugen/expressionism-2.jpg?responsive';
+import expressionism3 from './assets/digitaleAugen/expressionism-3.jpg?responsive';
+import expressionism4 from './assets/digitaleAugen/expressionism-4.jpg?responsive';
+import mondriaan0 from './assets/digitaleAugen/mondriaan-0.jpg?responsive';
+import mondriaan1 from './assets/digitaleAugen/mondriaan-1.jpg?responsive';
+import mondriaan2 from './assets/digitaleAugen/mondriaan-2.jpg?responsive';
+import mondriaan3 from './assets/digitaleAugen/mondriaan-3.jpg?responsive';
+import onlySource from './assets/digitaleAugen/onlySource.jpg?responsive';
+import onlySource1 from './assets/digitaleAugen/onlySource-1.jpg?responsive';
+import onlySource2 from './assets/digitaleAugen/onlySource-2.jpg?responsive';
+import onlySource3 from './assets/digitaleAugen/onlySource-3.jpg?responsive';
+import onlySource4 from './assets/digitaleAugen/onlySource-4.jpg?responsive';
+import onlySource5 from './assets/digitaleAugen/onlySource-5.jpg?responsive';
+import onlySource6 from './assets/digitaleAugen/onlySource-6.jpg?responsive';
+import onlySource7 from './assets/digitaleAugen/onlySource-7.jpg?responsive';
+import onlySource8 from './assets/digitaleAugen/onlySource-8.jpg?responsive';
+import onlySource9 from './assets/digitaleAugen/onlySource-9.jpg?responsive';
+import onlySource10 from './assets/digitaleAugen/onlySource-10.jpg?responsive';
+import onlySource11 from './assets/digitaleAugen/onlySource-11.jpg?responsive';
+import onlySource12 from './assets/digitaleAugen/onlySource-12.jpg?responsive';
+import onlySource13 from './assets/digitaleAugen/onlySource-13.jpg?responsive';
+import onlySource14 from './assets/digitaleAugen/onlySource-14.jpg?responsive';
+import onlySource15 from './assets/digitaleAugen/onlySource-15.jpg?responsive';
+import onlySource16 from './assets/digitaleAugen/onlySource-16.jpg?responsive';
+import onlySource17 from './assets/digitaleAugen/onlySource-17.jpg?responsive';
+import rebuildAnalysis1 from './assets/digitaleAugen/rebuildAnalysis-1.jpg?responsive';
+import rebuildAnalysis2 from './assets/digitaleAugen/rebuildAnalysis-2.jpg?responsive';
+import shillerAnalysis1 from './assets/digitaleAugen/shillerAnalysis-1.jpg?responsive';
+import shillerAnalysis2 from './assets/digitaleAugen/shillerAnalysis-2.jpg?responsive';
+import shillerAnalysis3 from './assets/digitaleAugen/shillerAnalysis-3.jpg?responsive';
+import shillerAnalysis4 from './assets/digitaleAugen/shillerAnalysis-4.jpg?responsive';
+import shillerAnalysis5 from './assets/digitaleAugen/shillerAnalysis-5.jpg?responsive';
+import shillerAnalysis6 from './assets/digitaleAugen/shillerAnalysis-6.jpg?responsive';
+import shillerAnalysis7 from './assets/digitaleAugen/shillerAnalysis-7.jpg?responsive';
+import shillerAnalysis8 from './assets/digitaleAugen/shillerAnalysis-8.jpg?responsive';
+import shillerAnalysis9 from './assets/digitaleAugen/shillerAnalysis-9.jpg?responsive';
+import shillerAnalysis10 from './assets/digitaleAugen/shillerAnalysis-10.jpg?responsive';
+import shillerAnalysis11 from './assets/digitaleAugen/shillerAnalysis-11.jpg?responsive';
+import shillerAnalysis12 from './assets/digitaleAugen/shillerAnalysis-12.jpg?responsive';
+import shillerAnalysis13 from './assets/digitaleAugen/shillerAnalysis-13.jpg?responsive';
+import shillerAnalysis14 from './assets/digitaleAugen/shillerAnalysis-14.jpg?responsive';
+import shillerAnalysis15 from './assets/digitaleAugen/shillerAnalysis-15.jpg?responsive';
+import shillerAnalysis16 from './assets/digitaleAugen/shillerAnalysis-16.jpg?responsive';
+import shillerAnalysis17 from './assets/digitaleAugen/shillerAnalysis-17.jpg?responsive';
+import shillerAnalysis18 from './assets/digitaleAugen/shillerAnalysis-18.jpg?responsive';
+import shillerSource from './assets/digitaleAugen/shillerSource.jpg?responsive';
+import shopAnalysis0 from './assets/digitaleAugen/shopAnalysis-0.jpg?responsive';
+import shopAnalysis1 from './assets/digitaleAugen/shopAnalysis-1.jpg?responsive';
+import shopAnalysis2 from './assets/digitaleAugen/shopAnalysis-2.jpg?responsive';
+import shopAnalysis3 from './assets/digitaleAugen/shopAnalysis-3.jpg?responsive';
+import shopAnalysis4 from './assets/digitaleAugen/shopAnalysis-4.jpg?responsive';
 
 const id = '2021-02';
 
@@ -84,7 +84,7 @@ const metaData: ProjectMetaData = {
 export const digitaleAugen: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(shillerAnalysis1, metaData.name, 1026, 1368),
+  projectImage: createTitleImage(shillerAnalysis1, metaData.name),
   projectContent: [
     createText(
       2,

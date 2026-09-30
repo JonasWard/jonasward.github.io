@@ -8,11 +8,11 @@ import { Keywords } from 'src/types/keywords/keywords';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import functions from './assets/state-to-function/functions.png';
-import help from './assets/state-to-function/help.png';
-import pdf from './assets/state-to-function/pdf.png';
-import qrCode from './assets/state-to-function/qr-code.png';
-import results from './assets/state-to-function/results.png';
+import functions from './assets/state-to-function/functions.png?responsive';
+import help from './assets/state-to-function/help.png?responsive';
+import pdf from './assets/state-to-function/pdf.png?responsive';
+import qrCode from './assets/state-to-function/qr-code.png?responsive';
+import results from './assets/state-to-function/results.png?responsive';
 
 const id = '2025-02';
 
@@ -31,7 +31,7 @@ const metaData: ProjectMetaData = {
 export const stateToFunction: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(pdf, 'State to Function', 1038, 1451, 'black-on-white'),
+  projectImage: createTitleImage(pdf, 'State to Function', 'black-on-white'),
   projectContent: [
     createText(
       2,

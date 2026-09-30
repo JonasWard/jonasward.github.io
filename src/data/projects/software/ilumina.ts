@@ -8,21 +8,21 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import favorites from './assets/ilumina/favorites.webp';
-import landing from './assets/ilumina/landing.webp';
-import sliding from './assets/ilumina/sliding.webp';
-import title from './assets/ilumina/title.webp';
+import favorites from './assets/ilumina/favorites.webp?responsive';
+import landing from './assets/ilumina/landing.webp?responsive';
+import sliding from './assets/ilumina/sliding.webp?responsive';
+import title from './assets/ilumina/title.webp?responsive';
 
-import lamp_01 from './assets/ilumina/lamp_01.jpg';
-import lamp_02 from './assets/ilumina/lamp_02.jpg';
-import lamp_03 from './assets/ilumina/lamp_03.jpg';
-import lamp_04 from './assets/ilumina/lamp_04.jpg';
-import lamp_05 from './assets/ilumina/lamp_05.jpg';
-import lamp_06 from './assets/ilumina/lamp_06.jpg';
-import lamp_07 from './assets/ilumina/lamp_07.jpg';
-import lamp_08 from './assets/ilumina/lamp_08.jpg';
-import lamp_09 from './assets/ilumina/lamp_09.jpg';
-import lamp_10 from './assets/ilumina/lamp_10.jpg';
+import lamp_01 from './assets/ilumina/lamp_01.jpg?responsive';
+import lamp_02 from './assets/ilumina/lamp_02.jpg?responsive';
+import lamp_03 from './assets/ilumina/lamp_03.jpg?responsive';
+import lamp_04 from './assets/ilumina/lamp_04.jpg?responsive';
+import lamp_05 from './assets/ilumina/lamp_05.jpg?responsive';
+import lamp_06 from './assets/ilumina/lamp_06.jpg?responsive';
+import lamp_07 from './assets/ilumina/lamp_07.jpg?responsive';
+import lamp_08 from './assets/ilumina/lamp_08.jpg?responsive';
+import lamp_09 from './assets/ilumina/lamp_09.jpg?responsive';
+import lamp_10 from './assets/ilumina/lamp_10.jpg?responsive';
 
 const id = '2025-05';
 
@@ -42,7 +42,7 @@ const metaData: ProjectMetaData = {
 export const ilumina: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(title, metaData.name, 1348, 1522),
+  projectImage: createTitleImage(title, metaData.name),
   projectContent: [
     createText(
       2,

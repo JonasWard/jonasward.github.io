@@ -8,55 +8,55 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import projectImage from './assets/lucernae-turici/lucernae-turici.jpg';
-import lamp1 from './assets/lucernae-turici/lamp_1.jpg';
-import lamp2 from './assets/lucernae-turici/lamp_2.jpg';
-import lamp3 from './assets/lucernae-turici/lamp_3.jpg';
+import projectImage from './assets/lucernae-turici/lucernae-turici.jpg?responsive';
+import lamp1 from './assets/lucernae-turici/lamp_1.jpg?responsive';
+import lamp2 from './assets/lucernae-turici/lamp_2.jpg?responsive';
+import lamp3 from './assets/lucernae-turici/lamp_3.jpg?responsive';
 
-import group1 from './assets/lucernae-turici/group_1.jpg';
-import group2 from './assets/lucernae-turici/group_2.jpg';
-import group3 from './assets/lucernae-turici/group_3.jpg';
-import group4 from './assets/lucernae-turici/group_4.jpg';
+import group1 from './assets/lucernae-turici/group_1.jpg?responsive';
+import group2 from './assets/lucernae-turici/group_2.jpg?responsive';
+import group3 from './assets/lucernae-turici/group_3.jpg?responsive';
+import group4 from './assets/lucernae-turici/group_4.jpg?responsive';
 
-import form3 from './assets/lucernae-turici/form_3.jpg';
-import form4 from './assets/lucernae-turici/form_4.jpg';
-import form5 from './assets/lucernae-turici/form_5.jpg';
-import form6 from './assets/lucernae-turici/form_6.jpg';
-import form7 from './assets/lucernae-turici/form_7.jpg';
-import form8 from './assets/lucernae-turici/form_8.jpg';
-import form9 from './assets/lucernae-turici/form_9.jpg';
-import form10 from './assets/lucernae-turici/form_10.jpg';
-import form11 from './assets/lucernae-turici/form_11.jpg';
-import form12 from './assets/lucernae-turici/form_12.jpg';
-import form13 from './assets/lucernae-turici/form_13.jpg';
-import form20 from './assets/lucernae-turici/form_20.jpg';
-import form21 from './assets/lucernae-turici/form_21.jpg';
-import form22 from './assets/lucernae-turici/form_22.jpg';
+import form3 from './assets/lucernae-turici/form_3.jpg?responsive';
+import form4 from './assets/lucernae-turici/form_4.jpg?responsive';
+import form5 from './assets/lucernae-turici/form_5.jpg?responsive';
+import form6 from './assets/lucernae-turici/form_6.jpg?responsive';
+import form7 from './assets/lucernae-turici/form_7.jpg?responsive';
+import form8 from './assets/lucernae-turici/form_8.jpg?responsive';
+import form9 from './assets/lucernae-turici/form_9.jpg?responsive';
+import form10 from './assets/lucernae-turici/form_10.jpg?responsive';
+import form11 from './assets/lucernae-turici/form_11.jpg?responsive';
+import form12 from './assets/lucernae-turici/form_12.jpg?responsive';
+import form13 from './assets/lucernae-turici/form_13.jpg?responsive';
+import form20 from './assets/lucernae-turici/form_20.jpg?responsive';
+import form21 from './assets/lucernae-turici/form_21.jpg?responsive';
+import form22 from './assets/lucernae-turici/form_22.jpg?responsive';
 
-import print1 from './assets/lucernae-turici/print_1.jpg';
-import print2 from './assets/lucernae-turici/print_2.jpg';
-import print4 from './assets/lucernae-turici/print_4.jpg';
-import print5 from './assets/lucernae-turici/print_5.jpg';
+import print1 from './assets/lucernae-turici/print_1.jpg?responsive';
+import print2 from './assets/lucernae-turici/print_2.jpg?responsive';
+import print4 from './assets/lucernae-turici/print_4.jpg?responsive';
+import print5 from './assets/lucernae-turici/print_5.jpg?responsive';
 
-import config1 from './assets/lucernae-turici/config_1.png';
-import config2 from './assets/lucernae-turici/config_2.png';
-import config3 from './assets/lucernae-turici/config_3.png';
-import config4 from './assets/lucernae-turici/config_4.png';
-import config5 from './assets/lucernae-turici/config_5.jpg';
-import config6 from './assets/lucernae-turici/config_6.png';
-import config7 from './assets/lucernae-turici/config_7.png';
-import config8 from './assets/lucernae-turici/config_8.png';
-import config9 from './assets/lucernae-turici/config_9.png';
-import config10 from './assets/lucernae-turici/config_10.png';
-import config11 from './assets/lucernae-turici/config_11.png';
-import config12 from './assets/lucernae-turici/config_12.png';
+import config1 from './assets/lucernae-turici/config_1.png?responsive';
+import config2 from './assets/lucernae-turici/config_2.png?responsive';
+import config3 from './assets/lucernae-turici/config_3.png?responsive';
+import config4 from './assets/lucernae-turici/config_4.png?responsive';
+import config5 from './assets/lucernae-turici/config_5.jpg?responsive';
+import config6 from './assets/lucernae-turici/config_6.png?responsive';
+import config7 from './assets/lucernae-turici/config_7.png?responsive';
+import config8 from './assets/lucernae-turici/config_8.png?responsive';
+import config9 from './assets/lucernae-turici/config_9.png?responsive';
+import config10 from './assets/lucernae-turici/config_10.png?responsive';
+import config11 from './assets/lucernae-turici/config_11.png?responsive';
+import config12 from './assets/lucernae-turici/config_12.png?responsive';
 
-import data1 from './assets/lucernae-turici/data_1.png';
-import data2 from './assets/lucernae-turici/data_2.png';
+import data1 from './assets/lucernae-turici/data_1.png?responsive';
+import data2 from './assets/lucernae-turici/data_2.png?responsive';
 
-import viewa from './assets/lucernae-turici/view_a.png';
-import viewb from './assets/lucernae-turici/view_b.png';
-import viewc from './assets/lucernae-turici/view_c.png';
+import viewa from './assets/lucernae-turici/view_a.png?responsive';
+import viewb from './assets/lucernae-turici/view_b.png?responsive';
+import viewc from './assets/lucernae-turici/view_c.png?responsive';
 
 const id = '2024-03';
 
@@ -83,7 +83,7 @@ const metaData: ProjectMetaData = {
 export const lucernaeTurici: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 1988, 2560, 'black-on-white'),
+  projectImage: createTitleImage(projectImage, metaData.name, 'black-on-white'),
   projectContent: [
     createText(1, [
       'Lamp Configurator',

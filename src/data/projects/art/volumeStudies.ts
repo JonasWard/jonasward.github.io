@@ -5,40 +5,40 @@ import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
 
-import volumeStudies_0 from './asssets/volumeStudies_0.jpg';
-import volumeStudies_1 from './asssets/volumeStudies_1.jpg';
-import volumeStudies_2 from './asssets/volumeStudies_2.jpg';
-import volumeStudies_3 from './asssets/volumeStudies_3.jpg';
-import volumeStudies_5_ from './asssets/volumeStudies_5_.jpg';
-import volumeStudies_5 from './asssets/volumeStudies_5.jpg';
-import volumeStudies_6 from './asssets/volumeStudies_6.jpg';
-import volumeStudies_7 from './asssets/volumeStudies_7.jpg';
-import volumeStudies_10 from './asssets/volumeStudies_10.jpg';
-import volumeStudies_11 from './asssets/volumeStudies_11.jpg';
-import volumeStudies_12 from './asssets/volumeStudies_12.jpg';
-import volumeStudies_13 from './asssets/volumeStudies_13.jpg';
-import volumeStudies_14 from './asssets/volumeStudies_14.jpg';
-import volumeStudies_15 from './asssets/volumeStudies_15.jpg';
-import volumeStudies_16 from './asssets/volumeStudies_16.jpg';
-import volumeStudies_17 from './asssets/volumeStudies_17.jpg';
-import volumeStudies_18 from './asssets/volumeStudies_18.jpg';
-import volumeStudies_19 from './asssets/volumeStudies_19.jpg';
-import volumeStudies_20 from './asssets/volumeStudies_20.jpg';
-import volumeStudies_21 from './asssets/volumeStudies_21.jpg';
-import volumeStudies_a from './asssets/volumeStudies_a.jpg';
-import volumeStudies_b from './asssets/volumeStudies_b.jpg';
-import volumeStudies_c from './asssets/volumeStudies_c.jpg';
-import volumeStudies_d from './asssets/volumeStudies_d.jpg';
-import volumeStudies_e from './asssets/volumeStudies_e.jpg';
-import volumeStudies_f from './asssets/volumeStudies_f.jpg';
-import volumeStudies_g from './asssets/volumeStudies_g.jpg';
-import volumeStudies_h from './asssets/volumeStudies_h.jpg';
-import volumeStudies_i from './asssets/volumeStudies_i.jpg';
-import volumeStudies_j from './asssets/volumeStudies_j.jpg';
-import volumeStudies_k from './asssets/volumeStudies_k.jpg';
-import volumeStudies_l from './asssets/volumeStudies_l.jpg';
-import volumeStudies_m from './asssets/volumeStudies_m.jpg';
-import volumeStudies_n from './asssets/volumeStudies_n.jpg';
+import volumeStudies_0 from './asssets/volumeStudies_0.jpg?responsive';
+import volumeStudies_1 from './asssets/volumeStudies_1.jpg?responsive';
+import volumeStudies_2 from './asssets/volumeStudies_2.jpg?responsive';
+import volumeStudies_3 from './asssets/volumeStudies_3.jpg?responsive';
+import volumeStudies_5_ from './asssets/volumeStudies_5_.jpg?responsive';
+import volumeStudies_5 from './asssets/volumeStudies_5.jpg?responsive';
+import volumeStudies_6 from './asssets/volumeStudies_6.jpg?responsive';
+import volumeStudies_7 from './asssets/volumeStudies_7.jpg?responsive';
+import volumeStudies_10 from './asssets/volumeStudies_10.jpg?responsive';
+import volumeStudies_11 from './asssets/volumeStudies_11.jpg?responsive';
+import volumeStudies_12 from './asssets/volumeStudies_12.jpg?responsive';
+import volumeStudies_13 from './asssets/volumeStudies_13.jpg?responsive';
+import volumeStudies_14 from './asssets/volumeStudies_14.jpg?responsive';
+import volumeStudies_15 from './asssets/volumeStudies_15.jpg?responsive';
+import volumeStudies_16 from './asssets/volumeStudies_16.jpg?responsive';
+import volumeStudies_17 from './asssets/volumeStudies_17.jpg?responsive';
+import volumeStudies_18 from './asssets/volumeStudies_18.jpg?responsive';
+import volumeStudies_19 from './asssets/volumeStudies_19.jpg?responsive';
+import volumeStudies_20 from './asssets/volumeStudies_20.jpg?responsive';
+import volumeStudies_21 from './asssets/volumeStudies_21.jpg?responsive';
+import volumeStudies_a from './asssets/volumeStudies_a.jpg?responsive';
+import volumeStudies_b from './asssets/volumeStudies_b.jpg?responsive';
+import volumeStudies_c from './asssets/volumeStudies_c.jpg?responsive';
+import volumeStudies_d from './asssets/volumeStudies_d.jpg?responsive';
+import volumeStudies_e from './asssets/volumeStudies_e.jpg?responsive';
+import volumeStudies_f from './asssets/volumeStudies_f.jpg?responsive';
+import volumeStudies_g from './asssets/volumeStudies_g.jpg?responsive';
+import volumeStudies_h from './asssets/volumeStudies_h.jpg?responsive';
+import volumeStudies_i from './asssets/volumeStudies_i.jpg?responsive';
+import volumeStudies_j from './asssets/volumeStudies_j.jpg?responsive';
+import volumeStudies_k from './asssets/volumeStudies_k.jpg?responsive';
+import volumeStudies_l from './asssets/volumeStudies_l.jpg?responsive';
+import volumeStudies_m from './asssets/volumeStudies_m.jpg?responsive';
+import volumeStudies_n from './asssets/volumeStudies_n.jpg?responsive';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 
 const id = '2024-05';
@@ -57,7 +57,7 @@ const metaData: ProjectMetaData = {
 export const volumeStudies: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(volumeStudies_0, metaData.name, 3944, 7008),
+  projectImage: createTitleImage(volumeStudies_0, metaData.name),
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,

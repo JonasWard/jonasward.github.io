@@ -8,18 +8,18 @@ import { ProjectContentType } from 'src/types/projectContent/projectContentType'
 import { Keywords } from 'src/types/keywords/keywords';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import eduard from './asssets/a-merry-fx-mesh/eduard.webp';
-import julie from './asssets/a-merry-fx-mesh/julie.webp';
-import marie from './asssets/a-merry-fx-mesh/marie.webp';
-import nik from './asssets/a-merry-fx-mesh/nik.webp';
-import oma from './asssets/a-merry-fx-mesh/oma.webp';
-import pol from './asssets/a-merry-fx-mesh/pol.webp';
-import richa from './asssets/a-merry-fx-mesh/richa.webp';
-import roxas from './asssets/a-merry-fx-mesh/roxas.webp';
-import sylvain from './asssets/a-merry-fx-mesh/sylvain.webp';
+import eduard from './asssets/a-merry-fx-mesh/eduard.webp?responsive';
+import julie from './asssets/a-merry-fx-mesh/julie.webp?responsive';
+import marie from './asssets/a-merry-fx-mesh/marie.webp?responsive';
+import nik from './asssets/a-merry-fx-mesh/nik.webp?responsive';
+import oma from './asssets/a-merry-fx-mesh/oma.webp?responsive';
+import pol from './asssets/a-merry-fx-mesh/pol.webp?responsive';
+import richa from './asssets/a-merry-fx-mesh/richa.webp?responsive';
+import roxas from './asssets/a-merry-fx-mesh/roxas.webp?responsive';
+import sylvain from './asssets/a-merry-fx-mesh/sylvain.webp?responsive';
 
-import editingPattern from './asssets/a-merry-fx-mesh/editing-pattern.webp';
-import editingText from './asssets/a-merry-fx-mesh/editing-text.webp';
+import editingPattern from './asssets/a-merry-fx-mesh/editing-pattern.webp?responsive';
+import editingText from './asssets/a-merry-fx-mesh/editing-text.webp?responsive';
 
 const id = '2024-07';
 
@@ -46,7 +46,7 @@ const metaData: ProjectMetaData = {
 export const aMerryFXMesh: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(pol, metaData.name, 1441, 1367),
+  projectImage: createTitleImage(pol, metaData.name),
   projectContent: [
     createText(
       2,

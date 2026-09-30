@@ -8,20 +8,20 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import smooth1 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT3wqmuiOeoSiAM9wAjASAUikAi-AJQOg_8zM.webp';
-import smooth2 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT3wqmuiOeoSiAM9wAjAUAIjgAi-AJQOg_8zM.webp';
-import smooth3 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT3wqmuiOeoSiAM9wAjAYAXlwAi-AJQOg_8zM.webp';
-import smooth4 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjASABtAAmWQJQOg_8zM.webp';
-import discrete1 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiO4QOEAFpwAjAQAEmEA-MQ7ec1zAAA.png';
-import discrete2 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjAQAGWACB9Q7ec1zAAA.png';
-import discrete3 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjAQAGWECB9Q7ec1zAAA.png';
-import discrete4 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjAQAGWQCB9Q7ec1zAAA.png';
-import discrete5 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjASAByABT5Q7ec1zAAA.png';
-import discrete6 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAD9wAjAQBgHAALDQMCa6ALTM.png';
-import discrete7 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAD9wAjAYBVqAALDQMCa6ALTM.png';
-import discrete8 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAFpwAjAQADaACrUQ7ec1zAAA.png';
-import tool1 from './assets/glsl-ray-marching/tool-1.png';
-import tool2 from './assets/glsl-ray-marching/tool-2.png';
+import smooth1 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT3wqmuiOeoSiAM9wAjASAUikAi-AJQOg_8zM.webp?responsive';
+import smooth2 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT3wqmuiOeoSiAM9wAjAUAIjgAi-AJQOg_8zM.webp?responsive';
+import smooth3 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT3wqmuiOeoSiAM9wAjAYAXlwAi-AJQOg_8zM.webp?responsive';
+import smooth4 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjASABtAAmWQJQOg_8zM.webp?responsive';
+import discrete1 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiO4QOEAFpwAjAQAEmEA-MQ7ec1zAAA.png?responsive';
+import discrete2 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjAQAGWACB9Q7ec1zAAA.png?responsive';
+import discrete3 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjAQAGWECB9Q7ec1zAAA.png?responsive';
+import discrete4 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjAQAGWQCB9Q7ec1zAAA.png?responsive';
+import discrete5 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjASAByABT5Q7ec1zAAA.png?responsive';
+import discrete6 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAD9wAjAQBgHAALDQMCa6ALTM.png?responsive';
+import discrete7 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAD9wAjAYBVqAALDQMCa6ALTM.png?responsive';
+import discrete8 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAFpwAjAQADaACrUQ7ec1zAAA.png?responsive';
+import tool1 from './assets/glsl-ray-marching/tool-1.png?responsive';
+import tool2 from './assets/glsl-ray-marching/tool-2.png?responsive';
 
 const id = '2024-02';
 
@@ -48,7 +48,7 @@ const metaData: ProjectMetaData = {
 export const glslRayMarching: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(discrete6, metaData.name, 1441, 1320),
+  projectImage: createTitleImage(discrete6, metaData.name),
   projectContent: [
     createText(
       2,

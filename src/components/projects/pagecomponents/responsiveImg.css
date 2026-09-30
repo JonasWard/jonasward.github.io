@@ -1,0 +1,21 @@
+/* the reserved box shows a neutral placeholder until the image arrives, then fades in (opacity only, no layout change) */
+.responsive-img {
+  background-color: #e8e8e8;
+  color: transparent;
+  transition: background-color 0.4s ease;
+}
+
+/* drop the placeholder once loaded so transparent pngs don't get a grey backdrop */
+.responsive-img.loaded {
+  background-color: transparent;
+  animation: responsive-img-fade-in 0.4s ease;
+}
+
+@keyframes responsive-img-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

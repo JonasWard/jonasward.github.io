@@ -6,25 +6,25 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 
-import image1 from './assets/coral/Brick_Marie_Griesmar_BeneathTheSea_41.jpg';
-import image3 from './assets/coral/CoralesdePaz1-600x338-1.jpg';
-import image4 from './assets/coral/CoralesdePaz2-600x338-1.jpg';
-import image5 from './assets/coral/Cube-4-detail-scaled-1600x4800.jpg';
-import image6 from './assets/coral/Griesmar_rrreefs_CAN_21_@Marie¨.Griesmar-scaled-800x4800.jpg';
-import image7 from './assets/coral/IMG_20200116_162142556.jpg';
-import image9 from './assets/coral/IMG_20200121_161629807.jpg';
-import image10 from './assets/coral/IMG_20200121_164508772.jpg';
-import image11 from './assets/coral/IMG_20200121_172709710.jpg';
-import image12 from './assets/coral/Marie_Griesmar_BeneathTheSea_2020_brick_clay_1.jpg';
-import image13 from './assets/coral/Marie_Griesmar_BTS_BrickSystem_2_1.jpg';
-import image14 from './assets/coral/Marie_Griesmar_clay_Prototypes_2019.jpg';
-import image15 from './assets/coral/Marie_Griesmar_claytiles_2019.jpg';
-import image16 from './assets/coral/rehabilitation-of-coral-reefs-01-01-01.jpg';
-import image17 from './assets/coral/test-marie.webp';
-import image18 from './assets/coral/Tiles_Maldives_April21_©MaRHE-scaled-800x4800.jpg';
-import image19 from './assets/coral/WEB_template_1920x1080px_rrreefs_12-scaled.jpg.webp';
+import image1 from './assets/coral/Brick_Marie_Griesmar_BeneathTheSea_41.jpg?responsive';
+import image3 from './assets/coral/CoralesdePaz1-600x338-1.jpg?responsive';
+import image4 from './assets/coral/CoralesdePaz2-600x338-1.jpg?responsive';
+import image5 from './assets/coral/Cube-4-detail-scaled-1600x4800.jpg?responsive';
+import image6 from './assets/coral/Griesmar_rrreefs_CAN_21_@Marie¨.Griesmar-scaled-800x4800.jpg?responsive';
+import image7 from './assets/coral/IMG_20200116_162142556.jpg?responsive';
+import image9 from './assets/coral/IMG_20200121_161629807.jpg?responsive';
+import image10 from './assets/coral/IMG_20200121_164508772.jpg?responsive';
+import image11 from './assets/coral/IMG_20200121_172709710.jpg?responsive';
+import image12 from './assets/coral/Marie_Griesmar_BeneathTheSea_2020_brick_clay_1.jpg?responsive';
+import image13 from './assets/coral/Marie_Griesmar_BTS_BrickSystem_2_1.jpg?responsive';
+import image14 from './assets/coral/Marie_Griesmar_clay_Prototypes_2019.jpg?responsive';
+import image15 from './assets/coral/Marie_Griesmar_claytiles_2019.jpg?responsive';
+import image16 from './assets/coral/rehabilitation-of-coral-reefs-01-01-01.jpg?responsive';
+import image17 from './assets/coral/test-marie.webp?responsive';
+import image18 from './assets/coral/Tiles_Maldives_April21_©MaRHE-scaled-800x4800.jpg?responsive';
+import image19 from './assets/coral/WEB_template_1920x1080px_rrreefs_12-scaled.jpg.webp?responsive';
 
-import projectImage from './assets/coral/rrreefs_low.jpg';
+import projectImage from './assets/coral/rrreefs_low.jpg?responsive';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
 const id = '2019-05';
@@ -45,7 +45,7 @@ const metaData: ProjectMetaData = {
 export const coralBricks: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(projectImage, metaData.name, 898, 1273),
+  projectImage: createTitleImage(projectImage, metaData.name),
   projectContent: [
     createText(
       2,

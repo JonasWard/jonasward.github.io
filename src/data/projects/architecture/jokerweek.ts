@@ -6,16 +6,16 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/jokerweek/1.OpeningPresentationOnTheFirstDay.jpg';
-import jokerweek1 from './assets/jokerweek/0.TheCalmBeforeTheStorm.jpg';
-import jokerweek2 from './assets/jokerweek/5.TheOldSchoolBuilding.jpg';
-import jokerweek3 from './assets/jokerweek/jokerweek-2015_16809953620_o.jpg';
-import jokerweek4 from './assets/jokerweek/jokerweek-2015_16971888186_o.jpg';
-import jokerweek5 from './assets/jokerweek/5.TheOldSchoolBuilding2.jpg';
-import jokerweek6 from './assets/jokerweek/jokerweek-2015_17020376252_o.jpg';
-import jokerweek7 from './assets/jokerweek/jokerweek-2015_16399464974_o.jpg';
-import jokerweek8 from './assets/jokerweek/jokerweek-2015_16834288910_o.jpg';
-import jokerweek9 from './assets/jokerweek/jokerweek-2015_16836174319_o.jpg';
+import keyImage from './assets/jokerweek/1.OpeningPresentationOnTheFirstDay.jpg?responsive';
+import jokerweek1 from './assets/jokerweek/0.TheCalmBeforeTheStorm.jpg?responsive';
+import jokerweek2 from './assets/jokerweek/5.TheOldSchoolBuilding.jpg?responsive';
+import jokerweek3 from './assets/jokerweek/jokerweek-2015_16809953620_o.jpg?responsive';
+import jokerweek4 from './assets/jokerweek/jokerweek-2015_16971888186_o.jpg?responsive';
+import jokerweek5 from './assets/jokerweek/5.TheOldSchoolBuilding2.jpg?responsive';
+import jokerweek6 from './assets/jokerweek/jokerweek-2015_17020376252_o.jpg?responsive';
+import jokerweek7 from './assets/jokerweek/jokerweek-2015_16399464974_o.jpg?responsive';
+import jokerweek8 from './assets/jokerweek/jokerweek-2015_16834288910_o.jpg?responsive';
+import jokerweek9 from './assets/jokerweek/jokerweek-2015_16836174319_o.jpg?responsive';
 import { Keywords } from 'src/types/keywords/keywords';
 
 const id = '2015-02';
@@ -37,7 +37,7 @@ const maxColumnCount = 2;
 export const jokerweek: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(keyImage, metaData.name, 1333, 2000),
+  projectImage: createTitleImage(keyImage, metaData.name),
   projectContent: [
     createText(
       maxColumnCount,

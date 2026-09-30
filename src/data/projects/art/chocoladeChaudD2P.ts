@@ -8,23 +8,23 @@ import { ProjectContentType } from 'src/types/projectContent/projectContentType'
 import { Keywords } from 'src/types/keywords/keywords';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import chocoladeChaudD2P_1 from './asssets/chocoladeChaudD2P_1.jpg';
-import chocoladeChaudD2P_2 from './asssets/chocoladeChaudD2P_2.jpg';
-import chocoladeChaudD2P_3 from './asssets/chocoladeChaudD2P_3.jpg';
-import chocoladeChaudD2P_4 from './asssets/chocoladeChaudD2P_4.jpg';
-import chocoladeChaudD2P_5 from './asssets/chocoladeChaudD2P_5.jpg';
-import chocoladeChaudD2P_6 from './asssets/chocoladeChaudD2P_6.jpg';
-import chocoladeChaudD2P_7 from './asssets/chocoladeChaudD2P_7.jpg';
-import chocoladeChaudD2P_8 from './asssets/chocoladeChaudD2P_8.jpg';
-import chocoladeChaudD2P_9 from './asssets/chocoladeChaudD2P_9.jpg';
-import chocoladeChaudD2P_10 from './asssets/chocoladeChaudD2P_10.jpg';
-import chocoladeChaudD2P_11 from './asssets/chocoladeChaudD2P_11.jpg';
-import chocoladeChaudD2P_12 from './asssets/chocoladeChaudD2P_12.jpg';
-import chocoladeChaudD2P_13 from './asssets/chocoladeChaudD2P_13.jpg';
-import chocoladeChaudD2P_14 from './asssets/chocoladeChaudD2P_14.jpg';
-import chocoladeChaudD2P_15 from './asssets/chocoladeChaudD2P_15.jpg';
-import chocoladeChaudD2P_16 from './asssets/chocoladeChaudD2P_16.jpg';
-import chocoladeChaudD2P_SwatchBar from './asssets/chocoladeChaudD2P_SwatchBar.jpg';
+import chocoladeChaudD2P_1 from './asssets/chocoladeChaudD2P_1.jpg?responsive';
+import chocoladeChaudD2P_2 from './asssets/chocoladeChaudD2P_2.jpg?responsive';
+import chocoladeChaudD2P_3 from './asssets/chocoladeChaudD2P_3.jpg?responsive';
+import chocoladeChaudD2P_4 from './asssets/chocoladeChaudD2P_4.jpg?responsive';
+import chocoladeChaudD2P_5 from './asssets/chocoladeChaudD2P_5.jpg?responsive';
+import chocoladeChaudD2P_6 from './asssets/chocoladeChaudD2P_6.jpg?responsive';
+import chocoladeChaudD2P_7 from './asssets/chocoladeChaudD2P_7.jpg?responsive';
+import chocoladeChaudD2P_8 from './asssets/chocoladeChaudD2P_8.jpg?responsive';
+import chocoladeChaudD2P_9 from './asssets/chocoladeChaudD2P_9.jpg?responsive';
+import chocoladeChaudD2P_10 from './asssets/chocoladeChaudD2P_10.jpg?responsive';
+import chocoladeChaudD2P_11 from './asssets/chocoladeChaudD2P_11.jpg?responsive';
+import chocoladeChaudD2P_12 from './asssets/chocoladeChaudD2P_12.jpg?responsive';
+import chocoladeChaudD2P_13 from './asssets/chocoladeChaudD2P_13.jpg?responsive';
+import chocoladeChaudD2P_14 from './asssets/chocoladeChaudD2P_14.jpg?responsive';
+import chocoladeChaudD2P_15 from './asssets/chocoladeChaudD2P_15.jpg?responsive';
+import chocoladeChaudD2P_16 from './asssets/chocoladeChaudD2P_16.jpg?responsive';
+import chocoladeChaudD2P_SwatchBar from './asssets/chocoladeChaudD2P_SwatchBar.jpg?responsive';
 
 const id = '2023-07';
 
@@ -51,7 +51,7 @@ const metaData: ProjectMetaData = {
 export const chocoladeChaudD2P: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(chocoladeChaudD2P_SwatchBar, metaData.name, 4364, 5420),
+  projectImage: createTitleImage(chocoladeChaudD2P_SwatchBar, metaData.name),
   projectContent: [
     {
       type: ProjectContentType.ImageGrid,

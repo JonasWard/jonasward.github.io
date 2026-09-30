@@ -111,7 +111,7 @@ export const MotivationLetterGenerator: React.FC = () => {
           </button>
         </PDFDownloadLink>
       </div>
-      <div id="myDrawer" className="drawer" style={{ left: showDrawer ? '0' : '-458px', fontFamily: 'montserrat' }}>
+      <div id="myDrawer" className="drawer" style={{ left: showDrawer ? '0' : '-458px', fontFamily: "'Montserrat Variable', sans-serif" }}>
         Title
         <input
           type="text"

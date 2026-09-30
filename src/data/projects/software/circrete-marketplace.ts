@@ -7,11 +7,11 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import tinderSliding from './assets/circrete-marketplace/tinder-sliding.webp';
-import favorites from './assets/circrete-marketplace/favorites.webp';
-import multiLingual from './assets/circrete-marketplace/multi-lingual.webp';
-import overviewElements from './assets/circrete-marketplace/overview-elements.webp';
-import swiping from './assets/circrete-marketplace/swiping.webp';
+import tinderSliding from './assets/circrete-marketplace/tinder-sliding.webp?responsive';
+import favorites from './assets/circrete-marketplace/favorites.webp?responsive';
+import multiLingual from './assets/circrete-marketplace/multi-lingual.webp?responsive';
+import overviewElements from './assets/circrete-marketplace/overview-elements.webp?responsive';
+import swiping from './assets/circrete-marketplace/swiping.webp?responsive';
 
 const id = '2025-06';
 
@@ -31,7 +31,7 @@ const metaData: ProjectMetaData = {
 export const circreteMarketplace: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(overviewElements, metaData.name, 3024, 2634, 'black-on-white'),
+  projectImage: createTitleImage(overviewElements, metaData.name, 'black-on-white'),
   projectContent: [
     createText(
       2,
