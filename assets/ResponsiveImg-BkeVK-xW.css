@@ -1,0 +1,1 @@
+.responsive-img{background-color:#e8e8e8;color:transparent;transition:background-color .4s ease}.responsive-img.loaded{background-color:transparent;animation:responsive-img-fade-in .4s ease}@keyframes responsive-img-fade-in{0%{opacity:0}to{opacity:1}}
