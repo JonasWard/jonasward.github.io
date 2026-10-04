@@ -149,8 +149,9 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     cssWidth = nextCssWidth;
     cssHeight = nextCssHeight;
     pixelRatio = nextPixelRatio;
-    tileSize =
-      clamp(Math.max(cssWidth, cssHeight) / TILES_ACROSS_LONG_EDGE, TILE_CSS_PX_MIN, TILE_CSS_PX_MAX) * pixelRatio;
+    // sized after the viewport, the canvas can run on underneath the browser's bars
+    const longEdge = Math.max(cssWidth, Math.min(cssHeight, window.innerHeight));
+    tileSize = clamp(longEdge / TILES_ACROSS_LONG_EDGE, TILE_CSS_PX_MIN, TILE_CSS_PX_MAX) * pixelRatio;
     width = Math.max(1, Math.round(cssWidth * pixelRatio));
     height = Math.max(1, Math.round(cssHeight * pixelRatio));
     canvas.width = width;

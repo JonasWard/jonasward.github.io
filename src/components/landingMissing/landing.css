@@ -15,3 +15,23 @@
   height: 100%;
   display: block;
 }
+
+/* iOS safari clips fixed elements to the area between its translucent status bar and toolbar,
+   and only paints in-flow content that scrolled underneath them. So there the landing is in
+   flow, with an overscan above and below the viewport, and the Landing component parks the
+   page halfway its scroll range, which slides the overscan under both bars */
+@supports (-webkit-touch-callout: none) {
+  .landing-page {
+    --landing-overscan: 128px;
+    position: relative;
+    inset: auto;
+    height: calc(100dvh + 2 * var(--landing-overscan));
+    touch-action: none;
+  }
+}
+
+/* keeps the parked page from being scrolled away */
+.landing-scroll-lock,
+.landing-scroll-lock body {
+  overflow: hidden;
+}
