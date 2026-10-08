@@ -335,18 +335,22 @@ float slabHeight(Tile T) {
 
 // ---------------------------------------------------------------- main
 
-void main(void) {
-  float t = uTime;
-  float cssPx = uPixelRatio; // one css px in device px
-  vec2 fragPx = gl_FragCoord.xy - uOrigin; // canvas px
-  vec2 uvWorld = (fragPx - 0.5 * uResolution) / uTileSize + SCROLL * t;
-  vec2 uv = uvWorld + frayAt(uvWorld);
+const float AA = 0.75; // half width of every blend across an edge, device px
 
+// what the slab under a point looks like there, and where that slab's nearest edge is
+struct Surface {
+  vec3 col;    // lit paper
+  float h;     // height, css px
+  float edge;  // distance to the slab's nearest edge, device px
+  vec2 across; // a point just beyond that edge, tile units, so on the neighbouring slab
+};
+
+Surface surfaceAt(vec2 uv, float t) {
   Tile T = tileAt(uv, t);
   float seed = tileSeed(T);
   vec2 sizePx = T.size * uTileSize;
-  vec2 q = (uv - T.lo) / T.size * sizePx; // position on the slab, device px
-  float aa = 0.75;
+  vec2 q = (uv - T.lo) * uTileSize; // position on the slab, device px
+  float cssPx = uPixelRatio;        // one css px in device px
 
   // this slab's paper, anchored to its centre, offset per slab, cut at its own angle
   vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
@@ -356,23 +360,53 @@ void main(void) {
   // slab's centre or on the lattice point the slab belongs to
   Look L = lookFrom(seed);
   vec2 c = patternCentre(T, sizePx, L);
-  float light = motif(q, c, L, LIGHT, aa);
+  float light = motif(q, c, L, LIGHT, AA);
 
   // this slab's tone, one of the precomputed palette
   vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
 
-  vec3 col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
+  Surface S;
+  S.col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
+  S.h = slabHeight(T) * HEIGHT + shapeHeight(q, c, L);
+
+  // the nearest of the four edges (left, bottom, right, top) and a step across it
+  vec4 d = vec4(q, sizePx - q);
+  S.edge = min(min(d.x, d.y), min(d.z, d.w));
+  vec2 outward = S.edge == d.x ? vec2(-1.0, 0.0) : S.edge == d.y ? vec2(0.0, -1.0) : S.edge == d.z ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+  S.across = uv + outward * (S.edge + 1.0) / uTileSize;
+  return S;
+}
+
+void main(void) {
+  float t = uTime;
+  float cssPx = uPixelRatio; // one css px in device px
+  vec2 fragPx = gl_FragCoord.xy - uOrigin; // canvas px
+  vec2 uvWorld = (fragPx - 0.5 * uResolution) / uTileSize + SCROLL * t;
+  vec2 uv = uvWorld + frayAt(uvWorld);
+
+  Surface S = surfaceAt(uv, t);
+  vec3 col = S.col;
+  float h = S.h;
+
+  // within a pixel of an edge the neighbouring slab shows through by its coverage, so
+  // colour and height ease across the edge, and the edge slides smoothly as the tiling
+  // moves instead of jumping a texel at a time
+  if (S.edge < AA) {
+    Surface N = surfaceAt(S.across, t);
+    float w = smoothstep(-AA, AA, S.edge);
+    col = mix(N.col, col, w);
+    h = mix(N.h, h, w);
+  }
 
   // the logo: cut out of the wall down to a plain paper floor (the shade pass casts the
   // tiles' shadows into the letters); the floor only matters up to the outline's blend
   float dLogo = logoDistance(fragPx);
-  if (dLogo < aa) {
+  if (dLogo < AA) {
     vec3 floorCol = uPalette[0] * 0.72 * (1.0 + paper(fragPx / cssPx, 0.3));
-    col = mix(floorCol, col, smoothstep(-aa, aa, dLogo));
+    float w = smoothstep(-AA, AA, dLogo);
+    col = mix(floorCol, col, w);
+    h = mix(-LOGO_DEPTH, h, w);
   }
-
-  // the wall's height here, css px, for the shade pass
-  float h = dLogo < 0.0 ? -LOGO_DEPTH : slabHeight(T) * HEIGHT + shapeHeight(q, c, L);
 
   fragColor = vec4(col, (h + LOGO_DEPTH) / HEIGHT_SPAN);
 }

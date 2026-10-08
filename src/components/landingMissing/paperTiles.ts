@@ -152,13 +152,13 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   let logoAspect = 1024 / 264;
   let logoTextureWidth = 1;
 
-  // the wall pass' target on unit 1, (re)sized in fit; unfiltered, so the shade pass' march
-  // sees the slabs' edges as the steps they are instead of one texel wide ramps
+  // the wall pass' target on unit 1, (re)sized in fit; filtered, so the shade pass' march
+  // reads a heightfield that slides smoothly with the tiling
   const wallTexture = gl.createTexture();
   gl.activeTexture(gl.TEXTURE1);
   gl.bindTexture(gl.TEXTURE_2D, wallTexture);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   const wallFramebuffer = gl.createFramebuffer();
@@ -177,8 +177,8 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
 
   let width = 0;
   let height = 0;
-  let cssWidth = 0;
-  let cssHeight = 0;
+  let cssWidth = -1; // so the first fit always sizes the buffers, even when the canvas has no box yet
+  let cssHeight = -1;
   let pixelRatio = 1;
   let pixelRatioStep = 0;
   let tileSize = TILE_CSS_PX_MIN;
@@ -191,8 +191,8 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   // change after the first frame without a window resize; cheap when nothing changed
   const fit = () => {
     const nextPixelRatio = Math.min(Math.max(window.devicePixelRatio || 1, 1), PIXEL_RATIO_STEPS[pixelRatioStep]);
-    const nextCssWidth = canvas.clientWidth || window.innerWidth;
-    const nextCssHeight = canvas.clientHeight || window.innerHeight;
+    const nextCssWidth = canvas.clientWidth || window.innerWidth || 1;
+    const nextCssHeight = canvas.clientHeight || window.innerHeight || 1;
     if (nextCssWidth === cssWidth && nextCssHeight === cssHeight && nextPixelRatio === pixelRatio) return;
     cssWidth = nextCssWidth;
     cssHeight = nextCssHeight;
