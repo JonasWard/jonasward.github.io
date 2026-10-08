@@ -1,5 +1,6 @@
 import vsSource from './shaders/paperTilesVertexShader.glsl?raw';
-import fsSource from './shaders/paperTilesFragmentShader.glsl?raw';
+import wallSource from './shaders/paperTilesWallShader.glsl?raw';
+import shadeSource from './shaders/paperTilesShadeShader.glsl?raw';
 import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png'; // inlined as a data url, see vite.config.ts
 
 const DEFAULT_NEUTRAL_COLOR: [number, number, number] = [Math.floor(Math.random() * 360), 0.08, 0.66];
@@ -40,10 +41,21 @@ const buildPalette = () => {
   return palette;
 };
 
-const MAX_PIXEL_RATIO = 1.5;
 const TILE_CSS_PX_MIN = 84;
 const TILE_CSS_PX_MAX = 200;
 const TILES_ACROSS_LONG_EDGE = 9;
+const SHADOW_REACH_CSS_PX = 16; // how far the shade pass marches, keep in step with SHADOW_REACH in its shader
+
+// the wall is drawn at most this often; it moves a few css px per second, so nothing is lost,
+// and the gpu gets to idle between frames
+const TARGET_FRAME_MS = 1000 / 30;
+const FRAME_TOLERANCE_MS = 4; // so a 60 Hz display settles on every other frame instead of every third
+// when drawn frames still come in slower than this, the drawing buffer is scaled down a step
+const SLOW_FRAME_MS = 1.5 * TARGET_FRAME_MS;
+const PIXEL_RATIO_STEPS = [1.5, 1.25, 1, 0.75]; // device px per css px, the cap only ever steps down
+const PACE_WARMUP_DRAWS = 10; // frames ignored after a start or a step, while everything settles
+const PACE_WINDOW = 12; // frames judged together
+const PACE_GAP_MS = 500; // longer gaps are the tab being hidden, not the gpu being slow
 
 const compileShader = (gl: WebGL2RenderingContext, type: GLenum, source: string) => {
   const shader = gl.createShader(type);
@@ -58,7 +70,7 @@ const compileShader = (gl: WebGL2RenderingContext, type: GLenum, source: string)
   return shader;
 };
 
-const createProgram = (gl: WebGL2RenderingContext) => {
+const createProgram = (gl: WebGL2RenderingContext, fsSource: string) => {
   const vertexShader = compileShader(gl, gl.VERTEX_SHADER, vsSource);
   const fragmentShader = compileShader(gl, gl.FRAGMENT_SHADER, fsSource);
   const program = gl.createProgram();
@@ -78,6 +90,12 @@ const createProgram = (gl: WebGL2RenderingContext) => {
   return program;
 };
 
+const uniformLocations = <T extends string>(gl: WebGL2RenderingContext, program: WebGLProgram, names: readonly T[]) =>
+  Object.fromEntries(names.map((name) => [name, gl.getUniformLocation(program, name)])) as Record<
+    T,
+    WebGLUniformLocation | null
+  >;
+
 /** Starts rendering the paper tiles into the canvas. Returns a function that stops it and frees the GL resources. */
 export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   const palette = buildPalette();
@@ -95,25 +113,36 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     return () => undefined;
   }
 
-  const program = createProgram(gl);
-  if (!program) {
+  // two passes: the wall (tiles, paper, logo cut, height) into a texture, then the shadows over it
+  const wallProgram = createProgram(gl, wallSource);
+  const shadeProgram = createProgram(gl, shadeSource);
+  if (!(wallProgram && shadeProgram)) {
     console.error('Could not initialize shaders');
     return () => undefined;
   }
+  const wall = uniformLocations(gl, wallProgram, [
+    'uResolution',
+    'uOrigin',
+    'uTime',
+    'uTileSize',
+    'uPixelRatio',
+    'uPalette',
+    'uLogo',
+    'uLogoRect',
+    'uLogoSpread'
+  ] as const);
+  const shade = uniformLocations(gl, shadeProgram, ['uWall', 'uWallSize', 'uOrigin', 'uResolution', 'uPixelRatio'] as const);
 
-  const uniforms = {
-    resolution: gl.getUniformLocation(program, 'uResolution'),
-    time: gl.getUniformLocation(program, 'uTime'),
-    tileSize: gl.getUniformLocation(program, 'uTileSize'),
-    pixelRatio: gl.getUniformLocation(program, 'uPixelRatio'),
-    palette: gl.getUniformLocation(program, 'uPalette'),
-    logo: gl.getUniformLocation(program, 'uLogo'),
-    logoRect: gl.getUniformLocation(program, 'uLogoRect'),
-    logoSpread: gl.getUniformLocation(program, 'uLogoSpread')
-  };
+  // what never changes: the palette, and which texture unit each sampler reads
+  gl.useProgram(wallProgram);
+  gl.uniform3fv(wall.uPalette, palette);
+  gl.uniform1i(wall.uLogo, 0);
+  gl.useProgram(shadeProgram);
+  gl.uniform1i(shade.uWall, 1);
 
-  // the logo's distance field; a single "far outside" texel until the image arrives
+  // the logo's distance field on unit 0; a single "far outside" texel until the image arrives
   const logoTexture = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE0);
   gl.bindTexture(gl.TEXTURE_2D, logoTexture);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, 1, 1, 0, gl.LUMINANCE, gl.UNSIGNED_BYTE, new Uint8Array([255]));
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -122,6 +151,20 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
   let logoAspect = 1024 / 264;
   let logoTextureWidth = 1;
+
+  // the wall pass' target on unit 1, (re)sized in fit; unfiltered, so the shade pass' march
+  // sees the slabs' edges as the steps they are instead of one texel wide ramps
+  const wallTexture = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE1);
+  gl.bindTexture(gl.TEXTURE_2D, wallTexture);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  const wallFramebuffer = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, wallFramebuffer);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, wallTexture, 0);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
   // full screen quad on attribute location 0
   const quad = gl.createVertexArray();
@@ -137,12 +180,17 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   let cssWidth = 0;
   let cssHeight = 0;
   let pixelRatio = 1;
+  let pixelRatioStep = 0;
   let tileSize = TILE_CSS_PX_MIN;
+  let margin = 0; // how far the wall texture runs on past the canvas on every side, device px
+  let wallWidth = 0;
+  let wallHeight = 0;
+  let wallChecked = false;
 
   // keeps the drawing buffer in step with the canvas' css box, which mobile browsers can
   // change after the first frame without a window resize; cheap when nothing changed
   const fit = () => {
-    const nextPixelRatio = clamp(window.devicePixelRatio || 1, 1, MAX_PIXEL_RATIO);
+    const nextPixelRatio = Math.min(Math.max(window.devicePixelRatio || 1, 1), PIXEL_RATIO_STEPS[pixelRatioStep]);
     const nextCssWidth = canvas.clientWidth || window.innerWidth;
     const nextCssHeight = canvas.clientHeight || window.innerHeight;
     if (nextCssWidth === cssWidth && nextCssHeight === cssHeight && nextPixelRatio === pixelRatio) return;
@@ -156,6 +204,20 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     height = Math.max(1, Math.round(cssHeight * pixelRatio));
     canvas.width = width;
     canvas.height = height;
+
+    margin = Math.ceil(SHADOW_REACH_CSS_PX * pixelRatio) + 2;
+    wallWidth = width + 2 * margin;
+    wallHeight = height + 2 * margin;
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, wallTexture);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, wallWidth, wallHeight, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    if (!wallChecked) {
+      wallChecked = true;
+      gl.bindFramebuffer(gl.FRAMEBUFFER, wallFramebuffer);
+      const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      if (status !== gl.FRAMEBUFFER_COMPLETE) console.error('The wall framebuffer is incomplete:', status);
+    }
   };
 
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -180,6 +242,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     if (stopped) return;
     logoAspect = logoImage.naturalWidth / logoImage.naturalHeight;
     logoTextureWidth = logoImage.naturalWidth;
+    gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, logoTexture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, gl.LUMINANCE, gl.UNSIGNED_BYTE, logoImage);
     if (reducedMotion && logoReady) frame = requestAnimationFrame(render);
@@ -189,27 +252,63 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   logoImage.src = logoSdfUrl;
   const startFallback = window.setTimeout(start, 1500);
 
-  const render = () => {
-    if (stopped) return;
+  const draw = () => {
     fit();
-
-    gl.viewport(0, 0, width, height);
-    gl.useProgram(program);
     gl.bindVertexArray(quad);
-    gl.uniform2f(uniforms.resolution, width, height);
-    gl.uniform1f(uniforms.time, currentTime());
-    gl.uniform1f(uniforms.tileSize, tileSize);
-    gl.uniform1f(uniforms.pixelRatio, pixelRatio);
-    gl.uniform3fv(uniforms.palette, palette);
+
+    // the wall, into its texture
+    gl.bindFramebuffer(gl.FRAMEBUFFER, wallFramebuffer);
+    gl.viewport(0, 0, wallWidth, wallHeight);
+    gl.useProgram(wallProgram);
+    gl.uniform2f(wall.uResolution, width, height);
+    gl.uniform2f(wall.uOrigin, margin, margin);
+    gl.uniform1f(wall.uTime, currentTime());
+    gl.uniform1f(wall.uTileSize, tileSize);
+    gl.uniform1f(wall.uPixelRatio, pixelRatio);
     const logoWidth = Math.min(LOGO_CSS_WIDTH_MAX, (LOGO_VIEWPORT_FRACTION * width) / pixelRatio) * pixelRatio;
-    gl.uniform4f(uniforms.logoRect, 0.5 * width, 0.5 * height, logoWidth, logoWidth / logoAspect);
-    gl.uniform1f(uniforms.logoSpread, (LOGO_SDF_SPREAD * logoWidth) / logoTextureWidth);
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, logoTexture);
-    gl.uniform1i(uniforms.logo, 0);
+    gl.uniform4f(wall.uLogoRect, 0.5 * width, 0.5 * height, logoWidth, logoWidth / logoAspect);
+    gl.uniform1f(wall.uLogoSpread, (LOGO_SDF_SPREAD * logoWidth) / logoTextureWidth);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
-    if (!reducedMotion) frame = requestAnimationFrame(render);
+    // the shadows over it, onto the canvas
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0, 0, width, height);
+    gl.useProgram(shadeProgram);
+    gl.uniform2f(shade.uWallSize, wallWidth, wallHeight);
+    gl.uniform2f(shade.uOrigin, margin, margin);
+    gl.uniform2f(shade.uResolution, width, height);
+    gl.uniform1f(shade.uPixelRatio, pixelRatio);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  };
+
+  // paces the animated frames and, when the drawn frames keep coming in slow, scales the
+  // drawing buffer down a step. Only ever down, so it cannot oscillate
+  let lastDrawAt = -Infinity;
+  let drawsSinceStep = 0;
+  const drawIntervals: number[] = [];
+  const pace = (now: number) => {
+    const interval = now - lastDrawAt;
+    lastDrawAt = now;
+    drawsSinceStep++;
+    if (drawsSinceStep <= PACE_WARMUP_DRAWS || interval > PACE_GAP_MS) return;
+    drawIntervals.push(interval);
+    if (drawIntervals.length < PACE_WINDOW) return;
+    const sorted = [...drawIntervals].sort((a, b) => a - b);
+    drawIntervals.length = 0;
+    if (sorted[PACE_WINDOW >> 1] > SLOW_FRAME_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1) {
+      pixelRatioStep++;
+      drawsSinceStep = 0;
+    }
+  };
+
+  const render = (now: number) => {
+    if (stopped) return;
+    if (!reducedMotion) {
+      frame = requestAnimationFrame(render);
+      if (now - lastDrawAt < TARGET_FRAME_MS - FRAME_TOLERANCE_MS) return;
+      pace(now);
+    }
+    draw();
   };
 
   const onResize = () => {
@@ -227,7 +326,10 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     observer?.disconnect();
     gl.deleteBuffer(quadBuffer);
     gl.deleteVertexArray(quad);
-    gl.deleteProgram(program);
+    gl.deleteFramebuffer(wallFramebuffer);
+    gl.deleteProgram(wallProgram);
+    gl.deleteProgram(shadeProgram);
     gl.deleteTexture(logoTexture);
+    gl.deleteTexture(wallTexture);
   };
 };

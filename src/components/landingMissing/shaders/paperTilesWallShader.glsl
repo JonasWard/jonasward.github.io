@@ -1,7 +1,12 @@
 #version 300 es
 precision highp float;
 
-// Embossed paper tiles on an animated asymmetric tiling.
+// Embossed paper tiles on an animated asymmetric tiling: the wall pass.
+//
+// This renders the lit paper into a texture, with the wall's height in the alpha channel;
+// the shade pass (paperTilesShadeShader.glsl) then marches that heightfield for the soft
+// shadows, so the tiling is only ever built once per pixel. The texture runs on past the
+// canvas by uOrigin on every side, so the march near the canvas' edges finds real wall.
 //
 // The tiling follows gelami's "Straight Flagstone Tiles"
 // (https://www.shadertoy.com/view/7tKGRc), itself derived from fizzer's
@@ -23,11 +28,12 @@ precision highp float;
 // slabs sit at different heights and the shapes stand out of
 // them, and every pixel marches towards the light across that heightfield, so
 // slabs and shapes cast soft shadows onto anything lower, including their own
-// slab and the neighbours. Each slab is faced with paper
+// slab and the neighbours (see the shade pass). Each slab is faced with paper
 // whose fibres are anchored to the slab's centre with a per-slab offset, so
 // they travel with it. Slabs abut directly; only tone and shadow mark the edges.
 
 uniform vec2 uResolution;  // canvas size, device px
+uniform vec2 uOrigin;      // where the canvas' lower left corner sits in this pass' target, device px
 uniform float uTime;       // seconds
 uniform float uTileSize;   // average tile edge, device px
 uniform float uPixelRatio; // device px per css px
@@ -47,7 +53,6 @@ const float SPAN_MAX = 0.8;
 const float SPAN_RATE = 0.2;           // radians per second of the edge oscillation
 const float SPAN_RATE_SPREAD = 0.35;   // per-cell variation of that rate
 
-const float LIGHT_SIZE = 5.0;  // apparent radius of the light, as a slope, for penumbrae
 const float PERIOD_MIN = 20.0;  // spacing of the pattern's folds, css px
 const float PERIOD_MAX = 384.0;
 const float PERIOD_MAX_CENTRED_FRAME = 60.0; // frames sitting on the slab's centre keep their folds tight
@@ -55,10 +60,7 @@ const float HEIGHT = 12.0;      // tallest slab above the lowest, css px
 const float LOGO_DEPTH = 10.0;  // how far the logo is cut below the lowest slab, css px
 const float FRAY = 0.8;         // how far the edges between slabs wander, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
-const float SHADOW_REACH = 16.0; // how far a shadow can fall, css px
-const float SHADOW_FINE = 7.0;  // the first stretch of the march is sampled every css px ...
-const int SHADOW_FINE_STEPS = 2;
-const int SHADOW_STEPS = 2;     // ... the rest ever more coarsely up to the reach
+const float HEIGHT_SPAN = LOGO_DEPTH + HEIGHT + RELIEF; // the height range the alpha channel covers, see the shade pass
 
 // ---------------------------------------------------------------- hashing
 
@@ -331,67 +333,13 @@ float slabHeight(Tile T) {
   return hashSeeded(tileSeed(T), 14.0);
 }
 
-// height of the wall at world position uv, css px; the logo is cut out of the tiles
-float terrain(vec2 uv, float t) {
-  vec2 fragPx = (uv - SCROLL * t) * uTileSize + 0.5 * uResolution;
-  if (logoDistance(fragPx) < 0.0) return -LOGO_DEPTH;
-  uv += frayAt(uv);
-  Tile T = tileAt(uv, t);
-  vec2 sizePx = T.size * uTileSize;
-  vec2 q = (uv - T.lo) / T.size * sizePx;
-  Look L = lookFrom(tileSeed(T));
-  vec2 c = patternCentre(T, sizePx, L);
-  return slabHeight(T) * HEIGHT + shapeHeight(q, c, L);
-}
-
-// height of the wall s css px from uv towards the light
-float terrainAlong(vec2 uv, float s, vec2 dir, float t) {
-  return terrain(uv + dir * s * uPixelRatio / uTileSize, t);
-}
-
-// soft shadow: march from height h0 at uv towards the light and keep the smallest
-// angular clearance (clearance over distance) of the wall above the ray. Wherever the
-// wall steps up between two samples, bisect to the step's edge and measure there, so the
-// clearance is a continuous function of the pixel rather than of where samples fall. The
-// light's apparent size then turns the angle into a penumbra
-float shadowAt(vec2 uv, float h0, float t) {
-  vec2 dir = normalize(LIGHT.xy);
-  float rise = LIGHT.z / length(LIGHT.xy); // how much the ray climbs per css px travelled
-  float bias = 0.4;
-  float angle = 1.0;
-  float sPrev = 0.0;
-  float hPrev = h0;
-  for (int i = 1; i <= SHADOW_STEPS; i++) {
-    float f = float(i - SHADOW_FINE_STEPS) / float(SHADOW_STEPS - SHADOW_FINE_STEPS);
-    float s = i <= SHADOW_FINE_STEPS ? float(i) * SHADOW_FINE / float(SHADOW_FINE_STEPS)
-                                     : SHADOW_FINE + (SHADOW_REACH - SHADOW_FINE) * f * sqrt(f);
-    float h = terrainAlong(uv, s, dir, t);
-    if (h - hPrev > 0.75) {
-      // a step up: find its edge and see how far the wall behind it rises above the ray there
-      float lo = sPrev;
-      float hi = s;
-      float threshold = 0.5 * (h + hPrev);
-      for (int j = 0; j < 5; j++) {
-        float mid = 0.5 * (lo + hi);
-        if (terrainAlong(uv, mid, dir, t) > threshold) hi = mid; else lo = mid;
-      }
-      angle = min(angle, (h0 + hi * rise + bias - h) / max(hi, 0.5));
-    }
-    float clearance = h0 + s * rise + bias - h;
-    angle = min(angle, clearance / s);
-    if (angle < -LIGHT_SIZE) break;
-    sPrev = s;
-    hPrev = h;
-  }
-  return smoothstep(-LIGHT_SIZE, LIGHT_SIZE, angle);
-}
-
 // ---------------------------------------------------------------- main
 
 void main(void) {
   float t = uTime;
   float cssPx = uPixelRatio; // one css px in device px
-  vec2 uvWorld = (gl_FragCoord.xy - 0.5 * uResolution) / uTileSize + SCROLL * t;
+  vec2 fragPx = gl_FragCoord.xy - uOrigin; // canvas px
+  vec2 uvWorld = (fragPx - 0.5 * uResolution) / uTileSize + SCROLL * t;
   vec2 uv = uvWorld + frayAt(uvWorld);
 
   Tile T = tileAt(uv, t);
@@ -415,19 +363,16 @@ void main(void) {
 
   vec3 col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
 
-  // the logo: cut out of the wall down to a plain paper floor; the tiles around it
-  // cast their shadows into the letters
-  float dLogo = logoDistance(gl_FragCoord.xy);
-  vec3 floorCol = uPalette[0] * 0.72 * (1.0 + paper(gl_FragCoord.xy / cssPx, 0.3));
-  col = mix(floorCol, col, smoothstep(-aa, aa, dLogo));
+  // the logo: cut out of the wall down to a plain paper floor (the shade pass casts the
+  // tiles' shadows into the letters); the floor only matters up to the outline's blend
+  float dLogo = logoDistance(fragPx);
+  if (dLogo < aa) {
+    vec3 floorCol = uPalette[0] * 0.72 * (1.0 + paper(fragPx / cssPx, 0.3));
+    col = mix(floorCol, col, smoothstep(-aa, aa, dLogo));
+  }
 
-  // shadows from everything taller towards the light
-  float shadow = shadowAt(uvWorld, terrain(uvWorld, t), t);
-  col *= 0.4 + 0.6 * shadow;
+  // the wall's height here, css px, for the shade pass
+  float h = dLogo < 0.0 ? -LOGO_DEPTH : slabHeight(T) * HEIGHT + shapeHeight(q, c, L);
 
-
-  vec2 v = gl_FragCoord.xy / uResolution - 0.5;
-  col *= 1.0 - 0.25 * dot(v, v);
-
-  fragColor = vec4(col, 1.0);
+  fragColor = vec4(col, (h + LOGO_DEPTH) / HEIGHT_SPAN);
 }
