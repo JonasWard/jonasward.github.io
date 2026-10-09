@@ -45,7 +45,12 @@ export default defineConfig({
     })
   ],
   server: {
-    port: 3111
+    port: 3111,
+    // the projects overview pulls in every project's content and with it some 700 `?responsive` images,
+    // each transformed on first request; transform them while the server starts instead of on the first visit
+    warmup: {
+      clientFiles: ['./src/components/projects/overview/ProjectOverview.tsx']
+    }
   },
   build: {
     outDir: './build',
