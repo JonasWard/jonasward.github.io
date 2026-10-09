@@ -30,6 +30,8 @@
   position: relative;
   padding: 4px 8px;
   overflow: hidden;
+  /* the stripe and the content below stack against each other only, never against the page's fixed header */
+  isolation: isolate;
 }
 
 .project-card-content::before {
