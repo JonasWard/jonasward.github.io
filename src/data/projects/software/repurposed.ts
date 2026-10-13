@@ -3,7 +3,7 @@ import { ProjectContext } from '../../../types/keywords/projectContext';
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
-import { createImage, createText, createTitleImage, svgPicture } from '../../../utils/projectconstructor';
+import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
@@ -15,9 +15,10 @@ import detailed3d from './assets/repurposed/detailed-3d.png?responsive';
 import detailedPdf from './assets/repurposed/detailed-pdf.png?responsive';
 import landing from './assets/repurposed/landing.png?responsive';
 import marketplaceOverview from './assets/repurposed/marketplace-overview.webp?responsive';
+import marketplace from './assets/repurposed/marketplace.webp?responsive';
+import repurposedSdf from './assets/repurposed/repurposed-sdf.webp?responsive';
 import slides from './assets/repurposed/slides.webp?responsive';
 import tableView from './assets/repurposed/table-view.png?responsive';
-import repurposedMorePadding from './assets/repurposed/repurposed-more-padding.svg';
 
 const id = '2026-02';
 
@@ -27,7 +28,7 @@ const metaData: ProjectMetaData = {
   name: 'Repurposed',
   projectType: ProjectCategory.Software,
   description: 'POC Marketplace for reuse Marketplaces',
-  keyImage: svgPicture(repurposedMorePadding, 1400, 1400),
+  keyImage: repurposedSdf,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [
@@ -45,7 +46,7 @@ const metaData: ProjectMetaData = {
 export const repurposed: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(svgPicture(repurposedMorePadding, 1400, 1400), metaData.name),
+  projectImage: createTitleImage(marketplace, metaData.name),
   projectContent: [
     createText(
       2,
@@ -65,7 +66,7 @@ export const repurposed: ProjectData = {
         },
         {
           type: ProjectContentType.ExternalLink,
-          href: 'https://jonasward.github.io/repurposed/',
+          href: 'https://repurposed.ch/',
           alternativeName: 'Deployment'
         }
       ]
