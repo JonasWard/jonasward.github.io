@@ -1,5 +1,6 @@
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { ProjectImages } from '../../../types/projectContent/projectImages';
+import { ImageLink } from './ImageLink';
 import { ResponsiveImg } from './ResponsiveImg';
 
 export interface IProjectImages {
@@ -16,27 +17,17 @@ export const ProjectImagesRenderer: React.FC<IProjectImages> = ({ content }) => 
 
   return (
     <div className={className}>
-      {content.images.map((image, index) => {
-        const children = (
-          <>
-            <ResponsiveImg picture={image.picture} sizes={isGrid ? imageGridSizes : imagesSizes} alt={image.imageText ?? ''} />
-            {image.imageText && (
-              <div className={`font-${image.imageTextSize ?? 'small'} ${image.imageTextPosition ?? 'bottom'}-${image.imageTextAlignment ?? 'right'}`}>
-                {image.imageText}
-              </div>
-            )}
-          </>
-        );
-        return image.href ? (
-          <a key={index} href={image.href} className={`${className}-content image-link`}>
-            {children}
-          </a>
-        ) : (
-          <div key={index} className={`${className}-content`}>
-            {children}
-          </div>
-        );
-      })}
+      {content.images.map((image, index) => (
+        <div key={index} className={`${className}-content`}>
+          <ResponsiveImg picture={image.picture} sizes={isGrid ? imageGridSizes : imagesSizes} alt={image.imageText ?? ''} />
+          {image.link && <ImageLink link={image.link} />}
+          {image.imageText && (
+            <div className={`font-${image.imageTextSize ?? 'small'} ${image.imageTextPosition ?? 'bottom'}-${image.imageTextAlignment ?? 'right'}`}>
+              {image.imageText}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

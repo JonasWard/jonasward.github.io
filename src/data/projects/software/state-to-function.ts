@@ -75,7 +75,7 @@ export const stateToFunction: ProjectData = {
     },
     {
       ...createImage(builderSchema, 'Model definition as a densing schema - port, not deployed yet'),
-      href: densingBuilderViews.stateToFunction
+      link: { href: densingBuilderViews.stateToFunction, title: 'Open this view in the Densing Builder' }
     }
   ]
 };

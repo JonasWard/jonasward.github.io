@@ -8,12 +8,12 @@ export type ProjectImage = {
   type: ProjectContentType.Image;
   picture: ResponsivePicture;
   imageText?: string;
-  // makes the image and its caption a link
-  href?: string;
   maxImageHeight?: number;
   maxImageWidth?: number;
   imageTextSize?: 'small' | 'medium' | 'large';
   imageTextPosition?: 'top' | 'bottom' | 'center';
   imageTextAlignment?: 'left' | 'center' | 'right';
   imageTextColor?: 'white-on-black' | 'black-on-white';
+  /** a small link in the image's top-right corner, e.g. to the settings an image was made with */
+  link?: { href: string; title: string };
 };

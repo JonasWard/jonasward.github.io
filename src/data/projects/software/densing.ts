@@ -22,6 +22,8 @@ const id = '2026-01';
 const logoSettings =
   'https://jonasward.ch/svg-sdf/?s=J_AYAnMALuABg9PHqIACs6VX0b5vR-jo9P8gAHBYQPqwejv6OK2eh0xQgAPr9Q-nlgpwAHWSg3jZD2TIAChYcPEzKqJgcAAn___-847___-lNqnEA2G';
 
+const builderLink = (href: string) => ({ href, title: 'Open this view in the Densing Builder' });
+
 const metaData: ProjectMetaData = {
   id,
   webstring: 'densing',
@@ -63,7 +65,7 @@ export const densing: ProjectData = {
         }
       ]
     },
-    { ...createImage(densingSdf, 'Logo rendered with SVG SDF, settings packed with densing'), href: logoSettings },
+    { ...createImage(densingSdf, 'Logo rendered with SVG SDF, settings packed with densing'), link: { href: logoSettings, title: 'Open these settings in the playground' } },
     {
       type: ProjectContentType.ExternalLinkList,
       links: [
@@ -95,10 +97,10 @@ export const densing: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        { ...createImage(builderInspector, 'Device Config - what a field costs'), href: densingBuilderViews.deviceConfig },
-        { ...createImage(builderTemplates, 'Recursive template - (5 + 3) × 2'), href: densingBuilderViews.expressionTree },
-        { ...createImage(builderSharedNumbers, 'Shared numbers with mm and m presets'), href: densingBuilderViews.sharedNumbers },
-        { ...createImage(builderQr, 'CITA building definition + qr-code'), href: densingBuilderViews.cita }
+        { ...createImage(builderInspector, 'Device Config - what a field costs'), link: builderLink(densingBuilderViews.deviceConfig) },
+        { ...createImage(builderTemplates, 'Recursive template - (5 + 3) × 2'), link: builderLink(densingBuilderViews.expressionTree) },
+        { ...createImage(builderSharedNumbers, 'Shared numbers with mm and m presets'), link: builderLink(densingBuilderViews.sharedNumbers) },
+        { ...createImage(builderQr, 'CITA building definition + qr-code'), link: builderLink(densingBuilderViews.cita) }
       ]
     }
   ]

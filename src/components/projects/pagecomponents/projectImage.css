@@ -159,8 +159,27 @@
   }
 }
 
-/* an image with a href, see ProjectImage */
+/* the corner link of an image, shown on hover where there is one, always on touch screens */
 .image-link {
-  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  color: white;
+  line-height: 1.2;
   text-decoration: none;
+}
+
+@media (hover: hover) {
+  .image-link {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .project-image:hover .image-link,
+  .images-content:hover .image-link,
+  .image-grid-content:hover .image-link,
+  .image-link:focus-visible {
+    opacity: 1;
+  }
 }
