@@ -2,13 +2,15 @@ import { ProjectPartnerContext } from '../../../types/keywords/projectPartnerCon
 import { ProjectContext } from '../../../types/keywords/projectContext';
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
-import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
+import { createImage, createText, createTitleImage, svgPicture } from '../../../utils/projectconstructor';
 import { ResponsivePicture } from '../../../types/projectContent/projectImage';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
 import { Technologies } from 'src/types/keywords/technologies';
 
+import computeMetrics from './asssets/svg-sdf-concepts/compute-metrics.svg';
+import computeSizes from './asssets/svg-sdf-concepts/compute-sizes.svg';
 import bufferDistance from './asssets/svg-sdf-concepts/buffer-distance.webp?responsive';
 import bufferDirection from './asssets/svg-sdf-concepts/buffer-direction.webp?responsive';
 import bufferShape from './asssets/svg-sdf-concepts/buffer-shape.webp?responsive';
@@ -208,8 +210,16 @@ export const svgSDF: ProjectData = {
         'Compute',
         'The buffer is computed with WebGPU, with WebGL2 or, when neither is available, on the CPU with up to 8 web workers. The CPU version is the reference, the GPU buffers match it to within about 1e-4 of a pixel.'
       ],
-      'Both GPU paths run in a worker, tile by tile. Before that, the geometry is moved around the centre of the buffer, otherwise float32 is not precise enough for the coordinates of a map.'
+      'Both GPU paths run in a worker, tile by tile. Before that, the geometry is moved around the centre of the buffer, otherwise float32 is not precise enough for the coordinates of a map.',
+      'Measured on an Apple M4 in Chrome with the Swiss outline: at 2048 px both GPU paths need 50 to 73 ms, the CPU workers between 289 ms and 1.2 s. WebGPU and WebGL2 end up pretty much equally fast. The Lp metric hurts the CPU the most, it is three to four times slower than the others there, while the GPU barely notices.'
     ),
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [
+        named(svgPicture(computeMetrics, 1280, 880), 'Metrics'),
+        named(svgPicture(computeSizes, 1280, 880), 'Buffer Size')
+      ]
+    },
     createText(
       1,
       'Denmark, Switzerland and Belgium, each with the same sixteen colorings and metrics.'
