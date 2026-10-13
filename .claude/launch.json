@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "preview",
+      "runtimeExecutable": "bunx",
+      "runtimeArgs": [
+        "vite",
+        "preview",
+        "--port",
+        "4173",
+        "--strictPort"
+      ],
+      "port": 4173
+    },
+    {
+      "name": "dev",
+      "runtimeExecutable": "bunx",
+      "runtimeArgs": [
+        "--bun",
+        "vite",
+        "--port",
+        "3111",
+        "--strictPort"
+      ],
+      "port": 3111
+    }
+  ]
+}
