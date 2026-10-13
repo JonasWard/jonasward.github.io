@@ -4,6 +4,7 @@ import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createText, createTitleImage, svgPicture } from '../../../utils/projectconstructor';
 import { ResponsivePicture } from '../../../types/projectContent/projectImage';
+import { ProjectImageText } from '../../../types/projectContent/projectImageText';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
@@ -11,6 +12,11 @@ import { Technologies } from 'src/types/keywords/technologies';
 
 import computeMetrics from './asssets/svg-sdf-concepts/compute-metrics.svg';
 import computeSizes from './asssets/svg-sdf-concepts/compute-sizes.svg';
+import introTopography from './asssets/svg-sdf-concepts/intro-topography.webp?responsive&lossless';
+import bufferInput from './asssets/svg-sdf-concepts/buffer-input.webp?responsive&lossless';
+import distancePentagon from './asssets/svg-sdf-concepts/distance-pentagon.webp?responsive&lossless';
+import curvesPolylineMedium from './asssets/svg-sdf-concepts/curves-polyline-medium.webp?responsive&lossless';
+import postSinebow from './asssets/svg-sdf-concepts/post-sinebow.webp?responsive&lossless';
 import bufferDistance from './asssets/svg-sdf-concepts/buffer-distance.webp?responsive&lossless';
 import bufferDirection from './asssets/svg-sdf-concepts/buffer-direction.webp?responsive&lossless';
 import bufferShape from './asssets/svg-sdf-concepts/buffer-shape.webp?responsive&lossless';
@@ -88,6 +94,24 @@ const id = '2025-07';
 
 const named = (picture: ResponsivePicture, name: string) => createImage(picture, `${name} © J.W.`);
 
+// text beside its key image, the heading on the first paragraph
+const section = (
+  picture: ResponsivePicture,
+  caption: string,
+  position: 'left' | 'right',
+  title: string | null,
+  ...paragraphs: string[]
+): ProjectImageText => ({
+  type: ProjectContentType.ImageText,
+  image: named(picture, caption),
+  text: {
+    type: ProjectContentType.Text,
+    maxColumnCount: 1,
+    content: title ? [[title, paragraphs[0]], ...paragraphs.slice(1)] : paragraphs
+  },
+  position
+});
+
 const metaData: ProjectMetaData = {
   id,
   webstring: 'sdf-svg',
@@ -105,26 +129,26 @@ export const svgSDF: ProjectData = {
   metaData,
   projectImage: createTitleImage(chRampEmber, metaData.name),
   projectContent: [
-    createText(
-      2,
-      [
-        'SVG SDFs',
-        'Little proof of concept to render SVGs with SDFs to get smooth and continuous distance fields for arbitrary shapes.'
-      ],
-      'The SVG is parsed in the browser and turned into a buffer of distances, which is then colored in a fragment shader. Below first the ideas behind it, each with a few details zoomed in, then three countries with a whole bunch of different colorings and metrics. You can load your own SVG in the playground and export the result as a PNG or as the raw buffer, feel free to try it out!'
+    section(
+      introTopography,
+      'Topography',
+      'left',
+      'SVG SDFs',
+      'Little proof of concept to render SVGs with SDFs to get smooth and continuous distance fields for arbitrary shapes.',
+      'Signed distance fields keep popping up in my projects - lamps, vases, knitting patterns. The appeal is that a distance field turns a line into a landscape: every point in the plane suddenly knows how far away the drawing is and in which direction it lies. Here the drawing is an SVG - a logo, a sketch or the outline of a country - and that landscape is what gets colored. Everything on this page can be played with in the playground, load your own SVG and export the result as a PNG or as the raw buffer!'
     ),
     {
       type: ProjectContentType.ExternalLink,
       href: 'https://jonasward.github.io/svg-sdf/',
       alternativeName: 'Playground'
     },
-    createText(
-      2,
-      [
-        'The Buffer',
-        'For every pixel of a fixed-resolution buffer four numbers are stored: the signed distance to the nearest edge, the vector pointing towards that edge and the shape it belongs to.'
-      ],
-      'All coloring happens afterwards, so playing with the settings never recomputes the buffer. Below a detail of the Danish islands, first only the distance, then only the direction to the nearest edge, then the shapes and finally the default polar coloring, which combines all of them.'
+    section(
+      bufferInput,
+      'Input',
+      'right',
+      'The Buffer',
+      'Every pixel of a fixed-resolution buffer stores four numbers: the signed distance to the nearest edge, the direction towards it and the shape it belongs to. That is the whole raw material, computed once.',
+      'Zoomed in on the gap between a square and a circle there is already quite a bit to see. The distance alone reads like a terrain, with a ridge running exactly halfway between the two. The direction cuts the plane into facets: flat bands along the straight sides, a fan around the corner and a sharp seam where the nearest edge jumps from one shape to the other. All coloring happens afterwards, so this is where the actual image making starts.'
     ),
     {
       type: ProjectContentType.ImageGrid,
@@ -135,13 +159,13 @@ export const svgSDF: ProjectData = {
         named(bufferPolar, 'Polar')
       ]
     },
-    createText(
-      2,
-      [
-        'Distances',
-        'The distance does not have to be the Euclidean one. Every metric measures the distance to the nearest edge with a different unit shape: a diamond for Manhattan, a square for Chebyshev, something in between the circle and the square for Lp and a regular polygon for the polygon metric.'
-      ],
-      'A circle, a triangle and a rectangle make this quite legible. Close to each shape the iso-lines follow its outline, further out they turn into the unit shape of the metric, and the borders between the shapes - where one shape stops being the nearest - move along with it. Each metric can also be rotated and stretched. Odd polygons are a bit special though: with a triangle the distance from A to B is not the same anymore as the one from B to A.'
+    section(
+      distanceTriangle,
+      'Triangle',
+      'left',
+      'Distances',
+      'Euclidean distance is the obvious choice, but by no means the only one. Swapping the metric swaps the unit shape the distance is measured with: a diamond for Manhattan, a square for Chebyshev, anything in between the circle and the square for Lp and a regular polygon for the polygon metric.',
+      'Formally this changes quite a lot. Close to a shape the lines still follow its outline, further out they take over the formal language of the metric: soft and round for Euclidean, crystalline for Manhattan and Chebyshev, and rather wind-swept for the triangle and the pentagon, where the distance from A to B is not the same anymore as the one from B to A. Every metric can also be rotated and stretched, a stretched circle draws much like a slanted pen.'
     ),
     {
       type: ProjectContentType.ImageGrid,
@@ -155,36 +179,36 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(distanceTriangle, 'Triangle'),
         named(distanceHexagon, 'Hexagon'),
+        named(distancePentagon, 'Pentagon'),
         named(distanceRotated, 'Rotated'),
         named(distanceStretched, 'Stretched')
       ]
     },
-    createText(
-      2,
-      [
-        'Curves',
-        'In a first version all curves were flattened into polylines. Cheap, though the direction to the nearest edge is then constant along every straight piece, which shows up as bands as soon as you color by direction. Therefore curves can now also stay cubic Béziers, with the distance measured to the actual curve.'
-      ],
-      'The example is a single ellipse, with the hue going around six times per turn so every change in direction shows. First a polyline that is allowed to be 8 pixels off, then one that is a quarter of a pixel off, then the exact curve and finally the difference in distance between the coarse polyline and the exact curve, up to 4 pixels.'
+    section(
+      curvesDifference,
+      'Difference',
+      'right',
+      'Curves',
+      'Curves can be flattened into polylines or kept as cubic Béziers, with the distance measured to the actual curve. Flattening is cheap, though the direction to the nearest edge is then constant along every straight piece, which shows up as hard bands as soon as you color by direction.',
+      'Though the bands are not only an error, they are a texture of their own. On the ellipse below the hue goes round six times per turn: a polyline that may be 8 pixels off gives faceted fans, 2 pixels gives finer ones, a quarter of a pixel is almost smooth and the exact curve completely so. The image next to this text only shows the difference in distance between the coarse polyline and the exact curve - an error map basically - and it turned out to be the prettiest image of the lot.'
     ),
     {
       type: ProjectContentType.ImageGrid,
       images: [
         named(curvesPolylineCoarse, 'Polyline 8 px'),
+        named(curvesPolylineMedium, 'Polyline 2 px'),
         named(curvesPolylineFine, 'Polyline 0.25 px'),
-        named(curvesExact, 'Exact'),
-        named(curvesDifference, 'Difference')
+        named(curvesExact, 'Exact')
       ]
     },
-    createText(
-      2,
-      [
-        'Post-Processing',
-        'One buffer, many images. The polar mode takes its hue from the direction to the nearest edge, out of an HSV rainbow, a perceptually even OKLCH wheel or a cyclic gradient of your own, and its strength from the distance. On top there can be radial lines, a checker or a mosaic of tiles.'
-      ],
-      'The ramps ignore the direction and only color by distance, with separate colors for the inside and the outside. All eight images below are the same buffer of the north of Jutland.'
+    section(
+      postSinebow,
+      'Sinebow',
+      'left',
+      'Post-Processing',
+      'One buffer, a whole bunch of images. The polar mode reads the field like a compass: the hue comes from the direction to the nearest edge, its strength from the distance. The hues come from an HSV rainbow, a perceptually even OKLCH wheel or a cyclic gradient of your own, with radial lines, a checker or a mosaic of tiles on top.',
+      'The ramps forget about direction and only color by distance, which gives the more familiar look of a contour map. All nine images are the very same buffer of the north of Jutland, only the reading changes - which is pretty much the point of keeping the computation and the coloring apart.'
     ),
     {
       type: ProjectContentType.ImageGrid,
@@ -204,31 +228,29 @@ export const svgSDF: ProjectData = {
         named(postTopography, 'Topography')
       ]
     },
-    createText(
-      2,
-      [
-        'Compute',
-        'The buffer is computed with WebGPU, with WebGL2 or, when neither is available, on the CPU with up to 8 web workers. The CPU version is the reference, the GPU buffers match it to within about 1e-4 of a pixel.'
-      ],
-      'Both GPU paths run in a worker, tile by tile. Before that, the geometry is moved around the centre of the buffer, otherwise float32 is not precise enough for the coordinates of a map.',
-      'Measured on a MacBook Air with an M4, in Chrome and with the Swiss outline: at 2048 px both GPU paths need 50 to 73 ms, the CPU workers between 289 ms and 1.2 s. WebGPU and WebGL2 end up pretty much equally fast. The Lp metric hurts the CPU the most, it is three to four times slower than the others there, while the GPU barely notices.'
+    section(
+      svgPicture(computeMetrics, 1280, 880),
+      'Metrics',
+      'right',
+      'Compute',
+      'Changing the coloring is instant, changing the metric or the resolution means computing the buffer again. That search runs on WebGPU as a compute shader, on WebGL2 as a fragment shader, or on the CPU with up to 8 web workers. The CPU is the reference, the GPU buffers match it to within about 1e-4 of a pixel.'
     ),
-    {
-      type: ProjectContentType.ImageGrid,
-      images: [
-        named(svgPicture(computeMetrics, 1280, 880), 'Metrics'),
-        named(svgPicture(computeSizes, 1280, 880), 'Buffer Size')
-      ]
-    },
+    section(
+      svgPicture(computeSizes, 1280, 880),
+      'Buffer Size',
+      'left',
+      null,
+      'On a MacBook Air with an M4, in Chrome and with the Swiss outline, both GPU paths need 50 to 73 ms for a 2048 px buffer, the CPU workers between 289 ms and 1.2 s. That is the difference between trying out a metric and waiting for one. WebGPU and WebGL2 end up pretty much equally fast. Also precision needed some care: map coordinates are large numbers and float32 does not like large numbers, so the geometry is first moved around the centre of the buffer.'
+    ),
     createText(
       1,
-      'Denmark, Switzerland and Belgium, each with the same sixteen colorings and metrics.'
+      'Denmark, Switzerland and Belgium, each with the same sixteen colorings and metrics. Borders make for rather good drawings to start from. They are found lines, drawn by history rather than by a designer, full of islands, enclaves and coasts that never run straight. Run through a distance field they turn into landscapes, with the ridges on the lines furthest away from any border.'
     ),
     createText(
       1,
       [
         'Denmark',
-        'Lots of islands, so lots of edges. The outline is from simplemaps.com.'
+        'Lots of islands, and every one of them pulls on the field around it, so the sea in between turns into a maze of seams. The outline is from simplemaps.com.'
       ]
     ),
     {
@@ -271,7 +293,7 @@ export const svgSDF: ProjectData = {
       1,
       [
         'Switzerland',
-        'The only one of the three with actual curves, over 1300 cubic Béziers for the border and the cantons.'
+        'The only one of the three drawn with actual curves, over 1300 cubic Béziers. The cantons are all one single path, so to give each its own color they first had to be split up.'
       ]
     ),
     {
@@ -314,7 +336,7 @@ export const svgSDF: ProjectData = {
       1,
       [
         'Belgium',
-        'The outline is from simplemaps.com.'
+        'Three regions - Flanders, Wallonia and Brussels - and not a single curve, so every coloring by direction comes out in flat facets. The outline is from simplemaps.com.'
       ]
     ),
     {
