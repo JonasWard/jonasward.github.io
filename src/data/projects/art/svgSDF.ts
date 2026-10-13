@@ -3,7 +3,8 @@ import { ProjectContext } from '../../../types/keywords/projectContext';
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createText, createTitleImage, svgPicture } from '../../../utils/projectconstructor';
-import { ResponsivePicture } from '../../../types/projectContent/projectImage';
+import { SVG_SDF_SETTINGS } from './svgSDFLinks';
+import { ProjectImage, ResponsivePicture } from '../../../types/projectContent/projectImage';
 import { ProjectImageText } from '../../../types/projectContent/projectImageText';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
@@ -92,18 +93,28 @@ import beRedBlue from './asssets/svg-sdf-countries/be-red-blue.webp?responsive&l
 
 const id = '2025-07';
 
-const named = (picture: ResponsivePicture, name: string) => createImage(picture, `${name} © J.W.`);
+const PLAYGROUND = 'https://jonasward.github.io/svg-sdf/';
+
+/** the playground with the settings an image was rendered with, on whatever svg it has loaded */
+const settingsLink = (key: string) => ({
+  href: `${PLAYGROUND}?s=${SVG_SDF_SETTINGS[key]}`,
+  title: 'Open these settings in the playground'
+});
+
+const named = (picture: ResponsivePicture, name: string, settings?: string): ProjectImage => ({
+  ...createImage(picture, `${name} © J.W.`),
+  ...(settings ? { link: settingsLink(settings) } : {})
+});
 
 // text beside its key image, the heading on the first paragraph
 const section = (
-  picture: ResponsivePicture,
-  caption: string,
+  image: ProjectImage,
   position: 'left' | 'right',
   title: string | null,
   ...paragraphs: string[]
 ): ProjectImageText => ({
   type: ProjectContentType.ImageText,
-  image: named(picture, caption),
+  image,
   text: {
     type: ProjectContentType.Text,
     maxColumnCount: 1,
@@ -127,11 +138,10 @@ const metaData: ProjectMetaData = {
 export const svgSDF: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(chRampEmber, metaData.name),
+  projectImage: { ...createTitleImage(chRampEmber, metaData.name), link: settingsLink('ch-ramp-ember') },
   projectContent: [
     section(
-      introTopography,
-      'Topography',
+      named(introTopography, 'Topography', 'intro-topography'),
       'left',
       'SVG SDFs',
       'Little proof of concept to render SVGs with SDFs to get smooth and continuous distance fields for arbitrary shapes.',
@@ -143,8 +153,7 @@ export const svgSDF: ProjectData = {
       alternativeName: 'Playground'
     },
     section(
-      bufferInput,
-      'Input',
+      named(bufferInput, 'Input'),
       'right',
       'The Buffer',
       'Every pixel of a fixed-resolution buffer stores four numbers: the signed distance to the nearest edge, the direction towards it and the shape it belongs to. That is the whole raw material, computed once.',
@@ -153,15 +162,14 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(bufferDistance, 'Distance'),
-        named(bufferDirection, 'Direction'),
-        named(bufferShape, 'Shape'),
-        named(bufferPolar, 'Polar')
+        named(bufferDistance, 'Distance', 'buffer-distance'),
+        named(bufferDirection, 'Direction', 'buffer-direction'),
+        named(bufferShape, 'Shape', 'buffer-shape'),
+        named(bufferPolar, 'Polar', 'buffer-polar')
       ]
     },
     section(
-      distanceTriangle,
-      'Triangle',
+      named(distanceTriangle, 'Triangle', 'distance-triangle'),
       'left',
       'Distances',
       'Euclidean distance is the obvious choice, but by no means the only one. Swapping the metric swaps the unit shape the distance is measured with: a diamond for Manhattan, a square for Chebyshev, anything in between the circle and the square for Lp and a regular polygon for the polygon metric.',
@@ -170,24 +178,23 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(distanceEuclidean, 'Euclidean'),
-        named(distanceManhattan, 'Manhattan'),
-        named(distanceChebyshev, 'Chebyshev'),
-        named(distanceL4, 'L4')
+        named(distanceEuclidean, 'Euclidean', 'distance-euclidean'),
+        named(distanceManhattan, 'Manhattan', 'distance-manhattan'),
+        named(distanceChebyshev, 'Chebyshev', 'distance-chebyshev'),
+        named(distanceL4, 'L4', 'distance-l4')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(distanceHexagon, 'Hexagon'),
-        named(distancePentagon, 'Pentagon'),
-        named(distanceRotated, 'Rotated'),
-        named(distanceStretched, 'Stretched')
+        named(distanceHexagon, 'Hexagon', 'distance-hexagon'),
+        named(distancePentagon, 'Pentagon', 'distance-pentagon'),
+        named(distanceRotated, 'Rotated', 'distance-rotated'),
+        named(distanceStretched, 'Stretched', 'distance-stretched')
       ]
     },
     section(
-      curvesDifference,
-      'Difference',
+      named(curvesDifference, 'Difference', 'curves-difference'),
       'right',
       'Curves',
       'Curves can be flattened into polylines or kept as cubic Béziers, with the distance measured to the actual curve. Flattening is cheap, though the direction to the nearest edge is then constant along every straight piece, which shows up as hard bands as soon as you color by direction.',
@@ -196,15 +203,14 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(curvesPolylineCoarse, 'Polyline 8 px'),
-        named(curvesPolylineMedium, 'Polyline 2 px'),
-        named(curvesPolylineFine, 'Polyline 0.25 px'),
-        named(curvesExact, 'Exact')
+        named(curvesPolylineCoarse, 'Polyline 8 px', 'curves-polyline-coarse'),
+        named(curvesPolylineMedium, 'Polyline 2 px', 'curves-polyline-medium'),
+        named(curvesPolylineFine, 'Polyline 0.25 px', 'curves-polyline-fine'),
+        named(curvesExact, 'Exact', 'curves-exact')
       ]
     },
     section(
-      postSinebow,
-      'Sinebow',
+      named(postSinebow, 'Sinebow', 'post-sinebow'),
       'left',
       'Post-Processing',
       'One buffer, a whole bunch of images. The polar mode reads the field like a compass: the hue comes from the direction to the nearest edge, its strength from the distance. The hues come from an HSV rainbow, a perceptually even OKLCH wheel or a cyclic gradient of your own, with radial lines, a checker or a mosaic of tiles on top.',
@@ -213,31 +219,29 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(postHsv, 'HSV'),
-        named(postOklch, 'OKLCH'),
-        named(postTwoTone, 'Two-Tone'),
-        named(postRadial, 'Radial')
+        named(postHsv, 'HSV', 'post-hsv'),
+        named(postOklch, 'OKLCH', 'post-oklch'),
+        named(postTwoTone, 'Two-Tone', 'post-two-tone'),
+        named(postRadial, 'Radial', 'post-radial')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(postChecker, 'Checker'),
-        named(postMosaic, 'Mosaic'),
-        named(postEmber, 'Ember'),
-        named(postTopography, 'Topography')
+        named(postChecker, 'Checker', 'post-checker'),
+        named(postMosaic, 'Mosaic', 'post-mosaic'),
+        named(postEmber, 'Ember', 'post-ember'),
+        named(postTopography, 'Topography', 'post-topography')
       ]
     },
     section(
-      svgPicture(computeMetrics, 1280, 880),
-      'Metrics',
+      named(svgPicture(computeMetrics, 1280, 880), 'Metrics'),
       'right',
       'Compute',
       'Changing the coloring is instant, changing the metric or the resolution means computing the buffer again. That search runs on WebGPU as a compute shader, on WebGL2 as a fragment shader, or on the CPU with up to 8 web workers. The CPU is the reference, the GPU buffers match it to within about 1e-4 of a pixel.'
     ),
     section(
-      svgPicture(computeSizes, 1280, 880),
-      'Buffer Size',
+      named(svgPicture(computeSizes, 1280, 880), 'Buffer Size'),
       'left',
       null,
       'On a MacBook Air with an M4, in Chrome and with the Swiss outline, both GPU paths need 50 to 73 ms for a 2048 px buffer, the CPU workers between 289 ms and 1.2 s. That is the difference between trying out a metric and waiting for one. WebGPU and WebGL2 end up pretty much equally fast. Also precision needed some care: map coordinates are large numbers and float32 does not like large numbers, so the geometry is first moved around the centre of the buffer.'
@@ -256,37 +260,37 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(dkTwilightChebyshev, 'Chebyshev'),
-        named(dkTwilightManhattan, 'Manhattan'),
-        named(dkTwilightEuclidean, 'Euclidean'),
-        named(dkTwilightTriangle, 'Triangle')
+        named(dkTwilightChebyshev, 'Chebyshev', 'dk-twilight-chebyshev'),
+        named(dkTwilightManhattan, 'Manhattan', 'dk-twilight-manhattan'),
+        named(dkTwilightEuclidean, 'Euclidean', 'dk-twilight-euclidean'),
+        named(dkTwilightTriangle, 'Triangle', 'dk-twilight-triangle')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(dkPolarHsv, 'HSV'),
-        named(dkPolarOklch, 'OKLCH'),
-        named(dkPolarSinebowRadial, 'Sinebow'),
-        named(dkPolarTwoTone, 'Two-Tone')
+        named(dkPolarHsv, 'HSV', 'dk-polar-hsv'),
+        named(dkPolarOklch, 'OKLCH', 'dk-polar-oklch'),
+        named(dkPolarSinebowRadial, 'Sinebow', 'dk-polar-sinebow-radial'),
+        named(dkPolarTwoTone, 'Two-Tone', 'dk-polar-two-tone')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(dkInk, 'Ink'),
-        named(dkHexagonTopo, 'Hexagon'),
-        named(dkRegions, 'Regions'),
-        named(dkMosaic, 'Mosaic')
+        named(dkInk, 'Ink', 'dk-ink'),
+        named(dkHexagonTopo, 'Hexagon', 'dk-hexagon-topo'),
+        named(dkRegions, 'Regions', 'dk-regions'),
+        named(dkMosaic, 'Mosaic', 'dk-mosaic')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(dkRampEmber, 'Ember'),
-        named(dkRampOcean, 'Ocean'),
-        named(dkTopo, 'Topography'),
-        named(dkRedBlue, 'Red-Blue')
+        named(dkRampEmber, 'Ember', 'dk-ramp-ember'),
+        named(dkRampOcean, 'Ocean', 'dk-ramp-ocean'),
+        named(dkTopo, 'Topography', 'dk-topo'),
+        named(dkRedBlue, 'Red-Blue', 'dk-red-blue')
       ]
     },
     createText(
@@ -299,37 +303,37 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(chTwilightChebyshev, 'Chebyshev'),
-        named(chTwilightManhattan, 'Manhattan'),
-        named(chTwilightEuclidean, 'Euclidean'),
-        named(chTwilightTriangle, 'Triangle')
+        named(chTwilightChebyshev, 'Chebyshev', 'ch-twilight-chebyshev'),
+        named(chTwilightManhattan, 'Manhattan', 'ch-twilight-manhattan'),
+        named(chTwilightEuclidean, 'Euclidean', 'ch-twilight-euclidean'),
+        named(chTwilightTriangle, 'Triangle', 'ch-twilight-triangle')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(chPolarHsv, 'HSV'),
-        named(chPolarOklch, 'OKLCH'),
-        named(chPolarSinebowRadial, 'Sinebow'),
-        named(chPolarTwoTone, 'Two-Tone')
+        named(chPolarHsv, 'HSV', 'ch-polar-hsv'),
+        named(chPolarOklch, 'OKLCH', 'ch-polar-oklch'),
+        named(chPolarSinebowRadial, 'Sinebow', 'ch-polar-sinebow-radial'),
+        named(chPolarTwoTone, 'Two-Tone', 'ch-polar-two-tone')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(chInk, 'Ink'),
-        named(chHexagonTopo, 'Hexagon'),
-        named(chRegions, 'Regions'),
-        named(chMosaic, 'Mosaic')
+        named(chInk, 'Ink', 'ch-ink'),
+        named(chHexagonTopo, 'Hexagon', 'ch-hexagon-topo'),
+        named(chRegions, 'Regions', 'ch-regions'),
+        named(chMosaic, 'Mosaic', 'ch-mosaic')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(chRampEmber, 'Ember'),
-        named(chRampOcean, 'Ocean'),
-        named(chTopo, 'Topography'),
-        named(chRedBlue, 'Red-Blue')
+        named(chRampEmber, 'Ember', 'ch-ramp-ember'),
+        named(chRampOcean, 'Ocean', 'ch-ramp-ocean'),
+        named(chTopo, 'Topography', 'ch-topo'),
+        named(chRedBlue, 'Red-Blue', 'ch-red-blue')
       ]
     },
     createText(
@@ -342,37 +346,37 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(beTwilightChebyshev, 'Chebyshev'),
-        named(beTwilightManhattan, 'Manhattan'),
-        named(beTwilightEuclidean, 'Euclidean'),
-        named(beTwilightTriangle, 'Triangle')
+        named(beTwilightChebyshev, 'Chebyshev', 'be-twilight-chebyshev'),
+        named(beTwilightManhattan, 'Manhattan', 'be-twilight-manhattan'),
+        named(beTwilightEuclidean, 'Euclidean', 'be-twilight-euclidean'),
+        named(beTwilightTriangle, 'Triangle', 'be-twilight-triangle')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(bePolarHsv, 'HSV'),
-        named(bePolarOklch, 'OKLCH'),
-        named(bePolarSinebowRadial, 'Sinebow'),
-        named(bePolarTwoTone, 'Two-Tone')
+        named(bePolarHsv, 'HSV', 'be-polar-hsv'),
+        named(bePolarOklch, 'OKLCH', 'be-polar-oklch'),
+        named(bePolarSinebowRadial, 'Sinebow', 'be-polar-sinebow-radial'),
+        named(bePolarTwoTone, 'Two-Tone', 'be-polar-two-tone')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(beInk, 'Ink'),
-        named(beHexagonTopo, 'Hexagon'),
-        named(beRegions, 'Regions'),
-        named(beMosaic, 'Mosaic')
+        named(beInk, 'Ink', 'be-ink'),
+        named(beHexagonTopo, 'Hexagon', 'be-hexagon-topo'),
+        named(beRegions, 'Regions', 'be-regions'),
+        named(beMosaic, 'Mosaic', 'be-mosaic')
       ]
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [
-        named(beRampEmber, 'Ember'),
-        named(beRampOcean, 'Ocean'),
-        named(beTopo, 'Topography'),
-        named(beRedBlue, 'Red-Blue')
+        named(beRampEmber, 'Ember', 'be-ramp-ember'),
+        named(beRampOcean, 'Ocean', 'be-ramp-ocean'),
+        named(beTopo, 'Topography', 'be-topo'),
+        named(beRedBlue, 'Red-Blue', 'be-red-blue')
       ]
     }
   ]

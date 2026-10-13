@@ -1,5 +1,6 @@
 import { ProjectImage } from '../../../types/projectContent/projectImage';
 import './projectImage.css';
+import { ImageLink } from './ImageLink';
 import { ResponsiveImg } from './ResponsiveImg';
 
 interface type {
@@ -44,6 +45,7 @@ export const ProjectImageRenderer: React.FC<type> = ({
         alt={content.imageText ?? ''}
         style={{ height: maxHeight ?? getHeightForMainImage(content, isMainImage) }}
       />
+      {content.link && <ImageLink link={content.link} />}
       {content.imageText && (
         <div
           style={{ maxHeight: getHeightForMainImage(content, isMainImage) }}
