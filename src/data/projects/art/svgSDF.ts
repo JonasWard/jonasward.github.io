@@ -211,7 +211,7 @@ export const svgSDF: ProjectData = {
         'The buffer is computed with WebGPU, with WebGL2 or, when neither is available, on the CPU with up to 8 web workers. The CPU version is the reference, the GPU buffers match it to within about 1e-4 of a pixel.'
       ],
       'Both GPU paths run in a worker, tile by tile. Before that, the geometry is moved around the centre of the buffer, otherwise float32 is not precise enough for the coordinates of a map.',
-      'Measured on an Apple M4 in Chrome with the Swiss outline: at 2048 px both GPU paths need 50 to 73 ms, the CPU workers between 289 ms and 1.2 s. WebGPU and WebGL2 end up pretty much equally fast. The Lp metric hurts the CPU the most, it is three to four times slower than the others there, while the GPU barely notices.'
+      'Measured on a MacBook Air with an M4, in Chrome and with the Swiss outline: at 2048 px both GPU paths need 50 to 73 ms, the CPU workers between 289 ms and 1.2 s. WebGPU and WebGL2 end up pretty much equally fast. The Lp metric hurts the CPU the most, it is three to four times slower than the others there, while the GPU barely notices.'
     ),
     {
       type: ProjectContentType.ImageGrid,
