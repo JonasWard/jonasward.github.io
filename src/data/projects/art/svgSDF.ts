@@ -23,7 +23,7 @@ import eastFlandersDistance from './asssets/east-flanders-distance.webp?responsi
 import eastFlandersHSV from './asssets/east-flanders-hsv.webp?responsive';
 import eastFlandersRedBlue from './asssets/east-flanders-red-blue.webp?responsive';
 import dkPolarOklch from './asssets/svg-sdf-countries/dk-polar-oklch.webp?responsive';
-import dkPolarTwilight from './asssets/svg-sdf-countries/dk-polar-twilight.webp?responsive';
+import dkPolarTwoTone from './asssets/svg-sdf-countries/dk-polar-two-tone.webp?responsive';
 import dkRampEmber from './asssets/svg-sdf-countries/dk-ramp-ember.webp?responsive';
 import dkRampOcean from './asssets/svg-sdf-countries/dk-ramp-ocean.webp?responsive';
 import chPolarHsv from './asssets/svg-sdf-countries/ch-polar-hsv.webp?responsive';
@@ -43,7 +43,7 @@ import beTwilightManhattan from './asssets/svg-sdf-countries/be-twilight-manhatt
 import beTwilightEuclidean from './asssets/svg-sdf-countries/be-twilight-euclidean.webp?responsive';
 import beTwilightTriangle from './asssets/svg-sdf-countries/be-twilight-triangle.webp?responsive';
 import bePolarOklch from './asssets/svg-sdf-countries/be-polar-oklch.webp?responsive';
-import bePolarTwilight from './asssets/svg-sdf-countries/be-polar-twilight.webp?responsive';
+import bePolarTwoTone from './asssets/svg-sdf-countries/be-polar-two-tone.webp?responsive';
 import beRampEmber from './asssets/svg-sdf-countries/be-ramp-ember.webp?responsive';
 import beRampOcean from './asssets/svg-sdf-countries/be-ramp-ocean.webp?responsive';
 
@@ -120,7 +120,7 @@ export const svgSDF: ProjectData = {
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [dkPolarOklch, dkPolarTwilight, dkRampEmber, dkRampOcean].map((i) => createImage(i, '© J.W.'))
+      images: [dkPolarOklch, dkPolarTwoTone, dkRampEmber, dkRampOcean].map((i) => createImage(i, '© J.W.'))
     },
     {
       type: ProjectContentType.ImageGrid,
@@ -140,7 +140,7 @@ export const svgSDF: ProjectData = {
     },
     {
       type: ProjectContentType.ImageGrid,
-      images: [bePolarOklch, bePolarTwilight, beRampEmber, beRampOcean].map((i) => createImage(i, '© J.W.'))
+      images: [bePolarOklch, bePolarTwoTone, beRampEmber, beRampOcean].map((i) => createImage(i, '© J.W.'))
     }
   ]
 };
