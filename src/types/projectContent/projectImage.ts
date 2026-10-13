@@ -8,6 +8,8 @@ export type ProjectImage = {
   type: ProjectContentType.Image;
   picture: ResponsivePicture;
   imageText?: string;
+  // makes the image and its caption a link
+  href?: string;
   maxImageHeight?: number;
   maxImageWidth?: number;
   imageTextSize?: 'small' | 'medium' | 'large';

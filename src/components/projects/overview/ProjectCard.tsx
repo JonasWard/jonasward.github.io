@@ -22,6 +22,8 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
   const navigate = useNavigate();
   const navigateProject = () => navigate(`/project/${metaData.webstring}`);
   const [showKeywords, setShowKeywords] = useState(false);
+  // a project can show something else on its card than the hero of its page
+  const picture = metaData.keyImage ?? keyImage.picture;
 
   return (
     <div
@@ -33,12 +35,12 @@ export const ProjectCard: React.FC<IProjectCard> = ({ metaData, keyImage, curren
     >
       <div>
         <ResponsiveImg
-          picture={keyImage.picture}
+          picture={picture}
           sizes={`${cardWidth}px`}
           alt={metaData.name}
           style={{
             width: '100%',
-            height: (keyImage.picture.img.h / keyImage.picture.img.w) * cardWidth,
+            height: (picture.img.h / picture.img.w) * cardWidth,
             objectFit: 'cover'
           }}
         />

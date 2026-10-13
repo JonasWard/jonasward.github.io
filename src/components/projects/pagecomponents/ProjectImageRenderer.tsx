@@ -32,11 +32,10 @@ export const ProjectImageRenderer: React.FC<type> = ({
   maxHeight,
   maxWidth
 }) => {
-  return (
-    <div
-      style={{ maxHeight: content.maxImageHeight ?? maxHeight, maxWidth: content.maxImageWidth ?? maxWidth }}
-      className={`project-image ${isMainImage ? 'main-image' : ''} ${isMainImage ? 'fade-in' : ''} ${className ?? ''}`}
-    >
+  const style = { maxHeight: content.maxImageHeight ?? maxHeight, maxWidth: content.maxImageWidth ?? maxWidth };
+  const classes = `project-image ${isMainImage ? 'main-image' : ''} ${isMainImage ? 'fade-in' : ''} ${className ?? ''}`;
+  const children = (
+    <>
       <ResponsiveImg
         picture={content.picture}
         sizes={isMainImage ? mainImageSizes : contentImageSizes}
@@ -56,6 +55,16 @@ export const ProjectImageRenderer: React.FC<type> = ({
           {content.imageText}
         </div>
       )}
+    </>
+  );
+
+  return content.href ? (
+    <a href={content.href} style={style} className={`${classes} image-link`}>
+      {children}
+    </a>
+  ) : (
+    <div style={style} className={classes}>
+      {children}
     </div>
   );
 };

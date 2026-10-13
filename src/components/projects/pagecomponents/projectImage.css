@@ -158,3 +158,9 @@
     columns: 1;
   }
 }
+
+/* an image with a href, see ProjectImage */
+.image-link {
+  display: block;
+  text-decoration: none;
+}

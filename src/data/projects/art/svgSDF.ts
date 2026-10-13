@@ -7,6 +7,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
 import { Technologies } from 'src/types/keywords/technologies';
+import { densingBuilderViews } from '../densingBuilderViews';
 
 import denmarkDistance from './asssets/denmarkDistance.png?responsive';
 import denmarkPolar from './asssets/denmarkPolar.png?responsive';
@@ -22,6 +23,7 @@ import france from './asssets/france.webp?responsive';
 import eastFlandersDistance from './asssets/east-flanders-distance.webp?responsive';
 import eastFlandersHSV from './asssets/east-flanders-hsv.webp?responsive';
 import eastFlandersRedBlue from './asssets/east-flanders-red-blue.webp?responsive';
+import builderSvgSdf from '../software/assets/densing/builder-svg-sdf.webp?responsive&lossless';
 
 const id = '2025-07';
 
@@ -34,7 +36,7 @@ const metaData: ProjectMetaData = {
   keyImage: eastFlandersHSV,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Shaders, Keywords.Patterns, Technologies.ReactThreeFiber, Technologies.SVG]
+  keywords: [Keywords.Shaders, Keywords.Patterns, Technologies.ReactThreeFiber, Technologies.SVG, Technologies.Densing]
 };
 
 export const svgSDF: ProjectData = {
@@ -75,6 +77,16 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [swissRadial, swissPolar, swissDistance, zurich].map((i) => createImage(i, '© J.W.'))
+    },
+    createText(1, [
+      'State in URL',
+      'Settings and view are kept in the url, packed with densing into about a hundred characters, so a link reopens the same picture. The SVG itself is not part of it.'
+    ]),
+    { ...createImage(builderSvgSdf, 'The settings schema in the Densing Builder'), href: densingBuilderViews.svgSdf },
+    {
+      type: ProjectContentType.ExternalLink,
+      href: '#/project/densing/',
+      alternativeName: 'densing'
     },
     {
       type: ProjectContentType.ImageGrid,
