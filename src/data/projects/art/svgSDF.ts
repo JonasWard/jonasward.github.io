@@ -22,6 +22,30 @@ import france from './asssets/france.webp?responsive';
 import eastFlandersDistance from './asssets/east-flanders-distance.webp?responsive';
 import eastFlandersHSV from './asssets/east-flanders-hsv.webp?responsive';
 import eastFlandersRedBlue from './asssets/east-flanders-red-blue.webp?responsive';
+import dkPolarOklch from './asssets/svg-sdf-countries/dk-polar-oklch.webp?responsive';
+import dkPolarTwilight from './asssets/svg-sdf-countries/dk-polar-twilight.webp?responsive';
+import dkRampEmber from './asssets/svg-sdf-countries/dk-ramp-ember.webp?responsive';
+import dkRampOcean from './asssets/svg-sdf-countries/dk-ramp-ocean.webp?responsive';
+import dkRegions from './asssets/svg-sdf-countries/dk-regions.webp?responsive';
+import dkManhattanPolar from './asssets/svg-sdf-countries/dk-manhattan-polar.webp?responsive';
+import dkHexagonTopo from './asssets/svg-sdf-countries/dk-hexagon-topo.webp?responsive';
+import dkMosaic from './asssets/svg-sdf-countries/dk-mosaic.webp?responsive';
+import chPolarHsv from './asssets/svg-sdf-countries/ch-polar-hsv.webp?responsive';
+import chPolarSinebowRadial from './asssets/svg-sdf-countries/ch-polar-sinebow-radial.webp?responsive';
+import chTopo from './asssets/svg-sdf-countries/ch-topo.webp?responsive';
+import chRampEmber from './asssets/svg-sdf-countries/ch-ramp-ember.webp?responsive';
+import chRampOcean from './asssets/svg-sdf-countries/ch-ramp-ocean.webp?responsive';
+import chLp4Oklch from './asssets/svg-sdf-countries/ch-lp4-oklch.webp?responsive';
+import chPolarTwilight from './asssets/svg-sdf-countries/ch-polar-twilight.webp?responsive';
+import chChecker from './asssets/svg-sdf-countries/ch-checker.webp?responsive';
+import bePolarOklch from './asssets/svg-sdf-countries/be-polar-oklch.webp?responsive';
+import bePolarTwilight from './asssets/svg-sdf-countries/be-polar-twilight.webp?responsive';
+import beRampEmber from './asssets/svg-sdf-countries/be-ramp-ember.webp?responsive';
+import beRampOcean from './asssets/svg-sdf-countries/be-ramp-ocean.webp?responsive';
+import beRegions from './asssets/svg-sdf-countries/be-regions.webp?responsive';
+import beRedBlue from './asssets/svg-sdf-countries/be-red-blue.webp?responsive';
+import beStretchedRamp from './asssets/svg-sdf-countries/be-stretched-ramp.webp?responsive';
+import beInk from './asssets/svg-sdf-countries/be-ink.webp?responsive';
 
 const id = '2025-07';
 
@@ -83,6 +107,34 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [mountains, mountainsBis, shape, france].map((i) => createImage(i, '© J.W.'))
+    },
+    createText(
+      1,
+      'Denmark, Switzerland and Belgium, each with a whole bunch of different colorings and metrics. The outlines of Denmark and Belgium are from simplemaps.com.'
+    ),
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [dkPolarOklch, dkPolarTwilight, dkRampEmber, dkRampOcean].map((i) => createImage(i, '© J.W.'))
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [dkRegions, dkManhattanPolar, dkHexagonTopo, dkMosaic].map((i) => createImage(i, '© J.W.'))
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [chPolarHsv, chPolarSinebowRadial, chTopo, chRampEmber].map((i) => createImage(i, '© J.W.'))
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [chRampOcean, chLp4Oklch, chPolarTwilight, chChecker].map((i) => createImage(i, '© J.W.'))
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [bePolarOklch, bePolarTwilight, beRampEmber, beRampOcean].map((i) => createImage(i, '© J.W.'))
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [beRegions, beRedBlue, beStretchedRamp, beInk].map((i) => createImage(i, '© J.W.'))
     }
   ]
 };
