@@ -4,6 +4,17 @@ on:
   push:
     branches:
       - master
+  # build pull requests too so a broken build shows up before it is merged, only master gets deployed
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# a newer push supersedes a running build, but a deploy that already started is left to finish
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -14,12 +25,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 'latest'
+          bun-version: '1.x'
 
       - name: Install dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
 
       # vite-imagetools caches every generated image variant here, restoring it saves re-encoding them all on each deploy
       - name: Cache generated images
@@ -32,10 +43,27 @@ jobs:
       - name: Build project
         run: bun run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          publish_branch: gh-pages
-          cname: jonasward.ch
+          path: ./build
+
+  # publishes the build straight to Pages, no gh-pages branch and so no second 'pages build and deployment' run
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
