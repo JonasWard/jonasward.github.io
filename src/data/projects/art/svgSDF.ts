@@ -30,7 +30,7 @@ const metaData: ProjectMetaData = {
   webstring: 'sdf-svg',
   name: 'SVG SDF',
   projectType: ProjectCategory.Art,
-  description: 'SVG SDFs',
+  description: 'Signed Distance Fields from SVGs',
   keyImage: eastFlandersHSV,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
@@ -42,19 +42,36 @@ export const svgSDF: ProjectData = {
   metaData,
   projectImage: createTitleImage(eastFlandersHSV, metaData.name),
   projectContent: [
-    createText(2, [
-      'SVG SDFs',
-      'Little proof of concept to render SVGs with SDFs to get smooth and continuous distance fields for arbitrary shapes.'
-    ]),
+    createText(
+      2,
+      [
+        'SVG SDFs',
+        'Little proof of concept to render SVGs with SDFs to get smooth and continuous distance fields for arbitrary shapes.'
+      ],
+      'The SVG is parsed in the browser and for every pixel of a fixed-resolution buffer four numbers are stored: the signed distance to the nearest edge, the vector pointing towards it and the shape it belongs to. All coloring happens afterwards in a fragment shader - hue from the direction, strength from the distance, contour lines on top - so playing with the settings never recomputes the buffer.'
+    ),
     {
       type: ProjectContentType.ExternalLink,
-      href: 'https://jonasward.github.io/repurposed/#naked-app',
-      alternativeName: 'Example App'
+      href: 'https://jonasward.github.io/svg-sdf/',
+      alternativeName: 'Playground'
     },
     {
       type: ProjectContentType.ImageGrid,
       images: [eastFlandersDistance, eastFlandersHSV, eastFlandersRedBlue, belgium].map((i) => createImage(i, '© J.W.'))
     },
+    createText(
+      2,
+      [
+        'Curves and Metrics',
+        'In a first version all curves were flattened into polylines. Cheap, though the direction to the nearest edge is then constant along every straight piece, which shows up as bands as soon as you color by direction. Therefore curves can now also stay cubic Béziers, with the distance measured to the actual curve.'
+      ],
+      'Also the distance itself does not have to be the Euclidean one. Manhattan, Chebyshev, Lp and polygon metrics are implemented as well, each of which can be rotated and stretched.',
+      [
+        'Compute',
+        'The buffer is computed with WebGPU, with WebGL2 or, when neither is available, on the CPU with up to 8 web workers. The CPU version is the reference, the GPU buffers match it to within about 1e-4 of a pixel.'
+      ],
+      'You can load your own SVG and export the result as a PNG or as the raw buffer, feel free to try it out!'
+    ),
     {
       type: ProjectContentType.ImageGrid,
       images: [swissRadial, swissPolar, swissDistance, zurich].map((i) => createImage(i, '© J.W.'))
