@@ -8,5 +8,6 @@ export const ProjectWrapper: React.FC = () => {
 
   const project = allProjects.find((project) => project.metaData.webstring === id);
 
-  return project ? <ProjectRenderer project={project} /> : <Missing />;
+  // keyed so a link from one project to another starts the next page at the top
+  return project ? <ProjectRenderer key={project.id} project={project} /> : <Missing />;
 };

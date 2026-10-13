@@ -8,6 +8,12 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 import { densingBuilderViews } from '../densingBuilderViews';
+import { aMerryFXMesh } from '../art/aMerryFXMesh';
+import { svgSDF } from '../art/svgSDF';
+import { glslRayMarching } from './glsl-ray-marching';
+import { lucernaLecto } from './lucerna-lecto';
+import { lucernaeTurici } from './lucernaeTurici';
+import { paraSlimShady } from './paraSlimShady';
 
 import builderInspector from './assets/densing/builder-inspector.webp?responsive&lossless';
 import builderQr from './assets/densing/builder-qr.webp?responsive&lossless';
@@ -23,6 +29,14 @@ const logoSettings =
   'https://jonasward.ch/svg-sdf/?s=J_AYAnMALuABg9PHqIACs6VX0b5vR-jo9P8gAHBYQPqwejv6OK2eh0xQgAPr9Q-nlgpwAHWSg3jZD2TIAChYcPEzKqJgcAAn___-847___-lNqnEA2G';
 
 const builderLink = (href: string) => ({ href, title: 'Open this view in the Densing Builder' });
+
+// a project that keeps its state in the url, with the link in the corner of its image
+const inUse = (project: ProjectData, app?: string) => ({
+  ...createImage(project.projectImage.picture, project.metaData.name),
+  link: app
+    ? { href: app, title: 'Open the app' }
+    : { href: `#/project/${project.metaData.webstring}/`, title: 'Open the project page' }
+});
 
 const metaData: ProjectMetaData = {
   id,
@@ -101,6 +115,37 @@ export const densing: ProjectData = {
         { ...createImage(builderTemplates, 'Recursive template - (5 + 3) × 2'), link: builderLink(densingBuilderViews.expressionTree) },
         { ...createImage(builderSharedNumbers, 'Shared numbers with mm and m presets'), link: builderLink(densingBuilderViews.sharedNumbers) },
         { ...createImage(builderQr, 'CITA building definition + qr-code'), link: builderLink(densingBuilderViews.cita) }
+      ]
+    },
+    createText(1, [
+      'In Use',
+      'The projects below all keep their state in the url. SVG SDF is the first one running on densing, most of the others still rely on url-safe-bitpacking.'
+    ]),
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [
+        inUse(svgSDF, 'https://jonasward.github.io/svg-sdf/'),
+        inUse(lucernaeTurici, 'https://jonasward.github.io/lucernae-turici/'),
+        inUse(lucernaLecto, 'https://jonasward.github.io/lucerna-lecto/'),
+        inUse(glslRayMarching, 'https://jonasward.github.io/glsl-ray-marching/'),
+        inUse(aMerryFXMesh, 'https://jonasward.github.io/a-merry-fx-mesh/'),
+        inUse(paraSlimShady)
+      ]
+    },
+    createText(1, ['Predecessors', 'url-safe-bitpacking, and State to Function, the POC to store simple math in a url.']),
+    {
+      type: ProjectContentType.ExternalLinkList,
+      links: [
+        {
+          type: ProjectContentType.ExternalLink,
+          href: '#/project/url-safe-bitpacker/',
+          alternativeName: 'url-safe-bitpacking'
+        },
+        {
+          type: ProjectContentType.ExternalLink,
+          href: '#/project/state-to-function/',
+          alternativeName: 'State to Function'
+        }
       ]
     }
   ]
