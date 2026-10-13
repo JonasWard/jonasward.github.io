@@ -1,5 +1,6 @@
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { ProjectImages } from '../../../types/projectContent/projectImages';
+import { ImageLink } from './ImageLink';
 import { ResponsiveImg } from './ResponsiveImg';
 
 export interface IProjectImages {
@@ -19,6 +20,7 @@ export const ProjectImagesRenderer: React.FC<IProjectImages> = ({ content }) => 
       {content.images.map((image, index) => (
         <div key={index} className={`${className}-content`}>
           <ResponsiveImg picture={image.picture} sizes={isGrid ? imageGridSizes : imagesSizes} alt={image.imageText ?? ''} />
+          {image.link && <ImageLink link={image.link} />}
           {image.imageText && (
             <div className={`font-${image.imageTextSize ?? 'small'} ${image.imageTextPosition ?? 'bottom'}-${image.imageTextAlignment ?? 'right'}`}>
               {image.imageText}
