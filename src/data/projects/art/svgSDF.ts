@@ -22,6 +22,30 @@ import france from './asssets/france.webp?responsive';
 import eastFlandersDistance from './asssets/east-flanders-distance.webp?responsive';
 import eastFlandersHSV from './asssets/east-flanders-hsv.webp?responsive';
 import eastFlandersRedBlue from './asssets/east-flanders-red-blue.webp?responsive';
+import dkPolarOklch from './asssets/svg-sdf-countries/dk-polar-oklch.webp?responsive';
+import dkPolarTwoTone from './asssets/svg-sdf-countries/dk-polar-two-tone.webp?responsive';
+import dkRampEmber from './asssets/svg-sdf-countries/dk-ramp-ember.webp?responsive';
+import dkRampOcean from './asssets/svg-sdf-countries/dk-ramp-ocean.webp?responsive';
+import chPolarHsv from './asssets/svg-sdf-countries/ch-polar-hsv.webp?responsive';
+import chPolarSinebowRadial from './asssets/svg-sdf-countries/ch-polar-sinebow-radial.webp?responsive';
+import chTopo from './asssets/svg-sdf-countries/ch-topo.webp?responsive';
+import chRampEmber from './asssets/svg-sdf-countries/ch-ramp-ember.webp?responsive';
+import dkTwilightChebyshev from './asssets/svg-sdf-countries/dk-twilight-chebyshev.webp?responsive';
+import dkTwilightManhattan from './asssets/svg-sdf-countries/dk-twilight-manhattan.webp?responsive';
+import dkTwilightEuclidean from './asssets/svg-sdf-countries/dk-twilight-euclidean.webp?responsive';
+import dkTwilightTriangle from './asssets/svg-sdf-countries/dk-twilight-triangle.webp?responsive';
+import chTwilightChebyshev from './asssets/svg-sdf-countries/ch-twilight-chebyshev.webp?responsive';
+import chTwilightManhattan from './asssets/svg-sdf-countries/ch-twilight-manhattan.webp?responsive';
+import chTwilightEuclidean from './asssets/svg-sdf-countries/ch-twilight-euclidean.webp?responsive';
+import chTwilightTriangle from './asssets/svg-sdf-countries/ch-twilight-triangle.webp?responsive';
+import beTwilightChebyshev from './asssets/svg-sdf-countries/be-twilight-chebyshev.webp?responsive';
+import beTwilightManhattan from './asssets/svg-sdf-countries/be-twilight-manhattan.webp?responsive';
+import beTwilightEuclidean from './asssets/svg-sdf-countries/be-twilight-euclidean.webp?responsive';
+import beTwilightTriangle from './asssets/svg-sdf-countries/be-twilight-triangle.webp?responsive';
+import bePolarOklch from './asssets/svg-sdf-countries/be-polar-oklch.webp?responsive';
+import bePolarTwoTone from './asssets/svg-sdf-countries/be-polar-two-tone.webp?responsive';
+import beRampEmber from './asssets/svg-sdf-countries/be-ramp-ember.webp?responsive';
+import beRampOcean from './asssets/svg-sdf-countries/be-ramp-ocean.webp?responsive';
 
 const id = '2025-07';
 
@@ -83,6 +107,40 @@ export const svgSDF: ProjectData = {
     {
       type: ProjectContentType.ImageGrid,
       images: [mountains, mountainsBis, shape, france].map((i) => createImage(i, '© J.W.'))
+    },
+    createText(
+      1,
+      'Denmark, Switzerland and Belgium, each with a whole bunch of different colorings and metrics. The outlines of Denmark and Belgium are from simplemaps.com.'
+    ),
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [dkTwilightChebyshev, dkTwilightManhattan, dkTwilightEuclidean, dkTwilightTriangle].map((i) =>
+        createImage(i, '© J.W.')
+      )
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [dkPolarOklch, dkPolarTwoTone, dkRampEmber, dkRampOcean].map((i) => createImage(i, '© J.W.'))
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [chTwilightChebyshev, chTwilightManhattan, chTwilightEuclidean, chTwilightTriangle].map((i) =>
+        createImage(i, '© J.W.')
+      )
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [chPolarHsv, chPolarSinebowRadial, chTopo, chRampEmber].map((i) => createImage(i, '© J.W.'))
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [beTwilightChebyshev, beTwilightManhattan, beTwilightEuclidean, beTwilightTriangle].map((i) =>
+        createImage(i, '© J.W.')
+      )
+    },
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [bePolarOklch, bePolarTwoTone, beRampEmber, beRampOcean].map((i) => createImage(i, '© J.W.'))
     }
   ]
 };
