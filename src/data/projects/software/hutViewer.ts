@@ -18,7 +18,25 @@ import alpenglow from './assets/hut-viewer/alpenglow.webp?responsive&lossless';
 import perceptual from './assets/hut-viewer/perceptual.webp?responsive&lossless';
 import twoTone from './assets/hut-viewer/two-tone.webp?responsive&lossless';
 
+import allHuts from './assets/hut-viewer/all-huts.webp?responsive';
+import freeBeds from './assets/hut-viewer/free-beds.webp?responsive';
+import completelyFree from './assets/hut-viewer/completely-free.webp?responsive';
+import area from './assets/hut-viewer/area.webp?responsive';
+import areaCompletelyFree from './assets/hut-viewer/area-completely-free.webp?responsive';
+import hoverCard from './assets/hut-viewer/hover-card.webp?responsive';
+import hoverMarker from './assets/hut-viewer/hover-marker.webp?responsive';
+import selected from './assets/hut-viewer/selected.webp?responsive';
+
 const id = '2026-05';
+
+const APP = 'https://hut-viewer.vercel.app/';
+// the filters live in the url; without a date the app opens on today
+const AREA = 'area=46.21785%2C7.62451%2C47.03269%2C9.01978';
+
+const view = (picture: ResponsivePicture, caption: string, query: string) => ({
+  ...createImage(picture, caption),
+  link: { href: query ? `${APP}?${query}` : APP, title: 'Open this view in the app' }
+});
 
 // the svg-sdf settings each logo render was made with, packed with densing; the svg itself is not part of the link
 const LOGO_SETTINGS = {
@@ -65,7 +83,7 @@ export const hutViewer: ProjectData = {
         'Map and list of the Swiss Alpine Club huts, with filters, area selection and the beds that are still free. Made together with Daniel Christev.'
       ],
       'The availability comes from hut-reservation.org, through a small edge proxy on Vercel that caches the answers for five minutes. Besides that it is a static frontend, React with a Leaflet map.',
-      'The logo was rendered with SVG SDF, every image below links to the settings it was made with.'
+      'Filters and the selected area are kept in the url, every screenshot below opens the same view for today. The logo was rendered with SVG SDF, those renders link to the settings they were made with.'
     ),
     {
       type: ProjectContentType.ExternalLinkList,
@@ -87,7 +105,19 @@ export const hutViewer: ProjectData = {
         }
       ]
     },
-    // TODO: screenshots of the app
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [
+        view(allHuts, 'All huts', ''),
+        view(freeBeds, 'At least one free bed', 'availability=min&minBeds=1'),
+        view(completelyFree, 'Completely free', 'availability=free'),
+        view(area, 'Area selection', AREA),
+        view(areaCompletelyFree, 'Area selection, completely free', `${AREA}&availability=free`),
+        view(hoverCard, 'Hovering a card', AREA),
+        view(hoverMarker, 'Hovering a marker', AREA),
+        view(selected, 'Selected hut, availability per night', AREA)
+      ]
+    },
     {
       type: ProjectContentType.ImageGrid,
       images: [
