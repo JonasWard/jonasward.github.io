@@ -4,21 +4,26 @@ on:
   push:
     branches:
       - master
-  # build pull requests too so a broken build shows up before it is merged, only master gets deployed
-  pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
-# a newer push supersedes a running build, but a deploy that already started is left to finish
+# a newer push queues behind a running deploy instead of cancelling it halfway
 concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  build:
+  # build and deploy in one job, so every change to master is a single run with a single job
+  deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -44,26 +49,10 @@ jobs:
         run: bun run build
 
       - name: Upload Pages artifact
-        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./build
 
-  # publishes the build straight to Pages, no gh-pages branch and so no second 'pages build and deployment' run
-  deploy:
-    if: github.event_name != 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
