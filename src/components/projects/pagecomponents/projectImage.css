@@ -165,9 +165,21 @@
   top: 0;
   right: 0;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* as tall as a caption box: 0.8rem text at line-height 1.2 plus its 2px padding */
+  box-sizing: border-box;
+  height: calc(0.96rem + 4px);
   color: white;
-  line-height: 1.2;
+  line-height: 1;
   text-decoration: none;
+}
+
+.image-link svg {
+  display: block;
+  width: 0.7rem;
+  height: 0.7rem;
 }
 
 @media (hover: hover) {
