@@ -44,7 +44,7 @@ const metaData: ProjectMetaData = {
   keyImage: rust,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
-  keywords: [Keywords.Frontend, Keywords.Timber, Technologies.NextJS, Technologies.TypeScript, Technologies.ReactThreeFiber],
+  keywords: [Keywords.Frontend, Keywords.Timber, Keywords.Hackathon, Technologies.NextJS, Technologies.TypeScript, Technologies.ReactThreeFiber],
   client: 'Design-to-Production'
 };
 
