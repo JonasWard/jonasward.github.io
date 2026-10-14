@@ -21,9 +21,12 @@ import tileSchema from './assets/vibed-reused-tiled/tile-schema.webp?responsive'
 import boundaries from './assets/vibed-reused-tiled/boundaries.webp?responsive';
 import solve from './assets/vibed-reused-tiled/solve.webp?responsive';
 import view2d from './assets/vibed-reused-tiled/view-2d.webp?responsive';
-import view3d from './assets/vibed-reused-tiled/view-3d.webp?responsive';
 import tileStockSampler from './assets/vibed-reused-tiled/tile-stock-sampler.webp?responsive';
 import tilePatterns from './assets/vibed-reused-tiled/tile-patterns.webp?responsive';
+import tilingBlockAndCourse from './assets/vibed-reused-tiled/tiling-block-and-course.webp?responsive';
+import tilingBasketweave from './assets/vibed-reused-tiled/tiling-basketweave.webp?responsive';
+import tilingStaircase from './assets/vibed-reused-tiled/tiling-staircase.webp?responsive';
+import tilingChecker from './assets/vibed-reused-tiled/tiling-checker.webp?responsive';
 
 const id = '2026-08';
 
@@ -61,7 +64,7 @@ const metaData: ProjectMetaData = {
 export const vibedReusedTiled: ProjectData = {
   id,
   metaData,
-  projectImage: createTitleImage(view3d, metaData.name, 'black-on-white'),
+  projectImage: createTitleImage(tilingBlockAndCourse, metaData.name),
   projectContent: [
     createText(
       2,
@@ -100,6 +103,19 @@ export const vibedReusedTiled: ProjectData = {
     {
       ...createImage(logo, 'Logo rendered with SVG SDF © J.W.'),
       link: { href: logoSettings, title: 'Open these settings in the playground' }
+    },
+    createText(1, [
+      'Example tilings',
+      'A few red and blue projects made in the app, each from one of its pattern presets, with terracotta, zellige, azulejo and encaustic materials. Rendered in the 3D view.'
+    ]),
+    {
+      type: ProjectContentType.ImageGrid,
+      images: [
+        view(tilingBlockAndCourse, 'Block and course', 'app/#/view/3d'),
+        view(tilingBasketweave, 'Basketweave', 'app/#/view/3d'),
+        view(tilingStaircase, 'Staircase', 'app/#/view/3d'),
+        view(tilingChecker, 'Checker', 'app/#/view/3d')
+      ]
     },
     {
       type: ProjectContentType.ImageGrid,
