@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- the logo with its 2 wide frame stroke as a filled ring, since svg-sdf measures to a stroke's centre line -->
+  <rect x="8" y="8" width="12" height="16" rx="1.5" fill="#7a3418" />
+  <rect x="8" y="26" width="12" height="16" rx="1.5" fill="#a84e26" />
+  <rect x="8" y="44" width="12" height="12" rx="1.5" fill="#d9773a" />
+  <rect x="22" y="44" width="16" height="12" rx="1.5" fill="#e49b62" />
+  <rect x="40" y="44" width="16" height="12" rx="1.5" fill="#eebf8e" />
+  <path fill="#2e2822" fill-rule="evenodd" d="M22 8 H56 V42 H22 Z M24 10 V40 H54 V10 Z" />
+</svg>
