@@ -5,6 +5,8 @@ dns.setDefaultResultOrder('verbatim');
 
 // widths generated for every `?responsive` image, capped at the original width
 const RESPONSIVE_WIDTHS = [400, 800, 1200, 1600, 2400];
+// `?responsive&card` only gets the widths of the 200px project card on the overview, at 1x and 2x
+const CARD_WIDTHS = [200, 400];
 
 // fetch the main font right away instead of after the css is parsed, shortens the swap from the fallback font
 const preloadMainFont = (): Plugin => ({
@@ -34,12 +36,13 @@ export default defineConfig({
         if (!url.searchParams.has('responsive')) return new URLSearchParams();
         // images get auto-oriented, so cap against the width after applying the exif rotation
         const meta = await metadata();
-        const width = meta.autoOrient?.width ?? meta.width ?? RESPONSIVE_WIDTHS[0];
-        const widths = RESPONSIVE_WIDTHS.filter((w) => w < width);
+        const targets = url.searchParams.has('card') ? CARD_WIDTHS : RESPONSIVE_WIDTHS;
+        const width = meta.autoOrient?.width ?? meta.width ?? targets[0];
+        const widths = targets.filter((w) => w < width);
         return new URLSearchParams({
           as: 'picture',
           format: 'webp',
-          w: [...widths, Math.min(width, RESPONSIVE_WIDTHS[RESPONSIVE_WIDTHS.length - 1])].join(';')
+          w: [...widths, Math.min(width, targets[targets.length - 1])].join(';')
         });
       }
     })

@@ -10,6 +10,7 @@ import { ProjectContentType } from '../../../types/projectContent/projectContent
 import { Technologies } from 'src/types/keywords/technologies';
 
 import alpenglow from './assets/hut-viewer/alpenglow.webp?responsive&lossless';
+import alpenglowCard from './assets/hut-viewer/alpenglow.webp?responsive&lossless&card';
 
 import allHuts from './assets/hut-viewer/all-huts.webp?responsive';
 import freeBeds from './assets/hut-viewer/free-beds.webp?responsive';
@@ -41,7 +42,7 @@ const metaData: ProjectMetaData = {
   name: 'Hut Viewer',
   projectType: ProjectCategory.Software,
   description: 'Map of Swiss Alpine Club huts and their free beds',
-  keyImage: alpenglow,
+  keyImage: alpenglowCard,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Technologies.React, Technologies.TypeScript],

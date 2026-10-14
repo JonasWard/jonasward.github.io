@@ -11,6 +11,7 @@ import { Technologies } from 'src/types/keywords/technologies';
 import { densingBuilderViews } from '../densingBuilderViews';
 
 import logo from './assets/state-to-function-2/logo.webp?responsive&lossless';
+import logoCard from './assets/state-to-function-2/logo.webp?responsive&lossless&card';
 import builderBase64url from './assets/state-to-function-2/builder-base64url.webp?responsive&lossless';
 import builderBase45 from './assets/state-to-function-2/builder-base45.webp?responsive&lossless';
 
@@ -44,10 +45,10 @@ const logoSettings =
 const metaData: ProjectMetaData = {
   id,
   webstring: 'state-to-function-2',
-  name: 'State to Function 2',
+  name: 'State to Function λ',
   projectType: ProjectCategory.Software,
   description: 'Simple math stored in the url, now with densing',
-  keyImage: logo,
+  keyImage: logoCard,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
   keywords: [Keywords.Frontend, Keywords.Software, Technologies.Densing, Technologies.React, Technologies.TypeScript]
@@ -61,7 +62,7 @@ export const stateToFunction2: ProjectData = {
     createText(
       2,
       [
-        'State to Function 2',
+        'State to Function λ',
         'Second iteration of State to Function, the POC to store simple math in a url. Cleaner UI without antd, and the state is now packed with densing instead of url-safe-bitpacking.'
       ],
       'Inputs and methods are put together on the Definitions page, either by clicking terms together or by typing them as formulas, with autocomplete. The Applet turns the definition into a small calculator, which can be exported as CSV or as a PDF with a QR code.',

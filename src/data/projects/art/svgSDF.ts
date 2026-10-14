@@ -71,6 +71,7 @@ import chHexagonTopo from './asssets/svg-sdf-countries/ch-hexagon-topo.webp?resp
 import chRegions from './asssets/svg-sdf-countries/ch-regions.webp?responsive&lossless';
 import chMosaic from './asssets/svg-sdf-countries/ch-mosaic.webp?responsive&lossless';
 import chRampEmber from './asssets/svg-sdf-countries/ch-ramp-ember.webp?responsive&lossless';
+import chRampEmberCard from './asssets/svg-sdf-countries/ch-ramp-ember.webp?responsive&lossless&card';
 import chRampOcean from './asssets/svg-sdf-countries/ch-ramp-ocean.webp?responsive&lossless';
 import chTopo from './asssets/svg-sdf-countries/ch-topo.webp?responsive&lossless';
 import chRedBlue from './asssets/svg-sdf-countries/ch-red-blue.webp?responsive&lossless';
@@ -129,7 +130,7 @@ const metaData: ProjectMetaData = {
   name: 'SVG SDF',
   projectType: ProjectCategory.Art,
   description: 'Signed Distance Fields from SVGs',
-  keyImage: chRampEmber,
+  keyImage: chRampEmberCard,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
   keywords: [Keywords.Shaders, Keywords.Patterns, Technologies.ReactThreeFiber, Technologies.SVG, Technologies.Densing]

@@ -10,6 +10,7 @@ import { ProjectContentType } from '../../../types/projectContent/projectContent
 import { Technologies } from 'src/types/keywords/technologies';
 
 import logo from './assets/vibed-reused-tiled/logo.webp?responsive&lossless';
+import logoCard from './assets/vibed-reused-tiled/logo.webp?responsive&lossless&card';
 
 import landing from './assets/vibed-reused-tiled/landing.webp?responsive';
 import project from './assets/vibed-reused-tiled/project.webp?responsive';
@@ -43,7 +44,7 @@ const metaData: ProjectMetaData = {
   name: 'Vibed · Reused · Tiled',
   projectType: ProjectCategory.Software,
   description: 'Design families for an uncertain reused tile stock',
-  keyImage: logo,
+  keyImage: logoCard,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [
