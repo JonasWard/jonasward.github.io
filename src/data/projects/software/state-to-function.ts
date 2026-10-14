@@ -7,9 +7,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from 'src/types/keywords/keywords';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
-import { densingBuilderViews } from '../densingBuilderViews';
 
-import builderSchema from './assets/state-to-function/builder-schema.webp?responsive&lossless';
 import functions from './assets/state-to-function/functions.png?responsive';
 import help from './assets/state-to-function/help.png?responsive';
 import pdf from './assets/state-to-function/pdf.png?responsive';
@@ -27,7 +25,7 @@ const metaData: ProjectMetaData = {
   keyImage: pdf,
   projectContext: ProjectContext.Personal,
   projectPartnerContext: ProjectPartnerContext.Solo,
-  keywords: [Keywords.Frontend, Keywords.Software, Technologies.Densing, Technologies.React]
+  keywords: [Keywords.Frontend, Keywords.Software, Technologies.React]
 };
 
 export const stateToFunction: ProjectData = {
@@ -58,8 +56,8 @@ export const stateToFunction: ProjectData = {
         },
         {
           type: ProjectContentType.ExternalLink,
-          href: '#/project/densing/',
-          alternativeName: 'densing'
+          href: '#/project/state-to-function-2/',
+          alternativeName: 'State to Function 2'
         }
       ]
     },
@@ -72,10 +70,6 @@ export const stateToFunction: ProjectData = {
         createImage(qrCode, 'QR Code for Definition'),
         createImage(results, 'Result of Definition')
       ]
-    },
-    {
-      ...createImage(builderSchema, 'Model definition as a densing schema - port, not deployed yet'),
-      link: { href: densingBuilderViews.stateToFunction, title: 'Open this view in the Densing Builder' }
     }
   ]
 };

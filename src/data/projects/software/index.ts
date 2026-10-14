@@ -17,3 +17,4 @@ export * from './repurposed';
 export * from './densing';
 export * from './hutViewer';
 export * from './screwFinder';
+export * from './stateToFunction2';
