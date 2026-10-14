@@ -9,7 +9,7 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import rust from './assets/screw-finder/rust.webp?responsive&lossless';
+import screw from './assets/screw-finder/screw.webp?responsive&lossless';
 
 import home from './assets/screw-finder/home.webp?responsive';
 import table from './assets/screw-finder/table.webp?responsive';
@@ -33,7 +33,7 @@ const view = (picture: ResponsivePicture, caption: string, path: string) => ({
 
 // the svg-sdf settings the logo was rendered with, packed with densing; the svg itself is not part of the link
 const logoSettings =
-  'https://jonasward.github.io/svg-sdf/?s=J_AeAnMALuABh9u_mIAFwTCn0uDIf-jwim4gA____ZD249j6NmkjwdFBgBxbPEfTfDYD6F4obXdYK5-AB1BUI1tUVVyAAoWHDxMyqicFgAHrgmFHuKXBMKA';
+  'https://jonasward.github.io/svg-sdf/?s=J_AeAnMALuABg9u_mIAFwTCn0uDIf-jwim4gA____ZD249j6NmkjwdFQgB5TKK-l6FBQhHWRRftZBUHIAChYcPEzKqJgWAAeuCYUe4pcEwo';
 
 const metaData: ProjectMetaData = {
   id,
@@ -41,7 +41,7 @@ const metaData: ProjectMetaData = {
   name: 'Screw Finder',
   projectType: ProjectCategory.Software,
   description: 'Searchable screw catalog with printable cards',
-  keyImage: rust,
+  keyImage: screw,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Keywords.Timber, Keywords.Hackathon, Technologies.NextJS, Technologies.TypeScript, Technologies.ReactThreeFiber],
@@ -83,7 +83,7 @@ export const screwFinder: ProjectData = {
       ]
     },
     {
-      ...createImage(rust, 'Logo rendered with SVG SDF © J.W.'),
+      ...createImage(screw, 'Logo rendered with SVG SDF © J.W.'),
       link: { href: logoSettings, title: 'Open these settings in the playground' }
     },
     {
