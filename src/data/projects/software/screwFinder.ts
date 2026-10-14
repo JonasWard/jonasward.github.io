@@ -10,6 +10,7 @@ import { ProjectContentType } from '../../../types/projectContent/projectContent
 import { Technologies } from 'src/types/keywords/technologies';
 
 import screw from './assets/screw-finder/screw.webp?responsive&lossless';
+import screwCard from './assets/screw-finder/screw.webp?responsive&lossless&card';
 
 import home from './assets/screw-finder/home.webp?responsive';
 import table from './assets/screw-finder/table.webp?responsive';
@@ -41,7 +42,7 @@ const metaData: ProjectMetaData = {
   name: 'Screw Finder',
   projectType: ProjectCategory.Software,
   description: 'Searchable screw catalog with printable cards',
-  keyImage: screw,
+  keyImage: screwCard,
   projectContext: ProjectContext.Professional,
   projectPartnerContext: ProjectPartnerContext.Team,
   keywords: [Keywords.Frontend, Keywords.Timber, Keywords.Hackathon, Technologies.NextJS, Technologies.TypeScript, Technologies.ReactThreeFiber],

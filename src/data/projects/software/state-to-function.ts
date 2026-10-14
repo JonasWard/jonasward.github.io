@@ -57,7 +57,7 @@ export const stateToFunction: ProjectData = {
         {
           type: ProjectContentType.ExternalLink,
           href: '#/project/state-to-function-2/',
-          alternativeName: 'State to Function 2'
+          alternativeName: 'State to Function λ'
         }
       ]
     },

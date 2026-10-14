@@ -11,3 +11,9 @@ declare module '*?responsive&lossless' {
   const picture: import('vite-imagetools').Picture;
   export default picture;
 }
+
+// lossless, but only in the small widths of a project card on the overview
+declare module '*?responsive&lossless&card' {
+  const picture: import('vite-imagetools').Picture;
+  export default picture;
+}
