@@ -180,10 +180,9 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, onFail: (reason: stri
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  // the texture is attached in fit, once it has storage: Adreno drivers drop an attachment made while the texture
+  // is still empty, which leaves the framebuffer incomplete (missing attachment)
   const wallFramebuffer = gl.createFramebuffer();
-  gl.bindFramebuffer(gl.FRAMEBUFFER, wallFramebuffer);
-  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, wallTexture, 0);
-  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
   // full screen quad on attribute location 0
   const quad = gl.createVertexArray();
@@ -231,7 +230,6 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, onFail: (reason: stri
   let margin = 0; // how far the wall texture runs on past the canvas on every side, device px
   let wallWidth = 0;
   let wallHeight = 0;
-  let wallChecked = false;
 
   // keeps the drawing buffer in step with the canvas' css box, which mobile browsers can
   // change after the first frame without a window resize; cheap when nothing changed
@@ -256,16 +254,15 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, onFail: (reason: stri
     wallHeight = height + 2 * margin;
     gl.activeTexture(gl.TEXTURE1);
     gl.bindTexture(gl.TEXTURE_2D, wallTexture);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, wallWidth, wallHeight, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-    if (!wallChecked) {
-      wallChecked = true;
-      gl.bindFramebuffer(gl.FRAMEBUFFER, wallFramebuffer);
-      const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
-      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-      if (status !== gl.FRAMEBUFFER_COMPLETE) {
-        console.error('The wall framebuffer is incomplete:', status);
-        fail(`the wall framebuffer is incomplete: ${status}`);
-      }
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, wallWidth, wallHeight, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    // (re)attached after every resize, see where the framebuffer is created
+    gl.bindFramebuffer(gl.FRAMEBUFFER, wallFramebuffer);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, wallTexture, 0);
+    const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    if (status !== gl.FRAMEBUFFER_COMPLETE) {
+      console.error('The wall framebuffer is incomplete:', status);
+      fail(`the wall framebuffer is incomplete: ${status}`);
     }
   };
 
