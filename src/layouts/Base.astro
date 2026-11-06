@@ -24,6 +24,8 @@ const path = Astro.url.pathname;
     <meta name="theme-color" content="#000000" />
     <meta name="description" content={description} />
     <link rel="icon" href={favicon} />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.json" />
     <title>{title}</title>
     <!-- the stylesheet only names the font, so without this it starts loading late and the text reflows on swap -->
     <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />
