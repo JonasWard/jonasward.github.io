@@ -2,7 +2,7 @@ import vsSource from './shaders/paperTilesVertexShader.glsl?raw';
 import wallSource from './shaders/paperTilesWallShader.glsl?raw';
 import shadeSource from './shaders/paperTilesShadeShader.glsl?raw';
 import paperSource from './shaders/paperTilesPaperShader.glsl?raw';
-import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png'; // inlined as a data url, see vite.config.ts
+import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png?inline'; // a data url, needed for the first frame
 
 const DEFAULT_NEUTRAL_COLOR: [number, number, number] = [Math.floor(Math.random() * 360), 0.08, 0.66];
 const DEFAULT_HUE_DELTA = 20;
