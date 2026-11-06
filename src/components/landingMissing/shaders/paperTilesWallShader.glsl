@@ -61,6 +61,7 @@ const float LOGO_DEPTH = 10.0;  // how far the logo is cut below the lowest slab
 const float FRAY = 0.8;         // how far the edges between slabs wander, css px
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float HEIGHT_SPAN = LOGO_DEPTH + HEIGHT + RELIEF; // the height range the alpha channel covers, see the shade pass
+const float AA = 0.75;          // half width of every blend across an edge, device px
 
 // ---------------------------------------------------------------- hashing
 
@@ -74,6 +75,11 @@ float hash12(vec2 p) {
 
 float hashSeeded(float seed, float salt) {
   return hash12(vec2(seed * 53.17, salt));
+}
+
+// everything a tile carries hangs off its seed, so the values come four at a time
+vec4 hashSeeded4(float seed, vec4 salt) {
+  return vec4(hashSeeded(seed, salt.x), hashSeeded(seed, salt.y), hashSeeded(seed, salt.z), hashSeeded(seed, salt.w));
 }
 
 float vnoise(vec2 p) {
@@ -102,7 +108,9 @@ struct Tile {
   vec2 size; // tile units
 };
 
-Tile tileAt(vec2 uv, float t) {
+// the lattice cell owning the tile under uv: the cell's own edge, then the edge of the
+// cell that one points to, decide which of the four cells around uv it is
+vec2 tileIdAt(vec2 uv, float t) {
   vec2 fl = floor(uv);
   vec2 fr = uv - fl;
   bool ch = mod(fl.x + fl.y, 2.0) > 0.5;
@@ -118,9 +126,12 @@ Tile tileAt(vec2 uv, float t) {
 
   vec2 st = step(vec2(0.0), vec2(a1, a2));
   vec2 of = ch ? st.xy : st.yx;
+  return fl + of - 1.0;
+}
 
+Tile tileAt(vec2 uv, float t) {
   Tile T;
-  T.id = fl + of - 1.0;
+  T.id = tileIdAt(uv, t);
   bool ch2 = mod(T.id.x + T.id.y, 2.0) > 0.5;
 
   float r00 = randSpan(T.id, t);
@@ -135,8 +146,13 @@ Tile tileAt(vec2 uv, float t) {
   return T;
 }
 
-float tileSeed(Tile T) {
-  return hash12(T.id + 0.5);
+float tileSeed(vec2 id) {
+  return hash12(id + 0.5);
+}
+
+// how high the slab owned by lattice cell `id` sits, css px
+float slabHeight(vec2 id) {
+  return hashSeeded(tileSeed(id), 14.0) * HEIGHT;
 }
 
 // ---------------------------------------------------------------- paper
@@ -193,7 +209,7 @@ struct Look {
                   // both moving with the cell; 0: it stays fixed to the lattice
   float corner;   // which corner, 0..3, when anchored to one
   float k;        // pitch of the folds (sign: which way the first fold goes)
-  float period;   // distance from one ridge to the next, css px
+  float period;   // distance from one ridge to the next, device px
   float phase;    // where along the period the centre sits
   float capTop;   // the fold wave is clipped flat above this level (1 = never) ...
   float capBottom; // ... and below minus this level
@@ -207,99 +223,26 @@ vec2 tiltFrom(float h1, float h2) {
 }
 
 Look lookFrom(float seed) {
+  vec4 h0 = hashSeeded4(seed, vec4(21.0, 22.0, 34.0, 23.0));
+  vec4 h1 = hashSeeded4(seed, vec4(24.0, 30.0, 31.0, 32.0));
+  vec4 h2 = hashSeeded4(seed, vec4(33.0, 29.0, 25.0, 26.0));
   Look L;
-  float f = hashSeeded(seed, 21.0);
-  L.family = f < 0.4 ? 0.0 : (f < 0.65 ? 1.0 : 2.0);
+  L.family = h0.x < 0.4 ? 0.0 : (h0.x < 0.65 ? 1.0 : 2.0);
   // where the pattern sits: mostly on the lattice, sometimes on the slab's centre
   // (frames less often than rings) and sometimes on one of its corners
-  float place = hashSeeded(seed, 22.0);
   float centreFrom = L.family == 1.0 ? 0.55 : 0.4;
-  L.anchored = place < centreFrom ? 0.0 : (place < centreFrom + 0.2 ? 1.0 : 2.0);
-  L.corner = floor(hashSeeded(seed, 34.0) * 4.0);
-  L.k = (hashSeeded(seed, 23.0) < 0.5 ? -1.0 : 1.0) * mix(0.8, 1.5, hashSeeded(seed, 24.0));
+  L.anchored = h0.y < centreFrom ? 0.0 : (h0.y < centreFrom + 0.2 ? 1.0 : 2.0);
+  L.corner = floor(h0.z * 4.0);
+  L.k = (h0.w < 0.5 ? -1.0 : 1.0) * mix(0.8, 1.5, h1.x);
   // periods spread evenly in the log so small and large ones are equally common
   float periodMax = (L.family == 1.0 && L.anchored == 1.0) ? PERIOD_MAX_CENTRED_FRAME : PERIOD_MAX;
-  L.period = PERIOD_MIN * pow(periodMax / PERIOD_MIN, hashSeeded(seed, 30.0));
-  L.phase = hashSeeded(seed, 31.0);
-  L.capTop = mix(0.2, 1.0, hashSeeded(seed, 32.0));
-  L.capBottom = mix(0.2, 1.0, hashSeeded(seed, 33.0));
-  L.diag = step(0.5, hashSeeded(seed, 29.0));
-  L.tBase = 0.35 * tiltFrom(hashSeeded(seed, 25.0), hashSeeded(seed, 26.0));
+  L.period = PERIOD_MIN * exp2(h1.y * log2(periodMax / PERIOD_MIN)) * uPixelRatio;
+  L.phase = h1.z;
+  L.capTop = mix(0.2, 1.0, h1.w);
+  L.capBottom = mix(0.2, 1.0, h2.x);
+  L.diag = step(0.5, h2.y);
+  L.tBase = 0.35 * tiltFrom(h2.z, h2.w);
   return L;
-}
-
-// ---------------------------------------------------------------- sdf shading
-
-float lit(vec3 n, vec3 l) {
-  return max(dot(n, l), 0.0);
-}
-
-// flat facet tilted by t
-float litFlat(vec2 t, vec3 l) {
-  return lit(normalize(vec3(t, 1.0)), l);
-}
-
-float blendSdf(float inside, float outside, float d, float aa) {
-  return mix(inside, outside, smoothstep(-aa, aa, d));
-}
-
-// the pattern's distance and the direction it grows in, for local position q on a
-// sheet of `size` px with the pattern centred on c
-struct Field {
-  float d;   // signed distance, px
-  vec2 dir;  // unit direction of increasing d
-  float mitre; // for frames: the x facet takes over from the y facet where this passes zero
-};
-
-Field fieldAt(vec2 q, vec2 c, Look L) {
-  Field F;
-  vec2 d = q - c;
-  if (L.family < 0.5) {
-    F.d = length(d);
-    F.dir = normalize(d + 1e-4);
-    F.mitre = 0.0;
-  } else if (L.family < 1.5) {
-    vec2 a = abs(d);
-    F.d = max(a.x, a.y);
-    F.dir = vec2(sign(d.x), 0.0);
-    F.mitre = a.x - a.y;
-  } else {
-    vec2 along = L.diag > 0.5 ? vec2(0.7071, 0.7071) : vec2(0.7071, -0.7071);
-    F.d = dot(d, along);
-    F.dir = along;
-    F.mitre = 0.0;
-  }
-  return F;
-}
-
-// the triangle wave along the pattern's distance, -1 at the valleys, +1 at the ridges
-float wave(float d, float period) {
-  return 1.0 - 2.0 * abs(mod(d, period) - 0.5 * period) / period;
-}
-
-// slope of that wave: +1 rising, -1 falling, blended across ridge and valley so neither
-// aliases, and zero where the slab clips the wave flat above capTop or below -capBottom
-float fold(float d, float period, float sgn, float capTop, float capBottom, float aa) {
-  float w = mod(d, period) - 0.5 * period;
-  float slope = (2.0 * smoothstep(-aa, aa, w) - 1.0) * (1.0 - smoothstep(0.5 * period - aa, 0.5 * period, abs(w)));
-  float h = sgn * wave(d, period);
-  float aaH = 2.0 * aa / period;
-  float open = smoothstep(capTop + aaH, capTop - aaH, h) * smoothstep(-capBottom - aaH, -capBottom + aaH, h);
-  return slope * open;
-}
-
-// diffuse light on the sheet at local position q with the pattern centred on c
-float motif(vec2 q, vec2 c, Look L, vec3 l, float aa) {
-  Field F = fieldAt(q, c, L);
-  float period = L.period * uPixelRatio;
-  float slope = L.k * fold(F.d + L.phase * period, period, sign(L.k), L.capTop, L.capBottom, aa);
-  float lit = litFlat(L.tBase + slope * F.dir, l);
-  if (L.family < 1.5 && L.family >= 0.5) {
-    // frames: the y facets, blended with the x facets at the mitres
-    float litY = litFlat(L.tBase + slope * vec2(0.0, sign(q.y - c.y)), l);
-    lit = blendSdf(litY, lit, F.mitre, aa);
-  }
-  return lit;
 }
 
 // where the pattern is centred on a slab of `sizePx`, in slab px
@@ -307,6 +250,52 @@ vec2 patternCentre(Tile T, vec2 sizePx, Look L) {
   if (L.anchored == 1.0) return 0.5 * sizePx;
   if (L.anchored == 2.0) return vec2(mod(L.corner, 2.0), floor(L.corner * 0.5)) * sizePx;
   return (T.id + 0.5 - T.lo) * uTileSize;
+}
+
+// ---------------------------------------------------------------- folds
+
+// diffuse light on a flat facet tilted by t
+float litFlat(vec2 t) {
+  return max(dot(vec3(t, 1.0), LIGHT) * inversesqrt(dot(t, t) + 1.0), 0.0);
+}
+
+// the folds at local position q on the slab with the pattern centred on c: the diffuse
+// light on the sheet, and its height above the slab in css px
+vec2 foldAt(vec2 q, vec2 c, Look L) {
+  // the pattern's distance, the direction it grows in, and for frames a second facet
+  // direction that takes over where the mitre passes zero (never, for the others)
+  vec2 d = q - c;
+  float dist;
+  vec2 dir;
+  vec2 dirY = vec2(0.0, sign(d.y));
+  float mitre = 1.0;
+  if (L.family < 0.5) {
+    dist = length(d);
+    dir = normalize(d + 1e-4);
+    dirY = dir;
+  } else if (L.family < 1.5) {
+    vec2 a = abs(d);
+    dist = max(a.x, a.y);
+    dir = vec2(sign(d.x), 0.0);
+    mitre = a.x - a.y;
+  } else {
+    dir = L.diag > 0.5 ? vec2(0.7071, 0.7071) : vec2(0.7071, -0.7071);
+    dist = dot(d, dir);
+    dirY = dir;
+  }
+
+  // the triangle wave along that distance, -1 at the valleys, +1 at the ridges, and its
+  // slope: +1 rising, -1 falling, blended across ridge and valley so neither aliases, and
+  // zero where the slab clips the wave flat above capTop or below -capBottom
+  float w = mod(dist + L.phase * L.period, L.period) - 0.5 * L.period;
+  float h = sign(L.k) * (1.0 - 2.0 * abs(w) / L.period);
+  float slope = (2.0 * smoothstep(-AA, AA, w) - 1.0) * (1.0 - smoothstep(0.5 * L.period - AA, 0.5 * L.period, abs(w)));
+  float aaH = 2.0 * AA / L.period;
+  float open = smoothstep(L.capTop + aaH, L.capTop - aaH, h) * smoothstep(-L.capBottom - aaH, -L.capBottom + aaH, h);
+  slope *= L.k * open;
+
+  float light = mix(litFlat(L.tBase + slope * dirY), litFlat(L.tBase + slope * dir), smoothstep(-AA, AA, mitre));
+  return vec2(light, RELIEF * clamp(h, -L.capBottom, L.capTop));
 }
 
 // ---------------------------------------------------------------- logo
@@ -319,90 +308,62 @@ float logoDistance(vec2 fragPx) {
   return (texture(uLogo, uv).r * 2.0 - 1.0) * uLogoSpread;
 }
 
-// ---------------------------------------------------------------- heightfield
-
-// height of the pattern above its slab, css px: the triangle wave behind the folds
-float shapeHeight(vec2 q, vec2 c, Look L) {
-  Field F = fieldAt(q, c, L);
-  float period = L.period * uPixelRatio;
-  float h = sign(L.k) * wave(F.d + L.phase * period, period);
-  return RELIEF * clamp(h, -L.capBottom, L.capTop);
-}
-
-float slabHeight(Tile T) {
-  return hashSeeded(tileSeed(T), 14.0);
-}
-
 // ---------------------------------------------------------------- main
-
-const float AA = 0.75; // half width of every blend across an edge, device px
-
-// what the slab under a point looks like there, and where that slab's nearest edge is
-struct Surface {
-  vec3 col;    // lit paper
-  float h;     // height, css px
-  float edge;  // distance to the slab's nearest edge, device px
-  vec2 across; // a point just beyond that edge, tile units, so on the neighbouring slab
-};
-
-Surface surfaceAt(vec2 uv, float t) {
-  Tile T = tileAt(uv, t);
-  float seed = tileSeed(T);
-  vec2 sizePx = T.size * uTileSize;
-  vec2 q = (uv - T.lo) * uTileSize; // position on the slab, device px
-  float cssPx = uPixelRatio;        // one css px in device px
-
-  // this slab's paper, anchored to its centre, offset per slab, cut at its own angle
-  vec2 texPx = (q - 0.5 * sizePx) / cssPx + vec2(hashSeeded(seed, 10.0), hashSeeded(seed, 11.0)) * 2000.0;
-  float grainAngle = (hashSeeded(seed, 12.0) - 0.5) * 0.6;
-
-  // the shape: its family and tilts are fixed by the seed; it sits either on the
-  // slab's centre or on the lattice point the slab belongs to
-  Look L = lookFrom(seed);
-  vec2 c = patternCentre(T, sizePx, L);
-  float light = motif(q, c, L, LIGHT, AA);
-
-  // this slab's tone, one of the precomputed palette
-  vec3 tone = uPalette[int(hashSeeded(seed, 6.0) * 32.0)];
-
-  Surface S;
-  S.col = tone * (0.8 + 0.32 * light) * (1.0 + paper(texPx, grainAngle));
-  S.h = slabHeight(T) * HEIGHT + shapeHeight(q, c, L);
-
-  // the nearest of the four edges (left, bottom, right, top) and a step across it
-  vec4 d = vec4(q, sizePx - q);
-  S.edge = min(min(d.x, d.y), min(d.z, d.w));
-  vec2 outward = S.edge == d.x ? vec2(-1.0, 0.0) : S.edge == d.y ? vec2(0.0, -1.0) : S.edge == d.z ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-  S.across = uv + outward * (S.edge + 1.0) / uTileSize;
-  return S;
-}
 
 void main(void) {
   float t = uTime;
   float cssPx = uPixelRatio; // one css px in device px
   vec2 fragPx = gl_FragCoord.xy - uOrigin; // canvas px
-  vec2 uvWorld = (fragPx - 0.5 * uResolution) / uTileSize + SCROLL * t;
-  vec2 uv = uvWorld + frayAt(uvWorld);
 
-  Surface S = surfaceAt(uv, t);
-  vec3 col = S.col;
-  float h = S.h;
-
-  // within a pixel of an edge the neighbouring slab shows through by its coverage, so
-  // colour and height ease across the edge, and the edge slides smoothly as the tiling
-  // moves instead of jumping a texel at a time
-  if (S.edge < AA) {
-    Surface N = surfaceAt(S.across, t);
-    float w = smoothstep(-AA, AA, S.edge);
-    col = mix(N.col, col, w);
-    h = mix(N.h, h, w);
+  // the logo: cut out of the wall down to the floor (the shade pass casts the tiles'
+  // shadows into the letters), so inside the letters there is no wall to build
+  float dLogo = logoDistance(fragPx);
+  vec3 floorCol = vec3(0.0);
+  if (dLogo < AA) {
+    floorCol = uPalette[0] * 0.72 * (1.0 + paper(fragPx / cssPx, 0.3));
+    if (dLogo < -AA) {
+      fragColor = vec4(floorCol, 0.0);
+      return;
+    }
   }
 
-  // the logo: cut out of the wall down to a plain paper floor (the shade pass casts the
-  // tiles' shadows into the letters); the floor only matters up to the outline's blend
-  float dLogo = logoDistance(fragPx);
+  vec2 uvWorld = (fragPx - 0.5 * uResolution) / uTileSize + SCROLL * t;
+  vec2 uv = uvWorld + frayAt(uvWorld);
+  Tile T = tileAt(uv, t);
+  float seed = tileSeed(T.id);
+  vec2 sizePx = T.size * uTileSize;
+  vec2 q = (uv - T.lo) * uTileSize; // position on the slab, device px
+
+  // this slab's paper, anchored to its centre, offset per slab, cut at its own angle, and
+  // its tone, one of the precomputed palette
+  vec4 hs = hashSeeded4(seed, vec4(10.0, 11.0, 12.0, 6.0));
+  float grain = paper((q - 0.5 * sizePx) / cssPx + hs.xy * 2000.0, (hs.z - 0.5) * 0.6);
+  vec3 tone = uPalette[int(hs.w * 32.0)];
+
+  // the shape: its family and tilts are fixed by the seed; it sits either on the
+  // slab's centre or on the lattice point the slab belongs to
+  Look L = lookFrom(seed);
+  vec2 fold = foldAt(q, patternCentre(T, sizePx, L), L);
+  vec3 col = tone * (0.8 + 0.32 * fold.x) * (1.0 + grain);
+
+  // the height: the slab's, plus the folds. Within a pixel of the nearest of the slab's
+  // four edges (left, bottom, right, top) the neighbouring slab shows through by its
+  // coverage, so the height eases across the edge and the shadow that marks it (see the
+  // shade pass) slides smoothly as the tiling moves instead of jumping a texel at a time.
+  // The colour steps: the tones of two slabs differ little, the fray already breaks the
+  // line, and the neighbour's paper and folds would cost a whole second surface
+  vec4 d = vec4(q, sizePx - q);
+  float edge = min(min(d.x, d.y), min(d.z, d.w));
+  float slab = slabHeight(T.id);
+  if (edge < AA) {
+    vec4 nearest = step(d, vec4(edge));
+    vec2 across = uv + (nearest.zw - nearest.xy) * (edge + 1.0) / uTileSize; // just beyond the edge
+    slab = mix(slabHeight(tileIdAt(across, t)), slab, smoothstep(-AA, AA, edge));
+  }
+  float h = slab + fold.y;
+
+  // the outline of the logo, where the floor blends into the wall
   if (dLogo < AA) {
-    vec3 floorCol = uPalette[0] * 0.72 * (1.0 + paper(fragPx / cssPx, 0.3));
     float w = smoothstep(-AA, AA, dLogo);
     col = mix(floorCol, col, w);
     h = mix(-LOGO_DEPTH, h, w);
