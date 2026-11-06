@@ -26,8 +26,6 @@
     }
 
     .cv-header,
-    .cv-header-photo,
-    .cv-header-title,
     .cv-grid {
       max-width: none;
     }
@@ -45,15 +43,15 @@
       margin-top: var(--space-4);
       font-size: var(--fs-2xs);
       break-inside: avoid;
-    }
 
-    .cv-print-footer a {
-      color: black;
-    }
+      a {
+        color: black;
+      }
 
-    .cv-print-footer img {
-      width: 36px;
-      height: 36px;
+      img {
+        width: 36px;
+        height: 36px;
+      }
     }
   }
 }

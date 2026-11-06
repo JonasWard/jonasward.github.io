@@ -46,19 +46,21 @@
     margin: 0;
   }
 
-  :root::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
-    background-color: black;
-    border: 1px solid var(--black-a20);
-  }
+  :root {
+    &::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+      background-color: black;
+      border: 1px solid var(--black-a20);
+    }
 
-  :root::-webkit-scrollbar-thumb {
-    background-color: var(--white-a60);
-    border-radius: 3.5px;
-  }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--white-a60);
+      border-radius: 3.5px;
+    }
 
-  :root::-webkit-scrollbar-track {
-    background: transparent;
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
   }
 }

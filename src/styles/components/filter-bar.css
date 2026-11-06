@@ -6,6 +6,7 @@
     margin: var(--space-2);
   }
 
+  /* the × of an active keyword (.tag.tag--solid) */
   .kf-chip span {
     font-size: var(--fs-sm);
     font-weight: 300;
@@ -28,11 +29,11 @@
     width: 100%;
     min-width: 120px;
     letter-spacing: 0.04em;
-  }
 
-  .kf-input::placeholder {
-    color: var(--black-a30);
-    font-style: italic;
+    &::placeholder {
+      color: var(--black-a30);
+      font-style: italic;
+    }
   }
 
   .kf-dropdown {
@@ -59,14 +60,14 @@
     color: var(--grey-800);
     border-bottom: 1px solid var(--black-a05);
     transition: background-color var(--t-fast);
-  }
 
-  .kf-suggestion:last-child {
-    border-bottom: none;
-  }
+    &:last-child {
+      border-bottom: none;
+    }
 
-  .kf-suggestion:hover {
-    background-color: var(--grey-50);
-    color: black;
+    &:hover {
+      background-color: var(--grey-50);
+      color: black;
+    }
   }
 }

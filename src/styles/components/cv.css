@@ -1,11 +1,18 @@
 /* the cv, on screen and (with pages/cv-print.css) on paper; the classes are the former react-pdf style objects of
-   components/cv/style.ts. .cv-content is also the column of the motivation letter page */
+   components/cv/style.ts. .cv-content is also the column of the motivation letter page. below tablet width the screen
+   cv is a single column; on paper (about 700px wide) it keeps both */
 @layer components {
   .cv-content {
     position: relative;
     max-width: min(100vw, 690px);
     margin: var(--space-5) auto;
     padding: 20px;
+
+    /* the links of the cv stay plain underlined links */
+    a {
+      color: LinkText;
+      text-decoration: underline;
+    }
   }
 
   .cv-download {
@@ -19,35 +26,47 @@
     font-size: var(--fs-sm);
     color: var(--link-blue);
     transition: opacity var(--t-slow);
-  }
 
-  .cv-download-link:hover {
-    opacity: 0.7;
-  }
+    &:hover {
+      opacity: 0.7;
+    }
 
-  .cv-download-link img {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
+    img {
+      width: 25px;
+      height: 25px;
+      margin-right: 5px;
+    }
   }
 
   /* photo left, logo + tagline right; stacked (tagline first) on tablets and phones */
-  .cv-header,
-  .cv-header-photo,
-  .cv-header-title {
+  .cv-header {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    width: 100%;
     max-width: calc(100vw - 40px);
+
+    @media screen and (max-width: 750px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  .cv-header-photo,
+  .cv-header-title {
+    width: calc((100% - 20px) * var(--share));
+
+    @media screen and (max-width: 750px) {
+      width: 100%;
+    }
   }
 
   .cv-header-photo {
-    width: calc((100% - 20px) * 0.4);
+    --share: 0.4;
   }
 
   .cv-header-title {
-    width: calc((100% - 20px) * 0.6);
+    --share: 0.6;
+    justify-content: space-between;
+    gap: 20px;
   }
 
   .cv-profile {
@@ -68,6 +87,10 @@
     max-width: calc(100vw - 40px);
     /* pulls the end of the page (and the print footer) up under the last column */
     margin-bottom: -30px;
+
+    @media screen and (max-width: 750px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* text */
@@ -102,9 +125,8 @@
     font-weight: 400;
   }
 
-  .cv-regular,
-  .cv-regular-bold,
-  .cv-skill-list {
+  /* the fine print: grey and left aligned, black (bold) or right aligned (skill lists) */
+  .cv-regular {
     font-size: var(--fs-2xs);
     font-weight: 200;
     text-align: left;
@@ -112,23 +134,18 @@
   }
 
   .cv-regular-bold {
+    font-size: var(--fs-2xs);
     font-weight: 400;
-    color: black;
+  }
+
+  .cv-skill-list {
+    font-size: var(--fs-2xs);
+    font-weight: 200;
+    text-align: right;
   }
 
   .cv-position {
     margin: 4px 0 1px;
-  }
-
-  .cv-skill-list {
-    color: inherit;
-    text-align: right;
-  }
-
-  /* the links of the cv stay plain underlined links */
-  .cv-content a {
-    color: LinkText;
-    text-decoration: underline;
   }
 
   .cv-keep {
@@ -178,21 +195,5 @@
   /* the footer only exists on paper */
   .cv-print-footer {
     display: none;
-  }
-
-  /* screen only: on paper (about 700px wide) the cv keeps its two columns */
-  @media screen and (max-width: 750px) {
-    .cv-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .cv-header {
-      flex-direction: column-reverse;
-    }
-
-    .cv-header-photo,
-    .cv-header-title {
-      width: 100%;
-    }
   }
 }

@@ -1,7 +1,7 @@
 /* overview card, a link tinted with its category (--cat comes from data-category, see tokens.css) */
 @layer components {
   .project-card {
-    /* the idle look; the active rule below swaps these */
+    /* the idle look; the active state below swaps these */
     --card-bg: color-mix(in srgb, var(--cat, var(--grey-100)) 12%, var(--grey-100));
     --stripe-w: 3px;
     --img-filter: brightness(0.8) contrast(0.85) saturate(0.75) brightness(1.25);
@@ -10,14 +10,64 @@
     width: 200px;
     background-color: var(--card-bg);
     transition: all var(--t-base);
-  }
 
-  .project-card img {
-    width: 100%;
-    min-height: 100px;
-    object-fit: cover;
-    filter: var(--img-filter);
-    transition: all var(--t-base);
+    /* active: hovered, or in the middle of the row on phones (the overview script sets .in-focus on phones only) */
+    &:is(:hover, .in-focus) {
+      --card-bg: var(--cat);
+      --stripe-w: 20%;
+      --img-filter: none;
+      color: white;
+    }
+
+    @media (min-width: 571px) {
+      &:hover {
+        transform: scale(1.035);
+      }
+    }
+
+    img {
+      width: 100%;
+      min-height: 100px;
+      object-fit: cover;
+      filter: var(--img-filter);
+      transition: all var(--t-base);
+    }
+
+    h2 {
+      font-weight: 500;
+      font-size: var(--fs-lg);
+    }
+
+    /* the keywords toggle */
+    h3 {
+      display: flex;
+      gap: var(--space-1);
+      align-items: center;
+      font-size: var(--fs-xs);
+      font-weight: 400;
+      text-decoration: underline;
+
+      svg {
+        width: 10px;
+        height: 10px;
+        transform: rotate(180deg);
+        transition: transform var(--t-slow);
+      }
+
+      &.open svg {
+        transform: none;
+      }
+    }
+
+    h4 {
+      font-size: var(--fs-xs);
+      font-weight: 300;
+    }
+
+    p {
+      font-weight: 300;
+      font-size: var(--fs-sm);
+    }
   }
 
   .project-card-content {
@@ -27,70 +77,35 @@
     overflow: hidden;
     /* the stripe and the content below stack against each other only, never against the page's fixed header */
     isolation: isolate;
-  }
 
-  /* the category stripe, it widens when the card is active */
-  .project-card-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: var(--stripe-w);
-    height: 100%;
-    background-color: var(--cat, transparent);
-    transition: width var(--t-base) ease;
-    z-index: var(--z-base);
-  }
+    /* the category stripe, it widens when the card is active */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--stripe-w);
+      height: 100%;
+      background-color: var(--cat, transparent);
+      transition: width var(--t-base) ease;
+      z-index: var(--z-base);
+    }
 
-  .project-card-content > * {
-    position: relative;
-    z-index: var(--z-raised);
-  }
-
-  .project-card h2 {
-    font-weight: 500;
-    font-size: var(--fs-lg);
-  }
-
-  .project-card h3 {
-    display: flex;
-    gap: var(--space-1);
-    align-items: center;
-    font-size: var(--fs-xs);
-    font-weight: 400;
-    text-decoration: underline;
-  }
-
-  .project-card h3 svg {
-    width: 10px;
-    height: 10px;
-    transform: rotate(180deg);
-    transition: transform var(--t-slow);
-  }
-
-  .project-card h3.open svg {
-    transform: none;
-  }
-
-  .project-card h4 {
-    font-size: var(--fs-xs);
-    font-weight: 300;
-  }
-
-  .project-card p {
-    font-weight: 300;
-    font-size: var(--fs-sm);
+    > * {
+      position: relative;
+      z-index: var(--z-raised);
+    }
   }
 
   .keywords {
     overflow: hidden;
     max-height: 200px;
     transition: max-height var(--t-fade) ease;
-  }
 
-  .keywords-hidden {
-    max-height: 0;
-    transition: max-height var(--t-base) ease;
+    &.keywords-hidden {
+      max-height: 0;
+      transition: max-height var(--t-base) ease;
+    }
   }
 
   /* the keyword chips (.tag) stay collapsed until the card's keyword list is opened */
@@ -98,26 +113,12 @@
     text-transform: lowercase;
     opacity: 0.85;
     transition: all var(--t-base);
-  }
 
-  .project-chip.hidden {
-    width: 0;
-    height: 0;
-    padding: 0;
-    opacity: 0;
-  }
-
-  /* active: hovered, or in the middle of the row on phones (the overview script sets .in-focus on phones only) */
-  .project-card:is(:hover, .in-focus) {
-    --card-bg: var(--cat);
-    --stripe-w: 20%;
-    --img-filter: none;
-    color: white;
-  }
-
-  @media (min-width: 571px) {
-    .project-card:hover {
-      transform: scale(1.035);
+    &.hidden {
+      width: 0;
+      height: 0;
+      padding: 0;
+      opacity: 0;
     }
   }
 }

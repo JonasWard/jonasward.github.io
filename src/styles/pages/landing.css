@@ -6,6 +6,16 @@
     position: fixed;
     inset: 0;
     overflow: hidden;
+
+    /* iOS safari clips fixed elements to the area between its translucent status bar and toolbar, so there the
+       landing is in flow, with an overscan above and below the viewport */
+    @supports (-webkit-touch-callout: none) {
+      --landing-overscan: 128px;
+      position: relative;
+      inset: auto;
+      height: calc(100dvh + 2 * var(--landing-overscan));
+      touch-action: none;
+    }
   }
 
   .landing-canvas {
@@ -19,17 +29,5 @@
   .landing-scroll-lock,
   .landing-scroll-lock body {
     overflow: hidden;
-  }
-
-  /* iOS safari clips fixed elements to the area between its translucent status bar and toolbar, so there the
-     landing is in flow, with an overscan above and below the viewport */
-  @supports (-webkit-touch-callout: none) {
-    .landing-page {
-      --landing-overscan: 128px;
-      position: relative;
-      inset: auto;
-      height: calc(100dvh + 2 * var(--landing-overscan));
-      touch-action: none;
-    }
   }
 }

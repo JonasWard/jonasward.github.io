@@ -27,9 +27,9 @@
     opacity: 0.4;
     filter: invert();
     transition: all var(--t-slow);
-  }
 
-  .missing-link:hover {
-    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
   }
 }

@@ -1,4 +1,5 @@
-/* the facts row under a project's hero: category, context, partners, keywords; every value links to the overview */
+/* the facts row under a project's hero: category, context, partners, keywords; every value links to the overview.
+   on phones the items stack, label left of the value */
 @layer components {
   .project-meta-block-left {
     border-left: 4px solid var(--cat, transparent);
@@ -9,6 +10,11 @@
     flex-wrap: wrap;
     border-top: 1px solid var(--black-a10);
     border-bottom: 1px solid var(--black-a10);
+
+    @media (max-width: 570px) {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
   }
 
   .meta-item {
@@ -16,11 +22,30 @@
     padding: 12px 20px;
     border-right: 1px solid var(--black-a10);
     min-width: 100px;
+
+    @media (max-width: 570px) {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 12px;
+      padding: 9px var(--space-3);
+      border-right: none;
+      border-bottom: 1px solid var(--black-a10);
+      min-width: unset;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
   }
 
   .meta-item--keywords {
     flex: 1;
     border-right: none;
+
+    @media (max-width: 570px) {
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
   }
 
   .meta-label {
@@ -29,6 +54,11 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     opacity: 0.45;
+
+    @media (max-width: 570px) {
+      flex-shrink: 0;
+      width: 90px;
+    }
   }
 
   .meta-value {
@@ -42,39 +72,8 @@
 
   .meta-keywords {
     margin-top: 2px;
-  }
 
-  @media (max-width: 570px) {
-    .project-meta-block {
-      flex-direction: column;
-      flex-wrap: nowrap;
-    }
-
-    .meta-item {
-      flex-direction: row;
-      align-items: baseline;
-      gap: 12px;
-      padding: 9px var(--space-3);
-      border-right: none;
-      border-bottom: 1px solid var(--black-a10);
-      min-width: unset;
-    }
-
-    .meta-item:last-child {
-      border-bottom: none;
-    }
-
-    .meta-item--keywords {
-      flex-wrap: wrap;
-      align-items: flex-start;
-    }
-
-    .meta-label {
-      flex-shrink: 0;
-      width: 90px;
-    }
-
-    .meta-keywords {
+    @media (max-width: 570px) {
       margin-top: 0;
     }
   }

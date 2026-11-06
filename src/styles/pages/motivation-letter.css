@@ -12,15 +12,15 @@
     display: flex;
     gap: 10px;
     padding: 50px 0 6px;
-  }
 
-  .ml-toolbar select,
-  .ml-toolbar button {
-    border: none;
-    background: var(--grey-50);
-    border-radius: var(--radius-md);
-    padding: 2px var(--space-2);
-    font-size: var(--fs-sm);
+    select,
+    button {
+      border: none;
+      background: var(--grey-50);
+      border-radius: var(--radius-md);
+      padding: 2px var(--space-2);
+      font-size: var(--fs-sm);
+    }
   }
 
   .drawer {
@@ -36,46 +36,45 @@
     color: white;
     font-weight: 600;
     transition: left var(--t-base);
-  }
 
-  .drawer.open {
-    left: 0;
-  }
+    &.open {
+      left: 0;
+    }
 
-  .drawer label {
-    gap: var(--space-1);
-  }
+    label {
+      gap: var(--space-1);
+    }
 
-  .drawer input,
-  .drawer textarea {
-    border: none;
-    border-radius: var(--radius-md);
-    padding: 6px;
-    font-size: var(--fs-sm);
-    font-weight: 400;
-  }
+    input,
+    textarea {
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 6px;
+      font-size: var(--fs-sm);
+      font-weight: 400;
+    }
 
-  .drawer textarea {
-    box-sizing: border-box;
-    width: 100%;
-    height: calc(100vh - 500px);
-    resize: vertical;
-  }
+    textarea {
+      box-sizing: border-box;
+      height: calc(100vh - 500px);
+      resize: vertical;
+    }
 
-  .drawer button {
-    position: fixed;
-    bottom: 10px;
-    left: 12px;
-    width: 162px;
-    min-height: 40px;
-    background: darkslategray;
-    border: 2px solid white;
-    border-radius: var(--radius-md);
-    color: white;
-  }
+    button {
+      position: fixed;
+      bottom: 10px;
+      left: 12px;
+      width: 162px;
+      min-height: 40px;
+      background: darkslategray;
+      border: 2px solid white;
+      border-radius: var(--radius-md);
+      color: white;
 
-  .drawer button:hover {
-    background: black;
+      &:hover {
+        background: black;
+      }
+    }
   }
 
   .ml-letter {
@@ -95,10 +94,10 @@
     font-size: var(--fs-2xs);
     font-weight: 200;
     color: var(--grey-800);
-  }
 
-  .ml-head a {
-    color: black;
+    a {
+      color: black;
+    }
   }
 
   .ml-logo {
@@ -121,11 +120,11 @@
 
   .ml-body {
     gap: 10px;
-  }
 
-  .ml-body p,
-  .ml-body ul {
-    margin: 0 0 10px;
+    p,
+    ul {
+      margin: 0 0 10px;
+    }
   }
 
   .ml-intro {
