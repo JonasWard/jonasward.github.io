@@ -30,7 +30,9 @@ precision highp float;
 // slabs and shapes cast soft shadows onto anything lower, including their own
 // slab and the neighbours (see the shade pass). Each slab is faced with paper
 // whose fibres are anchored to the slab's centre with a per-slab offset, so
-// they travel with it. Slabs abut directly; only tone and shadow mark the edges.
+// they travel with it; the paper itself is baked once into a repeating tile
+// (paperTilesPaperShader.glsl) and read here. Slabs abut directly; only tone and
+// shadow mark the edges.
 
 uniform vec2 uResolution;  // canvas size, device px
 uniform vec2 uOrigin;      // where the canvas' lower left corner sits in this pass' target, device px
@@ -41,6 +43,7 @@ uniform vec3 uPalette[32];    // slab tones, precomputed around a neutral colour
 uniform sampler2D uLogo;      // signed distance field of the logo, 0.5 on the outline
 uniform vec4 uLogoRect;       // centre x, centre y, width, height of the logo on screen, device px
 uniform float uLogoSpread;    // distance the field spans on each side of the outline, device px
+uniform sampler2D uPaper;     // the paper's lightness, a repeating tile, 0.5 is flat
 
 out vec4 fragColor;
 
@@ -62,6 +65,8 @@ const float FRAY = 0.8;         // how far the edges between slabs wander, css p
 const float RELIEF = 2.5;       // half height of the pattern's folds, css px
 const float HEIGHT_SPAN = LOGO_DEPTH + HEIGHT + RELIEF; // the height range the alpha channel covers, see the shade pass
 const float AA = 0.75;          // half width of every blend across an edge, device px
+const float PAPER_TILE = 512.0; // css px the paper tile spans, keep in step with the paper shader
+const float PAPER_RANGE = 0.5;  // lightness spanned by its byte, likewise
 
 // ---------------------------------------------------------------- hashing
 
@@ -80,17 +85,6 @@ float hashSeeded(float seed, float salt) {
 // everything a tile carries hangs off its seed, so the values come four at a time
 vec4 hashSeeded4(float seed, vec4 salt) {
   return vec4(hashSeeded(seed, salt.x), hashSeeded(seed, salt.y), hashSeeded(seed, salt.z), hashSeeded(seed, salt.w));
-}
-
-float vnoise(vec2 p) {
-  vec2 i = floor(p);
-  vec2 f = fract(p);
-  f = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
-  float a = hash12(i);
-  float b = hash12(i + vec2(1.0, 0.0));
-  float c = hash12(i + vec2(0.0, 1.0));
-  float d = hash12(i + vec2(1.0, 1.0));
-  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
 
 // ---------------------------------------------------------------- tiling
@@ -157,14 +151,6 @@ float slabHeight(vec2 id) {
 
 // ---------------------------------------------------------------- paper
 
-// value noise stretched along a direction: long thin fibres
-float fibres(vec2 p, float angle, float len, float thick) {
-  float c = cos(angle);
-  float s = sin(angle);
-  vec2 r = vec2(c * p.x - s * p.y, s * p.x + c * p.y);
-  return vnoise(vec2(r.x / len, r.y / thick));
-}
-
 // 1d value noise, quintic
 float vnoise1(float x) {
   float i = floor(x);
@@ -188,16 +174,13 @@ vec2 frayAt(vec2 uv) {
   return vec2(dx, dy) * FRAY * uPixelRatio / uTileSize;
 }
 
-// lightness of the paper at p (css px): fibres cut at grainAngle, cloudy formation, grain
+// lightness of the paper at p (css px), its fibres cut at grainAngle: the baked tile,
+// turned. The cloud and grain in it turn along, which nothing can tell
 float paper(vec2 p, float grainAngle) {
-  float f1 = fibres(p, 0.4 + grainAngle, 14.0, 1.8);
-  float f2 = fibres(p + 31.7, 1.9 + grainAngle, 20.0, 2.0);
-  float f3 = fibres(p + 77.1, -1.0 + grainAngle, 11.0, 1.7);
-  float f4 = fibres(p + 5.3, 2.6 + grainAngle, 26.0, 2.4);
-  float fibre = (f1 + f2 + f3 + f4) * 0.25 - 0.5;
-  float cloud = vnoise(p / 90.0) - 0.5;
-  float grain = vnoise(p * 0.7) - 0.5;
-  return 0.16 * fibre + 0.1 * cloud + 0.05 * grain;
+  float c = cos(grainAngle);
+  float s = sin(grainAngle);
+  vec2 r = vec2(c * p.x - s * p.y, s * p.x + c * p.y);
+  return (texture(uPaper, r / PAPER_TILE).r - 0.5) * PAPER_RANGE;
 }
 
 // ---------------------------------------------------------------- look
