@@ -70,7 +70,7 @@ export const CVContent: CVData = {
           '2017 — CLT competition entry for an iconic frying house in Brussels — honorary mention. Collaboration with Jan Verstraete & Dominque Girolami.'
         ],
         Boekentoren: [
-          'https://jonasward.ch/#project/lamps',
+          'https://jonasward.ch/#/project/boekentoren',
           "2017 — Designed and produced bedside-table lamp edition of UGent's 'Boekentoren' by Henry Van de Velde."
         ]
       }

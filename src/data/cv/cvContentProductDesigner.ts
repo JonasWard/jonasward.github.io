@@ -127,7 +127,7 @@ export const CVContent: CVData = {
           '2024 — Minimalist lamp configurator to create lamp shades for existing lamp bases.'
         ],
         'Boekentoren Lamp': [
-          'https://jonasward.ch/#/project/boekentoren-lamp',
+          'https://jonasward.ch/#/project/boekentoren',
           '2016 — Designed a lamp for the Boekentoren in Gent.'
         ]
       }

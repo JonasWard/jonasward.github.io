@@ -72,7 +72,7 @@ export const CVContent: CVData = {
           '2017 - Competion on the Frietkot in Brussels for a new iconic frying house for Brussels, sending in an out of CLT constructed proposal inspired by Expo ‘58 Philips pavilion and the typical Belgian "Frietzak". Collaboration with Jan Verstraete & Dominque Girolami - honorary mention.'
         ],
         Boekentoren: [
-          'https://jonasward.ch/#/project/lamps',
+          'https://jonasward.ch/#/project/boekentoren',
           '2017 - Bedsidetable lamp of the UGent \'s central library tower the "Boekentoren" by Henry Van de Velde'
         ],
         'Architectuur Atelier Ambiorix': '2014 - Rivierenhof, Antwerp, modelbuilding',
