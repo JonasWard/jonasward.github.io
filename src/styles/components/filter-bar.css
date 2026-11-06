@@ -1,27 +1,9 @@
 /* keyword filter in the overview's header: active keywords as chips, an input and its suggestion dropdown */
 @layer components {
   .keyword-filter-inner {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
     gap: 6px;
     padding: 0 var(--header-content-inset);
     margin: var(--space-2);
-  }
-
-  .kf-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 1px 6px;
-    font-size: var(--fs-xs);
-    letter-spacing: 0.08em;
-    text-transform: lowercase;
-    text-align: left;
-    border: 1px solid black;
-    background-color: black;
-    color: white;
-    transition: background-color var(--t-fast);
   }
 
   .kf-chip span {
@@ -29,10 +11,6 @@
     font-weight: 300;
     opacity: 0.6;
     line-height: 1;
-  }
-
-  .kf-chip:hover {
-    background-color: var(--grey-800);
   }
 
   .kf-input-wrap {
@@ -62,8 +40,6 @@
     top: calc(100% + var(--space-2));
     left: 0;
     z-index: var(--z-dropdown);
-    display: flex;
-    flex-direction: column;
     min-width: 180px;
     max-height: 260px;
     overflow-y: auto;

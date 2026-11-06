@@ -1,4 +1,4 @@
-@layer tokens, base, layout, components, pages, utilities;
+@layer tokens, base, primitives, layout, components, pages, utilities;
 
 /* the landing fills the layout viewport, which follows a collapsing mobile toolbar */
 @layer pages {

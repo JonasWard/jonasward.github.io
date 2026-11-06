@@ -17,8 +17,6 @@
   }
 
   .project-card-content {
-    display: flex;
-    flex-direction: column;
     gap: var(--space-2);
     position: relative;
     padding: var(--space-2) var(--space-2) var(--space-1);
@@ -81,10 +79,6 @@
   }
 
   .keywords {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1);
-    align-items: center;
     overflow: hidden;
     max-height: 200px;
     transition: max-height var(--t-fade) ease;
@@ -93,6 +87,20 @@
   .keywords-hidden {
     max-height: 0;
     transition: max-height var(--t-base) ease;
+  }
+
+  /* the keyword chips (.tag) stay collapsed until the card's keyword list is opened */
+  .project-chip {
+    text-transform: lowercase;
+    opacity: 0.85;
+    transition: all var(--t-base);
+  }
+
+  .project-chip.hidden {
+    width: 0;
+    height: 0;
+    padding: 0;
+    opacity: 0;
   }
 
   /* active: hovered with a mouse, or in the middle of the row on phones */

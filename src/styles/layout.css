@@ -2,9 +2,6 @@
 @layer layout {
   /* --- header --- */
   .header {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     position: fixed;
     top: 0;
     left: 0;
@@ -32,12 +29,6 @@
 
   .header-logo img {
     width: 180px;
-    cursor: pointer;
-    transition: filter var(--t-slow);
-  }
-
-  .header-logo img:hover {
-    filter: var(--hover-red);
   }
 
   .header-right {
@@ -59,15 +50,6 @@
     min-height: 40px;
     padding: 1px 6px;
     font-size: var(--fs-md);
-    transition: filter var(--t-slow);
-  }
-
-  .button-main.button-active {
-    filter: var(--active-purple);
-  }
-
-  .button-main:hover {
-    filter: var(--hover-red);
   }
 
   @media (max-width: 570px) {
@@ -99,9 +81,6 @@
   }
 
   .project-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 30px;
     padding: var(--space-4) var(--padding-tolerance) 20px;

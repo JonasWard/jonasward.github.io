@@ -129,10 +129,10 @@ export const renderContent = (content: ProjectContent): string => {
   }
 };
 
-const metaLink = (value: string, className = 'meta-value meta-value--link') =>
+const metaLink = (value: string, className = 'meta-value quiet-link') =>
   `<a${attrs({ class: className, href: keywordHref(value) })}>${esc(value)}</a>`;
 
-const metaItem = (label: string, body: string, className = 'meta-item') =>
+const metaItem = (label: string, body: string, className = 'meta-item stack') =>
   `<div class="${className}"><span class="meta-label">${label}</span>${body}</div>`;
 
 export const renderMetaBlock = (m: ProjectMetaData) =>
@@ -141,14 +141,14 @@ export const renderMetaBlock = (m: ProjectMetaData) =>
     metaItem('context', metaLink(m.projectContext)),
     metaItem('collaboration', metaLink(m.projectPartnerContext)),
     m.projectPartners?.length
-      ? metaItem('partners', `<div class="meta-partners">${each(m.projectPartners, (p) => metaLink(p))}</div>`)
+      ? metaItem('partners', `<div class="meta-partners stack">${each(m.projectPartners, (p) => metaLink(p))}</div>`)
       : '',
     m.client ? metaItem('client', metaLink(m.client)) : '',
     m.keywords?.length
       ? metaItem(
           'keywords',
-          `<div class="meta-keywords">${each(m.keywords, (k) => metaLink(String(k), 'meta-keyword'))}</div>`,
-          'meta-item meta-item--keywords'
+          `<div class="meta-keywords cluster">${each(m.keywords, (k) => metaLink(String(k), 'tag'))}</div>`,
+          'meta-item meta-item--keywords stack'
         )
       : ''
   ].join('')}</div></div>`;
@@ -156,4 +156,4 @@ export const renderMetaBlock = (m: ProjectMetaData) =>
 export const renderProject = (project: ProjectData) =>
   `<div class="project-layout">${renderImage(project.projectImage, { isMainImage: true })}${renderMetaBlock(
     project.metaData
-  )}<div class="project-content fade-in">${each(project.projectContent, renderContent)}</div></div>`;
+  )}<div class="project-content stack fade-in">${each(project.projectContent, renderContent)}</div></div>`;

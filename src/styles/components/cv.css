@@ -2,12 +2,14 @@
    components/cv/style.ts. .cv-content is also the column of the motivation letter page */
 @layer components {
   .cv-content {
-    display: flex;
-    flex-direction: column;
     position: relative;
     max-width: min(100vw, 690px);
     margin: var(--space-5) auto;
     padding: 20px;
+  }
+
+  .cv-download {
+    display: block;
   }
 
   .cv-download-link {
@@ -16,7 +18,6 @@
     padding: 10px 0;
     font-size: var(--fs-sm);
     color: var(--link-blue);
-    cursor: pointer;
     transition: opacity var(--t-slow);
   }
 
@@ -46,7 +47,6 @@
   }
 
   .cv-header-title {
-    flex-direction: column;
     width: calc((100% - 20px) * 0.6);
   }
 
@@ -72,8 +72,6 @@
 
   /* text */
   .cv-block {
-    display: flex;
-    flex-direction: column;
     width: 100%;
   }
 

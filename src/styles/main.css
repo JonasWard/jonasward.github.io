@@ -1,6 +1,6 @@
 /* the stylesheet of every page; a page adds its own file from pages/ (which repeats this layer order, because astro
    puts a page's css before the layout's) */
-@layer tokens, base, layout, components, pages, utilities;
+@layer tokens, base, primitives, layout, components, pages, utilities;
 
 /* variable woff2, split per unicode subset (unlayered, only @font-face rules) */
 @import '@fontsource-variable/montserrat/index.css';
@@ -8,9 +8,9 @@
 
 @import './tokens.css';
 @import './base.css';
+@import './primitives.css';
 @import './layout.css';
 @import './components/card.css';
-@import './components/chip.css';
 @import './components/filter-bar.css';
 @import './components/meta-block.css';
 @import './components/project-content.css';

@@ -53,7 +53,7 @@ const update = () => {
 
   bar.querySelectorAll('.kf-chip').forEach((chip) => chip.remove());
   for (const kw of keywordFilters)
-    inputWrap.before(button('kf-chip', `${escapeHtml(kw)} <span>×</span>`, () => toggleKeyword(kw)));
+    inputWrap.before(button('tag tag--solid kf-chip', `${escapeHtml(kw)} <span>×</span>`, () => toggleKeyword(kw)));
   input.placeholder = keywordFilters.length === 0 ? 'filter by keyword…' : '+';
   renderSuggestions();
 

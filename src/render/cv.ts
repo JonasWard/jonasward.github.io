@@ -5,8 +5,8 @@ import { attrs, cls, esc } from './html';
 
 // the react-pdf style objects of components/cv/style.ts as classes of src/styles/components/cv.css
 const C = {
-  block: 'cv-block',
-  blockEnd: 'cv-block cv-text-end',
+  block: 'cv-block stack',
+  blockEnd: 'cv-block stack cv-text-end',
   row: 'cv-row',
   primary: 'cv-primary',
   secondary: 'cv-secondary',
@@ -138,7 +138,7 @@ export const renderCV = (
     assets.printer
   }" alt=""><span>Download</span></div></a><div><div id="header"><div id="left" class="cv-header"><div class="cv-header-photo"><img class="cv-profile" alt="red-dot" src="${
     assets.profileImage
-  }"></div><div class="cv-header-title"><img class="cv-logo" alt="red-dot" src="${assets.logo}"><div>${text(
+  }"></div><div class="cv-header-title stack"><img class="cv-logo" alt="red-dot" src="${assets.logo}"><div>${text(
     customTitle ?? data.tagline[0],
     C.taglineTitle
   )}${data.tagline

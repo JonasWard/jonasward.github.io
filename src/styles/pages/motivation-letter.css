@@ -1,4 +1,4 @@
-@layer tokens, base, layout, components, pages, utilities;
+@layer tokens, base, primitives, layout, components, pages, utilities;
 
 /* dev only: the motivation letter generator, an input drawer and the letter preview (styled after
    MotivationLetterPDF.tsx); printing the page gives the pdf */
@@ -28,8 +28,6 @@
     top: 0;
     left: -458px;
     z-index: var(--z-overlay);
-    display: flex;
-    flex-direction: column;
     gap: 6px;
     width: 438px;
     height: 100%;
@@ -45,8 +43,6 @@
   }
 
   .drawer label {
-    display: flex;
-    flex-direction: column;
     gap: var(--space-1);
   }
 
@@ -124,8 +120,6 @@
   }
 
   .ml-body {
-    display: flex;
-    flex-direction: column;
     gap: 10px;
   }
 

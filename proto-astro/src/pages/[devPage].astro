@@ -27,10 +27,10 @@ const fields = [
       <input data-ml-key-name placeholder="Title" />
       <button data-ml-print>download</button>
     </div>
-    <form id="myDrawer" class="drawer" data-ml-form>
+    <form id="myDrawer" class="drawer stack" data-ml-form>
       {
         fields.map(([name, label]) => (
-          <label>
+          <label class="stack">
             {label}
             {name === 'content' ? <textarea name={name} /> : <input type="text" name={name} />}
           </label>
@@ -52,7 +52,7 @@ const fields = [
       </div>
       <div class="ml-title" data-ml="title"></div>
       <div class="ml-rule"></div>
-      <div class="ml-body">
+      <div class="ml-body stack">
         <div class="ml-intro" data-ml="intro"></div>
         <div data-ml="people"></div>
         <div data-ml="content"></div>

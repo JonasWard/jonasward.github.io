@@ -1,4 +1,4 @@
-@layer tokens, base, layout, components, pages, utilities;
+@layer tokens, base, primitives, layout, components, pages, utilities;
 
 /* 404: the shader canvas behind a faded, inverted link back to the projects */
 @layer pages {
@@ -19,8 +19,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 20px;
     max-width: 80vw;
