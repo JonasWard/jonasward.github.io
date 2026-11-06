@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import logo from 'src/assets/icons/jonasward_logo_ww.svg';
 import { useNavigate } from 'react-router-dom';
 import './missing.css';
-import vsSource from './shaders/missingVertexShader.glsl?raw';
-import fsSource from './shaders/missingFragmentShader.glsl?raw';
+import vsSource from 'src/scripts/missing/missingVertexShader.glsl?raw';
+import fsSource from 'src/scripts/missing/missingFragmentShader.glsl?raw';
 
 const loadShader = (gl: WebGLRenderingContext, type: GLenum, source: string) => {
   const shader = gl.createShader(type);

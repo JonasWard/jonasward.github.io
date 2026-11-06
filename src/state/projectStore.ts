@@ -2,20 +2,9 @@ import { create } from 'zustand';
 import { ProjectData } from '../types/projectContent/projectData';
 import { ProjectCategoryFilterType } from '../types/navigation/filterType';
 import { allProjects } from 'src/data/projects/allProjects';
-import { getProjectKeywords } from 'src/utils/projectconstructor';
+import { filterProjects } from 'src/utils/filterProjects';
 
-const applyFilters = (
-  projects: ProjectData[],
-  filter: ProjectCategoryFilterType,
-  keywordFilters: string[]
-): ProjectData[] => {
-  const byCategory = filter === 'All' ? projects : projects.filter((p) => p.metaData.projectType === filter);
-  if (keywordFilters.length === 0) return byCategory;
-  return byCategory.filter((p) => {
-    const kws = getProjectKeywords(p.metaData).map((k) => String(k).toLowerCase());
-    return keywordFilters.every((kw) => kws.includes(kw.toLowerCase()));
-  });
-};
+const applyFilters = filterProjects;
 
 export type ProjectStoreType = {
   projects: ProjectData[];

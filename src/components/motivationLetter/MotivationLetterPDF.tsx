@@ -1,11 +1,11 @@
 import { Page, Document, Image, Link } from '@react-pdf/renderer';
 import { MotivationLetterContent } from 'src/types/motivationLetter/content';
-import { CVContent } from '../cv/content/cvContent';
+import { CVContent } from 'src/data/cv/cvContent';
 import { DividingSpace } from '../cv/DividingSpace';
 import { PDFDivText } from '../cv/InfoRenderer';
 import { TitleRenderer } from '../cv/TitleRenderer';
 import logo from '../../assets/jonasward_logo_elong.png';
-import { getFilenameString } from './motivationLetterDefaultContent';
+import { getFilenameString } from 'src/data/motivation-letter/motivationLetterDefaultContent';
 import { REACT_PDF_STYLES } from '../cv/style';
 
 const months = [

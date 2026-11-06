@@ -1,6 +1,6 @@
 // the 404 background, components/landingMissing/Missing.tsx without react
-import vsSource from 'src/components/landingMissing/shaders/missingVertexShader.glsl?raw';
-import fsSource from 'src/components/landingMissing/shaders/missingFragmentShader.glsl?raw';
+import vsSource from 'src/scripts/missing/missingVertexShader.glsl?raw';
+import fsSource from 'src/scripts/missing/missingFragmentShader.glsl?raw';
 
 const loadShader = (gl: WebGL2RenderingContext, type: GLenum, source: string) => {
   const shader = gl.createShader(type);

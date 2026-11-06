@@ -7,7 +7,7 @@ import {
   MotivationLetterLocalStorage
 } from '../../types/motivationLetter/content';
 import { MotivationPDF } from './MotivationLetterPDF';
-import { getFilenameString, MotivationLetterDefaultLocalStorageContent } from './motivationLetterDefaultContent';
+import { getFilenameString, MotivationLetterDefaultLocalStorageContent } from 'src/data/motivation-letter/motivationLetterDefaultContent';
 
 export const MotivationLetterGenerator: React.FC = () => {
   const [activeKey, setActiveKey] = useState<string>(MotivationLetterKeys.defaultKey);

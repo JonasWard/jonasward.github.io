@@ -1,5 +1,5 @@
 // /projects: category (?c=) + keyword (?k=a,b) filter over the statically rendered cards.
-// matches applyFilters in src/state/projectStore.ts: same category, and every keyword (case-insensitive) on the card
+// matches filterProjects in src/utils/filterProjects.ts: same category, and every keyword (case-insensitive) on the card
 
 type Card = { el: HTMLElement; category: string; keywords: string[] };
 

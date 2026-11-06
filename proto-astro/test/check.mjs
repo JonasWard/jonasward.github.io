@@ -50,7 +50,7 @@ const SIGNATURES = [/react\.production/, /__SECRET_INTERNALS|__CLIENT_INTERNALS/
 const jsHits = jsFiles.flatMap((f) => SIGNATURES.filter((s) => s.test(readFileSync(f, 'utf8'))).map((s) => `${f}: ${s}`));
 report('1b', bannedDeps.length === 0 && jsHits.length === 0, `deps: [${deps.join(', ')}]; ${jsFiles.length} js files, framework signatures: ${jsHits.length ? jsHits.join('; ') : 'none'}`);
 
-// --- expected state from the real data and the real store ---
+// --- expected state from the real data and filterProjects ---
 const expected = JSON.parse(execFileSync('bun', ['test/expected.ts'], { cwd: proto, encoding: 'utf8' }));
 
 // --- static server for the react build (hash router, so a plain file server will do) ---
@@ -155,7 +155,7 @@ for (const c of expected.cases) {
   if (c.category !== 'All') q.set('c', c.category);
   await visit(`${P}/projects/?${q}`, async (page) => {
     const shown = await visibleCards(page);
-    if (!sameSet(shown, c.expected)) filterProblems.push(`${q}: shows ${shown.length}, applyFilters ${c.expected.length}`);
+    if (!sameSet(shown, c.expected)) filterProblems.push(`${q}: shows ${shown.length}, filterProjects ${c.expected.length}`);
   });
 }
 // toggling through the ui updates ?k= and a reload restores it

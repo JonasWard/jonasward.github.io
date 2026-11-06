@@ -1,4 +1,4 @@
-// run with bun: prints what the real data + the real zustand store (applyFilters) say the site should show.
+// run with bun: prints what the real data + filterProjects say the site should show.
 // images are stubbed, only the project data matters here
 import { plugin } from 'bun';
 
@@ -14,11 +14,8 @@ plugin({
 });
 
 const { allProjects } = await import('../../src/data/projects/allProjects');
-const { useProjectStore } = await import('../../src/state/projectStore');
+const { filterProjects } = await import('../../src/utils/filterProjects');
 const { getProjectKeywords } = await import('../../src/utils/projectconstructor');
-
-const store = useProjectStore.getState;
-const visible = () => store().activeProjects.map((p) => p.metaData.webstring);
 
 // the filter cases checked on /projects: 3 keywords (single and combined) + 1 category
 const counts = new Map<string, number>();
@@ -27,11 +24,8 @@ const byCount = [...counts.entries()].filter(([, n]) => n > 1 && n < allProjects
 const keywords = [counts.has('Timber') ? 'Timber' : byCount[1][0], byCount[0][0], byCount[Math.floor(byCount.length / 2)][0]];
 
 const cases: { category: string; keywords: string[]; expected: string[] }[] = [];
-const run = (category: string, kws: string[]) => {
-  store().setFilter(category as never);
-  store().setKeywordFilters(kws);
-  cases.push({ category, keywords: kws, expected: visible() });
-};
+const run = (category: string, kws: string[]) =>
+  cases.push({ category, keywords: kws, expected: filterProjects(allProjects, category as never, kws).map((p) => p.metaData.webstring) });
 for (const k of keywords) run('All', [k]);
 run('All', [keywords[0], keywords[1]]);
 run('Software', []);

@@ -3,8 +3,8 @@
 import Base from '../layouts/Base.astro';
 import 'src/styles/pages/motivation-letter.css';
 import logo from 'src/assets/jonasward_logo_elong.png?url';
-import { CVContent } from 'src/components/cv/content/cvContent';
-import { MotivationLetterDefaultContent } from 'src/components/motivationLetter/motivationLetterDefaultContent';
+import { CVContent } from 'src/data/cv/cvContent';
+import { MotivationLetterDefaultContent } from 'src/data/motivation-letter/motivationLetterDefaultContent';
 
 export const getStaticPaths = () => (import.meta.env.DEV ? [{ params: { devPage: 'create-motivation-letter' } }] : []);
 

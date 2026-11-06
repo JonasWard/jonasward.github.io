@@ -3,7 +3,7 @@ import './cv.css';
 import { CVDocument } from './CVDocument';
 import { CVHTML } from './CVDigital';
 import printer from 'src/assets/icons/printer.svg';
-import { getFilenameString } from '../motivationLetter/motivationLetterDefaultContent';
+import { getFilenameString } from 'src/data/motivation-letter/motivationLetterDefaultContent';
 import { CVData } from 'src/types/cv/cvType';
 
 export const CV: React.FC<{ data: CVData; route: string; qrCode: string }> = (props) => (

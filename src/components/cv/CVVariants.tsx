@@ -1,9 +1,9 @@
 import { CV } from './CV';
 import { ProjectRoutes } from '../../types/navigation/projectroutes';
-import { CVContent as CVContentCompact } from './content/cvContentCompact';
-import { CVContent as CVContentMax } from './content/cvContentMax';
-import { CVContent as CVContentProductDesigner } from './content/cvContentProductDesigner';
-import { CVContent as CVContentLivingLabHil } from './content/cvContentLivingLabHil';
+import { CVContent as CVContentCompact } from 'src/data/cv/cvContentCompact';
+import { CVContent as CVContentMax } from 'src/data/cv/cvContentMax';
+import { CVContent as CVContentProductDesigner } from 'src/data/cv/cvContentProductDesigner';
+import { CVContent as CVContentLivingLabHil } from 'src/data/cv/cvContentLivingLabHil';
 import cvLongerQrCode from 'src/assets/cv-longer.png';
 import cvMaxQrCode from 'src/assets/cv-max.png';
 import cvProductDesignerQrCode from 'src/assets/cv-product-designer.png';
