@@ -81,9 +81,10 @@
       }
     }
 
+    /* stacked: full width children, so an image's box is reserved before the file arrives */
     @media (max-width: 750px) {
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
     }
 
     > * {
