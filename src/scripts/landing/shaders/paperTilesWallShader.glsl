@@ -144,6 +144,11 @@ float tileSeed(vec2 id) {
   return hash12(id + 0.5);
 }
 
+// the slab's tone, one of the palette; the index is capped, a hash of exactly 1.0 would read past its end
+vec3 slabTone(float tone) {
+  return uPalette[min(int(tone * 32.0), 31)];
+}
+
 // how high the slab owned by lattice cell `id` sits, css px
 float slabHeight(vec2 id) {
   return hashSeeded(tileSeed(id), 14.0) * HEIGHT;
@@ -321,28 +326,31 @@ void main(void) {
   // its tone, one of the precomputed palette
   vec4 hs = hashSeeded4(seed, vec4(10.0, 11.0, 12.0, 6.0));
   float grain = paper((q - 0.5 * sizePx) / cssPx + hs.xy * 2000.0, (hs.z - 0.5) * 0.6);
-  vec3 tone = uPalette[int(hs.w * 32.0)];
+  vec3 tone = slabTone(hs.w);
 
   // the shape: its family and tilts are fixed by the seed; it sits either on the
   // slab's centre or on the lattice point the slab belongs to
   Look L = lookFrom(seed);
   vec2 fold = foldAt(q, patternCentre(T, sizePx, L), L);
-  vec3 col = tone * (0.8 + 0.32 * fold.x) * (1.0 + grain);
 
-  // the height: the slab's, plus the folds. Within a pixel of the nearest of the slab's
-  // four edges (left, bottom, right, top) the neighbouring slab shows through by its
-  // coverage, so the height eases across the edge and the shadow that marks it (see the
-  // shade pass) slides smoothly as the tiling moves instead of jumping a texel at a time.
-  // The colour steps: the tones of two slabs differ little, the fray already breaks the
-  // line, and the neighbour's paper and folds would cost a whole second surface
+  // the height and tone: the slab's, plus the folds. Within a pixel of the nearest of the
+  // slab's four edges (left, bottom, right, top) the neighbouring slab shows through by its
+  // coverage, so height and tone ease across the edge: the shadow that marks it (see the
+  // shade pass) and the colour step both slide smoothly as the tiling moves, instead of
+  // jumping a pixel at a time. The neighbour's paper and folds are left out, they would
+  // cost a whole second surface; its tone is one hash and a palette read
   vec4 d = vec4(q, sizePx - q);
   float edge = min(min(d.x, d.y), min(d.z, d.w));
   float slab = slabHeight(T.id);
   if (edge < AA) {
     vec4 nearest = step(d, vec4(edge));
     vec2 across = uv + (nearest.zw - nearest.xy) * (edge + 1.0) / uTileSize; // just beyond the edge
-    slab = mix(slabHeight(tileIdAt(across, t)), slab, smoothstep(-AA, AA, edge));
+    vec2 neighbour = tileIdAt(across, t);
+    float w = smoothstep(-AA, AA, edge);
+    slab = mix(slabHeight(neighbour), slab, w);
+    tone = mix(slabTone(hashSeeded(tileSeed(neighbour), 6.0)), tone, w);
   }
+  vec3 col = tone * (0.8 + 0.32 * fold.x) * (1.0 + grain);
   float h = slab + fold.y;
 
   // the outline of the logo, where the floor blends into the wall
