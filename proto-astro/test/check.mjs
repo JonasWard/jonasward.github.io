@@ -189,7 +189,13 @@ report('3', filterProblems.length === 0, `default + ${expected.cases.length} cas
 
 // --- criterion 4: hash redirects + 404 ---
 const redirectProblems = [];
-for (const [from, to] of [['/#/project/repurposed', '/project/repurposed/'], ['/#/cv', '/cv/'], ['/#/projects?k=solo', '/projects/?k=solo']]) {
+for (const [from, to] of [
+  ['/#/project/repurposed', '/project/repurposed/'],
+  ['/#/cv', '/cv/'],
+  ['/#/cv-max', '/cv-max/'],
+  ['/#/projects?k=solo', '/projects/?k=solo'],
+  ['/#/main', '/']
+]) {
   await visit(`${P}${from}`, async (page) => {
     await page.waitForURL((u) => u.pathname + u.search === to, { timeout: 5000 }).catch(() => {});
     const u = new URL(page.url());
@@ -200,26 +206,35 @@ await visit(`${P}/this/does/not/exist/`, async (page, response) => {
   const text = await page.textContent('body');
   if (response.status() !== 404 || !text.includes('wrong turn')) redirectProblems.push(`unknown path: ${response.status()}`);
 });
-report('4', redirectProblems.length === 0, redirectProblems.join('; ') || '/#/project/repurposed, /#/cv, /#/projects?k= redirect; unknown path -> 404 page');
+report('4', redirectProblems.length === 0, redirectProblems.join('; ') || '/#/project/repurposed, /#/cv, /#/cv-max, /#/projects?k=, /#/main redirect; unknown path -> 404 page');
 
-// --- criterion 5: cv pdf ---
-const pdfPath = join(buildDir, 'cv/cv.pdf');
-let pdfOk = false;
-let pdfDetail = 'build/cv/cv.pdf missing';
-if (existsSync(pdfPath)) {
+// --- criterion 5: a pdf per cv variant ---
+const CV_ROUTES = ['cv', 'cv-longer', 'cv-max', 'cv-product-designer', 'cv-living-lab-hil'];
+const pdfDetails = [];
+let pdfOk = true;
+for (const cv of CV_ROUTES) {
+  const pdfPath = join(buildDir, cv, `${cv}.pdf`);
+  if (!existsSync(pdfPath)) {
+    pdfOk = false;
+    pdfDetails.push(`${cv}: build/${cv}/${cv}.pdf missing`);
+    continue;
+  }
   const raw = readFileSync(pdfPath, 'latin1');
   const boxes = [...raw.matchAll(/\/MediaBox\s*\[\s*0 0 ([\d.]+) ([\d.]+)\s*\]/g)].map((m) => [Math.round(m[1]), Math.round(m[2])]);
   // A4 is 595.3 x 841.9pt, chromium rounds the page to whole css pixels
   const a4 = boxes.length > 0 && boxes.every(([w, h]) => Math.abs(w - 595) <= 1.5 && Math.abs(h - 842) <= 1.5);
   const text = execFileSync('pdftotext', [pdfPath, '-'], { encoding: 'utf8' });
   const hasText = text.includes('Jonas Ward') && text.includes('Van den Bulcke') && text.includes('jonas@jonasward.ch');
-  const href = await visit(`${P}/cv/`, (page) => page.getAttribute('.cv-download', 'href'));
+  const ownFooter = text.includes(`jonasward.ch/#/${cv}\n`) || text.trimEnd().endsWith(`jonasward.ch/#/${cv}`);
+  const href = await visit(`${P}/${cv}/`, (page) => page.getAttribute('.cv-download', 'href'));
   const pdfResponse = await fetch(new URL(href, P));
-  pdfOk = a4 && hasText && href === '/cv/cv.pdf' && pdfResponse.ok;
-  pdfDetail = `${boxes.length} page(s) ${a4 ? 'A4' : `not A4 ${JSON.stringify(boxes)}`}, name+email text ${hasText ? 'found' : 'missing'}, Download href ${href} -> ${pdfResponse.status}`;
+  const ok = a4 && hasText && ownFooter && href === `/${cv}/${cv}.pdf` && pdfResponse.ok;
+  pdfOk &&= ok;
+  pdfDetails.push(
+    `${cv}: ${boxes.length}p ${a4 ? 'A4' : `not A4 ${JSON.stringify(boxes)}`}${hasText ? '' : ', name/email missing'}${ownFooter ? '' : ', footer route wrong'}, href ${href} -> ${pdfResponse.status}`
+  );
 }
-report('5', pdfOk, pdfDetail);
-
+report('5', pdfOk, pdfDetails.join('; '));
 
 // --- criterion 7: data untouched ---
 const dataDiff = execSync('git status --porcelain -- src/data', { cwd: repo, encoding: 'utf8' }).trim();

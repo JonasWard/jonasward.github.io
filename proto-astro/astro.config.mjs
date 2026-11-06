@@ -14,6 +14,8 @@ export default defineConfig({
   outDir: './build',
   trailingSlash: 'ignore',
   build: { format: 'directory' },
+  // the react app rendered the landing at /main too, printed links may still point there
+  redirects: { '/main': '/' },
   devToolbar: { enabled: false },
   vite: {
     plugins: [
