@@ -186,14 +186,18 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   const paperTexture = gl.createTexture();
   gl.activeTexture(gl.TEXTURE2);
   gl.bindTexture(gl.TEXTURE_2D, paperTexture);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8, PAPER_TEXELS, PAPER_TEXELS, 0, gl.RED, gl.UNSIGNED_BYTE, null);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
   const paperFramebuffer = gl.createFramebuffer();
   gl.bindFramebuffer(gl.FRAMEBUFFER, paperFramebuffer);
+  // a single channel is all it needs; should a (mobile) driver not render into one, four
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8, PAPER_TEXELS, PAPER_TEXELS, 0, gl.RED, gl.UNSIGNED_BYTE, null);
   gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, paperTexture, 0);
+  if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) {
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, PAPER_TEXELS, PAPER_TEXELS, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+  }
   gl.viewport(0, 0, PAPER_TEXELS, PAPER_TEXELS);
   gl.useProgram(paperProgram);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
