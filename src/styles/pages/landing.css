@@ -3,6 +3,8 @@
 /* the landing fills the layout viewport, which follows a collapsing mobile toolbar */
 @layer pages {
   .landing-page {
+    /* a link, so block it explicitly: in the iOS layout below it is in flow, and an inline box ignores its height */
+    display: block;
     position: fixed;
     inset: 0;
     overflow: hidden;
