@@ -1,0 +1,54 @@
+@layer tokens, base, primitives, layout, components, pages, utilities;
+
+/* the about page: round portrait next to a few lines of text, stacked on phones */
+@layer pages {
+  .about-page {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px var(--space-5) 60px;
+
+    @media (max-width: 570px) {
+      flex-direction: column;
+      gap: 28px;
+      padding: 60px var(--space-3) var(--space-5);
+    }
+  }
+
+  .about-photo {
+    flex-shrink: 0;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: var(--hairline) solid var(--black-a20);
+    object-fit: cover;
+
+    @media (max-width: 570px) {
+      width: 180px;
+      height: 180px;
+    }
+  }
+
+  .about-content {
+    gap: var(--space-3);
+
+    h1 {
+      font-size: var(--fs-2xl);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+
+      @media (max-width: 570px) {
+        font-size: var(--fs-xl);
+        text-align: center;
+      }
+    }
+
+    p {
+      line-height: 1.65;
+      font-weight: 400;
+      color: var(--grey-800);
+    }
+  }
+}

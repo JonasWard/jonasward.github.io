@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import 'src/styles/pages/about.css';
+import profileImage from 'src/assets/pictures/jonas-icon.jpg?url';
+---
+
+<Base title="About | Jonas Ward">
+  <main class="about-page">
+    <img class="about-photo" src={profileImage} width="280" height="280" alt="Jonas Ward" />
+    <div class="about-content stack">
+      <h1>Hi, I am Jonas.</h1>
+      <p>10+ years of creative problem solving in AEC.</p>
+      <p>5 + years of creative software development.</p>
+      <p>Background in Architecture, Urban Design, and Digital Fabrication.</p>
+      <p>
+        Trying to apply my flair for aesthetics and curiosity for technical devolepments into the realm of Ecological and
+        Sustainable Design.
+      </p>
+      <p>
+        To understand the now, one has to look back. Many of my projects therefore also have a cultural heritage or
+        ecological component.
+      </p>
+    </div>
+  </main>
+</Base>
