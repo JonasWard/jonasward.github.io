@@ -55,8 +55,10 @@ const FRAME_TOLERANCE_MS = 4; // so a 60 Hz display settles on every other frame
 // when drawn frames still come in slower than this, the drawing buffer is scaled down a step
 const SLOW_FRAME_MS = 1.5 * TARGET_FRAME_MS;
 const PIXEL_RATIO_STEPS = [1.5, 1.25, 1, 0.75]; // device px per css px, the cap only ever steps down
-const PACE_WARMUP_DRAWS = 10; // frames ignored after a start or a step, while everything settles
-const PACE_WINDOW = 12; // frames judged together
+// phones start at one device px per css px: about half the pixels of 1.5, hardly visible at their density
+const PHONE_PIXEL_RATIO_STEP = 2;
+const PACE_WARMUP_DRAWS = 4; // frames ignored after a start or a step, while everything settles
+const PACE_WINDOW = 6; // frames judged together, so a slow device settles within a second
 const PACE_GAP_MS = 500; // longer gaps are the tab being hidden, not the gpu being slow
 
 const compileShader = (gl: WebGL2RenderingContext, type: GLenum, source: string) => {
@@ -225,7 +227,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, onFail: (reason: stri
   let cssWidth = -1; // so the first fit always sizes the buffers, even when the canvas has no box yet
   let cssHeight = -1;
   let pixelRatio = 1;
-  let pixelRatioStep = 0;
+  let pixelRatioStep = window.matchMedia?.('(pointer: coarse)').matches ? PHONE_PIXEL_RATIO_STEP : 0;
   let tileSize = TILE_CSS_PX_MIN;
   let margin = 0; // how far the wall texture runs on past the canvas on every side, device px
   let wallWidth = 0;
