@@ -22,12 +22,8 @@
     align-items: center;
   }
 
-  .header-logo {
-    display: flex;
-
-    img {
-      width: var(--logo-w);
-    }
+  .header-logo img {
+    width: var(--logo-w);
   }
 
   .header-right {

@@ -5,8 +5,8 @@ import { attrs, cls, esc } from './html';
 
 // the react-pdf style objects of components/cv/style.ts as classes of src/styles/components/cv.css
 const C = {
-  block: 'cv-block stack',
-  blockEnd: 'cv-block stack cv-text-end',
+  block: 'stack',
+  blockEnd: 'stack cv-text-end',
   row: 'cv-row',
   primary: 'cv-primary',
   secondary: 'cv-secondary',
