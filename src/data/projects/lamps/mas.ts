@@ -9,7 +9,7 @@ import { createTitleImage, createImage, createTextImage } from 'src/utils/projec
 
 import lampsMASLogo from './assets/MAS Logo.png?responsive';
 import lampsMAS1 from './assets/mas800.jpg?responsive';
-import lampsMAS2 from './assets/mas2.jpg?responsive';
+import lampsMAS2 from './assets/mas2.jpg?responsive&hero';
 
 const id = '2018-03';
 

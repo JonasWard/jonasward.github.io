@@ -16,3 +16,14 @@ declare module '*?responsive&lossless&card' {
   const picture: import('vite-imagetools').Picture;
   export default picture;
 }
+
+// a project's title image, the only kind shown wide enough to need the 2400px variant
+declare module '*?responsive&hero' {
+  const picture: import('vite-imagetools').Picture;
+  export default picture;
+}
+
+declare module '*?responsive&lossless&hero' {
+  const picture: import('vite-imagetools').Picture;
+  export default picture;
+}

@@ -19,7 +19,7 @@ import futuristExpo58 from './assets/frituur-futurist/futuristExpo58.png?respons
 import futuristLakenstraat from './assets/frituur-futurist/futuristLakenstraat.png?responsive';
 import futuristLogo from './assets/frituur-futurist/futuristLogo.png?responsive';
 import futuristReferences from './assets/frituur-futurist/futuristReferences.jpg?responsive';
-import futuristTitle from './assets/frituur-futurist/futuristTitle.png?responsive';
+import futuristTitle from './assets/frituur-futurist/futuristTitle.png?responsive&hero';
 import frituurReferences from './assets/frituur-futurist/frituurReferences.jpg?responsive';
 
 const id = '2017-02';

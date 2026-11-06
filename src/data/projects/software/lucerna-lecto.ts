@@ -8,7 +8,7 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import example from './assets/lucerna-lecto/example.webp?responsive';
+import example from './assets/lucerna-lecto/example.webp?responsive&hero';
 import mandelbrot from './assets/lucerna-lecto/mandelbrot.webp?responsive';
 import patternA from './assets/lucerna-lecto/pattern-a.webp?responsive';
 import patternB from './assets/lucerna-lecto/pattern-b.webp?responsive';

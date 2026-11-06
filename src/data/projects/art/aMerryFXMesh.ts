@@ -13,7 +13,7 @@ import julie from './asssets/a-merry-fx-mesh/julie.webp?responsive';
 import marie from './asssets/a-merry-fx-mesh/marie.webp?responsive';
 import nik from './asssets/a-merry-fx-mesh/nik.webp?responsive';
 import oma from './asssets/a-merry-fx-mesh/oma.webp?responsive';
-import pol from './asssets/a-merry-fx-mesh/pol.webp?responsive';
+import pol from './asssets/a-merry-fx-mesh/pol.webp?responsive&hero';
 import richa from './asssets/a-merry-fx-mesh/richa.webp?responsive';
 import roxas from './asssets/a-merry-fx-mesh/roxas.webp?responsive';
 import sylvain from './asssets/a-merry-fx-mesh/sylvain.webp?responsive';

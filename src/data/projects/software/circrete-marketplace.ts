@@ -10,7 +10,7 @@ import { ProjectContentType } from '../../../types/projectContent/projectContent
 import tinderSliding from './assets/circrete-marketplace/tinder-sliding.webp?responsive';
 import favorites from './assets/circrete-marketplace/favorites.webp?responsive';
 import multiLingual from './assets/circrete-marketplace/multi-lingual.webp?responsive';
-import overviewElements from './assets/circrete-marketplace/overview-elements.webp?responsive';
+import overviewElements from './assets/circrete-marketplace/overview-elements.webp?responsive&hero';
 import swiping from './assets/circrete-marketplace/swiping.webp?responsive';
 
 const id = '2025-06';

@@ -23,7 +23,7 @@ import solve from './assets/vibed-reused-tiled/solve.webp?responsive';
 import view2d from './assets/vibed-reused-tiled/view-2d.webp?responsive';
 import tileStockSampler from './assets/vibed-reused-tiled/tile-stock-sampler.webp?responsive';
 import tilePatterns from './assets/vibed-reused-tiled/tile-patterns.webp?responsive';
-import tilingBlockAndCourse from './assets/vibed-reused-tiled/tiling-block-and-course.webp?responsive';
+import tilingBlockAndCourse from './assets/vibed-reused-tiled/tiling-block-and-course.webp?responsive&hero';
 import tilingBasketweave from './assets/vibed-reused-tiled/tiling-basketweave.webp?responsive';
 import tilingStaircase from './assets/vibed-reused-tiled/tiling-staircase.webp?responsive';
 import tilingChecker from './assets/vibed-reused-tiled/tiling-checker.webp?responsive';

@@ -40,7 +40,7 @@ import onlySource16 from './assets/digitaleAugen/onlySource-16.jpg?responsive';
 import onlySource17 from './assets/digitaleAugen/onlySource-17.jpg?responsive';
 import rebuildAnalysis1 from './assets/digitaleAugen/rebuildAnalysis-1.jpg?responsive';
 import rebuildAnalysis2 from './assets/digitaleAugen/rebuildAnalysis-2.jpg?responsive';
-import shillerAnalysis1 from './assets/digitaleAugen/shillerAnalysis-1.jpg?responsive';
+import shillerAnalysis1 from './assets/digitaleAugen/shillerAnalysis-1.jpg?responsive&hero';
 import shillerAnalysis2 from './assets/digitaleAugen/shillerAnalysis-2.jpg?responsive';
 import shillerAnalysis3 from './assets/digitaleAugen/shillerAnalysis-3.jpg?responsive';
 import shillerAnalysis4 from './assets/digitaleAugen/shillerAnalysis-4.jpg?responsive';

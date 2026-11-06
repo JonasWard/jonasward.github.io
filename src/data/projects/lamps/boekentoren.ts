@@ -11,7 +11,7 @@ const id = '2018-01';
 
 import lampsBoekentorenLogo from './assets/boekentorenLogo.png?responsive';
 import lampsBoekentorenInSitu from './assets/boekentorenInSitu.jpg?responsive';
-import lampsBoekentoren from './assets/boekentorenSolo.jpg?responsive';
+import lampsBoekentoren from './assets/boekentorenSolo.jpg?responsive&hero';
 import lampsBoekentorenvBoekentoren from './assets/boekentorenVsBoekentoren.jpg?responsive';
 
 const metaData: ProjectMetaData = {

@@ -24,7 +24,7 @@ import chocoladeChaudD2P_13 from './asssets/chocoladeChaudD2P_13.jpg?responsive'
 import chocoladeChaudD2P_14 from './asssets/chocoladeChaudD2P_14.jpg?responsive';
 import chocoladeChaudD2P_15 from './asssets/chocoladeChaudD2P_15.jpg?responsive';
 import chocoladeChaudD2P_16 from './asssets/chocoladeChaudD2P_16.jpg?responsive';
-import chocoladeChaudD2P_SwatchBar from './asssets/chocoladeChaudD2P_SwatchBar.jpg?responsive';
+import chocoladeChaudD2P_SwatchBar from './asssets/chocoladeChaudD2P_SwatchBar.jpg?responsive&hero';
 
 const id = '2023-07';
 

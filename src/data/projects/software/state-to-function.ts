@@ -10,7 +10,7 @@ import { Technologies } from 'src/types/keywords/technologies';
 
 import functions from './assets/state-to-function/functions.png?responsive';
 import help from './assets/state-to-function/help.png?responsive';
-import pdf from './assets/state-to-function/pdf.png?responsive';
+import pdf from './assets/state-to-function/pdf.png?responsive&hero';
 import qrCode from './assets/state-to-function/qr-code.png?responsive';
 import results from './assets/state-to-function/results.png?responsive';
 

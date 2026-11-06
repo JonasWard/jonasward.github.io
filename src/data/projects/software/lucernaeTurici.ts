@@ -8,7 +8,7 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import projectImage from './assets/lucernae-turici/lucernae-turici.jpg?responsive';
+import projectImage from './assets/lucernae-turici/lucernae-turici.jpg?responsive&hero';
 import lamp1 from './assets/lucernae-turici/lamp_1.jpg?responsive';
 import lamp2 from './assets/lucernae-turici/lamp_2.jpg?responsive';
 import lamp3 from './assets/lucernae-turici/lamp_3.jpg?responsive';

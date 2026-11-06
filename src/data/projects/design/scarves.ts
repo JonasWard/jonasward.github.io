@@ -1,7 +1,7 @@
 import { ProjectPartnerContext } from '../../../types/keywords/projectPartnerContext';
 import { ProjectContext } from '../../../types/keywords/projectContext';
 import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
-import projectImage from './assets/scarves/20221214_jvb_flow_7.jpeg?responsive';
+import projectImage from './assets/scarves/20221214_jvb_flow_7.jpeg?responsive&hero';
 import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';

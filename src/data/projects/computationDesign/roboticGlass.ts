@@ -12,7 +12,7 @@ import glass1 from './assets/glass/1EuCe1YuqldFb7L0ayRgc5w0mOAaxKpOeEulgTmejlA.j
 import glass2 from './assets/glass/1Kg9arVLh7FENXsLSz3ppizm-gopLKY4ROqLiVFLNaQ.jpg?responsive';
 import glass3 from './assets/glass/1MFfn8HkatqSRC5ZX2Xvw7huf810VjWDneartJyS3ig.jpg?responsive';
 import glass4 from './assets/glass/1QrIbe2DOwxqtXsPkcEAQ2IzGc9AR1kUri3dKs37atA.png?responsive';
-import glass5 from './assets/glass/1sHo5vQkOld6rX8hOAttLg5JZU0UP8Qps19peP4Q35Q.jpg?responsive';
+import glass5 from './assets/glass/1sHo5vQkOld6rX8hOAttLg5JZU0UP8Qps19peP4Q35Q.jpg?responsive&hero';
 import glass6 from './assets/glass/1SywT-hRIXc9OpuTwQOcR7oHQOByyQDE499wum_MWjg-1.jpg?responsive';
 import glass7 from './assets/glass/1SywT-hRIXc9OpuTwQOcR7oHQOByyQDE499wum_MWjg.jpg?responsive';
 import glass8 from './assets/glass/2 color cube22.jpg?responsive';

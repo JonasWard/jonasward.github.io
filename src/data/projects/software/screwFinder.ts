@@ -12,7 +12,7 @@ import { Technologies } from 'src/types/keywords/technologies';
 import screw from './assets/screw-finder/screw.webp?responsive&lossless';
 import screwCard from './assets/screw-finder/screw.webp?responsive&lossless&card';
 
-import home from './assets/screw-finder/home.webp?responsive';
+import home from './assets/screw-finder/home.webp?responsive&hero';
 import table from './assets/screw-finder/table.webp?responsive';
 import tableSearch from './assets/screw-finder/table-search.webp?responsive';
 import cards from './assets/screw-finder/cards.webp?responsive';

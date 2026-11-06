@@ -9,7 +9,7 @@ import { Keywords } from '../../../types/keywords/keywords';
 
 import lampsBoekentorenLogo from './assets/lamps/boekentorenLogo.png?responsive';
 import lampsBoekentorenInSitu from './assets/lamps/boekentorenInSitu.jpg?responsive';
-import lampsBoekentoren from './assets/lamps/boekentorenSolo.jpg?responsive';
+import lampsBoekentoren from './assets/lamps/boekentorenSolo.jpg?responsive&hero';
 import lampsBoekentorenvBoekentoren from './assets/lamps/boekentorenVsBoekentoren.jpg?responsive';
 import lampsFrituurLogo from './assets/lamps/Futurist Logo.png?responsive';
 import lampsFrituurMultiple from './assets/lamps/frituurMultiple.jpg?responsive';

@@ -9,7 +9,7 @@ import { createTitleImage, createImage, createTextImage } from 'src/utils/projec
 
 import lampsFrituurLogo from './assets/Futurist Logo.png?responsive';
 import lampsFrituurMultiple from './assets/frituurMultiple.jpg?responsive';
-import lampsFrituurSingle from './assets/frituurSingle.jpg?responsive';
+import lampsFrituurSingle from './assets/frituurSingle.jpg?responsive&hero';
 
 const id = '2018-05';
 

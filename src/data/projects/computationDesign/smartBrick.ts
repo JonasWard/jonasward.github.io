@@ -7,7 +7,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import projectImage from './assets/smart-bricks/topViewTiles.jpg?responsive';
+import projectImage from './assets/smart-bricks/topViewTiles.jpg?responsive&hero';
 import image1 from './assets/smart-bricks/concept.0.B.StackedTiles.2.jpg?responsive';
 import image2 from './assets/smart-bricks/concept.0.G.Tesseleation-Interlocking.jpg?responsive';
 import image3 from './assets/smart-bricks/DetailStack.jpg?responsive';

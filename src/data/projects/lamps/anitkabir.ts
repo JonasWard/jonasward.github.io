@@ -13,7 +13,7 @@ import lampsAntikabirLogo from './assets/antikabirLogo.png?responsive';
 import lampsAntikabir1 from './assets/Voor.jpg?responsive';
 import lampsAntikabir2 from './assets/Zij.jpg?responsive';
 import lampsAntikabir3 from './assets/Perspectief 2.jpg?responsive';
-import lampsAntikabir4 from './assets/Perspectief.jpg?responsive';
+import lampsAntikabir4 from './assets/Perspectief.jpg?responsive&hero';
 
 const metaData: ProjectMetaData = {
   id,

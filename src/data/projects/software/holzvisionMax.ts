@@ -10,7 +10,7 @@ import { Technologies } from 'src/types/keywords/technologies';
 
 import holzvisionMaxFront from './assets/holzvisionMax/holzvisionMax_front.png?responsive';
 import holzvisionMax_opening from './assets/holzvisionMax/holzvisionMax_opening.png?responsive';
-import holzvisionMax_byType from './assets/holzvisionMax/holzvisionMax_byType.png?responsive';
+import holzvisionMax_byType from './assets/holzvisionMax/holzvisionMax_byType.png?responsive&hero';
 import holzvisionMax_filters from './assets/holzvisionMax/holzvisionMax_filters.png?responsive';
 import holzvisionMax_gantt from './assets/holzvisionMax/holzvisionMax_gantt.png?responsive';
 import holzvisionMax_graph from './assets/holzvisionMax/holzvisionMax_graph.png?responsive';

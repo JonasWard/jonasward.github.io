@@ -7,7 +7,7 @@ import { ResponsivePicture } from '../../../types/projectContent/projectImage';
 import { createImage, createText, createTitleImage } from '../../../utils/projectconstructor';
 import { Keywords } from '../../../types/keywords/keywords';
 
-import projectImage from './assets/scarves2023/picture_4.jpg?responsive';
+import projectImage from './assets/scarves2023/picture_4.jpg?responsive&hero';
 import patternA from './assets/scarves2023/rawScarves.jpg?responsive';
 import patternB from './assets/scarves2023/rawScarvesBlue.jpg?responsive';
 import picture1 from './assets/scarves2023/picture_1.jpg?responsive';

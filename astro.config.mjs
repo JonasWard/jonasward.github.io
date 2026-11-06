@@ -7,8 +7,11 @@ import { imagetools } from 'vite-imagetools';
 // the data, types and renderers import each other as `src/...`
 const src = fileURLToPath(new URL('./src', import.meta.url));
 
-// `?responsive` -> webp Picture with intrinsic size, `&card` only in the widths of an overview card
-const RESPONSIVE_WIDTHS = [400, 800, 1200, 1600, 2400];
+// `?responsive` -> webp Picture with intrinsic size, in the widths the pages ask for: content images are at most 800px
+// wide (1600 on a 2x screen), only a project's title image (`&hero`, up to 1200px) needs 2400; `&card` only gets the
+// widths of an overview card
+const RESPONSIVE_WIDTHS = [400, 800, 1200, 1600];
+const HERO_WIDTHS = [...RESPONSIVE_WIDTHS, 2400];
 const CARD_WIDTHS = [200, 400];
 
 // vite-imagetools 12 re-encodes a cached image with sharp's defaults when the dev server serves it, so `&lossless`
@@ -45,7 +48,11 @@ export default defineConfig({
         defaultDirectives: async (url, metadata) => {
           if (!url.searchParams.has('responsive')) return new URLSearchParams();
           const meta = await metadata();
-          const targets = url.searchParams.has('card') ? CARD_WIDTHS : RESPONSIVE_WIDTHS;
+          const targets = url.searchParams.has('card')
+            ? CARD_WIDTHS
+            : url.searchParams.has('hero')
+              ? HERO_WIDTHS
+              : RESPONSIVE_WIDTHS;
           const width = meta.autoOrient?.width ?? meta.width ?? targets[0];
           const widths = targets.filter((w) => w < width);
           return new URLSearchParams({
