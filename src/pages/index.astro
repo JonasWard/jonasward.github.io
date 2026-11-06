@@ -1,16 +1,64 @@
 ---
 import Base from '../layouts/Base.astro';
 import 'src/styles/pages/landing.css';
+import logo from 'src/assets/icons/jonasward_logo_ww.svg?url';
 ---
 
 <Base header={false}>
   <a class="landing-page" href="/projects/" aria-label="jonas ward, to the projects">
     <canvas class="landing-canvas" data-landing-canvas></canvas>
+    <!-- shown instead of the canvas when the shaders can't run on this device -->
+    <img class="landing-fallback" src={logo} alt="" width="185" height="48" />
   </a>
 </Base>
 
 <script>
   import { startPaperTiles } from 'src/scripts/landing/paperTiles';
+
+  const page = document.querySelector<HTMLElement>('.landing-page')!;
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-landing-canvas]')!;
+
+  // `?debug` lists what the landing ran into, for devices where it falls back
+  const debug = new URLSearchParams(location.search).has('debug');
+  const report: string[] = [];
+  const showReport = () => {
+    if (!debug) return;
+    let box = document.querySelector<HTMLElement>('.landing-debug');
+    if (!box) {
+      box = document.createElement('pre');
+      box.className = 'landing-debug';
+      document.body.append(box);
+    }
+    box.textContent = report.join('\n');
+  };
+  if (debug) {
+    const gl = document.createElement('canvas').getContext('webgl2');
+    const info = gl?.getExtension('WEBGL_debug_renderer_info');
+    report.push(navigator.userAgent, `webgl2: ${gl ? 'yes' : 'no'}`);
+    if (gl && info) report.push(`gpu: ${gl.getParameter(info.UNMASKED_RENDERER_WEBGL)}`);
+    const logError = console.error.bind(console);
+    console.error = (...args: unknown[]) => {
+      report.push(args.map(String).join(' '));
+      showReport();
+      logError(...args);
+    };
+    showReport();
+  }
+
+  let stop: (() => void) | undefined;
+  let failed = false;
+  const fallBack = (reason: string) => {
+    failed = true;
+    stop?.();
+    page.classList.add('landing-page--fallback');
+    document.body.style.background = 'white';
+    report.push(`fallback: ${reason}`);
+    showReport();
+  };
+
+  stop = startPaperTiles(canvas, fallBack);
+  if (failed) stop();
+  if (debug && !failed) setTimeout(() => !failed && (report.push('shader running'), showReport()), 2000);
 
   // where the landing is taller than the viewport (iOS, see landing.css) the page is parked halfway its scroll
   // range, so the overscan ends up under the browser's bars
@@ -18,8 +66,6 @@ import 'src/styles/pages/landing.css';
     const range = document.documentElement.scrollHeight - innerHeight;
     if (range > 0) scrollTo(0, range / 2);
   };
-
-  startPaperTiles(document.querySelector<HTMLCanvasElement>('[data-landing-canvas]')!);
   document.documentElement.classList.add('landing-scroll-lock');
   parkScroll();
   addEventListener('resize', parkScroll);

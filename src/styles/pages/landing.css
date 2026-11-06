@@ -3,6 +3,8 @@
 /* the landing fills the layout viewport, which follows a collapsing mobile toolbar */
 @layer pages {
   .landing-page {
+    /* a link, so block it explicitly: in the iOS layout below it is in flow, and an inline box ignores its height */
+    display: block;
     position: fixed;
     inset: 0;
     overflow: hidden;
@@ -23,6 +25,43 @@
     inset: 0;
     width: 100%;
     height: 100%;
+  }
+
+  /* black and white logo for devices where the shaders can't run, centred in the visible viewport */
+  .landing-fallback {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(80%, 600px);
+    height: auto;
+    transform: translate(-50%, -50%);
+  }
+
+  .landing-page--fallback {
+    background: white;
+
+    .landing-canvas {
+      display: none;
+    }
+
+    .landing-fallback {
+      display: block;
+    }
+  }
+
+  .landing-debug {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: var(--z-overlay);
+    max-height: 50vh;
+    overflow: auto;
+    margin: 0;
+    padding: var(--space-2);
+    font: var(--fs-xs) / 1.4 monospace;
+    white-space: pre-wrap;
+    color: white;
+    background: var(--black-a80);
   }
 
   /* keeps the parked page from being scrolled away */

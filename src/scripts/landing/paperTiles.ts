@@ -98,8 +98,19 @@ const uniformLocations = <T extends string>(gl: WebGL2RenderingContext, program:
     WebGLUniformLocation | null
   >;
 
-/** Starts rendering the paper tiles into the canvas. Returns a function that stops it and frees the GL resources. */
-export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
+/**
+ * Starts rendering the paper tiles into the canvas. Returns a function that stops it and frees the GL resources.
+ * `onFail` is called once, with the reason, when the wall can't be drawn: no WebGL2, a shader that doesn't compile,
+ * a render target the GPU refuses, a lost context, or a first frame that comes out black.
+ */
+export const startPaperTiles = (canvas: HTMLCanvasElement, onFail: (reason: string) => void = () => undefined): (() => void) => {
+  let failed = false;
+  const fail = (reason: string) => {
+    if (failed) return;
+    failed = true;
+    onFail(reason);
+  };
+
   const palette = buildPalette();
   document.body.style.background = `rgb(${palette[0] * 255}, ${palette[1] * 255}, ${palette[2] * 255})`;
 
@@ -112,6 +123,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   });
   if (!gl) {
     console.error('WebGL2 not supported');
+    fail('WebGL2 not supported');
     return () => undefined;
   }
 
@@ -122,6 +134,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   const paperProgram = createProgram(gl, paperSource);
   if (!(wallProgram && shadeProgram && paperProgram)) {
     console.error('Could not initialize shaders');
+    fail('a shader did not compile or link');
     return () => undefined;
   }
   const wall = uniformLocations(gl, wallProgram, [
@@ -197,6 +210,8 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, paperTexture, 0);
   if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, PAPER_TEXELS, PAPER_TEXELS, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+    if (status !== gl.FRAMEBUFFER_COMPLETE) fail(`the paper framebuffer is incomplete: ${status}`);
   }
   gl.viewport(0, 0, PAPER_TEXELS, PAPER_TEXELS);
   gl.useProgram(paperProgram);
@@ -247,7 +262,10 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
       gl.bindFramebuffer(gl.FRAMEBUFFER, wallFramebuffer);
       const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-      if (status !== gl.FRAMEBUFFER_COMPLETE) console.error('The wall framebuffer is incomplete:', status);
+      if (status !== gl.FRAMEBUFFER_COMPLETE) {
+        console.error('The wall framebuffer is incomplete:', status);
+        fail(`the wall framebuffer is incomplete: ${status}`);
+      }
     }
   };
 
@@ -332,20 +350,33 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     }
   };
 
+  // the wall is never black (its darkest tone is the shadowed floor), so a black first frame means the GPU
+  // ran the passes but drew nothing, as some mobile drivers do instead of reporting an error
+  let firstFrameChecked = false;
+  const checkFirstFrame = () => {
+    firstFrameChecked = true;
+    const pixel = new Uint8Array(4);
+    gl.readPixels(width >> 1, height >> 1, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+    if (pixel[0] + pixel[1] + pixel[2] === 0) fail(`the first frame is black (gl error ${gl.getError()})`);
+  };
+
   const render = (now: number) => {
-    if (stopped) return;
+    if (stopped || failed) return;
     if (!reducedMotion) {
       frame = requestAnimationFrame(render);
       if (now - lastDrawAt < TARGET_FRAME_MS - FRAME_TOLERANCE_MS) return;
       pace(now);
     }
     draw();
+    if (!firstFrameChecked) checkFirstFrame();
   };
 
   const onResize = () => {
     if (reducedMotion && logoReady) frame = requestAnimationFrame(render);
   };
   window.addEventListener('resize', onResize);
+  const onContextLost = () => fail('the WebGL context was lost');
+  canvas.addEventListener('webglcontextlost', onContextLost);
   const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(onResize);
   observer?.observe(canvas);
 
@@ -354,6 +385,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     window.clearTimeout(startFallback);
     cancelAnimationFrame(frame);
     window.removeEventListener('resize', onResize);
+    canvas.removeEventListener('webglcontextlost', onContextLost);
     observer?.disconnect();
     gl.deleteBuffer(quadBuffer);
     gl.deleteVertexArray(quad);
