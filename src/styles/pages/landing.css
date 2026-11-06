@@ -5,11 +5,22 @@
   .landing-page {
     position: fixed;
     inset: 0;
-    display: grid;
-    place-items: center;
     overflow: hidden;
     color: inherit;
     cursor: pointer;
+  }
+
+  .landing-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* keeps the parked page from being scrolled away */
+  .landing-scroll-lock,
+  .landing-scroll-lock body {
+    overflow: hidden;
   }
 
   /* iOS safari clips fixed elements to the area between its translucent status bar and toolbar, so there the

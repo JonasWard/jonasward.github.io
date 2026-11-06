@@ -3,10 +3,24 @@ import Base from '../layouts/Base.astro';
 import 'src/styles/pages/landing.css';
 ---
 
-<!-- landing canvas (paperTiles.ts) is migration step 3: its plain `.png` import would become an astro image object,
-     it needs `?url` there first. For the prototype the root page only has to forward old hash links. -->
 <Base header={false}>
-  <a class="landing-page" id="landing-page" href="/projects/">
-    <span>jonas ward — projects</span>
+  <a class="landing-page" href="/projects/" aria-label="jonas ward, to the projects">
+    <canvas class="landing-canvas" data-landing-canvas></canvas>
   </a>
 </Base>
+
+<script>
+  import { startPaperTiles } from 'src/components/landingMissing/paperTiles';
+
+  // where the landing is taller than the viewport (iOS, see landing.css) the page is parked halfway its scroll
+  // range, so the overscan ends up under the browser's bars
+  const parkScroll = () => {
+    const range = document.documentElement.scrollHeight - innerHeight;
+    if (range > 0) scrollTo(0, range / 2);
+  };
+
+  startPaperTiles(document.querySelector<HTMLCanvasElement>('[data-landing-canvas]')!);
+  document.documentElement.classList.add('landing-scroll-lock');
+  parkScroll();
+  addEventListener('resize', parkScroll);
+</script>
