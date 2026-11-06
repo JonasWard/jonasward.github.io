@@ -48,17 +48,29 @@ const TILE_CSS_PX_MAX = 200;
 const TILES_ACROSS_LONG_EDGE = 9;
 const SHADOW_REACH_CSS_PX = 16; // how far the shade pass marches, keep in step with SHADOW_REACH in its shader
 
-// the wall is drawn at most this often; it moves a few css px per second, so nothing is lost,
-// and the gpu gets to idle between frames
-const TARGET_FRAME_MS = 1000 / 30;
-const FRAME_TOLERANCE_MS = 4; // so a 60 Hz display settles on every other frame instead of every third
-// when drawn frames still come in slower than this, the drawing buffer is scaled down a step
-const SLOW_FRAME_MS = 1.5 * TARGET_FRAME_MS;
-const PIXEL_RATIO_STEPS = [1.5, 1.25, 1, 0.75]; // device px per css px, the cap only ever steps down
+// the wall is drawn at 60 fps where the gpu has the time, at 30 fps otherwise, so a slow gpu gets to idle
+// between frames; it moves a few css px per second, so 30 still reads as smooth on a phone
+const FAST_FRAME_MS = 1000 / 60;
+const SLOW_FRAME_MS = 1000 / 30;
+const FRAME_TOLERANCE_MS = 4; // so a display settles on every n-th frame instead of drifting between n and n + 1
+const PIXEL_RATIO_STEPS = [1.5, 1.25, 1, 0.75]; // device px per css px
 // phones start at one device px per css px: about half the pixels of 1.5, hardly visible at their density
 const PHONE_PIXEL_RATIO_STEP = 2;
-const PACE_WARMUP_DRAWS = 4; // frames ignored after a start or a step, while everything settles
-const PACE_WINDOW = 6; // frames judged together, so a slow device settles within a second
+
+// with a gpu timer (EXT_disjoint_timer_query_webgl2, most desktop browsers) the frame rate and the resolution
+// follow the gpu's time per frame, both ways, with hysteresis so neither flips back and forth
+const GPU_WINDOW = 6; // samples judged together
+const GPU_60FPS_BELOW_MS = 7; // switch to 60 fps when a frame takes less than this
+const GPU_30FPS_ABOVE_MS = 11; // back to 30 fps above this
+const GPU_STEP_DOWN_ABOVE_MS = 20; // even at 30 fps the frame is too heavy: fewer pixels
+const GPU_STEP_UP_BELOW_MS = 5; // estimated time at the next resolution up, below this it steps up
+
+// the time between drawn frames is always watched, timer or not (Safari and most phones have none, and some
+// timers never return a usable result): the resolution steps down while it stays well above 30 fps. Only the timer
+// steps it back up. The first second is skipped, loading and shader compiles look slow
+const INTERVAL_WARMUP_MS = 1000;
+const INTERVAL_WINDOW = 6;
+const INTERVAL_SLOW_MS = 1.5 * SLOW_FRAME_MS;
 const PACE_GAP_MS = 500; // longer gaps are the tab being hidden, not the gpu being slow
 
 const compileShader = (gl: WebGL2RenderingContext, type: GLenum, source: string) => {
@@ -105,7 +117,14 @@ const uniformLocations = <T extends string>(gl: WebGL2RenderingContext, program:
  * `onFail` is called once, with the reason, when the wall can't be drawn: no WebGL2, a shader that doesn't compile,
  * a render target the GPU refuses, a lost context, or a first frame that comes out black.
  */
-export type PaperTilesStats = { frameMs: number; pixelRatio: number; width: number; height: number };
+export type PaperTilesStats = {
+  frameMs: number; // median time between drawn frames
+  gpuMs: number | null; // median gpu time per frame, null without a gpu timer
+  targetFps: number;
+  pixelRatio: number;
+  width: number;
+  height: number;
+};
 
 export const startPaperTiles = (
   canvas: HTMLCanvasElement,
@@ -310,6 +329,11 @@ export const startPaperTiles = (
   const draw = () => {
     fit();
     gl.bindVertexArray(quad);
+    const timing = !!timer && !query;
+    if (timing) {
+      query = gl.createQuery();
+      gl.beginQuery(timer.TIME_ELAPSED_EXT, query!);
+    }
 
     // the wall, into its texture
     gl.bindFramebuffer(gl.FRAMEBUFFER, wallFramebuffer);
@@ -334,27 +358,65 @@ export const startPaperTiles = (
     gl.uniform2f(shade.uResolution, width, height);
     gl.uniform1f(shade.uPixelRatio, pixelRatio);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    if (timing) gl.endQuery(timer.TIME_ELAPSED_EXT);
   };
 
-  // paces the animated frames and, when the drawn frames keep coming in slow, scales the
-  // drawing buffer down a step. Only ever down, so it cannot oscillate
-  let lastDrawAt = -Infinity;
-  let drawsSinceStep = 0;
+  // gpu time per frame, one query in flight at a time; disjoint results (power state changes) are dropped
+  const timer = gl.getExtension('EXT_disjoint_timer_query_webgl2');
+  let query: WebGLQuery | null = null;
+  const gpuSamples: number[] = [];
+  const readQuery = () => {
+    if (!timer || !query || !gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE)) return;
+    if (!gl.getParameter(timer.GPU_DISJOINT_EXT)) gpuSamples.push(gl.getQueryParameter(query, gl.QUERY_RESULT) / 1e6);
+    gl.deleteQuery(query);
+    query = null;
+  };
+
+  let targetFrameMs = SLOW_FRAME_MS;
+  let gpuMs: number | null = null;
+  const median = (values: number[]) => [...values].sort((a, b) => a - b)[values.length >> 1];
+  const stepTo = (step: number) => {
+    pixelRatioStep = step;
+    gpuSamples.length = 0; // the next window measures the new size
+    drawIntervals.length = 0;
+  };
+
+  // with the timer: frame rate and resolution from the gpu's time per frame
+  const judgeGpu = () => {
+    if (gpuSamples.length < GPU_WINDOW) return;
+    gpuMs = median(gpuSamples);
+    gpuSamples.length = 0;
+    if (gpuMs < GPU_60FPS_BELOW_MS) targetFrameMs = FAST_FRAME_MS;
+    else if (gpuMs > GPU_30FPS_ABOVE_MS) targetFrameMs = SLOW_FRAME_MS;
+    if (gpuMs > GPU_STEP_DOWN_ABOVE_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1) stepTo(pixelRatioStep + 1);
+    else if (pixelRatioStep > 0) {
+      // the cost scales with the pixel count; the device's own ratio caps how far up it is worth going
+      const up = Math.min(PIXEL_RATIO_STEPS[pixelRatioStep - 1], Math.max(window.devicePixelRatio || 1, 1));
+      if (up > pixelRatio && gpuMs * (up / pixelRatio) ** 2 < GPU_STEP_UP_BELOW_MS) stepTo(pixelRatioStep - 1);
+    }
+  };
+
+  // without it: the resolution steps down while the drawn frames keep coming in slow
   const drawIntervals: number[] = [];
+  const judgeIntervals = () => {
+    if (drawIntervals.length < INTERVAL_WINDOW) return;
+    const frameMs = median(drawIntervals);
+    drawIntervals.length = 0;
+    if (frameMs > INTERVAL_SLOW_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1) stepTo(pixelRatioStep + 1);
+  };
+
+  let lastDrawAt = -Infinity;
   const pace = (now: number) => {
     const interval = now - lastDrawAt;
     lastDrawAt = now;
-    drawsSinceStep++;
-    if (drawsSinceStep <= PACE_WARMUP_DRAWS || interval > PACE_GAP_MS) return;
-    drawIntervals.push(interval);
-    if (drawIntervals.length < PACE_WINDOW) return;
-    const sorted = [...drawIntervals].sort((a, b) => a - b);
-    drawIntervals.length = 0;
-    onStats?.({ frameMs: sorted[PACE_WINDOW >> 1], pixelRatio, width, height });
-    if (sorted[PACE_WINDOW >> 1] > SLOW_FRAME_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1) {
-      pixelRatioStep++;
-      drawsSinceStep = 0;
+    if (interval <= PACE_GAP_MS && now - startedAt > INTERVAL_WARMUP_MS) drawIntervals.push(interval);
+    if (drawIntervals.length >= INTERVAL_WINDOW)
+      onStats?.({ frameMs: median(drawIntervals), gpuMs, targetFps: Math.round(1000 / targetFrameMs), pixelRatio, width, height });
+    if (timer) {
+      readQuery();
+      judgeGpu();
     }
+    judgeIntervals();
   };
 
   // the wall is never black (its darkest tone is the shadowed floor), so a black first frame means the GPU
@@ -371,7 +433,7 @@ export const startPaperTiles = (
     if (stopped || failed) return;
     if (!reducedMotion) {
       frame = requestAnimationFrame(render);
-      if (now - lastDrawAt < TARGET_FRAME_MS - FRAME_TOLERANCE_MS) return;
+      if (now - lastDrawAt < targetFrameMs - FRAME_TOLERANCE_MS) return;
       pace(now);
     }
     draw();
@@ -402,5 +464,6 @@ export const startPaperTiles = (
     gl.deleteTexture(logoTexture);
     gl.deleteTexture(wallTexture);
     gl.deleteTexture(paperTexture);
+    if (query) gl.deleteQuery(query);
   };
 };

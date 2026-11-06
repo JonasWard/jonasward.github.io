@@ -61,9 +61,10 @@ import logo from 'src/assets/icons/jonasward_logo_ww.svg?url';
     canvas,
     fallBack,
     debug
-      ? ({ frameMs, pixelRatio, width, height }) => {
-          // median time between drawn frames; the wall is paced to 30 fps, so ~33 ms is the best it shows
-          statsLine = `frame ${frameMs.toFixed(1)} ms (${(1000 / frameMs).toFixed(0)} fps), ${pixelRatio} px/css px, ${width}x${height}`;
+      ? ({ frameMs, gpuMs, targetFps, pixelRatio, width, height }) => {
+          // gpu: the cost of one frame (needs a gpu timer); frame: time between drawn frames, paced to the target
+          const gpu = gpuMs === null ? 'gpu time n/a' : `gpu ${gpuMs.toFixed(1)} ms`;
+          statsLine = `${gpu}, frame ${frameMs.toFixed(1)} ms (${(1000 / frameMs).toFixed(0)} fps, target ${targetFps}), ${pixelRatio} px/css px, ${width}x${height}`;
           showReport();
         }
       : undefined
