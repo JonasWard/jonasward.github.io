@@ -1,22 +1,18 @@
-// checks success criteria 1-8 of the plan against the built prototype (proto-astro/build) and,
-// for the screenshots, the current react build (../build).
+// checks the built site (build/): every page, filters, redirects, cv pdfs, dev-only pages, screenshots
 //   node test/check.mjs            -> test the existing build
 //   node test/check.mjs --build    -> run `bun run build` first (and time it)
 //   node test/check.mjs --no-shots -> skip criterion 8
 import { execFileSync, execSync } from 'node:child_process';
-import { createServer } from 'node:http';
 import { createRequire } from 'node:module';
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { extname, join } from 'node:path';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { dev, preview } from 'astro';
 
 const { chromium } = createRequire(import.meta.url)('playwright');
-const proto = fileURLToPath(new URL('..', import.meta.url));
-const repo = join(proto, '..');
-const buildDir = join(proto, 'build');
-const reactBuild = join(repo, 'build');
-const shotsDir = join(proto, 'test/screenshots');
+const root = fileURLToPath(new URL('..', import.meta.url));
+const buildDir = join(root, 'build');
+const shotsDir = join(root, 'test/screenshots');
 const args = new Set(process.argv.slice(2));
 
 const results = [];
@@ -31,7 +27,7 @@ const walk = (dir) =>
 if (args.has('--build')) {
   const start = Date.now();
   try {
-    execSync('bun run build', { cwd: proto, stdio: 'inherit' });
+    execSync('bun run build', { cwd: root, stdio: 'inherit' });
     report('1a', true, `bun run build exited 0 in ${((Date.now() - start) / 1000).toFixed(1)}s`);
   } catch {
     report('1a', false, 'bun run build failed');
@@ -40,7 +36,7 @@ if (args.has('--build')) {
 } else report('1a', existsSync(join(buildDir, 'index.html')), 'build/ present (run with --build to rebuild)');
 
 const BANNED = ['react', 'react-dom', 'react-router-dom', 'zustand', '@react-pdf/renderer'];
-const pkg = JSON.parse(readFileSync(join(proto, 'package.json'), 'utf8'));
+const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
 const bannedDeps = deps.filter((d) => BANNED.includes(d));
 const files = walk(buildDir);
@@ -51,25 +47,13 @@ const jsHits = jsFiles.flatMap((f) => SIGNATURES.filter((s) => s.test(readFileSy
 report('1b', bannedDeps.length === 0 && jsHits.length === 0, `deps: [${deps.join(', ')}]; ${jsFiles.length} js files, framework signatures: ${jsHits.length ? jsHits.join('; ') : 'none'}`);
 
 // --- expected state from the real data and filterProjects ---
-const expected = JSON.parse(execFileSync('bun', ['test/expected.ts'], { cwd: proto, encoding: 'utf8' }));
-
-// --- static server for the react build (hash router, so a plain file server will do) ---
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.pdf': 'application/pdf', '.ico': 'image/x-icon' };
-const serveStatic = (dir, port) =>
-  new Promise((resolve) => {
-    const server = createServer((req, res) => {
-      let path = join(dir, decodeURIComponent(new URL(req.url, 'http://x').pathname));
-      if (existsSync(path) && statSync(path).isDirectory()) path = join(path, 'index.html');
-      if (!existsSync(path)) return res.writeHead(404).end('not found');
-      res.writeHead(200, { 'content-type': TYPES[extname(path)] ?? 'application/octet-stream' }).end(readFileSync(path));
-    }).listen(port, () => resolve(server));
-  });
+const expected = JSON.parse(execFileSync('bun', ['test/expected.ts'], { cwd: root, encoding: 'utf8' }));
 
 // runs before preview(): astro's preview switches the process to production mode, after which dev() renders as prod
 // --- criterion 6: motivation letter only in dev ---
 const inBuild = files.filter((f) => /motivation/i.test(f) || (f.endsWith('.html') && /data-ml-form/.test(readFileSync(f, 'utf8'))));
 const devStart = Date.now();
-const devServer = await dev({ root: proto, logLevel: 'error', server: { port: 4397 } });
+const devServer = await dev({ root, logLevel: 'error', server: { port: 4397 } });
 const devReady = Date.now() - devStart;
 let devOk = false;
 try {
@@ -91,8 +75,8 @@ try {
 }
 report('6', devOk && inBuild.length === 0, `dev: ${devOk ? 'form -> preview + localStorage work' : 'broken'} (dev server ready in ${devReady}ms); in build/: ${inBuild.length ? inBuild.join(', ') : 'absent'}`);
 
-const protoServer = await preview({ root: proto, logLevel: 'error', server: { port: 4398 } });
-const P = `http://localhost:${protoServer.port}`;
+const server = await preview({ root, logLevel: 'error', server: { port: 4398 } });
+const P = `http://localhost:${server.port}`;
 const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
 
@@ -237,58 +221,53 @@ for (const cv of CV_ROUTES) {
 report('5', pdfOk, pdfDetails.join('; '));
 
 // --- criterion 7: data untouched ---
-const dataDiff = execSync('git status --porcelain -- src/data', { cwd: repo, encoding: 'utf8' }).trim();
+const dataDiff = execSync('git status --porcelain -- src/data', { cwd: root, encoding: 'utf8' }).trim();
 report('7', dataDiff === '', dataDiff || 'git status src/data: clean');
 
-// --- criterion 8: screenshots, react build vs prototype ---
+// --- criterion 8: screenshots to look at ---
 if (!args.has('--no-shots')) {
   mkdirSync(shotsDir, { recursive: true });
-  const reactServer = existsSync(join(reactBuild, 'index.html')) ? await serveStatic(reactBuild, 4396) : null;
-  const R = 'http://localhost:4396';
   const pages = [
-    ['project-digitale-augen', '/#/project/digitale-augen', '/project/digitale-augen/'],
-    ['project-chocolade-chaud', '/#/project/chocolade-chaud', '/project/chocolade-chaud/'],
-    ['project-anitkabir', '/#/project/anitkabir', '/project/anitkabir/'],
-    ['project-sdf-svg', '/#/project/sdf-svg', '/project/sdf-svg/'],
-    ['projects', '/#/projects', '/projects/'],
-    ['cv', '/#/cv', '/cv/']
+    ['project-digitale-augen', '/project/digitale-augen/'],
+    ['project-chocolade-chaud', '/project/chocolade-chaud/'],
+    ['project-anitkabir', '/project/anitkabir/'],
+    ['project-sdf-svg', '/project/sdf-svg/'],
+    ['projects', '/projects/'],
+    ['about', '/about/'],
+    ['cv', '/cv/']
   ];
   const shots = [];
   for (const [viewportName, viewport] of [['desktop', { width: 1440, height: 900 }], ['mobile', { width: 390, height: 844 }]]) {
     const ctx = await browser.newContext({ viewport, deviceScaleFactor: 1, isMobile: viewportName === 'mobile', hasTouch: viewportName === 'mobile' });
-    for (const [name, reactPath, protoPath] of pages) {
-      for (const [site, base, path] of [['react', R, reactPath], ['astro', P, protoPath]]) {
-        if (site === 'react' && !reactServer) continue;
-        const page = await ctx.newPage();
-        await page.goto(base + path, { waitUntil: 'networkidle' });
-        await page.evaluate(async () => {
-          // walk down the page so lazy images load, then back up
-          for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight) {
-            scrollTo(0, y);
-            await new Promise((r) => setTimeout(r, 120));
-          }
-          scrollTo(0, 0);
-          // lazy images that never enter the viewport (e.g. the horizontal row on phones) don't load, so wait at most 5s
-          const pending = [...document.images].filter((i) => !i.complete).map((i) => new Promise((r) => (i.onload = i.onerror = r)));
-          await Promise.race([Promise.all(pending), new Promise((r) => setTimeout(r, 5000))]);
-          await document.fonts.ready;
-        });
-        await page.waitForTimeout(800);
-        const file = join(shotsDir, `${name}-${viewportName}-${site}.png`);
-        await page.screenshot({ path: file, fullPage: true });
-        await page.screenshot({ path: file.replace('.png', '-top.png') });
-        shots.push(file);
-        await page.close();
-      }
+    for (const [name, path] of pages) {
+      const page = await ctx.newPage();
+      await page.goto(P + path, { waitUntil: 'networkidle' });
+      await page.evaluate(async () => {
+        // walk down the page so lazy images load, then back up
+        for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight) {
+          scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 120));
+        }
+        scrollTo(0, 0);
+        // lazy images that never enter the viewport (e.g. the horizontal row on phones) don't load, so wait at most 5s
+        const pending = [...document.images].filter((i) => !i.complete).map((i) => new Promise((r) => (i.onload = i.onerror = r)));
+        await Promise.race([Promise.all(pending), new Promise((r) => setTimeout(r, 5000))]);
+        await document.fonts.ready;
+      });
+      await page.waitForTimeout(800);
+      const file = join(shotsDir, `${name}-${viewportName}.png`);
+      await page.screenshot({ path: file, fullPage: true });
+      await page.screenshot({ path: file.replace('.png', '-top.png') });
+      shots.push(file);
+      await page.close();
     }
     await ctx.close();
   }
-  reactServer?.close();
-  report('8', shots.length > 0, `${shots.length} full-page screenshots (+ "-top" viewport crops) in test/screenshots/${reactServer ? '' : ' (react build missing, only astro)'}; compare by eye`);
+  report('8', shots.length === pages.length * 2, `${shots.length} full-page screenshots (+ "-top" viewport crops) in test/screenshots/; compare by eye`);
 }
 
 await browser.close();
-await protoServer.stop();
+await server.stop();
 const failed = results.filter((r) => !r.ok);
 console.log(`\n${results.length - failed.length}/${results.length} checks passed${failed.length ? `, failed: ${failed.map((f) => f.id).join(', ')}` : ''}`);
 process.exit(failed.length ? 1 : 0);

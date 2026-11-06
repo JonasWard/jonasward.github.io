@@ -13,9 +13,9 @@ plugin({
   }
 });
 
-const { allProjects } = await import('../../src/data/projects/allProjects');
-const { filterProjects } = await import('../../src/utils/filterProjects');
-const { getProjectKeywords } = await import('../../src/utils/projectconstructor');
+const { allProjects } = await import('../src/data/projects/allProjects');
+const { filterProjects } = await import('../src/utils/filterProjects');
+const { getProjectKeywords } = await import('../src/utils/projectconstructor');
 
 // the filter cases checked on /projects: 3 keywords (single and combined) + 1 category
 const counts = new Map<string, number>();

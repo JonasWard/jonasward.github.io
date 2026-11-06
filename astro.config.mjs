@@ -2,10 +2,10 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import { imagetools } from 'vite-imagetools';
 
-// the content, types and utils stay in the parent repo, this prototype only renders them
-const parentSrc = fileURLToPath(new URL('../src', import.meta.url));
+// the data, types and renderers import each other as `src/...`
+const src = fileURLToPath(new URL('./src', import.meta.url));
 
-// same image pipeline as ../vite.config.mts: `?responsive` -> webp Picture with intrinsic size
+// `?responsive` -> webp Picture with intrinsic size, `&card` only in the widths of an overview card
 const RESPONSIVE_WIDTHS = [400, 800, 1200, 1600, 2400];
 const CARD_WIDTHS = [200, 400];
 
@@ -34,7 +34,6 @@ export default defineConfig({
         }
       })
     ],
-    resolve: { alias: { src: parentSrc } },
-    server: { fs: { allow: ['..'] } }
+    resolve: { alias: { src } }
   }
 });
