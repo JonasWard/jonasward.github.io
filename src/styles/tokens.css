@@ -72,7 +72,7 @@
     --glow-light: 0 0 var(--space-5) var(--white-a80), 0 var(--space-1) var(--space-3) var(--white-a60);
 
     /* type scale; 9px is the fine print of the cv and the meta labels */
-    --font: 'Montserrat Variable', sans-serif;
+    --font: 'Montserrat Variable', 'Montserrat fallback', sans-serif;
     --fs-2xs: 9px;
     --fs-xs: 11px;
     --fs-sm: 13px;

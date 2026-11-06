@@ -1,3 +1,15 @@
+/* a local sans scaled to Montserrat's width and line metrics, so the swap to the real font barely moves any text.
+   measured with fonttools: Montserrat at weight 400 (the body text) against Arial/Liberation Sans on an english
+   sample; size-adjust is the width ratio, the overrides are Montserrat's ascent/descent divided by it */
+@font-face {
+  font-family: 'Montserrat fallback';
+  src: local('Arial'), local('Helvetica'), local('Liberation Sans');
+  size-adjust: 113.17%;
+  ascent-override: 85.54%;
+  descent-override: 22.18%;
+  line-gap-override: 0%;
+}
+
 /* element defaults; the font files are imported in main.css (an @import can't sit inside a layer block) */
 @layer base {
   body {

@@ -4,7 +4,6 @@
 
 /* variable woff2, split per unicode subset (unlayered, only @font-face rules) */
 @import '@fontsource-variable/montserrat/index.css';
-@import '@fontsource-variable/montserrat/wght-italic.css';
 
 @import './tokens.css';
 @import './base.css';
