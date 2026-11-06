@@ -1,0 +1,27 @@
+@layer tokens, base, primitives, layout, components, pages, utilities;
+
+/* an a4 sheet: the print base of the cv (cv-print.css) and the motivation letter; each sets its own page margin and
+   hides its own controls. on paper .cv-content (the column of both) fills the sheet */
+@page {
+  size: A4;
+}
+
+@layer pages {
+  @media print {
+    html,
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .header {
+      display: none;
+    }
+
+    .cv-content {
+      margin: 0;
+      padding: 0;
+      max-width: none;
+    }
+  }
+}

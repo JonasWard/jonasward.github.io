@@ -1,9 +1,9 @@
 @layer tokens, base, primitives, layout, components, pages, utilities;
+@import './paper.css';
 
 /* dev only: the motivation letter generator, an input drawer and the letter preview (styled after
-   MotivationLetterPDF.tsx); printing the page gives the pdf */
+   MotivationLetterPDF.tsx, title, rule and spacers are the cv's); printing the page gives the pdf */
 @page {
-  size: A4;
   margin: 0;
 }
 
@@ -108,16 +108,8 @@
     margin-top: calc(-1 * var(--space-1));
   }
 
-  .ml-title {
-    font-size: var(--fs-2xl);
-    font-weight: 800;
-    margin: var(--space-0h) 0;
-  }
-
-  .ml-rule {
-    height: var(--space-1);
-    background: black;
-    margin: var(--space-2h) 0;
+  .ml-letter .cv-rule {
+    margin-block: var(--space-2h);
   }
 
   .ml-body {
@@ -129,26 +121,10 @@
     }
   }
 
-  .ml-intro {
-    font-size: var(--fs-sm);
-    font-weight: 600;
-  }
-
-  .ml-space {
-    height: var(--space-1);
-  }
-
   @media print {
-    .header,
     .ml-toolbar,
     .drawer {
       display: none;
-    }
-
-    .cv-content {
-      margin: 0;
-      padding: 0;
-      max-width: none;
     }
 
     .ml-letter {
