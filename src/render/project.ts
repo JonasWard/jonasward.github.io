@@ -1,4 +1,4 @@
-// project page: typed ProjectData -> markup, same structure and class names as components/projects/pagecomponents/*
+// project page: typed ProjectData -> markup, one renderer per content type
 import type { ProjectContent } from '../types/projectContent/projectContent';
 import { ProjectContentType } from '../types/projectContent/projectContentType';
 import type { ProjectData } from '../types/projectContent/projectData';

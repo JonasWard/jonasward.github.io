@@ -17,7 +17,7 @@ export const cls = (...names: (string | false | null | undefined)[]): string => 
 
 const UNITLESS = new Set(['fontWeight', 'lineHeight', 'opacity', 'flexGrow', 'zIndex']);
 
-/** inline style from a map, numbers become px like react's style prop; empty values are dropped */
+/** inline style from a map, numbers become px (except unitless properties); empty values are dropped */
 export const style = (values: Record<string, string | number | null | undefined>): string | undefined => {
   const css = Object.entries(values)
     .filter(([, v]) => v !== null && v !== undefined && v !== '')

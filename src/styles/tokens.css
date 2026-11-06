@@ -50,7 +50,7 @@
     --hairline: 1px;
     --border: var(--hairline) solid var(--black-a10);
     --stripe: 4px;
-    /* the page gutter: header inset, cv padding and columns (the cv keeps its react-pdf proportions) */
+    /* the page gutter: header inset, cv padding and columns (the cv keeps its old pdf proportions) */
     --gutter: 20px;
 
     /* layout sizes */

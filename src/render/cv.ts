@@ -1,9 +1,8 @@
-// the html cv (components/cv/CVDigital.tsx and its renderers) as one string, the printed / pdf version is the same
-// markup with a print stylesheet, so there is no separate react-pdf document anymore
+// the html cv as one string; the printed / pdf version is the same markup with a print stylesheet
 import type { CVData, Education, Experience, ExperienceContent, Info, List, ListContent, Skills } from '../types/cv/cvType';
 import { attrs, cls, esc } from './html';
 
-// the react-pdf style objects of components/cv/style.ts as classes of src/styles/components/cv.css
+// the classes of src/styles/components/cv.css
 const C = {
   block: 'stack',
   blockEnd: 'stack cv-text-end',
@@ -97,7 +96,7 @@ export const renderSkills = (skills: Skills) =>
             'cv-keep',
             text(`${header} `, C.primary) +
               Object.entries(subSkills)
-                // the html cv never showed skillSubTitle's margins (react-pdf's View rendered as an inline element)
+                // skillSubTitle has no margins of its own here
                 .map(([parent, list]) => div(undefined, text(parent, C.secondaryEnd) + listContent(list, C.skillList)))
                 .join('') +
               (i < all.length - 1 ? dividingLine('m') : '')

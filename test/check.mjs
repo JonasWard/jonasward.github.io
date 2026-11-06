@@ -3,13 +3,12 @@
 //   node test/check.mjs --build    -> run `bun run build` first (and time it)
 //   node test/check.mjs --no-shots -> skip criterion 8
 import { execFileSync, execSync } from 'node:child_process';
-import { createRequire } from 'node:module';
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { dev, preview } from 'astro';
+import { chromium } from 'playwright';
 
-const { chromium } = createRequire(import.meta.url)('playwright');
 const root = fileURLToPath(new URL('..', import.meta.url));
 const buildDir = join(root, 'build');
 const shotsDir = join(root, 'test/screenshots');
@@ -23,7 +22,7 @@ const report = (id, ok, detail = '') => {
 const walk = (dir) =>
   readdirSync(dir).flatMap((f) => (statSync(join(dir, f)).isDirectory() ? walk(join(dir, f)) : [join(dir, f)]));
 
-// --- criterion 1: build + no react & co in deps or output ---
+// --- criterion 1: build + only the site's own tooling in deps, no framework runtime in the output ---
 if (args.has('--build')) {
   const start = Date.now();
   try {
@@ -35,16 +34,17 @@ if (args.has('--build')) {
   }
 } else report('1a', existsSync(join(buildDir, 'index.html')), 'build/ present (run with --build to rebuild)');
 
-const BANNED = ['react', 'react-dom', 'react-router-dom', 'zustand', '@react-pdf/renderer'];
+// everything the site needs; a ui framework would have to be added here first
+const ALLOWED = ['@fontsource-variable/montserrat', 'astro', 'playwright', 'vite-imagetools'];
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
-const bannedDeps = deps.filter((d) => BANNED.includes(d));
+const extraDeps = deps.filter((d) => !ALLOWED.includes(d));
 const files = walk(buildDir);
 const jsFiles = files.filter((f) => f.endsWith('.js'));
-// signatures of the runtimes in a minified bundle
-const SIGNATURES = [/react\.production/, /__SECRET_INTERNALS|__CLIENT_INTERNALS/, /react-router/, /zustand/, /@react-pdf|react-pdf/, /useSyncExternalStore/];
-const jsHits = jsFiles.flatMap((f) => SIGNATURES.filter((s) => s.test(readFileSync(f, 'utf8'))).map((s) => `${f}: ${s}`));
-report('1b', bannedDeps.length === 0 && jsHits.length === 0, `deps: [${deps.join(', ')}]; ${jsFiles.length} js files, framework signatures: ${jsHits.length ? jsHits.join('; ') : 'none'}`);
+// the page scripts are small and vanilla; the landing one carries the logo distance field as a ~140 kB data url
+const JS_BUDGET = 200 * 1024;
+const jsBytes = jsFiles.reduce((sum, f) => sum + statSync(f).size, 0);
+report('1b', extraDeps.length === 0 && jsBytes <= JS_BUDGET, `deps: [${deps.join(', ')}]${extraDeps.length ? `, not allowed: ${extraDeps.join(', ')}` : ''}; ${jsFiles.length} js files, ${(jsBytes / 1024).toFixed(1)} kB (budget ${JS_BUDGET / 1024} kB)`);
 
 // --- expected state from the real data and filterProjects ---
 const expected = JSON.parse(execFileSync('bun', ['test/expected.ts'], { cwd: root, encoding: 'utf8' }));

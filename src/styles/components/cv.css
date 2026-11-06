@@ -1,5 +1,5 @@
-/* the cv, on screen and on paper (pages/cv-print.css sets the sheet); the classes are the former react-pdf style
-   objects of components/cv/style.ts. .cv-content is also the column of the motivation letter page. below tablet width
+/* the cv, on screen and on paper (pages/cv-print.css sets the sheet); the class names come from the old pdf
+   style objects. .cv-content is also the column of the motivation letter page. below tablet width
    the screen cv is a single column; on paper (about 700px wide) it keeps both */
 @layer components {
   .cv-content {

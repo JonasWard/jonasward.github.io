@@ -1,4 +1,4 @@
-// the 404 background, components/landingMissing/Missing.tsx without react
+// the 404 background: a full-screen shader
 import vsSource from 'src/scripts/missing/missingVertexShader.glsl?raw';
 import fsSource from 'src/scripts/missing/missingFragmentShader.glsl?raw';
 

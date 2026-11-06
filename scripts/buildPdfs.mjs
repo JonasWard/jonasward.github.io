@@ -1,12 +1,9 @@
 // CI step after `astro build`: print every cv page of the build to the pdf its Download link points at
-import { createRequire } from 'node:module';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { preview } from 'astro';
-
-// playwright is preinstalled globally in CI and here, not a dependency of the site (require() honours NODE_PATH)
-const { chromium } = createRequire(import.meta.url)('playwright');
+import { chromium } from 'playwright';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const buildDir = join(root, 'build');

@@ -1,4 +1,4 @@
-// the fixed page header, same markup as components/Header.tsx but with real links; the burger toggle is a separate script
+// the fixed page header with real links; the burger toggle is a separate script (src/scripts/common.ts)
 import { attrs } from './html';
 
 const navLinks = [

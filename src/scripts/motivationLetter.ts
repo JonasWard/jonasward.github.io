@@ -81,7 +81,7 @@ select.addEventListener('change', () => {
   renderAll();
 });
 
-// renaming the key stores the current letter under the new name, like the react version
+// renaming the key stores the current letter under the new name
 const rename = () => {
   const next = keyName.value.trim();
   if (!next || next === activeKey) return;
