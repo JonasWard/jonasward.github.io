@@ -1,0 +1,107 @@
+/* the content blocks of a project page: text, image + text, links and lists */
+@layer components {
+  .text-block {
+    column-gap: 50px;
+    width: 100%;
+  }
+
+  .text-block.columns-1 {
+    column-count: 1;
+  }
+
+  .text-block.columns-2 {
+    column-count: 2;
+  }
+
+  .text-block h2 {
+    font-size: var(--fs-2xl);
+    font-weight: 600;
+    margin: 0;
+    padding: 0 0 20px;
+  }
+
+  .text-block p {
+    font-size: var(--fs-xl);
+    font-weight: 400;
+    margin: 0 0 20px;
+  }
+
+  .text-block a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: var(--fs-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    border: 1px solid var(--black-a80);
+    transition: background-color var(--t-base) ease, color var(--t-base) ease;
+  }
+
+  .text-block a:hover {
+    background-color: black;
+    color: white;
+  }
+
+  .link-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .link-block {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .image-text-block {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .image-text-block.right {
+    flex-direction: row-reverse;
+  }
+
+  .image-text-block .project-image,
+  .image-text-block .text-block {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .image-text-block .project-image img {
+    width: 100%;
+  }
+
+  @media (max-width: 750px) {
+    .text-block.columns-2 {
+      column-count: 1;
+    }
+
+    .text-block h2,
+    .text-block p {
+      font-size: var(--fs-md);
+    }
+
+    .text-block a {
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .link-block,
+    .image-text-block,
+    .image-text-block.right {
+      flex-direction: column;
+    }
+
+    .link-block {
+      gap: 10px;
+    }
+
+    .image-text-block {
+      align-items: center;
+    }
+  }
+}

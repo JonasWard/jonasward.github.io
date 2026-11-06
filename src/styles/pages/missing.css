@@ -1,0 +1,40 @@
+@layer tokens, base, layout, components, pages, utilities;
+
+/* 404: the shader canvas behind a faded, inverted link back to the projects */
+@layer pages {
+  .missing-page {
+    width: 100svw;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .missing-canvas {
+    position: fixed;
+    width: 100svw;
+    height: 100svh;
+  }
+
+  .missing-link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 80vw;
+    max-height: 80vh;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.4;
+    filter: invert();
+    transition: all var(--t-slow);
+  }
+
+  .missing-link:hover {
+    opacity: 1;
+  }
+}

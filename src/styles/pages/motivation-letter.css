@@ -1,0 +1,165 @@
+@layer tokens, base, layout, components, pages, utilities;
+
+/* dev only: the motivation letter generator, an input drawer and the letter preview (styled after
+   MotivationLetterPDF.tsx); printing the page gives the pdf */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@layer pages {
+  .ml-toolbar {
+    display: flex;
+    gap: 10px;
+    padding: 50px 0 6px;
+  }
+
+  .ml-toolbar select,
+  .ml-toolbar button {
+    border: none;
+    background: var(--grey-50);
+    border-radius: var(--radius-md);
+    padding: 2px var(--space-2);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+  }
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    left: -458px;
+    z-index: var(--z-overlay);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 438px;
+    height: 100%;
+    padding: 60px 10px 10px 12px;
+    background-color: var(--grey-900);
+    color: white;
+    font-weight: 600;
+    transition: left var(--t-base);
+  }
+
+  .drawer.open {
+    left: 0;
+  }
+
+  .drawer label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .drawer input,
+  .drawer textarea {
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 6px;
+    font-size: var(--fs-sm);
+    font-weight: 400;
+  }
+
+  .drawer textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(100vh - 500px);
+    resize: vertical;
+  }
+
+  .drawer button {
+    position: fixed;
+    bottom: 10px;
+    left: 12px;
+    width: 162px;
+    min-height: 40px;
+    background: darkslategray;
+    border: 2px solid white;
+    border-radius: var(--radius-md);
+    color: white;
+    cursor: pointer;
+  }
+
+  .drawer button:hover {
+    background: black;
+  }
+
+  .ml-letter {
+    box-sizing: border-box;
+    width: 210mm;
+    max-width: 100%;
+    min-height: 297mm;
+    padding: var(--space-5);
+    box-shadow: 0 2px 16px var(--black-a20);
+    font-size: var(--fs-sm);
+  }
+
+  .ml-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-size: var(--fs-2xs);
+    font-weight: 200;
+    color: var(--grey-800);
+  }
+
+  .ml-head a {
+    color: black;
+  }
+
+  .ml-logo {
+    width: 285px;
+    height: 60px;
+    margin-top: -4px;
+  }
+
+  .ml-title {
+    font-size: var(--fs-2xl);
+    font-weight: 800;
+    margin: 2px 0;
+  }
+
+  .ml-rule {
+    height: 4px;
+    background: black;
+    margin: 10px 0;
+  }
+
+  .ml-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ml-body p,
+  .ml-body ul {
+    margin: 0 0 10px;
+  }
+
+  .ml-intro {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+  }
+
+  .ml-space {
+    height: 3px;
+  }
+
+  @media print {
+    .header,
+    .ml-toolbar,
+    .drawer {
+      display: none;
+    }
+
+    .cv-content {
+      margin: 0;
+      padding: 0;
+      max-width: none;
+    }
+
+    .ml-letter {
+      box-shadow: none;
+    }
+  }
+}

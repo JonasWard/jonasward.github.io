@@ -1,0 +1,38 @@
+/* element defaults; the font files are imported in main.css (an @import can't sit inside a layer block) */
+@layer base {
+  body {
+    margin: 0;
+    font-weight: 500;
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* form controls take the page font instead of the system one; buttons also its colour */
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button {
+    color: inherit;
+  }
+
+  :root::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background-color: black;
+    border: 1px solid var(--black-a20);
+  }
+
+  :root::-webkit-scrollbar-thumb {
+    background-color: var(--white-a60);
+    border-radius: 3.5px;
+  }
+
+  :root::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}

@@ -89,7 +89,7 @@ for (const { el } of cards) {
     }
     const list = el.querySelector('.keywords')!;
     const open = list.classList.toggle('keywords-hidden') === false;
-    el.querySelector<SVGElement>('[data-keywords-toggle] svg')!.style.transform = `rotate(${open ? 0 : 180}deg)`;
+    el.querySelector('[data-keywords-toggle]')!.classList.toggle('open', open);
     list.querySelectorAll('.project-chip').forEach((c) => {
       c.classList.toggle('show', open);
       c.classList.toggle('hidden', !open);

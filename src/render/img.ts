@@ -14,12 +14,11 @@ export type ImgOptions = {
   // above the fold images (e.g. the project hero) load immediately and with priority
   eager?: boolean;
   className?: string;
-  style?: string;
 };
 
 // width & height reserve the image's aspect ratio box before any bytes arrive, so loading doesn't move the layout.
 // `.responsive-img` gets `loaded` from the fade-in script once the image is there (see responsiveImg.css)
-export const responsiveImg = (picture: ResponsivePicture, { sizes, alt, eager = false, className, style }: ImgOptions) =>
+export const responsiveImg = (picture: ResponsivePicture, { sizes, alt, eager = false, className }: ImgOptions) =>
   `<img${attrs({
     src: imageUrl(picture.img.src as ImageSource),
     srcset: picture.sources.webp,
@@ -30,6 +29,5 @@ export const responsiveImg = (picture: ResponsivePicture, { sizes, alt, eager = 
     decoding: 'async',
     fetchpriority: eager ? 'high' : 'auto',
     alt,
-    class: cls('responsive-img', className),
-    style
+    class: cls('responsive-img', className)
   })}>`;

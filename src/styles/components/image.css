@@ -1,0 +1,144 @@
+/* project images: the hero, single images with a caption, the two column grid, and the fade-in of every responsive img */
+@layer components {
+  /* the reserved box (width + height attributes) shows a placeholder until the image arrives, then fades in */
+  .responsive-img {
+    background-color: var(--grey-200);
+    color: transparent;
+    transition: background-color var(--t-fade) ease;
+  }
+
+  /* the overview script adds .loaded; dropping the placeholder keeps transparent pngs off a grey backdrop */
+  .responsive-img.loaded {
+    background-color: transparent;
+    animation: fade-in var(--t-fade) ease;
+  }
+
+  .project-image {
+    position: relative;
+    text-align: center;
+    color: white;
+    max-width: min(100%, 800px);
+  }
+
+  .project-image img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* the hero spans the layout, as high as the image at that width but never more than the viewport */
+  .project-image.main-image {
+    max-width: 100%;
+  }
+
+  .project-image.main-image img {
+    display: block;
+    width: 100%;
+    max-height: 100vh;
+  }
+
+  .main-image .image-caption {
+    max-height: 100%;
+  }
+
+  /* captions */
+  .font-large {
+    font-size: var(--fs-display);
+    font-weight: 200;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    padding: 30px;
+    text-shadow:
+      0 0 40px var(--black-a80),
+      0 4px 16px var(--black-a60);
+    transition: all var(--t-base);
+  }
+
+  .black-on-white {
+    color: black;
+    text-shadow:
+      0 0 40px var(--white-a80),
+      0 4px 16px var(--white-a60);
+  }
+
+  .font-small {
+    background-color: black;
+    font-size: var(--fs-sm);
+    padding: 2px 3px;
+  }
+
+  .center-center {
+    position: absolute;
+    top: min(50%, 50vh);
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  /* the corner link of an image, shown on hover where there is one, always on touch screens */
+  .image-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: var(--z-raised);
+    color: white;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  @media (hover: hover) {
+    .image-link {
+      opacity: 0;
+      transition: opacity var(--t-fast) ease;
+    }
+
+    .project-image:hover .image-link,
+    .image-grid-content:hover .image-link,
+    .image-link:focus-visible {
+      opacity: 1;
+    }
+  }
+
+  /* two column grid of images */
+  .image-grid {
+    columns: 2;
+    column-gap: 6px;
+    width: 100%;
+  }
+
+  .image-grid-content {
+    position: relative;
+    break-inside: avoid;
+    margin-bottom: 6px;
+    overflow: hidden;
+    color: white;
+    font-weight: 300;
+  }
+
+  .image-grid-content img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform var(--t-slow) ease;
+  }
+
+  .image-grid-content:hover img {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 570px) {
+    .font-large {
+      font-size: var(--fs-display-sm);
+      padding: 20px;
+    }
+
+    .image-grid {
+      columns: 1;
+    }
+  }
+}

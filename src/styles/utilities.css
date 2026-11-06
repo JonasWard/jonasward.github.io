@@ -1,0 +1,20 @@
+/* last layer: wins over every component by layer order alone */
+@layer utilities {
+  /* components that set a display (e.g. the keyword dropdown, the cards) still hide with the hidden attribute */
+  [hidden] {
+    display: none;
+  }
+
+  .fade-in {
+    animation: fade-in var(--t-slow) forwards;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

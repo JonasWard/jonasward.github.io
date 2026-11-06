@@ -1,0 +1,27 @@
+/* keyword chips on an overview card, collapsed until the card's keyword list is opened */
+@layer components {
+  .project-chip {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    text-transform: lowercase;
+    border: 1px solid var(--grey-300);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    opacity: 0.85;
+    cursor: pointer;
+    transition: all var(--t-base);
+  }
+
+  .project-chip.hidden {
+    width: 0;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+
+  .project-chip:hover {
+    filter: invert(99%);
+  }
+}

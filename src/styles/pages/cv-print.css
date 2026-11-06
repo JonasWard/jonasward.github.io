@@ -1,0 +1,60 @@
+@layer tokens, base, layout, components, pages, utilities;
+
+/* the cv on paper, also what scripts/buildPdfs.mjs turns into the downloadable pdf */
+@page {
+  size: A4;
+  margin: 14mm 12mm 16mm;
+}
+
+@layer pages {
+  @media print {
+    .header,
+    .cv-download {
+      display: none;
+    }
+
+    html,
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .cv-content {
+      margin: 0;
+      padding: 0;
+      max-width: none;
+    }
+
+    .cv-header,
+    .cv-header-photo,
+    .cv-header-title,
+    .cv-grid {
+      max-width: none;
+    }
+
+    /* the logo keeps its proportions on paper */
+    .cv-logo {
+      height: auto;
+    }
+
+    .cv-print-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: var(--space-4);
+      font-size: var(--fs-2xs);
+      break-inside: avoid;
+    }
+
+    .cv-print-footer a {
+      color: black;
+      text-decoration: underline;
+    }
+
+    .cv-print-footer img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}

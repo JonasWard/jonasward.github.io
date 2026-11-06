@@ -22,10 +22,6 @@ const contentImageSizes = 'min(100vw, 800px)';
 const imagesSizes = 'min(100vw, 800px)';
 const imageGridSizes = '(max-width: 650px) 100vw, min(50vw, 600px)';
 
-// the hero is as high as the image at the layout's width, but never more than the viewport
-const mainImageHeight = (image: ProjectImage) =>
-  `min(100vh, calc(min(100vw, 1200px) * ${image.picture.img.h / image.picture.img.w}))`;
-
 export const imageLink = (link: NonNullable<ProjectImage['link']>) =>
   `<a${attrs({
     class: 'image-link font-small',
@@ -48,17 +44,16 @@ export const renderImage = (
   })}>${responsiveImg(image.picture, {
     sizes: isMainImage ? mainImageSizes : contentImageSizes,
     eager: isMainImage,
-    alt: image.imageText ?? '',
-    style: style({ height: maxHeight ?? (isMainImage ? mainImageHeight(image) : undefined) })
+    alt: image.imageText ?? ''
   })}${image.link ? imageLink(image.link) : ''}${
     image.imageText
       ? `<div${attrs({
           class: cls(
+            'image-caption',
             `font-${image.imageTextSize ?? (isMainImage ? 'large' : 'small')}`,
             `${textPosition}-${textAlignment}`,
             image.imageTextColor
-          ),
-          style: style({ maxHeight: isMainImage ? mainImageHeight(image) : undefined })
+          )
         })}>${esc(image.imageText)}</div>`
       : ''
   }</div>`;
@@ -141,7 +136,7 @@ const metaItem = (label: string, body: string, className = 'meta-item') =>
   `<div class="${className}"><span class="meta-label">${label}</span>${body}</div>`;
 
 export const renderMetaBlock = (m: ProjectMetaData) =>
-  `<div class="project-meta-block-left ${esc(m.projectType)}"><div class="project-meta-block">${[
+  `<div class="project-meta-block-left" data-category="${esc(m.projectType)}"><div class="project-meta-block">${[
     metaItem('category', metaLink(m.projectType)),
     metaItem('context', metaLink(m.projectContext)),
     metaItem('collaboration', metaLink(m.projectPartnerContext)),

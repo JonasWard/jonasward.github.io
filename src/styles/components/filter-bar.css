@@ -1,0 +1,101 @@
+/* keyword filter in the overview's header: active keywords as chips, an input and its suggestion dropdown */
+@layer components {
+  .keyword-filter-inner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 var(--header-content-inset);
+    margin: var(--space-2);
+  }
+
+  .kf-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    text-align: left;
+    border: 1px solid black;
+    border-radius: 0;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: background-color var(--t-fast);
+  }
+
+  .kf-chip span {
+    font-size: var(--fs-sm);
+    font-weight: 300;
+    opacity: 0.6;
+    line-height: 1;
+  }
+
+  .kf-chip:hover {
+    background-color: var(--grey-800);
+  }
+
+  .kf-input-wrap {
+    position: relative;
+    flex: 1;
+  }
+
+  .kf-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: var(--fs-xs);
+    font-weight: 400;
+    color: var(--grey-800);
+    width: 100%;
+    min-width: 120px;
+    letter-spacing: 0.04em;
+  }
+
+  .kf-input::placeholder {
+    color: var(--black-a30);
+    font-style: italic;
+  }
+
+  .kf-dropdown {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    left: 0;
+    z-index: var(--z-dropdown);
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+    max-height: 260px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid var(--black-a10);
+    box-shadow: 0 6px 20px var(--black-a10);
+  }
+
+  .kf-suggestion {
+    width: 100%;
+    padding: 7px 14px;
+    font-size: var(--fs-xs);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    text-transform: lowercase;
+    text-align: left;
+    color: var(--grey-800);
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--black-a05);
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color var(--t-fast);
+  }
+
+  .kf-suggestion:last-child {
+    border-bottom: none;
+  }
+
+  .kf-suggestion:hover {
+    background-color: var(--grey-50);
+    color: black;
+  }
+}
