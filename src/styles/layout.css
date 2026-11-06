@@ -102,6 +102,13 @@
       row-gap: 0;
     }
 
+    /* with js the desktop grid waits for the masonry, so cards never paint in rows and then jump */
+    @media (min-width: 571px) {
+      :root.js &:not(.masonry) {
+        visibility: hidden;
+      }
+    }
+
     @media (max-width: 570px) {
       grid-template-columns: none;
       grid-auto-flow: column;

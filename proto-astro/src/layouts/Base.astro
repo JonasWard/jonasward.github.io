@@ -29,6 +29,7 @@ const path = Astro.url.pathname;
     <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />
     <!-- old hash routes (printed cvs, qr codes, links inside project texts) move to the real path -->
     <script is:inline>
+      document.documentElement.classList.add('js');
       (function () {
         var go = function () {
           var h = location.hash;
