@@ -1,23 +1,75 @@
 name: Build and Deploy to GitHub Pages
 
+# every pull request gets the full build and checks, only master deploys
 on:
   push:
     branches:
       - master
+  pull_request:
   workflow_dispatch:
 
-# a newer push queues behind a running deploy instead of cancelling it halfway
+# a newer push to a pull request cancels its older build; on master runs queue, so a deploy is never cut off halfway
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
 
 jobs:
-  # build and deploy in one job, so every change to master is a single run with a single job
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # astro 7 needs node >= 22.23.4, bun installs the packages and runs the scripts
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # chromium prints the cv pdfs and runs the checks; pdftotext reads the pdfs back in the checks
+      - name: Install Chromium and pdftotext
+        run: |
+          bunx playwright install --with-deps chromium
+          sudo apt-get install -y --no-install-recommends poppler-utils
+
+      # vite-imagetools caches every generated image variant here, restoring it saves re-encoding them all on each build
+      - name: Cache generated images
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/imagetools
+          key: imagetools-${{ hashFiles('src/data/**', 'astro.config.mjs') }}
+          restore-keys: imagetools-
+
+      - name: Build site and cv pdfs
+        run: bun run build
+
+      - name: Check the build
+        run: node test/check.mjs --no-shots
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
+
   deploy:
+    needs: build
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
       pages: write
       id-token: write
 
@@ -26,33 +78,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: '1.x'
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
-
-      # vite-imagetools caches every generated image variant here, restoring it saves re-encoding them all on each deploy
-      - name: Cache generated images
-        uses: actions/cache@v4
-        with:
-          path: node_modules/.cache/imagetools
-          key: imagetools-${{ hashFiles('src/data/projects/**', 'vite.config.mts') }}
-          restore-keys: imagetools-
-
-      - name: Build project
-        run: bun run build
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./build
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
