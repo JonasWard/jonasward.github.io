@@ -1,0 +1,16 @@
+---
+import 'src/components/projects/overview/ProjectCard.css';
+import 'src/components/projects/overview/ProjectChip.css';
+import 'src/components/projects/overview/KeywordFilterBar.css';
+import Base from '../layouts/Base.astro';
+import { allProjects } from 'src/data/projects/allProjects';
+import { renderKeywordFilterBar, renderProjectGrid } from 'src/render/overview';
+---
+
+<Base title="Projects | Jonas Ward" headerChildren={renderKeywordFilterBar()}>
+  <Fragment set:html={renderProjectGrid(allProjects)} />
+</Base>
+
+<script>
+  import '../scripts/overview';
+</script>

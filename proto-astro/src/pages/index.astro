@@ -1,0 +1,12 @@
+---
+import 'src/components/landingMissing/landing.css';
+import Base from '../layouts/Base.astro';
+---
+
+<!-- landing canvas (paperTiles.ts) is migration step 3: its plain `.png` import would become an astro image object,
+     it needs `?url` there first. For the prototype the root page only has to forward old hash links. -->
+<Base header={false}>
+  <a class="landing-page" id="landing-page" href="/projects/" style="display:grid;place-items:center;color:inherit">
+    <span>jonas ward — projects</span>
+  </a>
+</Base>

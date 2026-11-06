@@ -1,0 +1,54 @@
+---
+import 'src/index.css';
+import 'src/components/header.css';
+import 'src/components/projects/pagecomponents/responsiveImg.css';
+import '../styles/static.css';
+import logo from 'src/assets/icons/jonasward_logo_ww.svg?url';
+import favicon from 'src/assets/favicon.ico?url&no-inline';
+import { renderHeader } from 'src/render/header';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** html below the header row, e.g. the keyword filter */
+  headerChildren?: string;
+  header?: boolean;
+}
+const { title = 'Jonas Ward', description = 'Jonas Ward Portfolio Website', headerChildren, header = true } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content={description} />
+    <link rel="icon" href={favicon} />
+    <title>{title}</title>
+    <!-- old hash routes (printed cvs, qr codes, links inside project texts) move to the real path -->
+    <script is:inline>
+      (function () {
+        var go = function () {
+          var h = location.hash;
+          if (h.indexOf('#/') !== 0) return;
+          var u = new URL(h.slice(1), location.origin);
+          if (!/\/$|\.\w+$/.test(u.pathname)) u.pathname += '/';
+          location.replace(u.pathname + u.search + u.hash);
+        };
+        go();
+        addEventListener('hashchange', go);
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="project-page">
+      {header && <Fragment set:html={renderHeader({ path, logoSrc: logo, children: headerChildren })} />}
+      <slot />
+    </div>
+    <script>
+      import '../scripts/common';
+    </script>
+  </body>
+</html>

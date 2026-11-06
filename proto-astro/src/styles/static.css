@@ -1,0 +1,86 @@
+/* what changes when react's onClick buttons and js layout become plain links and css */
+
+/* header: links styled like the `.header button`s they replace */
+.header-logo {
+  display: flex;
+}
+
+.header a.button-main {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 1px 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+  transition: 0.6s;
+}
+
+/* project page meta block: links instead of buttons */
+a.meta-value--link {
+  display: inline-block;
+}
+
+a.meta-keyword {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* the project card is a link now */
+a.project-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* overview: css grid of fixed 200px columns instead of computeLayout(), at most 6 columns */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  justify-content: center;
+  align-items: start;
+  gap: 16px;
+  max-width: calc(6 * 200px + 5 * 16px);
+  margin: 90px auto 0;
+  padding: 0 8px;
+}
+
+/* phones: one horizontal row, the card in the middle is in focus */
+@media screen and (max-width: 570px) {
+  .project-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 200px;
+    justify-content: start;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding: 0 calc(50vw - 100px) 16px;
+    max-width: none;
+    scrollbar-width: none;
+  }
+
+  .project-grid > .project-card {
+    scroll-snap-align: center;
+  }
+}
+
+/* set by the overview script: 1px rows, every card spans its own height + the 16px gap */
+.project-grid.masonry {
+  grid-auto-rows: 1px;
+  grid-auto-flow: row dense;
+  row-gap: 0;
+}
+
+.project-card[hidden] {
+  display: none;
+}
+
+.kf-dropdown[hidden] {
+  display: none;
+}
+
+/* cv: the footer only exists on paper */
+.cv-print-footer {
+  display: none;
+}
