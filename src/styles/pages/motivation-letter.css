@@ -21,7 +21,6 @@
     border-radius: var(--radius-md);
     padding: 2px var(--space-2);
     font-size: var(--fs-sm);
-    cursor: pointer;
   }
 
   .drawer {
@@ -77,7 +76,6 @@
     border: 2px solid white;
     border-radius: var(--radius-md);
     color: white;
-    cursor: pointer;
   }
 
   .drawer button:hover {

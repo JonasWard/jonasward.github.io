@@ -16,14 +16,13 @@
   .text-block h2 {
     font-size: var(--fs-2xl);
     font-weight: 600;
-    margin: 0;
     padding: 0 0 20px;
   }
 
   .text-block p {
     font-size: var(--fs-xl);
     font-weight: 400;
-    margin: 0 0 20px;
+    margin-bottom: 20px;
   }
 
   .text-block a {
@@ -32,8 +31,6 @@
     font-size: var(--fs-xs);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    text-decoration: none;
-    color: black;
     border: 1px solid var(--black-a80);
     transition: background-color var(--t-base) ease, color var(--t-base) ease;
   }

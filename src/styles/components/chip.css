@@ -8,9 +8,7 @@
     text-transform: lowercase;
     border: 1px solid var(--grey-300);
     border-radius: var(--radius-sm);
-    background: transparent;
     opacity: 0.85;
-    cursor: pointer;
     transition: all var(--t-base);
   }
 

@@ -127,6 +127,12 @@
     text-align: right;
   }
 
+  /* the links of the cv stay plain underlined links */
+  .cv-content a {
+    color: LinkText;
+    text-decoration: underline;
+  }
+
   .cv-keep {
     break-inside: avoid;
   }

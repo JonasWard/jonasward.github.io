@@ -21,8 +21,6 @@
   }
 
   .project-image img {
-    max-width: 100%;
-    height: auto;
     object-fit: cover;
   }
 
@@ -32,7 +30,6 @@
   }
 
   .project-image.main-image img {
-    display: block;
     width: 100%;
     max-height: 100vh;
   }
@@ -88,7 +85,6 @@
     z-index: var(--z-raised);
     color: white;
     line-height: 1.2;
-    text-decoration: none;
   }
 
   @media (hover: hover) {
@@ -121,9 +117,7 @@
   }
 
   .image-grid-content img {
-    display: block;
     width: 100%;
-    height: auto;
     transition: transform var(--t-slow) ease;
   }
 

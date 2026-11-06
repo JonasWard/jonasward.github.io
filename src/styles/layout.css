@@ -59,8 +59,6 @@
     min-height: 40px;
     padding: 1px 6px;
     font-size: var(--fs-md);
-    color: black;
-    text-decoration: none;
     transition: filter var(--t-slow);
   }
 

@@ -13,15 +13,14 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
+    padding: 1px 6px;
     font-size: var(--fs-xs);
     letter-spacing: 0.08em;
     text-transform: lowercase;
     text-align: left;
     border: 1px solid black;
-    border-radius: 0;
     background-color: black;
     color: white;
-    cursor: pointer;
     transition: background-color var(--t-fast);
   }
 
@@ -82,11 +81,7 @@
     text-transform: lowercase;
     text-align: left;
     color: var(--grey-800);
-    background-color: transparent;
-    border: none;
     border-bottom: 1px solid var(--black-a05);
-    border-radius: 0;
-    cursor: pointer;
     transition: background-color var(--t-fast);
   }
 

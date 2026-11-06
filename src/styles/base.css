@@ -8,7 +8,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* form controls take the page font instead of the system one; buttons also its colour */
+  /* form controls take the page font instead of the system one */
   button,
   input,
   select,
@@ -16,8 +16,34 @@
     font: inherit;
   }
 
+  /* buttons and links look like their surroundings until a component styles them */
   button {
+    padding: 0;
     color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* images are blocks (no baseline gap below them) that never overflow their box */
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* spacing between headings and paragraphs comes from the parent's gap */
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
   }
 
   :root::-webkit-scrollbar {

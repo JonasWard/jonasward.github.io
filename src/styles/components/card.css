@@ -4,16 +4,12 @@
     display: block;
     position: relative;
     width: 200px;
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
     background-color: color-mix(in srgb, var(--cat, var(--grey-100)) 12%, var(--grey-100));
     transition: all var(--t-base);
   }
 
   .project-card img {
     width: 100%;
-    height: auto;
     min-height: 100px;
     object-fit: cover;
     filter: brightness(0.8) contrast(0.85) saturate(0.75) brightness(1.25);
@@ -21,8 +17,11 @@
   }
 
   .project-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
     position: relative;
-    padding: var(--space-1) var(--space-2);
+    padding: var(--space-2) var(--space-2) var(--space-1);
     overflow: hidden;
     /* the stripe and the content below stack against each other only, never against the page's fixed header */
     isolation: isolate;
@@ -49,7 +48,6 @@
   .project-card h2 {
     font-weight: 500;
     font-size: var(--fs-lg);
-    margin: var(--space-2) 0;
   }
 
   .project-card h3 {
@@ -59,7 +57,6 @@
     font-size: var(--fs-xs);
     font-weight: 400;
     text-decoration: underline;
-    margin-block: auto var(--space-2);
   }
 
   .project-card h3 svg {
@@ -76,13 +73,11 @@
   .project-card h4 {
     font-size: var(--fs-xs);
     font-weight: 300;
-    margin-block: var(--space-1) 0;
   }
 
   .project-card p {
     font-weight: 300;
     font-size: var(--fs-sm);
-    margin: var(--space-2) 0;
   }
 
   .keywords {

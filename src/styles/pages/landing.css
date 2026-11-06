@@ -6,8 +6,6 @@
     position: fixed;
     inset: 0;
     overflow: hidden;
-    color: inherit;
-    cursor: pointer;
   }
 
   .landing-canvas {
