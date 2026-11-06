@@ -1,6 +1,7 @@
 import vsSource from './shaders/paperTilesVertexShader.glsl?raw';
 import wallSource from './shaders/paperTilesWallShader.glsl?raw';
 import shadeSource from './shaders/paperTilesShadeShader.glsl?raw';
+import paperSource from './shaders/paperTilesPaperShader.glsl?raw';
 import logoSdfUrl from 'src/assets/icons/jonasward_logo_sdf.png'; // inlined as a data url, see vite.config.ts
 
 const DEFAULT_NEUTRAL_COLOR: [number, number, number] = [Math.floor(Math.random() * 360), 0.08, 0.66];
@@ -8,6 +9,7 @@ const DEFAULT_HUE_DELTA = 20;
 const DEFAULT_SATURATION_DELTA = 0.04;
 const DEFAULT_VALUE_DELTA = 0.12;
 const PALETTE_SIZE = 32;
+const PAPER_TEXELS = 1024; // the baked paper tile, 2 texels per css px, keep in step with its shader
 const LOGO_SDF_SPREAD = 48; // px of the distance field texture on each side of the outline
 const LOGO_CSS_WIDTH_MAX = 894.5;
 const LOGO_VIEWPORT_FRACTION = 0.8;
@@ -113,10 +115,12 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     return () => undefined;
   }
 
-  // two passes: the wall (tiles, paper, logo cut, height) into a texture, then the shadows over it
+  // two passes a frame: the wall (tiles, paper, logo cut, height) into a texture, then the
+  // shadows over it; and once, before, the paper's texture into a tile the wall repeats
   const wallProgram = createProgram(gl, wallSource);
   const shadeProgram = createProgram(gl, shadeSource);
-  if (!(wallProgram && shadeProgram)) {
+  const paperProgram = createProgram(gl, paperSource);
+  if (!(wallProgram && shadeProgram && paperProgram)) {
     console.error('Could not initialize shaders');
     return () => undefined;
   }
@@ -129,7 +133,8 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     'uPalette',
     'uLogo',
     'uLogoRect',
-    'uLogoSpread'
+    'uLogoSpread',
+    'uPaper'
   ] as const);
   const shade = uniformLocations(gl, shadeProgram, ['uWall', 'uWallSize', 'uOrigin', 'uResolution', 'uPixelRatio'] as const);
 
@@ -137,6 +142,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   gl.useProgram(wallProgram);
   gl.uniform3fv(wall.uPalette, palette);
   gl.uniform1i(wall.uLogo, 0);
+  gl.uniform1i(wall.uPaper, 2);
   gl.useProgram(shadeProgram);
   gl.uniform1i(shade.uWall, 1);
 
@@ -174,6 +180,31 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
   gl.enableVertexAttribArray(0);
   gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+  // the paper on unit 2: baked now, repeating, with mipmaps so it stays calm when the
+  // wall is drawn at one device px per css px or less
+  const paperTexture = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE2);
+  gl.bindTexture(gl.TEXTURE_2D, paperTexture);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+  const paperFramebuffer = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, paperFramebuffer);
+  // a single channel is all it needs; should a (mobile) driver not render into one, four
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.R8, PAPER_TEXELS, PAPER_TEXELS, 0, gl.RED, gl.UNSIGNED_BYTE, null);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, paperTexture, 0);
+  if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) {
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, PAPER_TEXELS, PAPER_TEXELS, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+  }
+  gl.viewport(0, 0, PAPER_TEXELS, PAPER_TEXELS);
+  gl.useProgram(paperProgram);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  gl.generateMipmap(gl.TEXTURE_2D);
+  gl.deleteFramebuffer(paperFramebuffer);
+  gl.deleteProgram(paperProgram);
 
   let width = 0;
   let height = 0;
@@ -331,5 +362,6 @@ export const startPaperTiles = (canvas: HTMLCanvasElement): (() => void) => {
     gl.deleteProgram(shadeProgram);
     gl.deleteTexture(logoTexture);
     gl.deleteTexture(wallTexture);
+    gl.deleteTexture(paperTexture);
   };
 };
