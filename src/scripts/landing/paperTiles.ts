@@ -52,7 +52,9 @@ const SHADOW_REACH_CSS_PX = 16; // how far the shade pass marches, keep in step 
 // between frames; it moves a few css px per second, so 30 still reads as smooth on a phone
 const FAST_FRAME_MS = 1000 / 60;
 const SLOW_FRAME_MS = 1000 / 30;
-const FRAME_TOLERANCE_MS = 4; // so a display settles on every n-th frame instead of drifting between n and n + 1
+// frames are drawn on every n-th display refresh, n from the measured refresh interval, so timestamp jitter
+// never makes a frame wait one refresh longer (on a 120 Hz display 60 fps is exactly every second refresh)
+const REFRESH_WINDOW = 30; // refresh intervals the display rate is measured over
 const PIXEL_RATIO_STEPS = [1.5, 1.25, 1, 0.75]; // device px per css px
 // phones start at one device px per css px: about half the pixels of 1.5, hardly visible at their density
 const PHONE_PIXEL_RATIO_STEP = 2;
@@ -60,10 +62,10 @@ const PHONE_PIXEL_RATIO_STEP = 2;
 // with a gpu timer (EXT_disjoint_timer_query_webgl2, most desktop browsers) the frame rate and the resolution
 // follow the gpu's time per frame, both ways, with hysteresis so neither flips back and forth
 const GPU_WINDOW = 6; // samples judged together
-const GPU_60FPS_BELOW_MS = 7; // switch to 60 fps when a frame takes less than this
-const GPU_30FPS_ABOVE_MS = 11; // back to 30 fps above this
-const GPU_STEP_DOWN_ABOVE_MS = 20; // even at 30 fps the frame is too heavy: fewer pixels
-const GPU_STEP_UP_BELOW_MS = 5; // estimated time at the next resolution up, below this it steps up
+const GPU_60FPS_BELOW_MS = 10; // switch to 60 fps when a frame takes less than this (of its 16.7 ms)
+const GPU_30FPS_ABOVE_MS = 14; // back to 30 fps above this
+const GPU_STEP_DOWN_ABOVE_MS = 24; // even at 30 fps the frame is too heavy: fewer pixels
+const GPU_STEP_UP_BELOW_MS = 9; // estimated time at the next resolution up, below this it steps up
 
 // the time between drawn frames is always watched, timer or not (Safari and most phones have none, and some
 // timers never return a usable result): the resolution steps down while it stays well above 30 fps. Only the timer
@@ -121,6 +123,7 @@ export type PaperTilesStats = {
   frameMs: number; // median time between drawn frames
   gpuMs: number | null; // median gpu time per frame, null without a gpu timer
   targetFps: number;
+  refreshHz: number; // the display's refresh rate, as measured
   pixelRatio: number;
   width: number;
   height: number;
@@ -129,9 +132,10 @@ export type PaperTilesStats = {
 export const startPaperTiles = (
   canvas: HTMLCanvasElement,
   onFail: (reason: string) => void = () => undefined,
-  // called after every judged window of frames, for the ?debug overlay
-  onStats?: (stats: PaperTilesStats) => void
+  // for the ?debug overlay: stats after every judged window of frames, and a line for every resolution change
+  hooks: { onStats?: (stats: PaperTilesStats) => void; onLog?: (line: string) => void } = {}
 ): (() => void) => {
+  const { onStats, onLog } = hooks;
   let failed = false;
   const fail = (reason: string) => {
     if (failed) return;
@@ -375,7 +379,8 @@ export const startPaperTiles = (
   let targetFrameMs = SLOW_FRAME_MS;
   let gpuMs: number | null = null;
   const median = (values: number[]) => [...values].sort((a, b) => a - b)[values.length >> 1];
-  const stepTo = (step: number) => {
+  const stepTo = (step: number, reason: string) => {
+    onLog?.(`resolution ${PIXEL_RATIO_STEPS[pixelRatioStep]} -> ${PIXEL_RATIO_STEPS[step]} px/css px: ${reason}`);
     pixelRatioStep = step;
     gpuSamples.length = 0; // the next window measures the new size
     drawIntervals.length = 0;
@@ -388,11 +393,14 @@ export const startPaperTiles = (
     gpuSamples.length = 0;
     if (gpuMs < GPU_60FPS_BELOW_MS) targetFrameMs = FAST_FRAME_MS;
     else if (gpuMs > GPU_30FPS_ABOVE_MS) targetFrameMs = SLOW_FRAME_MS;
-    if (gpuMs > GPU_STEP_DOWN_ABOVE_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1) stepTo(pixelRatioStep + 1);
+    if (gpuMs > GPU_STEP_DOWN_ABOVE_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1)
+      stepTo(pixelRatioStep + 1, `gpu ${gpuMs.toFixed(1)} ms per frame`);
     else if (pixelRatioStep > 0) {
       // the cost scales with the pixel count; the device's own ratio caps how far up it is worth going
       const up = Math.min(PIXEL_RATIO_STEPS[pixelRatioStep - 1], Math.max(window.devicePixelRatio || 1, 1));
-      if (up > pixelRatio && gpuMs * (up / pixelRatio) ** 2 < GPU_STEP_UP_BELOW_MS) stepTo(pixelRatioStep - 1);
+      const estimate = gpuMs * (up / pixelRatio) ** 2;
+      if (up > pixelRatio && estimate < GPU_STEP_UP_BELOW_MS)
+        stepTo(pixelRatioStep - 1, `gpu ${gpuMs.toFixed(1)} ms, about ${estimate.toFixed(1)} ms there`);
     }
   };
 
@@ -402,7 +410,8 @@ export const startPaperTiles = (
     if (drawIntervals.length < INTERVAL_WINDOW) return;
     const frameMs = median(drawIntervals);
     drawIntervals.length = 0;
-    if (frameMs > INTERVAL_SLOW_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1) stepTo(pixelRatioStep + 1);
+    if (frameMs > INTERVAL_SLOW_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1)
+      stepTo(pixelRatioStep + 1, `frames ${frameMs.toFixed(0)} ms apart`);
   };
 
   let lastDrawAt = -Infinity;
@@ -411,7 +420,15 @@ export const startPaperTiles = (
     lastDrawAt = now;
     if (interval <= PACE_GAP_MS && now - startedAt > INTERVAL_WARMUP_MS) drawIntervals.push(interval);
     if (drawIntervals.length >= INTERVAL_WINDOW)
-      onStats?.({ frameMs: median(drawIntervals), gpuMs, targetFps: Math.round(1000 / targetFrameMs), pixelRatio, width, height });
+      onStats?.({
+        frameMs: median(drawIntervals),
+        gpuMs,
+        targetFps: Math.round(1000 / targetFrameMs),
+        refreshHz: Math.round(1000 / refreshMs),
+        pixelRatio,
+        width,
+        height
+      });
     if (timer) {
       readQuery();
       judgeGpu();
@@ -429,11 +446,28 @@ export const startPaperTiles = (
     if (pixel[0] + pixel[1] + pixel[2] === 0) fail(`the first frame is black (gl error ${gl.getError()})`);
   };
 
+  // the display's refresh interval, from the gaps between animation frames (gaps of a hidden tab left out)
+  const refreshIntervals: number[] = [];
+  let refreshMs = 1000 / 60;
+  let lastFrameAt = -Infinity;
+  let refreshesSinceDraw = 0;
+  const measureRefresh = (now: number) => {
+    const gap = now - lastFrameAt;
+    lastFrameAt = now;
+    if (gap > 100) return;
+    refreshIntervals.push(gap);
+    if (refreshIntervals.length > REFRESH_WINDOW) refreshIntervals.shift();
+    refreshMs = median(refreshIntervals);
+  };
+
   const render = (now: number) => {
     if (stopped || failed) return;
     if (!reducedMotion) {
       frame = requestAnimationFrame(render);
-      if (now - lastDrawAt < targetFrameMs - FRAME_TOLERANCE_MS) return;
+      measureRefresh(now);
+      refreshesSinceDraw++;
+      if (refreshesSinceDraw < Math.max(1, Math.round(targetFrameMs / refreshMs))) return;
+      refreshesSinceDraw = 0;
       pace(now);
     }
     draw();
