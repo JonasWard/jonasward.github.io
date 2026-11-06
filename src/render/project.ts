@@ -24,13 +24,19 @@ const imageGridSizes = '(max-width: 650px) 100vw, min(50vw, 600px)';
 
 export const imageLink = (link: NonNullable<ProjectImage['link']>) =>
   `<a${attrs({
-    class: 'image-link font-small',
+    class: 'image-link caption caption--small',
     href: link.href,
     target: '_blank',
     rel: 'noopener noreferrer',
     title: link.title,
     'aria-label': link.title
   })}>↗</a>`;
+
+/** text over an image: `size` small (a black label) or large (the hero title), `pos` e.g. bottom-right */
+const caption = (text: string, size: string, pos: string, color?: ProjectImage['imageTextColor']) =>
+  `<div${attrs({ class: cls('caption', `caption--${size}`, color === 'black-on-white' && 'caption--dark'), 'data-pos': pos })}>${esc(
+    text
+  )}</div>`;
 
 export const renderImage = (
   image: ProjectImage,
@@ -47,14 +53,12 @@ export const renderImage = (
     alt: image.imageText ?? ''
   })}${image.link ? imageLink(image.link) : ''}${
     image.imageText
-      ? `<div${attrs({
-          class: cls(
-            'image-caption',
-            `font-${image.imageTextSize ?? (isMainImage ? 'large' : 'small')}`,
-            `${textPosition}-${textAlignment}`,
-            image.imageTextColor
-          )
-        })}>${esc(image.imageText)}</div>`
+      ? caption(
+          image.imageText,
+          image.imageTextSize ?? (isMainImage ? 'large' : 'small'),
+          `${textPosition}-${textAlignment}`,
+          image.imageTextColor
+        )
       : ''
   }</div>`;
 };
@@ -81,9 +85,11 @@ export const renderImages = (content: ProjectImages) => {
         alt: image.imageText ?? ''
       })}${image.link ? imageLink(image.link) : ''}${
         image.imageText
-          ? `<div class="font-${image.imageTextSize ?? 'small'} ${image.imageTextPosition ?? 'bottom'}-${
-              image.imageTextAlignment ?? 'right'
-            }">${esc(image.imageText)}</div>`
+          ? caption(
+              image.imageText,
+              image.imageTextSize ?? 'small',
+              `${image.imageTextPosition ?? 'bottom'}-${image.imageTextAlignment ?? 'right'}`
+            )
           : ''
       }</div>`
   )}</div>`;

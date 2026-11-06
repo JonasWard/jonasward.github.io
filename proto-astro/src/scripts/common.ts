@@ -7,7 +7,7 @@ document.querySelectorAll<HTMLImageElement>('img.responsive-img').forEach((img) 
 });
 
 const toggle = document.querySelector<HTMLElement>('[data-nav-toggle]');
-const dropdown = document.querySelector<HTMLElement>('.dropdown-content');
+const dropdown = document.querySelector<HTMLElement>('.nav-menu');
 toggle?.addEventListener('click', () => {
   toggle.classList.toggle('show');
   dropdown?.classList.toggle('show');

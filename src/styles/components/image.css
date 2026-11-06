@@ -32,14 +32,36 @@
         max-height: 100vh;
       }
 
-      .image-caption {
+      .caption {
         max-height: 100%;
       }
     }
   }
 
-  /* captions */
-  .font-large {
+  /* text over an image: a black label (--small) or the hero's title (--large, --dark for light images); data-pos
+     places it */
+  .caption {
+    position: absolute;
+
+    &[data-pos='center-center'] {
+      top: min(50%, 50vh);
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &[data-pos='bottom-right'] {
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  .caption--small {
+    background-color: black;
+    font-size: var(--fs-sm);
+    padding: var(--space-0h) var(--space-1);
+  }
+
+  .caption--large {
     font-size: var(--fs-display);
     font-weight: 200;
     line-height: 1.1;
@@ -54,33 +76,13 @@
     }
   }
 
-  .black-on-white {
+  .caption--dark {
     color: black;
     text-shadow: var(--glow-light);
   }
 
-  .font-small {
-    background-color: black;
-    font-size: var(--fs-sm);
-    padding: var(--space-0h) var(--space-1);
-  }
-
-  .center-center {
-    position: absolute;
-    top: min(50%, 50vh);
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .bottom-right {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-
   /* the corner link of an image, shown on hover where there is one, always on touch screens */
   .image-link {
-    position: absolute;
     top: 0;
     right: 0;
     z-index: var(--z-raised);

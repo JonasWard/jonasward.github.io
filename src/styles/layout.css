@@ -35,7 +35,7 @@
   }
 
   /* the burger, phones only */
-  .navigation-button {
+  .nav-toggle {
     display: none;
 
     @media (max-width: 570px) {
@@ -47,7 +47,7 @@
   }
 
   /* a row of links, on phones a column that the burger opens */
-  .dropdown-content {
+  .nav-menu {
     display: flex;
     align-items: center;
 
@@ -67,7 +67,7 @@
     }
   }
 
-  .button-main {
+  .nav-link {
     display: inline-flex;
     align-items: center;
     min-height: var(--nav-h);
