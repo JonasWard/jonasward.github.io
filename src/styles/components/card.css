@@ -1,10 +1,14 @@
 /* overview card, a link tinted with its category (--cat comes from data-category, see tokens.css) */
 @layer components {
   .project-card {
+    /* the idle look; the active rule below swaps these */
+    --card-bg: color-mix(in srgb, var(--cat, var(--grey-100)) 12%, var(--grey-100));
+    --stripe-w: 3px;
+    --img-filter: brightness(0.8) contrast(0.85) saturate(0.75) brightness(1.25);
     display: block;
     position: relative;
     width: 200px;
-    background-color: color-mix(in srgb, var(--cat, var(--grey-100)) 12%, var(--grey-100));
+    background-color: var(--card-bg);
     transition: all var(--t-base);
   }
 
@@ -12,7 +16,7 @@
     width: 100%;
     min-height: 100px;
     object-fit: cover;
-    filter: brightness(0.8) contrast(0.85) saturate(0.75) brightness(1.25);
+    filter: var(--img-filter);
     transition: all var(--t-base);
   }
 
@@ -31,7 +35,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 3px;
+    width: var(--stripe-w);
     height: 100%;
     background-color: var(--cat, transparent);
     transition: width var(--t-base) ease;
@@ -103,39 +107,17 @@
     opacity: 0;
   }
 
-  /* active: hovered with a mouse, or in the middle of the row on phones */
-  @media (min-width: 571px) {
-    .project-card:hover {
-      color: white;
-      background-color: var(--cat);
-      transform: scale(1.035);
-    }
-
-    .project-card:hover .project-card-content::before {
-      width: 20%;
-    }
-
-    .project-card:hover img {
-      filter: none;
-    }
+  /* active: hovered, or in the middle of the row on phones (the overview script sets .in-focus on phones only) */
+  .project-card:is(:hover, .in-focus) {
+    --card-bg: var(--cat);
+    --stripe-w: 20%;
+    --img-filter: none;
+    color: white;
   }
 
-  @media (max-width: 570px) {
-    .project-card:hover img {
-      filter: brightness(0.8) contrast(0.85) saturate(0.25) brightness(1.25);
-    }
-
-    .project-card.in-focus {
-      color: white;
-      background-color: var(--cat);
-    }
-
-    .project-card.in-focus .project-card-content::before {
-      width: 20%;
-    }
-
-    .project-card.in-focus img {
-      filter: none;
+  @media (min-width: 571px) {
+    .project-card:hover {
+      transform: scale(1.035);
     }
   }
 }
