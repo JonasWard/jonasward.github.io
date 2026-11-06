@@ -39,12 +39,37 @@
     --hover-red: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
     --active-purple: invert(18%) sepia(52%) saturate(4747%) hue-rotate(241deg) brightness(63%) contrast(127%);
 
-    /* spacing */
+    /* spacing ("h" is a half step) and lines */
+    --space-0h: 2px;
     --space-1: 4px;
     --space-2: 8px;
+    --space-2h: 12px;
     --space-3: 16px;
     --space-4: 24px;
     --space-5: 40px;
+    --hairline: 1px;
+    --border: var(--hairline) solid var(--black-a10);
+    --stripe: 4px;
+    /* the page gutter: header inset, cv padding and columns (the cv keeps its react-pdf proportions) */
+    --gutter: 20px;
+
+    /* layout sizes */
+    --card-w: 200px;
+    --logo-w: 180px;
+    --nav-h: 40px;
+    /* room above the overview grid: the fixed header with its filter bar */
+    --header-h: 90px;
+    /* the smallest box: a meta item, the phone menu, a card image */
+    --min-box: 100px;
+    --content-w: 800px;
+    --cv-w: 690px;
+    --cv-photo: 120px;
+
+    /* shadows */
+    --shadow-pop: 0 var(--space-2) var(--space-4) var(--black-a10);
+    --shadow-paper: 0 var(--space-0h) var(--space-3) var(--black-a20);
+    --glow-dark: 0 0 var(--space-5) var(--black-a80), 0 var(--space-1) var(--space-3) var(--black-a60);
+    --glow-light: 0 0 var(--space-5) var(--white-a80), 0 var(--space-1) var(--space-3) var(--white-a60);
 
     /* type scale; 9px is the fine print of the cv and the meta labels */
     --font: 'Montserrat Variable', sans-serif;
@@ -78,8 +103,8 @@
     --global-max-width: 1200px;
     --simple-padding: 16px;
     --padding-tolerance: min(var(--simple-padding), max(0px, calc(var(--global-max-width) + var(--simple-padding) * 2 - 100vw)));
-    --header-content-width: min(100vw - 40px, var(--global-max-width));
-    --header-content-inset: max(20px, calc((100vw - var(--global-max-width)) * 0.5));
+    --header-content-width: min(100vw - 2 * var(--gutter), var(--global-max-width));
+    --header-content-inset: max(var(--gutter), calc((100vw - var(--global-max-width)) * 0.5));
   }
 
   /* an element with a data-category gets that category's colour as --cat */

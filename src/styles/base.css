@@ -48,15 +48,15 @@
 
   :root {
     &::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
+      width: var(--space-2);
+      height: var(--space-2);
       background-color: black;
-      border: 1px solid var(--black-a20);
+      border: var(--hairline) solid var(--black-a20);
     }
 
     &::-webkit-scrollbar-thumb {
       background-color: var(--white-a60);
-      border-radius: 3.5px;
+      border-radius: var(--space-1);
     }
 
     &::-webkit-scrollbar-track {

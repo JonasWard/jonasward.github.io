@@ -7,8 +7,8 @@
     right: 0;
     z-index: var(--z-header);
     background: var(--white-a60);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--black-a10);
+    backdrop-filter: blur(var(--space-2));
+    border-bottom: var(--border);
     /* the page extends under the status bar on phones (viewport-fit=cover); keep the header below it */
     padding-top: env(safe-area-inset-top, 0px);
   }
@@ -26,7 +26,7 @@
     display: flex;
 
     img {
-      width: 180px;
+      width: var(--logo-w);
     }
   }
 
@@ -56,12 +56,12 @@
 
       &.show {
         position: absolute;
-        right: -20px;
+        right: calc(-1 * var(--header-content-inset));
         top: 0;
         display: flex;
         flex-direction: column;
         background-color: var(--white-a80);
-        min-width: 100px;
+        min-width: var(--min-box);
         z-index: var(--z-dropdown);
       }
     }
@@ -70,8 +70,8 @@
   .button-main {
     display: inline-flex;
     align-items: center;
-    min-height: 40px;
-    padding: 1px 6px;
+    min-height: var(--nav-h);
+    padding-inline: var(--space-2);
     font-size: var(--fs-md);
   }
 
@@ -83,20 +83,20 @@
 
   .project-content {
     align-items: center;
-    gap: 30px;
-    padding: var(--space-4) var(--padding-tolerance) 20px;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--padding-tolerance);
   }
 
-  /* overview: css grid of fixed 200px columns, at most 6; on phones one horizontal row, the card in the middle is
+  /* overview: css grid of fixed card-wide columns, at most 6; on phones one horizontal row, the card in the middle is
      in focus */
   .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
+    grid-template-columns: repeat(auto-fill, var(--card-w));
     justify-content: center;
     align-items: start;
     gap: var(--space-3);
-    max-width: calc(6 * 200px + 5 * var(--space-3));
-    margin: 90px auto 0;
+    max-width: calc(6 * var(--card-w) + 5 * var(--space-3));
+    margin: var(--header-h) auto 0;
     padding: 0 var(--space-2);
 
     /* set by the overview script: 1px rows, every card spans its own height + the gap */
@@ -109,11 +109,11 @@
     @media (max-width: 570px) {
       grid-template-columns: none;
       grid-auto-flow: column;
-      grid-auto-columns: 200px;
+      grid-auto-columns: var(--card-w);
       justify-content: start;
       overflow-x: auto;
       scroll-snap-type: x proximity;
-      padding: 0 calc(50vw - 100px) var(--space-3);
+      padding: 0 calc(50vw - var(--card-w) / 2) var(--space-3);
       max-width: none;
       scrollbar-width: none;
 

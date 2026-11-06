@@ -24,15 +24,15 @@ const div = (className: string | undefined, body: string, id?: string) =>
 const text = (content: string, className = C.regular, href?: string) =>
   div(className, `${esc(content)}${href ? ` - <a href="${esc(href)}">link</a>` : ''}`);
 
-/** an empty spacer, `size` picks one of the .cv-space heights */
-const space = (size?: 7 | 10 | 12 | 20, id: string | undefined = 'divider') =>
+/** an empty spacer, `size` picks one of the .cv-space heights (s 8px, m 12px, l 20px; default 4px) */
+const space = (size?: 's' | 'm' | 'l', id: string | undefined = 'divider') =>
   div(cls('cv-space', size && `cv-space--${size}`), '', id || undefined);
 const dividingSpace = (id?: string) => space(undefined, id);
-const dividingLine = (paddingTop: 7 | 12 = 7) =>
-  space(paddingTop, 'aboveLine') + div('cv-line', '', 'line') + space(7, 'underneathLine');
+const dividingLine = (paddingTop: 's' | 'm' = 's') =>
+  space(paddingTop, 'aboveLine') + div('cv-line', '', 'line') + space('s', 'underneathLine');
 
 const title = (t: string, leftAlign = true) =>
-  text(t, leftAlign ? C.title : C.titleEnd) + space(10, '') + div('cv-rule', '') + space(10, '');
+  text(t, leftAlign ? C.title : C.titleEnd) + space('s', '') + div('cv-rule', '') + space('s', '');
 
 const listContent = (content: ListContent, className?: string) =>
   text(Array.isArray(content) ? content.join(', ') : content, className);
@@ -100,7 +100,7 @@ export const renderSkills = (skills: Skills) =>
                 // the html cv never showed skillSubTitle's margins (react-pdf's View rendered as an inline element)
                 .map(([parent, list]) => div(undefined, text(parent, C.secondaryEnd) + listContent(list, C.skillList)))
                 .join('') +
-              (i < all.length - 1 ? dividingLine(12) : '')
+              (i < all.length - 1 ? dividingLine('m') : '')
           )
         )
         .join(''),
@@ -146,7 +146,7 @@ export const renderCV = (
     .map((t) => text(t))
     .join('')}</div></div></div></div><div id="section 1" class="cv-grid">${renderInfo(data.info)}${renderEducation(
     data.education
-  )}${renderSkills(data.skills)}<div>${renderExperience(data.experience)}${space(20, '')}${renderExtraCurricular(
+  )}${renderSkills(data.skills)}<div>${renderExperience(data.experience)}${space('l', '')}${renderExtraCurricular(
     data.extraCurricular
   )}</div></div></div><div class="cv-print-footer">Created on ${createdOn.getFullYear()}.${
     createdOn.getMonth() + 1

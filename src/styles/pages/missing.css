@@ -20,7 +20,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     align-items: center;
-    gap: 20px;
+    gap: var(--space-4);
     max-width: 80vw;
     max-height: 80vh;
     text-align: center;

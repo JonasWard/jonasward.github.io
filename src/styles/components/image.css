@@ -17,7 +17,7 @@
     position: relative;
     text-align: center;
     color: white;
-    max-width: min(100%, 800px);
+    max-width: min(100%, var(--content-w));
 
     img {
       object-fit: cover;
@@ -44,29 +44,25 @@
     font-weight: 200;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    padding: 30px;
-    text-shadow:
-      0 0 40px var(--black-a80),
-      0 4px 16px var(--black-a60);
+    padding: var(--space-4);
+    text-shadow: var(--glow-dark);
     transition: all var(--t-base);
 
     @media (max-width: 570px) {
       font-size: var(--fs-display-sm);
-      padding: 20px;
+      padding: var(--space-3);
     }
   }
 
   .black-on-white {
     color: black;
-    text-shadow:
-      0 0 40px var(--white-a80),
-      0 4px 16px var(--white-a60);
+    text-shadow: var(--glow-light);
   }
 
   .font-small {
     background-color: black;
     font-size: var(--fs-sm);
-    padding: 2px 3px;
+    padding: var(--space-0h) var(--space-1);
   }
 
   .center-center {
@@ -105,7 +101,7 @@
   /* two column grid of images, one column on phones */
   .image-grid {
     columns: 2;
-    column-gap: 6px;
+    column-gap: var(--space-2);
     width: 100%;
 
     @media (max-width: 570px) {
@@ -116,7 +112,7 @@
   .image-grid-content {
     position: relative;
     break-inside: avoid;
-    margin-bottom: 6px;
+    margin-bottom: var(--space-2);
     overflow: hidden;
     color: white;
     font-weight: 300;

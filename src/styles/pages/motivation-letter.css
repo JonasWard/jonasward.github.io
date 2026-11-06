@@ -10,8 +10,8 @@
 @layer pages {
   .ml-toolbar {
     display: flex;
-    gap: 10px;
-    padding: 50px 0 6px;
+    gap: var(--space-2);
+    padding: var(--space-5) 0 var(--space-2);
 
     select,
     button {
@@ -23,15 +23,18 @@
     }
   }
 
+  /* slides in from the left; not with a transform, which would carry the fixed button along */
   .drawer {
+    --drawer-w: 460px;
     position: fixed;
     top: 0;
-    left: -458px;
+    left: calc(-1 * var(--drawer-w));
     z-index: var(--z-overlay);
-    gap: 6px;
-    width: 438px;
+    gap: var(--space-2);
+    box-sizing: border-box;
+    width: var(--drawer-w);
     height: 100%;
-    padding: 60px 10px 10px 12px;
+    padding: calc(var(--space-5) + var(--gutter)) var(--space-2h) var(--space-2h);
     background-color: var(--grey-900);
     color: white;
     font-weight: 600;
@@ -49,7 +52,7 @@
     textarea {
       border: none;
       border-radius: var(--radius-md);
-      padding: 6px;
+      padding: var(--space-1) var(--space-2);
       font-size: var(--fs-sm);
       font-weight: 400;
     }
@@ -62,12 +65,12 @@
 
     button {
       position: fixed;
-      bottom: 10px;
-      left: 12px;
+      bottom: var(--space-2h);
+      left: var(--space-2h);
       width: 162px;
-      min-height: 40px;
+      min-height: var(--nav-h);
       background: darkslategray;
-      border: 2px solid white;
+      border: var(--space-0h) solid white;
       border-radius: var(--radius-md);
       color: white;
 
@@ -83,14 +86,14 @@
     max-width: 100%;
     min-height: 297mm;
     padding: var(--space-5);
-    box-shadow: 0 2px 16px var(--black-a20);
+    box-shadow: var(--shadow-paper);
     font-size: var(--fs-sm);
   }
 
   .ml-head {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: var(--space-4);
     font-size: var(--fs-2xs);
     font-weight: 200;
     color: var(--grey-800);
@@ -102,28 +105,27 @@
 
   .ml-logo {
     width: 285px;
-    height: 60px;
-    margin-top: -4px;
+    margin-top: calc(-1 * var(--space-1));
   }
 
   .ml-title {
     font-size: var(--fs-2xl);
     font-weight: 800;
-    margin: 2px 0;
+    margin: var(--space-0h) 0;
   }
 
   .ml-rule {
-    height: 4px;
+    height: var(--space-1);
     background: black;
-    margin: 10px 0;
+    margin: var(--space-2h) 0;
   }
 
   .ml-body {
-    gap: 10px;
+    gap: var(--space-2h);
 
     p,
     ul {
-      margin: 0 0 10px;
+      margin: 0 0 var(--space-2h);
     }
   }
 
@@ -133,7 +135,7 @@
   }
 
   .ml-space {
-    height: 3px;
+    height: var(--space-1);
   }
 
   @media print {

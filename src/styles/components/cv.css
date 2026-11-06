@@ -4,9 +4,9 @@
 @layer components {
   .cv-content {
     position: relative;
-    max-width: min(100vw, 690px);
+    max-width: min(100vw, var(--cv-w));
     margin: var(--space-5) auto;
-    padding: 20px;
+    padding: var(--gutter);
 
     /* the links of the cv stay plain underlined links */
     a {
@@ -22,7 +22,8 @@
   .cv-download-link {
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    gap: var(--space-1);
+    padding: var(--space-2) 0;
     font-size: var(--fs-sm);
     color: var(--link-blue);
     transition: opacity var(--t-slow);
@@ -32,9 +33,8 @@
     }
 
     img {
-      width: 25px;
-      height: 25px;
-      margin-right: 5px;
+      width: var(--space-4);
+      height: var(--space-4);
     }
   }
 
@@ -42,8 +42,8 @@
   .cv-header {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
-    max-width: calc(100vw - 40px);
+    gap: var(--gutter);
+    max-width: calc(100vw - 2 * var(--gutter));
 
     @media screen and (max-width: 750px) {
       flex-direction: column-reverse;
@@ -52,7 +52,7 @@
 
   .cv-header-photo,
   .cv-header-title {
-    width: calc((100% - 20px) * var(--share));
+    width: calc((100% - var(--gutter)) * var(--share));
 
     @media screen and (max-width: 750px) {
       width: 100%;
@@ -66,12 +66,12 @@
   .cv-header-title {
     --share: 0.6;
     justify-content: space-between;
-    gap: 20px;
+    gap: var(--gutter);
   }
 
   .cv-profile {
-    width: 120px;
-    height: 120px;
+    width: var(--cv-photo);
+    height: var(--cv-photo);
     border-radius: 50%;
   }
 
@@ -83,10 +83,10 @@
   .cv-grid {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-    gap: 20px;
-    max-width: calc(100vw - 40px);
+    gap: var(--gutter);
+    max-width: calc(100vw - 2 * var(--gutter));
     /* pulls the end of the page (and the print footer) up under the last column */
-    margin-bottom: -30px;
+    margin-bottom: calc(-1.5 * var(--gutter));
 
     @media screen and (max-width: 750px) {
       grid-template-columns: 1fr;
@@ -103,7 +103,7 @@
   }
 
   .cv-title {
-    margin: 2px 0;
+    margin: var(--space-0h) 0;
     font-size: var(--fs-2xl);
     font-weight: 800;
     text-align: left;
@@ -120,7 +120,7 @@
   }
 
   .cv-secondary {
-    margin-top: 3.5px;
+    margin-top: var(--space-1);
     font-size: var(--fs-2xs);
     font-weight: 400;
   }
@@ -145,7 +145,7 @@
   }
 
   .cv-position {
-    margin: 4px 0 1px;
+    margin-top: var(--space-1);
   }
 
   .cv-keep {
@@ -154,32 +154,28 @@
 
   /* spacers and rules */
   .cv-space {
-    height: 3px;
+    height: var(--space-1);
   }
 
-  .cv-space--7 {
-    height: 7px;
+  .cv-space--s {
+    height: var(--space-2);
   }
 
-  .cv-space--10 {
-    height: 10px;
+  .cv-space--m {
+    height: var(--space-2h);
   }
 
-  .cv-space--12 {
-    height: 12px;
-  }
-
-  .cv-space--20 {
-    height: 20px;
+  .cv-space--l {
+    height: var(--gutter);
   }
 
   .cv-line {
-    height: 0.5px;
+    height: calc(var(--hairline) / 2);
     background-color: var(--grey-500);
   }
 
   .cv-rule {
-    height: 4px;
+    height: var(--space-1);
     background-color: black;
   }
 

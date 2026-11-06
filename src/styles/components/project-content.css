@@ -3,7 +3,7 @@
   .text-block {
     --title-size: var(--fs-2xl);
     --text-size: var(--fs-xl);
-    column-gap: 50px;
+    column-gap: var(--space-5);
     width: 100%;
 
     @media (max-width: 750px) {
@@ -22,22 +22,22 @@
     h2 {
       font-size: var(--title-size);
       font-weight: 600;
-      padding: 0 0 20px;
+      padding-bottom: var(--space-4);
     }
 
     p {
       font-size: var(--text-size);
       font-weight: 400;
-      margin-bottom: 20px;
+      margin-bottom: var(--space-4);
     }
 
     a {
       display: inline-block;
-      padding: 10px 20px;
+      padding: var(--space-2h) var(--space-4);
       font-size: var(--fs-xs);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1px solid var(--black-a80);
+      border: var(--hairline) solid var(--black-a80);
       transition: background-color var(--t-base) ease, color var(--t-base) ease;
 
       &:hover {
@@ -53,7 +53,7 @@
 
   .link-list {
     display: flex;
-    gap: 20px;
+    gap: var(--space-4);
     flex-wrap: wrap;
   }
 
@@ -64,7 +64,7 @@
 
     @media (max-width: 750px) {
       flex-direction: column;
-      gap: 10px;
+      gap: var(--space-2h);
     }
   }
 

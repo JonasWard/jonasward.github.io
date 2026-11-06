@@ -2,14 +2,13 @@
    on phones the items stack, label left of the value */
 @layer components {
   .project-meta-block-left {
-    border-left: 4px solid var(--cat, transparent);
+    border-left: var(--stripe) solid var(--cat, transparent);
   }
 
   .project-meta-block {
     display: flex;
     flex-wrap: wrap;
-    border-top: 1px solid var(--black-a10);
-    border-bottom: 1px solid var(--black-a10);
+    border-block: var(--border);
 
     @media (max-width: 570px) {
       flex-direction: column;
@@ -19,17 +18,17 @@
 
   .meta-item {
     gap: var(--space-1);
-    padding: 12px 20px;
-    border-right: 1px solid var(--black-a10);
-    min-width: 100px;
+    padding: var(--space-2h) var(--space-4);
+    border-right: var(--border);
+    min-width: var(--min-box);
 
     @media (max-width: 570px) {
       flex-direction: row;
       align-items: baseline;
-      gap: 12px;
-      padding: 9px var(--space-3);
+      gap: var(--space-2h);
+      padding: var(--space-2) var(--space-3);
       border-right: none;
-      border-bottom: 1px solid var(--black-a10);
+      border-bottom: var(--border);
       min-width: unset;
 
       &:last-child {
@@ -57,7 +56,7 @@
 
     @media (max-width: 570px) {
       flex-shrink: 0;
-      width: 90px;
+      width: var(--min-box);
     }
   }
 
@@ -67,11 +66,11 @@
   }
 
   .meta-partners {
-    gap: 2px;
+    gap: var(--space-0h);
   }
 
   .meta-keywords {
-    margin-top: 2px;
+    margin-top: var(--space-0h);
 
     @media (max-width: 570px) {
       margin-top: 0;

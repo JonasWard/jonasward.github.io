@@ -3,11 +3,11 @@
   .project-card {
     /* the idle look; the active state below swaps these */
     --card-bg: color-mix(in srgb, var(--cat, var(--grey-100)) 12%, var(--grey-100));
-    --stripe-w: 3px;
+    --stripe-w: var(--stripe);
     --img-filter: brightness(0.8) contrast(0.85) saturate(0.75) brightness(1.25);
     display: block;
     position: relative;
-    width: 200px;
+    width: var(--card-w);
     background-color: var(--card-bg);
     transition: all var(--t-base);
 
@@ -27,7 +27,7 @@
 
     img {
       width: 100%;
-      min-height: 100px;
+      min-height: var(--min-box);
       object-fit: cover;
       filter: var(--img-filter);
       transition: all var(--t-base);
@@ -48,8 +48,8 @@
       text-decoration: underline;
 
       svg {
-        width: 10px;
-        height: 10px;
+        width: 1em;
+        height: 1em;
         transform: rotate(180deg);
         transition: transform var(--t-slow);
       }
