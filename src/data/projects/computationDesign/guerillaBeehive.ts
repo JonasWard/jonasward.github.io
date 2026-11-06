@@ -7,7 +7,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/guerilla-beehive/keyImage.jpg?responsive';
+import keyImage from './assets/guerilla-beehive/keyImage.jpg?responsive&hero';
 import image1 from './assets/guerilla-beehive/BeesDetail.png?responsive';
 import image2 from './assets/guerilla-beehive/Conceptueel - 1.png?responsive';
 import image3 from './assets/guerilla-beehive/DetailBXL.jpg?responsive';

@@ -5,13 +5,11 @@
 // inside and 1 is `spread` pixels outside. The landing shader samples it to
 // cut the logo into the paper wall.
 //
-// usage: node scripts/generateLogoSdf.mjs   (needs playwright with chromium)
+// usage: node scripts/generateLogoSdf.mjs   (needs the playwright chromium, see the readme)
 
-import { createRequire } from 'node:module';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-
-const { chromium } = createRequire(import.meta.url)('playwright');
+import { chromium } from 'playwright';
 
 const WIDTH = 1024;
 const SPREAD = 48;

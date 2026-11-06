@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import { allProjects } from 'src/data/projects/allProjects';
+import { renderProject } from 'src/render/project';
+import type { ProjectData } from 'src/types/projectContent/projectData';
+
+export const getStaticPaths = () =>
+  allProjects.map((project) => ({ params: { webstring: project.metaData.webstring }, props: { project } }));
+
+const { project } = Astro.props as { project: ProjectData };
+---
+
+<Base title={`${project.metaData.name} | Jonas Ward`} description={project.metaData.description}>
+  <Fragment set:html={renderProject(project)} />
+</Base>

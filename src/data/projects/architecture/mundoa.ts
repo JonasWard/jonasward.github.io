@@ -9,7 +9,7 @@ import { ProjectContentType } from '../../../types/projectContent/projectContent
 import mundoA1 from './assets/mundo-A/ilse_liekens-mundo_A.jpg?responsive';
 import mundoA2 from './assets/mundo-A/lucid-mundo_A-interieur_2.jpg?responsive';
 import mundoA3 from './assets/mundo-A/lucid-mundo_A-interieur.jpg?responsive';
-import projectImage from './assets/mundo-A/lucid-mundo_A.jpg?responsive';
+import projectImage from './assets/mundo-A/lucid-mundo_A.jpg?responsive&hero';
 
 const id = '2016-02';
 

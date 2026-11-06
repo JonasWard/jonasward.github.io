@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import 'src/styles/pages/missing.css';
+import logo from 'src/assets/icons/jonasward_logo_ww.svg?url';
+---
+
+<Base title="Not found | Jonas Ward">
+  <div class="missing-page">
+    <canvas class="missing-canvas" data-missing-canvas></canvas>
+    <a class="missing-link stack" href="/projects/">
+      <span>You must have taken a wrong turn</span>
+      <span>why don't you go back to the projects page</span>
+      <img src={logo} alt="missing logo" />
+    </a>
+  </div>
+</Base>
+
+<script>
+  import { startMissing } from '../scripts/missing';
+  startMissing(document.querySelector<HTMLCanvasElement>('[data-missing-canvas]')!);
+</script>

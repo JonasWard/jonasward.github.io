@@ -12,7 +12,7 @@ import screenshot2 from './assets/haas-haus-configurator/221031_HFB_Screenshot_j
 import screenshot3 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_3.png?responsive';
 import screenshot4 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_4.png?responsive';
 import screenshot5 from './assets/haas-haus-configurator/221031_HFB_Screenshot_jvb_5.png?responsive';
-import projectImage from './assets/haas-haus-configurator/haasCover.png?responsive';
+import projectImage from './assets/haas-haus-configurator/haasCover.png?responsive&hero';
 import image1 from './assets/haas-haus-configurator/overview.png?responsive';
 import image2 from './assets/haas-haus-configurator/searsCatalogue.jpg?responsive';
 

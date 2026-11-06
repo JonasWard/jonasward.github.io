@@ -15,7 +15,7 @@ import detailed3d from './assets/repurposed/detailed-3d.png?responsive';
 import detailedPdf from './assets/repurposed/detailed-pdf.png?responsive';
 import landing from './assets/repurposed/landing.png?responsive';
 import marketplaceOverview from './assets/repurposed/marketplace-overview.webp?responsive';
-import marketplace from './assets/repurposed/marketplace.webp?responsive';
+import marketplace from './assets/repurposed/marketplace.webp?responsive&hero';
 import repurposedSdf from './assets/repurposed/repurposed-sdf.webp?responsive';
 import slides from './assets/repurposed/slides.webp?responsive';
 import tableView from './assets/repurposed/table-view.png?responsive';

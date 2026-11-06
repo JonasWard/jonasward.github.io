@@ -11,7 +11,7 @@ import { Technologies } from 'src/types/keywords/technologies';
 import favorites from './assets/ilumina/favorites.webp?responsive';
 import landing from './assets/ilumina/landing.webp?responsive';
 import sliding from './assets/ilumina/sliding.webp?responsive';
-import title from './assets/ilumina/title.webp?responsive';
+import title from './assets/ilumina/title.webp?responsive&hero';
 
 import lamp_01 from './assets/ilumina/lamp_01.jpg?responsive';
 import lamp_02 from './assets/ilumina/lamp_02.jpg?responsive';

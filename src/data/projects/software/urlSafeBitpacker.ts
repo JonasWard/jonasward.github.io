@@ -8,7 +8,7 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import projectImage1 from './assets/urlSafeBitpacker/bitpacker.png?responsive';
+import projectImage1 from './assets/urlSafeBitpacker/bitpacker.png?responsive&hero';
 import projectImage2 from './assets/urlSafeBitpacker/lerp.png?responsive';
 
 const id = '2024-04';

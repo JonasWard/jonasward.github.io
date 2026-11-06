@@ -1,0 +1,99 @@
+/* the content blocks of a project page: text, image + text, links and lists; one column below tablet width */
+@layer components {
+  .text-block {
+    --title-size: var(--fs-2xl);
+    --text-size: var(--fs-xl);
+    column-gap: var(--space-5);
+    width: 100%;
+
+    @media (max-width: 750px) {
+      --title-size: var(--fs-md);
+      --text-size: var(--fs-md);
+    }
+
+    &.columns-2 {
+      column-count: 2;
+
+      @media (max-width: 750px) {
+        column-count: 1;
+      }
+    }
+
+    h2 {
+      font-size: var(--title-size);
+      font-weight: 600;
+      padding-bottom: var(--space-4);
+    }
+
+    p {
+      font-size: var(--text-size);
+      font-weight: 400;
+      margin-bottom: var(--space-4);
+    }
+
+    a {
+      display: inline-block;
+      padding: var(--space-2h) var(--space-4);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: var(--hairline) solid var(--black-a80);
+      transition: background-color var(--t-base) ease, color var(--t-base) ease;
+
+      &:hover {
+        background-color: black;
+        color: white;
+      }
+
+      @media (max-width: 750px) {
+        padding: var(--space-2) var(--space-3);
+      }
+    }
+  }
+
+  .link-list {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .link-block {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+
+    @media (max-width: 750px) {
+      flex-direction: column;
+      gap: var(--space-2h);
+    }
+  }
+
+  /* an image beside its text, on the other side with .right */
+  .image-text-block {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+    width: 100%;
+
+    &.right {
+      @media (min-width: 751px) {
+        flex-direction: row-reverse;
+      }
+    }
+
+    /* stacked: full width children, so an image's box is reserved before the file arrives */
+    @media (max-width: 750px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    > * {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .project-image img {
+      width: 100%;
+    }
+  }
+}

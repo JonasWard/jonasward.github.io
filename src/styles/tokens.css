@@ -1,0 +1,117 @@
+/* design tokens: every colour, size and timing the other files use.
+ *
+ * breakpoints (css custom media isn't native yet, so these are written out in the media queries):
+ *   phone   max-width: 570px   one horizontal card row, stacked meta block, smaller hero text, 1 image column
+ *   tablet  max-width: 750px   single text column, stacked image-text and link blocks, single column cv
+ *   wide    max-width: 1320px  (reserved, three column text drops to two; not used by the current content)
+ * "above phone" is written as min-width: 571px so the two ranges never overlap.
+ */
+@layer tokens {
+  :root {
+    /* category colours */
+    --cat-design: rgb(190, 68, 52);
+    --cat-art: rgb(118, 52, 152);
+    --cat-architecture: rgb(48, 52, 168);
+    --cat-urbanism: rgb(28, 88, 118);
+    --cat-software: rgb(58, 108, 152);
+    --cat-lamps: rgb(240, 153, 2);
+
+    /* one grey scale */
+    --grey-50: #f5f5f5;
+    --grey-100: #f0f0f0;
+    --grey-200: #e8e8e8;
+    --grey-300: #d3d3d3;
+    --grey-500: #999;
+    --grey-800: #333;
+    --grey-900: #111;
+
+    /* alpha scales, for borders, shadows and glass */
+    --black-a05: rgba(0, 0, 0, 0.05);
+    --black-a10: rgba(0, 0, 0, 0.1);
+    --black-a20: rgba(0, 0, 0, 0.2);
+    --black-a30: rgba(0, 0, 0, 0.3);
+    --black-a60: rgba(0, 0, 0, 0.6);
+    --black-a80: rgba(0, 0, 0, 0.8);
+    --white-a60: rgba(255, 255, 255, 0.6);
+    --white-a80: rgba(255, 255, 255, 0.8);
+
+    --link-blue: rgb(0, 0, 163);
+    --hover-red: invert(18%) sepia(49%) saturate(4708%) hue-rotate(336deg) brightness(94%) contrast(95%);
+    --active-purple: invert(18%) sepia(52%) saturate(4747%) hue-rotate(241deg) brightness(63%) contrast(127%);
+
+    /* spacing ("h" is a half step) and lines */
+    --space-0h: 2px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-2h: 12px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 40px;
+    --hairline: 1px;
+    --border: var(--hairline) solid var(--black-a10);
+    --stripe: 4px;
+    /* the page gutter: header inset, cv padding and columns (the cv keeps its old pdf proportions) */
+    --gutter: 20px;
+
+    /* layout sizes */
+    --card-w: 200px;
+    --logo-w: 180px;
+    --nav-h: 40px;
+    /* room above the overview grid: the fixed header with its filter bar */
+    --header-h: 90px;
+    /* the smallest box: a meta item, the phone menu, a card image */
+    --min-box: 100px;
+    --content-w: 800px;
+    --cv-w: 690px;
+    --cv-photo: 120px;
+
+    /* shadows */
+    --shadow-pop: 0 var(--space-2) var(--space-4) var(--black-a10);
+    --shadow-paper: 0 var(--space-0h) var(--space-3) var(--black-a20);
+    --glow-dark: 0 0 var(--space-5) var(--black-a80), 0 var(--space-1) var(--space-3) var(--black-a60);
+    --glow-light: 0 0 var(--space-5) var(--white-a80), 0 var(--space-1) var(--space-3) var(--white-a60);
+
+    /* type scale; 9px is the fine print of the cv and the meta labels */
+    --font: 'Montserrat Variable', 'Montserrat fallback', sans-serif;
+    --fs-2xs: 9px;
+    --fs-xs: 11px;
+    --fs-sm: 13px;
+    --fs-md: 16px;
+    --fs-lg: 20px;
+    --fs-xl: 24px;
+    --fs-2xl: 28px;
+    --fs-display-sm: 42px;
+    --fs-display: 72px;
+
+    /* stacking */
+    --z-base: 0;
+    --z-raised: 1;
+    --z-header: 10;
+    --z-dropdown: 20;
+    --z-overlay: 30;
+
+    --radius-sm: 2px;
+    --radius-md: 8px;
+
+    /* transitions */
+    --t-fast: 0.2s;
+    --t-base: 0.3s;
+    --t-fade: 0.4s;
+    --t-slow: 0.6s;
+
+    /* page geometry */
+    --global-max-width: 1200px;
+    --simple-padding: 16px;
+    --padding-tolerance: min(var(--simple-padding), max(0px, calc(var(--global-max-width) + var(--simple-padding) * 2 - 100vw)));
+    --header-content-width: min(100vw - 2 * var(--gutter), var(--global-max-width));
+    --header-content-inset: max(var(--gutter), calc((100vw - var(--global-max-width)) * 0.5));
+  }
+
+  /* an element with a data-category gets that category's colour as --cat */
+  [data-category='Design'] { --cat: var(--cat-design); }
+  [data-category='Art'] { --cat: var(--cat-art); }
+  [data-category='Architecture'] { --cat: var(--cat-architecture); }
+  [data-category='Urbanism'] { --cat: var(--cat-urbanism); }
+  [data-category='Software'] { --cat: var(--cat-software); }
+  [data-category='Lamps'] { --cat: var(--cat-lamps); }
+}

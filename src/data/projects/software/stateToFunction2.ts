@@ -15,7 +15,7 @@ import logoCard from './assets/state-to-function-2/logo.webp?responsive&lossless
 import builderBase64url from './assets/state-to-function-2/builder-base64url.webp?responsive&lossless';
 import builderBase45 from './assets/state-to-function-2/builder-base45.webp?responsive&lossless';
 
-import definitions from './assets/state-to-function-2/definitions.webp?responsive';
+import definitions from './assets/state-to-function-2/definitions.webp?responsive&hero';
 import settings from './assets/state-to-function-2/settings.webp?responsive';
 import formulas from './assets/state-to-function-2/formulas.webp?responsive';
 import autocomplete from './assets/state-to-function-2/autocomplete.webp?responsive';

@@ -7,7 +7,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/stauffer-static/keyImage.png?responsive';
+import keyImage from './assets/stauffer-static/keyImage.png?responsive&hero';
 import buckling from './assets/stauffer-static/buckling.png?responsive';
 import calculations from './assets/stauffer-static/calculations.png?responsive';
 import indeterminateBeam from './assets/stauffer-static/indeterminateBeam.png?responsive';

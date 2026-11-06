@@ -1,0 +1,134 @@
+@layer tokens, base, primitives, layout, components, pages, utilities;
+@import './paper.css';
+
+/* dev only: the motivation letter generator, an input drawer and the letter preview (styled after
+   MotivationLetterPDF.tsx, title, rule and spacers are the cv's); printing the page gives the pdf */
+@page {
+  margin: 0;
+}
+
+@layer pages {
+  .ml-toolbar {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-5) 0 var(--space-2);
+
+    select,
+    button {
+      border: none;
+      background: var(--grey-50);
+      border-radius: var(--radius-md);
+      padding: 2px var(--space-2);
+      font-size: var(--fs-sm);
+    }
+  }
+
+  /* slides in from the left; not with a transform, which would carry the fixed button along */
+  .drawer {
+    --drawer-w: 460px;
+    position: fixed;
+    top: 0;
+    left: calc(-1 * var(--drawer-w));
+    z-index: var(--z-overlay);
+    gap: var(--space-2);
+    box-sizing: border-box;
+    width: var(--drawer-w);
+    height: 100%;
+    padding: calc(var(--space-5) + var(--gutter)) var(--space-2h) var(--space-2h);
+    background-color: var(--grey-900);
+    color: white;
+    font-weight: 600;
+    transition: left var(--t-base);
+
+    &.open {
+      left: 0;
+    }
+
+    label {
+      gap: var(--space-1);
+    }
+
+    input,
+    textarea {
+      border: none;
+      border-radius: var(--radius-md);
+      padding: var(--space-1) var(--space-2);
+      font-size: var(--fs-sm);
+      font-weight: 400;
+    }
+
+    textarea {
+      box-sizing: border-box;
+      height: calc(100vh - 500px);
+      resize: vertical;
+    }
+
+    button {
+      position: fixed;
+      bottom: var(--space-2h);
+      left: var(--space-2h);
+      width: 162px;
+      min-height: var(--nav-h);
+      background: darkslategray;
+      border: var(--space-0h) solid white;
+      border-radius: var(--radius-md);
+      color: white;
+
+      &:hover {
+        background: black;
+      }
+    }
+  }
+
+  .ml-letter {
+    box-sizing: border-box;
+    width: 210mm;
+    max-width: 100%;
+    min-height: 297mm;
+    padding: var(--space-5);
+    box-shadow: var(--shadow-paper);
+    font-size: var(--fs-sm);
+  }
+
+  .ml-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    font-size: var(--fs-2xs);
+    font-weight: 200;
+    color: var(--grey-800);
+
+    a {
+      color: black;
+    }
+  }
+
+  .ml-logo {
+    width: 285px;
+    margin-top: calc(-1 * var(--space-1));
+  }
+
+  .ml-letter .cv-rule {
+    margin-block: var(--space-2h);
+  }
+
+  .ml-body {
+    gap: var(--space-2h);
+
+    p,
+    ul {
+      margin: 0 0 var(--space-2h);
+    }
+  }
+
+  @media print {
+    .ml-toolbar,
+    .drawer {
+      display: none;
+    }
+
+    .ml-letter {
+      box-shadow: none;
+    }
+  }
+}

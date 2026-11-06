@@ -140,7 +140,7 @@ Notice: the project is allowed to have been stuck. Opinions are stated without s
 
 ## About page
 
-`components/me/About.tsx`
+`src/pages/about.astro`
 
 > Trying to apply my flair for aesthetics and curiosity for technical devolepments into the realm of Ecological and Sustainable Design.
 >

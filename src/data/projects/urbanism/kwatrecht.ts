@@ -37,7 +37,7 @@ import sociaalna from './assets/kwatrecht/11.D sociaal na.jpg?responsive';
 import visueelbeeld from './assets/kwatrecht/12.B visueel beeld.jpg?responsive';
 import visueelvoor from './assets/kwatrecht/12.C visueel voor.jpg?responsive';
 import visueelna from './assets/kwatrecht/12.D visueel na.jpg?responsive';
-import RISK from './assets/kwatrecht/13.B RISK.jpg?responsive';
+import RISK from './assets/kwatrecht/13.B RISK.jpg?responsive&hero';
 
 const id = '2013-01';
 

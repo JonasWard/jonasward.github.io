@@ -1,0 +1,78 @@
+/* a local sans scaled to Montserrat's width and line metrics, so the swap to the real font barely moves any text.
+   measured with fonttools: Montserrat at weight 400 (the body text) against Arial/Liberation Sans on an english
+   sample; size-adjust is the width ratio, the overrides are Montserrat's ascent/descent divided by it */
+@font-face {
+  font-family: 'Montserrat fallback';
+  src: local('Arial'), local('Helvetica'), local('Liberation Sans');
+  size-adjust: 113.17%;
+  ascent-override: 85.54%;
+  descent-override: 22.18%;
+  line-gap-override: 0%;
+}
+
+/* element defaults; the font files are imported in main.css (an @import can't sit inside a layer block) */
+@layer base {
+  body {
+    margin: 0;
+    font-weight: 500;
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* form controls take the page font instead of the system one */
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  /* buttons and links look like their surroundings until a component styles them */
+  button {
+    padding: 0;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* images are blocks (no baseline gap below them) that never overflow their box */
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* spacing between headings and paragraphs comes from the parent's gap */
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
+  }
+
+  :root {
+    &::-webkit-scrollbar {
+      width: var(--space-2);
+      height: var(--space-2);
+      background-color: black;
+      border: var(--hairline) solid var(--black-a20);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--white-a60);
+      border-radius: var(--space-1);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  }
+}

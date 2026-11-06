@@ -11,7 +11,7 @@ import image2 from './assets/concrete-choreography/inAction_2.png?responsive';
 import image3 from './assets/concrete-choreography/inAction_1.png?responsive';
 import image4 from './assets/concrete-choreography/fabrication-setup-1.jpg?responsive';
 import image5 from './assets/concrete-choreography/edit02_260A3586.jpg?responsive';
-import keyImage from './assets/concrete-choreography/columnView.jpg?responsive';
+import keyImage from './assets/concrete-choreography/columnView.jpg?responsive&hero';
 import overviewNight from './assets/concrete-choreography/byNight.jpg?responsive';
 import overviewDay from './assets/concrete-choreography/byDay.jpg?responsive';
 

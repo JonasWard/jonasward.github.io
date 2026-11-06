@@ -8,7 +8,7 @@ import { ProjectContentType } from 'src/types/projectContent/projectContentType'
 import { Keywords } from 'src/types/keywords/keywords';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import sdfVases_Front from './asssets/sdfVases_Front.jpg?responsive';
+import sdfVases_Front from './asssets/sdfVases_Front.jpg?responsive&hero';
 import sdfVases_1 from './asssets/sdfVases_1.jpg?responsive';
 import sdfVases_2 from './asssets/sdfVases_2.jpg?responsive';
 import sdfVases_3 from './asssets/sdfVases_3.jpg?responsive';

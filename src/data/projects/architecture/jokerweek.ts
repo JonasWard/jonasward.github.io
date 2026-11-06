@@ -6,7 +6,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/jokerweek/1.OpeningPresentationOnTheFirstDay.jpg?responsive';
+import keyImage from './assets/jokerweek/1.OpeningPresentationOnTheFirstDay.jpg?responsive&hero';
 import jokerweek1 from './assets/jokerweek/0.TheCalmBeforeTheStorm.jpg?responsive';
 import jokerweek2 from './assets/jokerweek/5.TheOldSchoolBuilding.jpg?responsive';
 import jokerweek3 from './assets/jokerweek/jokerweek-2015_16809953620_o.jpg?responsive';

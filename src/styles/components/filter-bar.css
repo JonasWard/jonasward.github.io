@@ -1,0 +1,72 @@
+/* keyword filter in the overview's header: active keywords as chips, an input and its suggestion dropdown */
+@layer components {
+  .keyword-filter-inner {
+    gap: var(--space-2);
+    padding: 0 var(--header-content-inset);
+    margin: var(--space-2);
+  }
+
+  /* the × of an active keyword (.tag.tag--solid) */
+  .kf-chip span {
+    font-size: var(--fs-sm);
+    font-weight: 300;
+    opacity: 0.6;
+    line-height: 1;
+  }
+
+  .kf-input-wrap {
+    position: relative;
+    flex: 1;
+  }
+
+  .kf-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: var(--fs-xs);
+    font-weight: 400;
+    color: var(--grey-800);
+    width: 100%;
+    min-width: 120px;
+    letter-spacing: 0.04em;
+
+    &::placeholder {
+      color: var(--black-a30);
+      font-style: italic;
+    }
+  }
+
+  .kf-dropdown {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    left: 0;
+    z-index: var(--z-dropdown);
+    min-width: 180px;
+    max-height: 260px;
+    overflow-y: auto;
+    background: white;
+    border: var(--border);
+    box-shadow: var(--shadow-pop);
+  }
+
+  .kf-suggestion {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--fs-xs);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    text-transform: lowercase;
+    text-align: left;
+    color: var(--grey-800);
+    border-bottom: var(--hairline) solid var(--black-a05);
+    transition: background-color var(--t-fast);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: var(--grey-50);
+      color: black;
+    }
+  }
+}

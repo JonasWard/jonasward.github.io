@@ -35,7 +35,7 @@ import chocoStudies_25 from './asssets/chocoStudies_25.jpg?responsive';
 import chocoStudies_26 from './asssets/chocoStudies_26.jpg?responsive';
 import chocoStudies_27 from './asssets/chocoStudies_27.jpg?responsive';
 import chocoStudies_28 from './asssets/chocoStudies_28.jpg?responsive';
-import chocoStudies_Front from './asssets/chocoStudies_Front.jpg?responsive';
+import chocoStudies_Front from './asssets/chocoStudies_Front.jpg?responsive&hero';
 
 const id = '2023-06';
 

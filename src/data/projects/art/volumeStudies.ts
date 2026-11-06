@@ -5,7 +5,7 @@ import { ProjectCategory } from '../../../types/keywords/categoryTypes';
 import { createImage, createTitleImage } from '../../../utils/projectconstructor';
 import { ProjectData } from '../../../types/projectContent/projectData';
 
-import volumeStudies_0 from './asssets/volumeStudies_0.jpg?responsive';
+import volumeStudies_0 from './asssets/volumeStudies_0.jpg?responsive&hero';
 import volumeStudies_1 from './asssets/volumeStudies_1.jpg?responsive';
 import volumeStudies_2 from './asssets/volumeStudies_2.jpg?responsive';
 import volumeStudies_3 from './asssets/volumeStudies_3.jpg?responsive';

@@ -8,7 +8,7 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import projectImage from './assets/paraSlimShady/babylon_2.jpg?responsive';
+import projectImage from './assets/paraSlimShady/babylon_2.jpg?responsive&hero';
 import babylon3 from './assets/paraSlimShady/babylon_3.jpg?responsive';
 import babylon4 from './assets/paraSlimShady/babylon_4.jpg?responsive';
 

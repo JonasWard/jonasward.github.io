@@ -1,0 +1,8 @@
+@layer tokens, base, primitives, layout, components, pages, utilities;
+@import './paper.css';
+
+/* the cv on paper (its print rules sit in components/cv.css), also what scripts/buildPdfs.mjs turns into the
+   downloadable pdf */
+@page {
+  margin: 14mm 12mm 16mm;
+}

@@ -8,7 +8,7 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import view from './assets/circrete-tool/3d-view.webp?responsive';
+import view from './assets/circrete-tool/3d-view.webp?responsive&hero';
 import components from './assets/circrete-tool/components.webp?responsive';
 import geometry from './assets/circrete-tool/geometry.webp?responsive';
 import overview from './assets/circrete-tool/overview.webp?responsive';

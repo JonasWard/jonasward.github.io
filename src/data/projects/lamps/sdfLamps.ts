@@ -7,7 +7,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
 
-import sdfLamps_Front from './assets/sdfLamps_Front.jpg?responsive';
+import sdfLamps_Front from './assets/sdfLamps_Front.jpg?responsive&hero';
 import sdfLamps_1 from './assets/sdfLamps_1.jpg?responsive';
 import sdfLamps_2 from './assets/sdfLamps_2.jpg?responsive';
 import sdfLamps_3 from './assets/sdfLamps_3.jpg?responsive';

@@ -1,0 +1,128 @@
+/* page frame: the fixed header with its nav, the project page column and the overview grid */
+@layer layout {
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-header);
+    background: var(--white-a60);
+    backdrop-filter: blur(var(--space-2));
+    border-bottom: var(--border);
+    /* the page extends under the status bar on phones (viewport-fit=cover); keep the header below it */
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .header-content {
+    position: relative;
+    left: var(--header-content-inset);
+    width: var(--header-content-width);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-logo img {
+    width: var(--logo-w);
+  }
+
+  .header-right {
+    position: relative;
+  }
+
+  /* the burger, phones only */
+  .nav-toggle {
+    display: none;
+
+    @media (max-width: 570px) {
+      &.show {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  /* a row of links, on phones a column that the burger opens */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 570px) {
+      display: none;
+
+      &.show {
+        position: absolute;
+        right: calc(-1 * var(--header-content-inset));
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--white-a80);
+        min-width: var(--min-box);
+        z-index: var(--z-dropdown);
+      }
+    }
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--nav-h);
+    padding-inline: var(--space-2);
+    font-size: var(--fs-md);
+  }
+
+  /* project page column */
+  .project-layout {
+    margin: 0 auto;
+    max-width: min(var(--global-max-width), 100vw);
+  }
+
+  .project-content {
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--padding-tolerance);
+  }
+
+  /* overview: css grid of fixed card-wide columns, at most 6; on phones one horizontal row, the card in the middle is
+     in focus */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--card-w));
+    justify-content: center;
+    align-items: start;
+    gap: var(--space-3);
+    max-width: calc(6 * var(--card-w) + 5 * var(--space-3));
+    margin: var(--header-h) auto 0;
+    padding: 0 var(--space-2);
+
+    /* set by the overview script: 1px rows, every card spans its own height + the gap */
+    &.masonry {
+      grid-auto-rows: 1px;
+      grid-auto-flow: row dense;
+      row-gap: 0;
+    }
+
+    /* with js the desktop grid waits for the masonry, so cards never paint in rows and then jump */
+    @media (min-width: 571px) {
+      :root.js &:not(.masonry) {
+        visibility: hidden;
+      }
+    }
+
+    @media (max-width: 570px) {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: var(--card-w);
+      justify-content: start;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      padding: 0 calc(50vw - var(--card-w) / 2) var(--space-3);
+      max-width: none;
+      scrollbar-width: none;
+
+      > .project-card {
+        scroll-snap-align: center;
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+/* the facts row under a project's hero: category, context, partners, keywords; every value links to the overview.
+   on phones the items stack, label left of the value */
+@layer components {
+  .project-meta-block-left {
+    border-left: var(--stripe) solid var(--cat, transparent);
+  }
+
+  .project-meta-block {
+    display: flex;
+    flex-wrap: wrap;
+    border-block: var(--border);
+
+    @media (max-width: 570px) {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+  }
+
+  .meta-item {
+    gap: var(--space-1);
+    padding: var(--space-2h) var(--space-4);
+    border-right: var(--border);
+    min-width: var(--min-box);
+
+    @media (max-width: 570px) {
+      flex-direction: row;
+      align-items: baseline;
+      gap: var(--space-2h);
+      padding: var(--space-2) var(--space-3);
+      border-right: none;
+      border-bottom: var(--border);
+      min-width: unset;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .meta-item--keywords {
+    flex: 1;
+    border-right: none;
+
+    @media (max-width: 570px) {
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+  }
+
+  .meta-label {
+    font-size: var(--fs-2xs);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.45;
+
+    @media (max-width: 570px) {
+      flex-shrink: 0;
+      width: var(--min-box);
+    }
+  }
+
+  .meta-value {
+    font-size: var(--fs-sm);
+  }
+
+  .meta-partners {
+    gap: var(--space-0h);
+  }
+
+  .meta-keywords {
+    margin-top: var(--space-0h);
+
+    @media (max-width: 570px) {
+      margin-top: 0;
+    }
+  }
+}

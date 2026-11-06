@@ -70,7 +70,7 @@ import chInk from './asssets/svg-sdf-countries/ch-ink.webp?responsive&lossless';
 import chHexagonTopo from './asssets/svg-sdf-countries/ch-hexagon-topo.webp?responsive&lossless';
 import chRegions from './asssets/svg-sdf-countries/ch-regions.webp?responsive&lossless';
 import chMosaic from './asssets/svg-sdf-countries/ch-mosaic.webp?responsive&lossless';
-import chRampEmber from './asssets/svg-sdf-countries/ch-ramp-ember.webp?responsive&lossless';
+import chRampEmber from './asssets/svg-sdf-countries/ch-ramp-ember.webp?responsive&lossless&hero';
 import chRampEmberCard from './asssets/svg-sdf-countries/ch-ramp-ember.webp?responsive&lossless&card';
 import chRampOcean from './asssets/svg-sdf-countries/ch-ramp-ocean.webp?responsive&lossless';
 import chTopo from './asssets/svg-sdf-countries/ch-topo.webp?responsive&lossless';

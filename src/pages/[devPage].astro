@@ -1,0 +1,75 @@
+---
+// dev-only pages: getStaticPaths returns nothing in a production build, so they never end up in build/
+import Base from '../layouts/Base.astro';
+import 'src/styles/pages/motivation-letter.css';
+import logo from 'src/assets/jonasward_logo_elong.png?url';
+import { CVContent } from 'src/data/cv/cvContent';
+import { MotivationLetterDefaultContent } from 'src/data/motivation-letter/motivationLetterDefaultContent';
+
+export const getStaticPaths = () => (import.meta.env.DEV ? [{ params: { devPage: 'create-motivation-letter' } }] : []);
+
+const { info } = CVContent;
+const fields = [
+  ['title', 'Title'],
+  ['intro', 'Intro'],
+  ['people', 'People to Address'],
+  ['content', 'Content'],
+  ['outro', 'Outro'],
+  ['wishes', 'Salutations'],
+  ['city', 'City']
+] as const;
+---
+
+<Base title="Motivation letter | Jonas Ward">
+  <div class="cv-content">
+    <div id="select" class="ml-toolbar">
+      <select data-ml-key-select></select>
+      <input data-ml-key-name placeholder="Title" />
+      <button data-ml-print>download</button>
+    </div>
+    <form id="myDrawer" class="drawer stack" data-ml-form>
+      {
+        fields.map(([name, label]) => (
+          <label class="stack">
+            {label}
+            {name === 'content' ? <textarea name={name} /> : <input type="text" name={name} />}
+          </label>
+        ))
+      }
+      <button type="button" data-ml-drawer>Open Input Drawer</button>
+    </form>
+    <article class="ml-letter" data-ml-letter>
+      <div class="ml-head">
+        <div class="ml-sender">
+          <div>{info.firstName.split(' ')[0]}, {info.name}</div>
+          <div class="cv-space"></div>
+          <div>{info.addressLine1}</div>
+          <div>{info.telephone}</div>
+          <div>{info.email}</div>
+          <a href="https://jonasward.ch/#/cv">jonasward.ch/#/cv</a>
+        </div>
+        <img src={logo} alt="" class="ml-logo" />
+      </div>
+      <div class="cv-title" data-ml="title"></div>
+      <div class="cv-rule"></div>
+      <div class="ml-body stack">
+        <div class="cv-tagline-title" data-ml="intro"></div>
+        <div data-ml="people"></div>
+        <div data-ml="content"></div>
+        <div class="cv-space"></div>
+        <div data-ml="outro"></div>
+        <div data-ml="wishes"></div>
+        <div>{info.firstName.split(' ')[0]} {info.name}</div>
+        <div class="cv-space"></div>
+        <div data-ml="date"></div>
+      </div>
+    </article>
+  </div>
+</Base>
+
+<script is:inline define:vars={{ defaults: MotivationLetterDefaultContent }}>
+  window.__ML_DEFAULTS__ = defaults;
+</script>
+<script>
+  import '../scripts/motivationLetter';
+</script>

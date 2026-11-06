@@ -6,7 +6,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/the-city-is-art/theCityIsArt.jpg?responsive';
+import keyImage from './assets/the-city-is-art/theCityIsArt.jpg?responsive&hero';
 import image1 from './assets/the-city-is-art/4K_VSL_a_b.jpg?responsive';
 import image2 from './assets/the-city-is-art/campi2muqarnas_shah.jpg?responsive';
 import image3 from './assets/the-city-is-art/Carla2klee.jpg?responsive';

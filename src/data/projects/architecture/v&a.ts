@@ -6,7 +6,7 @@ import { ProjectMetaData } from '../../../types/projectContent/projectMetaData';
 import { createImage, createText } from '../../../utils/projectconstructor';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import keyImage from './assets/v&a/VA_Hello_Robot_51.jpg?responsive';
+import keyImage from './assets/v&a/VA_Hello_Robot_51.jpg?responsive&hero';
 import keyImage2 from './assets/v&a/VA_Hello_Robot_64.jpg?responsive';
 import stresstest1 from './assets/v&a/start_stressTest.jpg?responsive';
 import stresstest2 from './assets/v&a/30h_stressTest.jpg?responsive';

@@ -17,7 +17,7 @@ import discrete2 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-m
 import discrete3 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjAQAGWECB9Q7ec1zAAA.png?responsive';
 import discrete4 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjAQAGWQCB9Q7ec1zAAA.png?responsive';
 import discrete5 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPfYT4S-muiOeoSiAOPwAjASAByABT5Q7ec1zAAA.png?responsive';
-import discrete6 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAD9wAjAQBgHAALDQMCa6ALTM.png?responsive';
+import discrete6 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAD9wAjAQBgHAALDQMCa6ALTM.png?responsive&hero';
 import discrete7 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAD9wAjAYBVqAALDQMCa6ALTM.png?responsive';
 import discrete8 from './assets/glsl-ray-marching/glsl-ray-marching.C-uGPZSb4S-muiO4QOEAFpwAjAQADaACrUQ7ec1zAAA.png?responsive';
 import tool1 from './assets/glsl-ray-marching/tool-1.png?responsive';

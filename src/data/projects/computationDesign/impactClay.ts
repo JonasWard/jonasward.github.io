@@ -14,7 +14,7 @@ import image4 from './assets/impact-clay/DotDistance.jpg?responsive';
 import image5 from './assets/impact-clay/Dragon.jpg?responsive';
 import image6 from './assets/impact-clay/ImpactClay_BaselineTests.jpg?responsive';
 import image7 from './assets/impact-clay/Pressing.jpg?responsive';
-import keyImage from './assets/impact-clay/Ray.jpg?responsive';
+import keyImage from './assets/impact-clay/Ray.jpg?responsive&hero';
 import image9 from './assets/impact-clay/SetUp.jpg?responsive';
 import image10 from './assets/impact-clay/SetUp2.jpg?responsive';
 import image11 from './assets/impact-clay/Stacking.jpg?responsive';

@@ -7,7 +7,7 @@ import { ProjectData } from '../../../types/projectContent/projectData';
 import { ProjectContentType } from 'src/types/projectContent/projectContentType';
 import { Keywords } from 'src/types/keywords/keywords';
 
-import sdfAsMeaning_front from './asssets/sdfAsMeaning_front.jpg?responsive';
+import sdfAsMeaning_front from './asssets/sdfAsMeaning_front.jpg?responsive&hero';
 import sdfAsMeaning_1 from './asssets/sdfAsMeaning_1.jpg?responsive';
 import sdfAsMeaning_2 from './asssets/sdfAsMeaning_2.jpg?responsive';
 import sdfAsMeaning_3 from './asssets/sdfAsMeaning_3.jpg?responsive';

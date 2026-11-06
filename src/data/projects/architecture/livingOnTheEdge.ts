@@ -9,7 +9,7 @@ import { ProjectContentType } from 'src/types/projectContent/projectContentType'
 import permeke from './assets/living-on-the-edge/Constant_Permeke.webp?responsive';
 import tuymans from './assets/living-on-the-edge/tuymans.webp?responsive';
 import leonAugustin from './assets/living-on-the-edge/Léon_Augustin-Lhermitte.webp?responsive';
-import projectImage from './assets/living-on-the-edge/SiteModel.jpg?responsive';
+import projectImage from './assets/living-on-the-edge/SiteModel.jpg?responsive&hero';
 import brueghelKinderen from './assets/living-on-the-edge/children-s-games-1560.webp?responsive';
 
 import schema from './assets/living-on-the-edge/Schema.webp?responsive';

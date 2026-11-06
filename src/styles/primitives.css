@@ -1,0 +1,63 @@
+/* small building blocks the renderers combine with a component class; components override them by layer order */
+@layer primitives {
+  /* a column, and a wrapping row of centred items; the component sets the gap */
+  .stack {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  /* a keyword: outlined in the text colour and filled on hover, or filled from the start (--solid) */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--hairline) var(--space-2);
+    font-size: var(--fs-xs);
+    font-weight: 400;
+    border: var(--hairline) solid color-mix(in srgb, currentColor 20%, transparent);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+
+    &:hover,
+    &.tag--solid {
+      color: white;
+      background-color: black;
+      border-color: black;
+    }
+
+    &.tag--solid:hover {
+      background-color: var(--grey-800);
+    }
+  }
+
+  /* a link that shows its underline on hover only */
+  .quiet-link {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: text-decoration-color var(--t-fast);
+
+    &:hover {
+      text-decoration-color: currentColor;
+    }
+  }
+
+  /* black icons and links that turn red on hover and purple for the current page */
+  .tint-hover {
+    transition: filter var(--t-slow);
+
+    &[aria-current='page'] {
+      filter: var(--active-purple);
+    }
+
+    &:hover {
+      filter: var(--hover-red);
+    }
+  }
+}

@@ -18,7 +18,7 @@ import { paraSlimShady } from './paraSlimShady';
 import builderInspector from './assets/densing/builder-inspector.webp?responsive&lossless';
 import builderQr from './assets/densing/builder-qr.webp?responsive&lossless';
 import builderSharedNumbers from './assets/densing/builder-shared-numbers.webp?responsive&lossless';
-import builderSvgSdf from './assets/densing/builder-svg-sdf.webp?responsive&lossless';
+import builderSvgSdf from './assets/densing/builder-svg-sdf.webp?responsive&lossless&hero';
 import builderTemplates from './assets/densing/builder-templates.webp?responsive&lossless';
 import densingSdf from './assets/densing/densing-sdf.webp?responsive';
 

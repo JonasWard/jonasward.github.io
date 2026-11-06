@@ -12,7 +12,7 @@ import { Technologies } from 'src/types/keywords/technologies';
 import alpenglow from './assets/hut-viewer/alpenglow.webp?responsive&lossless';
 import alpenglowCard from './assets/hut-viewer/alpenglow.webp?responsive&lossless&card';
 
-import allHuts from './assets/hut-viewer/all-huts.webp?responsive';
+import allHuts from './assets/hut-viewer/all-huts.webp?responsive&hero';
 import freeBeds from './assets/hut-viewer/free-beds.webp?responsive';
 import completelyFree from './assets/hut-viewer/completely-free.webp?responsive';
 import area from './assets/hut-viewer/area.webp?responsive';

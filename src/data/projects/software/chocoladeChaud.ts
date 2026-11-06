@@ -7,7 +7,7 @@ import { createImage, createText, createTitleImage } from '../../../utils/projec
 import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
-import projectImage from './assets/chocoladeChaud/chocoladeChaud.jpg?responsive';
+import projectImage from './assets/chocoladeChaud/chocoladeChaud.jpg?responsive&hero';
 import freeStyle1 from './assets/chocoladeChaud/freestyle_1.jpg?responsive';
 import freeStyle2 from './assets/chocoladeChaud/freestyle_2.jpg?responsive';
 

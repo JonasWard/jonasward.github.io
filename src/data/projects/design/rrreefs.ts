@@ -24,7 +24,7 @@ import image17 from './assets/coral/test-marie.webp?responsive';
 import image18 from './assets/coral/Tiles_Maldives_April21_©MaRHE-scaled-800x4800.jpg?responsive';
 import image19 from './assets/coral/WEB_template_1920x1080px_rrreefs_12-scaled.jpg.webp?responsive';
 
-import projectImage from './assets/coral/rrreefs_low.jpg?responsive';
+import projectImage from './assets/coral/rrreefs_low.jpg?responsive&hero';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 
 const id = '2019-05';

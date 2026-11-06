@@ -1,0 +1,33 @@
+@layer tokens, base, primitives, layout, components, pages, utilities;
+
+/* the landing fills the layout viewport, which follows a collapsing mobile toolbar */
+@layer pages {
+  .landing-page {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+
+    /* iOS safari clips fixed elements to the area between its translucent status bar and toolbar, so there the
+       landing is in flow, with an overscan above and below the viewport */
+    @supports (-webkit-touch-callout: none) {
+      --landing-overscan: 128px;
+      position: relative;
+      inset: auto;
+      height: calc(100dvh + 2 * var(--landing-overscan));
+      touch-action: none;
+    }
+  }
+
+  .landing-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* keeps the parked page from being scrolled away */
+  .landing-scroll-lock,
+  .landing-scroll-lock body {
+    overflow: hidden;
+  }
+}

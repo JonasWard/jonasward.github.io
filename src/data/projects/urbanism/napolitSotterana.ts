@@ -12,7 +12,7 @@ import imageCortile from './assets/napoliSotterana/imageCortile.jpg?responsive';
 import imageDecumani from './assets/napoliSotterana/imageDecumani.jpg?responsive';
 import imageMonastery from './assets/napoliSotterana/imageMonastery.jpg?responsive';
 import mapDucaDiNoja from './assets/napoliSotterana/mapDucaDiNoja.jpg?responsive';
-import mapIleDansLesIlos from './assets/napoliSotterana/mapIleDansLesIlos.jpg?responsive';
+import mapIleDansLesIlos from './assets/napoliSotterana/mapIleDansLesIlos.jpg?responsive&hero';
 import mapIntervention from './assets/napoliSotterana/mapIntervention.jpg?responsive';
 
 const id = '2014-02';

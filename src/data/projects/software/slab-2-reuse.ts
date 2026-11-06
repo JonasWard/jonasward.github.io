@@ -8,7 +8,7 @@ import { Keywords } from '../../../types/keywords/keywords';
 import { ProjectContentType } from '../../../types/projectContent/projectContentType';
 import { Technologies } from 'src/types/keywords/technologies';
 
-import architectView from './assets/slab-2-reuse/architect-view.webp?responsive';
+import architectView from './assets/slab-2-reuse/architect-view.webp?responsive&hero';
 import defaultViewer from './assets/slab-2-reuse/default-viewer.webp?responsive';
 import engineerView from './assets/slab-2-reuse/engineer-view.webp?responsive';
 import landing from './assets/slab-2-reuse/landing.webp?responsive';

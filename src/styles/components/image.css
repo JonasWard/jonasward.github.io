@@ -1,0 +1,131 @@
+/* project images: the hero, single images with a caption, the two column grid, and the fade-in of every responsive img */
+@layer components {
+  /* the reserved box (width + height attributes) shows a placeholder until the image arrives, then fades in */
+  .responsive-img {
+    background-color: var(--grey-200);
+    color: transparent;
+    transition: background-color var(--t-fade) ease;
+
+    /* set by the common script; dropping the placeholder keeps transparent pngs off a grey backdrop */
+    &.loaded {
+      background-color: transparent;
+      animation: fade-in var(--t-fade) ease;
+    }
+  }
+
+  .project-image {
+    position: relative;
+    text-align: center;
+    color: white;
+    max-width: min(100%, var(--content-w));
+
+    img {
+      object-fit: cover;
+    }
+
+    /* the hero spans the layout, as high as the image at that width but never more than the viewport */
+    &.main-image {
+      max-width: 100%;
+
+      img {
+        width: 100%;
+        max-height: 100vh;
+      }
+
+      .caption {
+        max-height: 100%;
+      }
+    }
+  }
+
+  /* text over an image: a black label (--small) or the hero's title (--large, --dark for light images); data-pos
+     places it */
+  .caption {
+    position: absolute;
+
+    &[data-pos='center-center'] {
+      top: min(50%, 50vh);
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &[data-pos='bottom-right'] {
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  .caption--small {
+    background-color: black;
+    font-size: var(--fs-sm);
+    padding: var(--space-0h) var(--space-1);
+  }
+
+  .caption--large {
+    font-size: var(--fs-display);
+    font-weight: 200;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    padding: var(--space-4);
+    text-shadow: var(--glow-dark);
+    transition: all var(--t-base);
+
+    @media (max-width: 570px) {
+      font-size: var(--fs-display-sm);
+      padding: var(--space-3);
+    }
+  }
+
+  .caption--dark {
+    color: black;
+    text-shadow: var(--glow-light);
+  }
+
+  /* the corner link of an image, shown on hover where there is one, always on touch screens */
+  .image-link {
+    top: 0;
+    right: 0;
+    z-index: var(--z-raised);
+    color: white;
+    line-height: 1.2;
+
+    @media (hover: hover) {
+      opacity: 0;
+      transition: opacity var(--t-fast) ease;
+
+      :is(.project-image, .image-grid-content):hover &,
+      &:focus-visible {
+        opacity: 1;
+      }
+    }
+  }
+
+  /* two column grid of images, one column on phones */
+  .image-grid {
+    columns: 2;
+    column-gap: var(--space-2);
+    width: 100%;
+
+    @media (max-width: 570px) {
+      columns: 1;
+    }
+  }
+
+  .image-grid-content {
+    position: relative;
+    break-inside: avoid;
+    margin-bottom: var(--space-2);
+    overflow: hidden;
+    color: white;
+    font-weight: 300;
+
+    img {
+      width: 100%;
+      transition: transform var(--t-slow) ease;
+    }
+
+    &:hover img {
+      transform: scale(1.03);
+    }
+  }
+}
