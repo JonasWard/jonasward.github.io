@@ -105,7 +105,14 @@ const uniformLocations = <T extends string>(gl: WebGL2RenderingContext, program:
  * `onFail` is called once, with the reason, when the wall can't be drawn: no WebGL2, a shader that doesn't compile,
  * a render target the GPU refuses, a lost context, or a first frame that comes out black.
  */
-export const startPaperTiles = (canvas: HTMLCanvasElement, onFail: (reason: string) => void = () => undefined): (() => void) => {
+export type PaperTilesStats = { frameMs: number; pixelRatio: number; width: number; height: number };
+
+export const startPaperTiles = (
+  canvas: HTMLCanvasElement,
+  onFail: (reason: string) => void = () => undefined,
+  // called after every judged window of frames, for the ?debug overlay
+  onStats?: (stats: PaperTilesStats) => void
+): (() => void) => {
   let failed = false;
   const fail = (reason: string) => {
     if (failed) return;
@@ -343,6 +350,7 @@ export const startPaperTiles = (canvas: HTMLCanvasElement, onFail: (reason: stri
     if (drawIntervals.length < PACE_WINDOW) return;
     const sorted = [...drawIntervals].sort((a, b) => a - b);
     drawIntervals.length = 0;
+    onStats?.({ frameMs: sorted[PACE_WINDOW >> 1], pixelRatio, width, height });
     if (sorted[PACE_WINDOW >> 1] > SLOW_FRAME_MS && pixelRatioStep < PIXEL_RATIO_STEPS.length - 1) {
       pixelRatioStep++;
       drawsSinceStep = 0;
