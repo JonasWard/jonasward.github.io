@@ -29,14 +29,16 @@ const path = Astro.url.pathname;
     <title>{title}</title>
     <!-- the stylesheet only names the font, so without this it starts loading late and the text reflows on swap -->
     <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />
-    <!-- old hash routes (printed cvs, qr codes, links inside project texts) move to the real path -->
+    <!-- old hash routes (printed cvs, qr codes, links inside project texts) move to the real path: `#/cv` and `#cv`,
+         but only when the first segment is a route, so in-page anchors stay; the list as in src/utils/hashRoute.ts -->
     <script is:inline>
       document.documentElement.classList.add('js');
       (function () {
+        var routes = /^(project|projects|about|cv|cv-longer|cv-max|cv-product-designer|cv-living-lab-hil|main|portfolio|landing)([/?#]|$)/;
         var go = function () {
-          var h = location.hash;
-          if (h.indexOf('#/') !== 0) return;
-          var u = new URL(h.slice(1), location.origin);
+          var route = location.hash.replace(/^#\/?/, '');
+          if (!routes.test(route)) return;
+          var u = new URL('/' + route, location.origin);
           if (!/\/$|\.\w+$/.test(u.pathname)) u.pathname += '/';
           location.replace(u.pathname + u.search + u.hash);
         };
