@@ -1,15 +1,19 @@
 // tiny helpers for building markup as strings, shared by every renderer in this folder
+import { siteHref } from 'src/utils/hashRoute';
 
 const ESCAPES: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 
 /** escapes text and attribute values */
 export const esc = (value: unknown): string => String(value ?? '').replace(/[&<>"']/g, (c) => ESCAPES[c]);
 
-/** `attrs({ href: 'x', hidden: true, title: undefined })` -> ` href="x" hidden`; false / null / undefined are dropped */
+/**
+ * `attrs({ href: 'x', hidden: true, title: undefined })` -> ` href="x" hidden`; false / null / undefined are dropped.
+ * An href to an old hash route of this site (`#/project/x`) becomes its real path
+ */
 export const attrs = (values: Record<string, string | number | boolean | null | undefined>): string =>
   Object.entries(values)
     .filter(([, v]) => v !== false && v !== null && v !== undefined)
-    .map(([k, v]) => (v === true ? ` ${k}` : ` ${k}="${esc(v)}"`))
+    .map(([k, v]) => (v === true ? ` ${k}` : ` ${k}="${esc(k === 'href' ? siteHref(String(v)) : v)}"`))
     .join('');
 
 /** joins the truthy class names */
