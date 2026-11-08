@@ -2,6 +2,7 @@
 //   node test/check.mjs            -> test the existing build
 //   node test/check.mjs --build    -> run `bun run build` first (and time it)
 //   node test/check.mjs --no-shots -> skip criterion 8
+//   node test/check.mjs --links    -> list every link of criterion 9 and where it landed
 import { execFileSync, execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -219,6 +220,58 @@ for (const cv of CV_ROUTES) {
   );
 }
 report('5', pdfOk, pdfDetails.join('; '));
+
+// --- criterion 9: every link to this site lands where it should ---
+// from the source (data, cv content), from every built page, and the urls in the printed cvs' qr codes
+// (decoded once from src/assets/cv*.png). Old hash routes have to arrive on their page, anchors have to stay anchors
+const QR_URLS = ['cv', 'cv-longer', 'cv-max', 'cv-product-designer', 'cv-living-lab-hil'].map((cv) => `jonasward.ch/#${cv}`);
+const OTHER_SITES = /^\/(clay-online|lucerna-lecto|svg-sdf|densing-ui)(\/|$)/; // other repos on the same domain
+const LANDS_ON_404 = ['/portfolio/', '/landing/']; // the old site showed its 404 page there too
+const links = new Map(); // site-relative link -> where it was found
+const addLink = (raw, where) => {
+  const own = raw.match(/^(?:https?:\/\/)?(?:www\.)?jonasward\.ch(\/.*)?$/);
+  const link = own ? own[1] || '/' : raw;
+  if (!/^[/#]/.test(link) || link.startsWith('//') || OTHER_SITES.test(link)) return;
+  if (!links.has(link)) links.set(link, where);
+};
+for (const file of walk(join(root, 'src/data')).filter((f) => f.endsWith('.ts')))
+  // jonasward.ch urls, `#/route` and `#segment/...` strings; not keys like '#c' (C#), not template strings
+  for (const [, raw] of readFileSync(file, 'utf8').matchAll(/['"`]((?:https?:\/\/)?(?:www\.)?jonasward\.ch[^'"`\s]*|#\/[^'"`\s]*|#[a-z-]+\/[^'"`\s]*)['"`]/g))
+    if (!raw.includes('${')) addLink(raw, file.slice(root.length));
+for (const file of walk(buildDir).filter((f) => f.endsWith('.html')))
+  for (const [, raw] of readFileSync(file, 'utf8').matchAll(/href="([^"]+)"/g)) addLink(raw, file.slice(buildDir.length));
+QR_URLS.forEach((url) => addLink(url, 'qr code'));
+links.set('/cv/#education', 'in-page anchor');
+
+const linkRows = [];
+const linkProblems = [];
+for (const [link, where] of links) {
+  // a link with only a hash is opened from the landing page, like a printed `jonasward.ch/#cv`
+  const from = link.startsWith('#') ? `/${link}` : link;
+  if (/\.\w+$/.test(new URL(from, P).pathname)) {
+    const res = await fetch(new URL(from, P));
+    linkRows.push([link, `file ${res.status}`]);
+    if (!res.ok) linkProblems.push(`${link} (${where}) -> ${res.status}`);
+    continue;
+  }
+  const route = from.replace(/^\/#\/?/, '/');
+  const anchor = from.includes('#') && !/^\/#/.test(from);
+  await visit(`${P}${from}`, async (page) => {
+    if (/^\/#/.test(from) && route !== '/' && route !== '/main')
+      await page.waitForURL((u) => u.pathname !== '/' || !u.hash, { timeout: 5000 }).catch(() => {});
+    const u = new URL(page.url());
+    const landed = u.pathname + u.search + u.hash;
+    const isMissing = (await page.textContent('body')).includes('wrong turn');
+    linkRows.push([link, landed + (isMissing ? ' (404 page)' : '')]);
+    const expectLanding = route === '/' || /^\/main\/?$/.test(route);
+    const expect404 = LANDS_ON_404.includes(u.pathname);
+    if (anchor && landed !== from) linkProblems.push(`${link} anchor moved to ${landed}`);
+    else if (!expectLanding && u.pathname === '/') linkProblems.push(`${link} (${where}) stayed on the landing page`);
+    else if (isMissing && !expect404) linkProblems.push(`${link} (${where}) -> 404 page at ${landed}`);
+  });
+}
+if (args.has('--links')) linkRows.forEach(([link, landed]) => console.log(`  ${link.padEnd(42)} -> ${landed}`));
+report('9', linkProblems.length === 0, `${links.size} links to this site${linkProblems.length ? `; ${linkProblems.join(' || ')}` : ' all land on their page'}`);
 
 // --- criterion 7: data untouched ---
 const dataDiff = execSync('git status --porcelain -- src/data', { cwd: root, encoding: 'utf8' }).trim();
