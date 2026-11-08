@@ -21,7 +21,7 @@ const div = (className: string | undefined, body: string, id?: string) =>
   `<div${attrs({ id, class: className })}>${body}</div>`;
 
 const text = (content: string, className = C.regular, href?: string) =>
-  div(className, `${esc(content)}${href ? ` - <a href="${esc(href)}">link</a>` : ''}`);
+  div(className, `${esc(content)}${href ? ` - <a${attrs({ href })}>link</a>` : ''}`);
 
 /** an empty spacer, `size` picks one of the .cv-space heights (s 8px, m 12px, l 20px; default 4px) */
 const space = (size?: 's' | 'm' | 'l', id: string | undefined = 'divider') =>
@@ -149,6 +149,6 @@ export const renderCV = (
     data.extraCurricular
   )}</div></div></div><div class="cv-print-footer">Created on ${createdOn.getFullYear()}.${
     createdOn.getMonth() + 1
-  }.${createdOn.getDate()}. <a href="https://jonasward.ch/#${esc(route)}">jonasward.ch/#${esc(route)}</a><img src="${
+  }.${createdOn.getDate()}. <a href="https://jonasward.ch${esc(route)}/">jonasward.ch${esc(route)}</a><img src="${
     assets.qrCode
   }" alt=""></div></div>`;

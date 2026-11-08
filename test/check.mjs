@@ -209,7 +209,7 @@ for (const cv of CV_ROUTES) {
   const a4 = boxes.length > 0 && boxes.every(([w, h]) => Math.abs(w - 595) <= 1.5 && Math.abs(h - 842) <= 1.5);
   const text = execFileSync('pdftotext', [pdfPath, '-'], { encoding: 'utf8' });
   const hasText = text.includes('Jonas Ward') && text.includes('Van den Bulcke') && text.includes('jonas@jonasward.ch');
-  const ownFooter = text.includes(`jonasward.ch/#/${cv}\n`) || text.trimEnd().endsWith(`jonasward.ch/#/${cv}`);
+  const ownFooter = text.includes(`jonasward.ch/${cv}\n`) || text.trimEnd().endsWith(`jonasward.ch/${cv}`);
   const href = await visit(`${P}/${cv}/`, (page) => page.getAttribute('.cv-download', 'href'));
   const pdfResponse = await fetch(new URL(href, P));
   const ok = a4 && hasText && ownFooter && href === `/${cv}/${cv}.pdf` && pdfResponse.ok;
