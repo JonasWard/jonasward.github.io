@@ -9,3 +9,5 @@
 
 - Think twice about the success and failure criteria: how we know it worked, and what would count as it not working.
 - Always show the expected code changes.
+- Always name the branch the plan will be built on.
+- Always give an expected number of lines of code that will be added.
