@@ -104,6 +104,8 @@ let frame = 0;
 const masonry = () => {
   frame = 0;
   grid.classList.toggle('masonry', desktop.matches);
+  // unpin first: a card left in column 6 keeps that column in the grid, and the count would never drop
+  cards.forEach(({ el }) => (el.style.gridColumn = ''));
   const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
   cards
     .filter(({ el }) => !el.hidden)
