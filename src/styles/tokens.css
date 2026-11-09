@@ -56,6 +56,8 @@
     /* layout sizes */
     --card-w: 200px;
     --logo-w: 180px;
+    /* the fixed header bar: the logo at the aspect of its svg (184.93 x 47.52 pt) and the border under it */
+    --header-bar-h: calc(var(--logo-w) * 47.52 / 184.93 + 1px);
     --nav-h: 40px;
     /* room above the overview grid: the fixed header with its filter bar */
     --header-h: 90px;
