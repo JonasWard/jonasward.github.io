@@ -49,7 +49,7 @@ const view = (picture: ResponsivePicture, caption: string, state: keyof typeof S
 
 // the svg-sdf settings the logo was rendered with, packed with densing; the svg itself is not part of the link
 const logoSettings =
-  'https://jonasward.github.io/svg-sdf/?s=J_AeAnMALuABg9PHqIACs6VX0b5vR-jo9P8gAHBYQPqwejv6OK2eh0xQgA3R6U-mzbvQAHWShQq5D1--AChYcPEzKqJwcAAedmJEZwr___-lSQnEA18';
+  'https://jonasward.github.io/svg-sdf/?s=J_AeAnMALuABg9PHqIACs6VX0b5vR-jo9P8gAHBYQPqwejv6OK2eh0xQgA3R6U-mzbvQAHUZvVsZD1--AChYcPEzKqJwcAAedmJEZwr___-lSQnEA18';
 
 const metaData: ProjectMetaData = {
   id,
