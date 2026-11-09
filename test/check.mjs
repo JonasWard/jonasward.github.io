@@ -170,7 +170,27 @@ await visit(`${P}/projects/`, async (page) => {
   if (new URL(page.url()).pathname !== '/projects/' || new URL(page.url()).searchParams.get('k') !== kw)
     filterProblems.push(`card chip ${kw} -> ${page.url()}`);
 });
-report('3', filterProblems.length === 0, `default + ${expected.cases.length} cases (${expected.cases.map((c) => `${c.category}/${c.keywords.join('+') || '-'}=${c.expected.length}`).join(', ')}) + ui toggle/reload + card chip${filterProblems.length ? `; ${filterProblems.join(' || ')}` : ''}`);
+// narrowing the window: as many columns as a fresh load at that width, nothing cut off, no sideways scroll
+const layoutAt = (page) => page.evaluate(() => {
+  const boxes = [...document.querySelectorAll('.project-card:not([hidden])')].map((c) => c.getBoundingClientRect());
+  return { columns: new Set(boxes.map((b) => Math.round(b.left))).size, clipped: boxes.filter((b) => b.right > innerWidth + 1).length, sideways: document.documentElement.scrollWidth > innerWidth };
+});
+await visit(`${P}/projects/`, async (page) => {
+  for (const width of [1100, 800, 600]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.waitForTimeout(300);
+    const resized = await layoutAt(page);
+    const fresh = await context.newPage().then(async (p) => {
+      await p.setViewportSize({ width, height: 900 });
+      await p.goto(`${P}/projects/`, { waitUntil: 'load' });
+      await p.waitForTimeout(300);
+      return layoutAt(p).finally(() => p.close());
+    });
+    if (resized.columns !== fresh.columns || resized.clipped || resized.sideways)
+      filterProblems.push(`narrowed to ${width}px: ${resized.columns} columns (fresh load ${fresh.columns}), ${resized.clipped} cards cut off${resized.sideways ? ', scrolls sideways' : ''}`);
+  }
+});
+report('3', filterProblems.length === 0, `default + ${expected.cases.length} cases (${expected.cases.map((c) => `${c.category}/${c.keywords.join('+') || '-'}=${c.expected.length}`).join(', ')}) + ui toggle/reload + card chip + narrowing window${filterProblems.length ? `; ${filterProblems.join(' || ')}` : ''}`);
 
 // --- criterion 4: hash redirects + 404 ---
 const redirectProblems = [];
