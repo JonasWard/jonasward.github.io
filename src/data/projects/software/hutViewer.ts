@@ -14,11 +14,7 @@ import alpenglowCard from './assets/hut-viewer/alpenglow.webp?responsive&lossles
 
 import allHuts from './assets/hut-viewer/all-huts.webp?responsive&hero';
 import freeBeds from './assets/hut-viewer/free-beds.webp?responsive';
-import completelyFree from './assets/hut-viewer/completely-free.webp?responsive';
 import area from './assets/hut-viewer/area.webp?responsive';
-import areaCompletelyFree from './assets/hut-viewer/area-completely-free.webp?responsive';
-import hoverCard from './assets/hut-viewer/hover-card.webp?responsive';
-import hoverMarker from './assets/hut-viewer/hover-marker.webp?responsive';
 import selected from './assets/hut-viewer/selected.webp?responsive';
 
 const id = '2026-05';
@@ -92,11 +88,7 @@ export const hutViewer: ProjectData = {
       images: [
         view(allHuts, 'All huts', ''),
         view(freeBeds, 'At least one free bed', 'availability=min&minBeds=1'),
-        view(completelyFree, 'Completely free', 'availability=free'),
         view(area, 'Area selection', AREA),
-        view(areaCompletelyFree, 'Area selection, completely free', `${AREA}&availability=free`),
-        view(hoverCard, 'Hovering a card', AREA),
-        view(hoverMarker, 'Hovering a marker', AREA),
         view(selected, 'Selected hut, availability per night', AREA)
       ]
     },
