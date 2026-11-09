@@ -18,4 +18,5 @@ export * from './densing';
 export * from './hutViewer';
 export * from './screwFinder';
 export * from './stateToFunction2';
-export * from './vibedReusedTiled';
+export * from './vibedReusedTiled';export * from './gardenSpline';
+export * from './chociSurMesure';
