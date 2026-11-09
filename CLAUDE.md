@@ -2,12 +2,12 @@
 
 ## Git
 
-- Use short, sensible branch names that describe the change (e.g. `fix-cv-pdf-margins`).
-- Commits and pull requests: no description body and no attribution lines, just a clear title.
+- Clear, short branch names that say what the change is (e.g. `fix-cv-pdf-margins`).
+- Concise, atomic commits: one change each, that builds and passes the checks on its own.
+- Commits and pull requests: a clear title only, no description body, no attribution lines.
 
 ## Plans
 
-- Think twice about the success and failure criteria: how we know it worked, and what would count as it not working.
-- Always show the expected code changes.
-- Always name the branch the plan will be built on.
-- Always give an expected number of lines of code that will be added.
+- Name the branch the plan is built on.
+- Show the expected code changes and the expected number of lines added or changed.
+- Success and failure criteria: how we know it worked, and what counts as it not working (think twice).
