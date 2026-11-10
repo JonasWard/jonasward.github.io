@@ -31,6 +31,10 @@ const id = '2026-09';
 const APP = 'https://jonasward.github.io/chocolade-chaud/';
 
 // the whole bar lives in ?s=, the camera and expert mode are not part of it
+// the bar of the title image, also what the deployment link opens
+const HERO_STATE =
+  'CzOBGVg-5B-ku5Xj24wUxOICcQE4gIygCX7JiYgUnjCU04hSCIrAV5COEAACqcQnQgAAynEKQQEUfhSCAiRAnE1O6AAE4gAAEiAFA';
+
 const STATE = {
   nameOnAGyroid:
     'CzOBhGU8jA2su5Xgu4FJxATiAnEBGUAK_ZMTEqcQpBAABAjgJ6YCTiFIIBQBDAGgAYQB1AGQUAOYAwgDcAOYAWgDmAMoA5ADSAMyG1gACcQE4gOEAHgDyBQCWA',
@@ -55,10 +59,6 @@ const view = (picture: ResponsivePicture, caption: string, state: keyof typeof S
   ...createImage(picture, caption),
   link: { href: `${APP}?s=${STATE[state]}`, title: 'Open this bar in the configurator' }
 });
-
-// the svg-sdf settings the logo was rendered with, packed with densing; the svg itself is not part of the link
-const logoSettings =
-  'https://jonasward.github.io/svg-sdf/?s=J_AeAnMALuABhpHxbEAEokFPoIhAKEAG9ON_opHxbBztCAC0WC76bNAzAAdZKDyXkPX74AKFhw8TMqomBYAB____57iiIQCqVJCcQDX0QRRZx2k6g';
 
 const metaData: ProjectMetaData = {
   id,
@@ -101,7 +101,7 @@ export const chociSurMesure: ProjectData = {
       links: [
         {
           type: ProjectContentType.ExternalLink,
-          href: APP,
+          href: `${APP}?s=${HERO_STATE}`,
           alternativeName: 'GitHub Pages Deployment'
         },
         {
@@ -131,10 +131,7 @@ export const chociSurMesure: ProjectData = {
         }
       ]
     },
-    {
-      ...createImage(logo, 'Logo rendered with SVG SDF © J.W.'),
-      link: { href: logoSettings, title: 'Open these settings in the playground' }
-    },
+    createImage(logo, 'Logo rendered with SVG SDF © J.W.'),
     createText(1, ['Starting points', 'The patterns a bar can start from in simple mode, each in another chocolate.']),
     {
       type: ProjectContentType.ImageGrid,
