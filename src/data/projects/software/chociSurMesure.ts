@@ -56,10 +56,6 @@ const view = (picture: ResponsivePicture, caption: string, state: keyof typeof S
   link: { href: `${APP}?s=${STATE[state]}`, title: 'Open this bar in the configurator' }
 });
 
-// the svg-sdf settings the logo was rendered with, packed with densing; the svg itself is not part of the link
-const logoSettings =
-  'https://jonasward.github.io/svg-sdf/?s=J_AeAnMALuABhpHxbEAEokFPoIhAKEAG9ON_opHxbBztCAC0WC76bNAzAAdZKDyXkPX74AKFhw8TMqomBYAB____57iiIQCqVJCcQDX0QRRZx2k6g';
-
 const metaData: ProjectMetaData = {
   id,
   webstring: 'choci-sur-mesure',
@@ -131,10 +127,7 @@ export const chociSurMesure: ProjectData = {
         }
       ]
     },
-    {
-      ...createImage(logo, 'Logo rendered with SVG SDF © J.W.'),
-      link: { href: logoSettings, title: 'Open these settings in the playground' }
-    },
+    createImage(logo, 'Logo rendered with SVG SDF © J.W.'),
     createText(1, ['Starting points', 'The patterns a bar can start from in simple mode, each in another chocolate.']),
     {
       type: ProjectContentType.ImageGrid,
