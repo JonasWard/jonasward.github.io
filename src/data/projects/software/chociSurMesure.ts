@@ -31,6 +31,10 @@ const id = '2026-09';
 const APP = 'https://jonasward.github.io/chocolade-chaud/';
 
 // the whole bar lives in ?s=, the camera and expert mode are not part of it
+// the bar of the title image, also what the deployment link opens
+const HERO_STATE =
+  'CzOBGVg-5B-ku5Xj24wUxOICcQE4gIygCX7JiYgUnjCU04hSCIrAV5COEAACqcQnQgAAynEKQQEUfhSCAiRAnE1O6AAE4gAAEiAFA';
+
 const STATE = {
   nameOnAGyroid:
     'CzOBhGU8jA2su5Xgu4FJxATiAnEBGUAK_ZMTEqcQpBAABAjgJ6YCTiFIIBQBDAGgAYQB1AGQUAOYAwgDcAOYAWgDmAMoA5ADSAMyG1gACcQE4gOEAHgDyBQCWA',
@@ -97,7 +101,7 @@ export const chociSurMesure: ProjectData = {
       links: [
         {
           type: ProjectContentType.ExternalLink,
-          href: APP,
+          href: `${APP}?s=${HERO_STATE}`,
           alternativeName: 'GitHub Pages Deployment'
         },
         {
