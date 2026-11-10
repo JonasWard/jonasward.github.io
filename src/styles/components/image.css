@@ -27,9 +27,19 @@
     &.main-image {
       max-width: 100%;
 
+      /* on a phone the image is too low to lose its top under the fixed header, so it starts below it */
+      @media (max-width: 570px) {
+        margin-top: calc(var(--header-bar-h) + env(safe-area-inset-top, 0px));
+      }
+
       img {
         width: 100%;
         max-height: 100vh;
+
+        /* a wide image is too low for a title of two or three lines on a phone: keep room and crop the sides */
+        @media (max-width: 570px) {
+          min-height: 15rem;
+        }
       }
 
       .caption {
