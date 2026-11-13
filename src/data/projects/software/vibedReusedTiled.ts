@@ -39,7 +39,7 @@ const view = (picture: ResponsivePicture, caption: string, path: string) => ({
 
 // the svg-sdf settings the logo was rendered with, packed with densing; the svg itself is not part of the link
 const logoSettings =
-  'https://jonasward.github.io/svg-sdf/?s=J_AeAnMALuABg9vTvIACs6VX0b5vR-jo9P8gAHBYQPqwejv6OK2eh0xQgA9Ggw-ndfxwAHWShatZD1--AChYcPEzKqJgcAAn____kwr___8';
+  'https://jonasward.github.io/svg-sdf/?s=J_AYQnMtLuABg9PHqIACs6VX0b5vR-jo9P8gAHBYQPqwejv6OK2eh0xRgBiIpUfXlgpz6D71GXc_3HAAB1kqvJdpbkyAAuOJjxMyqiYHAAJ____5MK____pUkJxANfA';
 
 const metaData: ProjectMetaData = {
   id,
