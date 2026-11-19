@@ -16,6 +16,8 @@ import allHuts from './assets/hut-viewer/all-huts.webp?responsive&hero';
 import freeBeds from './assets/hut-viewer/free-beds.webp?responsive';
 import area from './assets/hut-viewer/area.webp?responsive';
 import selected from './assets/hut-viewer/selected.webp?responsive';
+import phoneList from './assets/hut-viewer/phone-list.webp?responsive';
+import phoneMap from './assets/hut-viewer/phone-map.webp?responsive';
 
 const id = '2026-05';
 
@@ -89,7 +91,9 @@ export const hutViewer: ProjectData = {
         view(allHuts, 'All huts', ''),
         view(freeBeds, 'At least one free bed', 'availability=min&minBeds=1'),
         view(area, 'Area selection', AREA),
-        view(selected, 'Selected hut, availability per night', AREA)
+        view(selected, 'Selected hut, availability per night', AREA),
+        view(phoneList, 'On a phone, results and filters in one sheet', ''),
+        view(phoneMap, 'On a phone, selected hut and legend', AREA)
       ]
     },
   ]
