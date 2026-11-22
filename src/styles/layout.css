@@ -115,14 +115,9 @@
       grid-auto-columns: var(--card-w);
       justify-content: start;
       overflow-x: auto;
-      scroll-snap-type: x proximity;
       padding: 0 calc(50vw - var(--card-w) / 2) var(--space-3);
       max-width: none;
       scrollbar-width: none;
-
-      > .project-card {
-        scroll-snap-align: center;
-      }
     }
   }
 }
